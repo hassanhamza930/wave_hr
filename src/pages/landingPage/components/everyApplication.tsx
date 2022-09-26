@@ -2,7 +2,7 @@ import {BsArrowDownShort} from "react-icons/bs";
 
 export default function WeBelieveEveryApplicationDeservesToBeSeen() {
     return (
-        <div className="h-screen w-full flex justify-start items-start px-[15%] py-24 flex flex-col justify-start items-start">
+        <div className="h-min w-full flex justify-start items-start px-[15%] py-24 flex flex-col justify-start items-start">
             <div className="text-purple text-7xl font-bold">We believe</div>
             <div className="text-purple text-4xl font-bold">Every application deserves to be seen!</div>
 

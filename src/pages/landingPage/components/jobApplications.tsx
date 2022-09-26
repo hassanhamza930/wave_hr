@@ -1,34 +1,37 @@
+import { AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 import { BsArrowRightShort } from "react-icons/bs";
+import PictureUpload from "./pictureUpload";
+import TextForm from "./textform";
 
 export default function JobApplicationsThatFeelLikeAConvo() {
 
+    const [showing, setShowing] = useState(false);
+
+    useEffect(() => {
+        setTimeout(() => { setShowing(true) }, 3000);
+    }, []);
+
     return (
-        <div className="h-screen w-full flex justify-start items-start px-[15%] py-24 flex flex-col justify-start items-start">
+        <div className="relative h-screen w-full flex justify-start items-start px-[15%] py-24 flex flex-col justify-start items-start mt-24">
             <div className="text-purple text-7xl font-bold">Job Applications</div>
             <div className="text-purple text-4xl font-bold">that feel like a conversation</div>
 
-            <div className="w-full flex flex-row overflow-x-scroll">
 
-                <div className="flex w-screen justify-start item-start">
-                    <input placeholder="What should we call you?" className="border-b-2 p-2 bg-transparent focus:ring-0 border-purple border-0 text-purple text-md font-regular mt-10">
-                    </input>
+            <div className="relative flex justify-start items-start h-72 w-96">
+                <AnimatePresence>
+                    {showing == false && <TextForm />}
+                </AnimatePresence>
 
-
-                    <div className="h-12 w-12 mt-10 bg-purple rounded-md flex justify-center items-center">
-                        <BsArrowRightShort size={40} color="white"></BsArrowRightShort>
-                    </div>
-                </div>
-
-                <div className="flex w-screen justify-start item-start">
-                    <input placeholder="What should we call you?" className="border-b-2 p-2 bg-transparent focus:ring-0 border-purple border-0 text-purple text-md font-regular mt-10">
-                    </input>
+                <AnimatePresence>
+                    {showing == true && <PictureUpload />}
+                </AnimatePresence>
+            </div>
 
 
-                    <div className="h-12 w-12 mt-10 bg-purple rounded-md flex justify-center items-center">
-                        <BsArrowRightShort size={40} color="white"></BsArrowRightShort>
-                    </div>
-                </div>
 
+            <div className="h-16 w-16 mt-10 bg-purple rounded-md flex justify-center items-center">
+                <BsArrowRightShort size={40} color="white"></BsArrowRightShort>
             </div>
 
 
