@@ -1,23 +1,21 @@
-import Page2 from '../components/Page2';
-import Page3 from '../components/Page3';
-import Page4 from '../components/Page4';
-import Page5 from '../components/Page5';
+import WeBelieveEveryApplicationDeservesToBeSeen from '../components/everyApplication';
 import ShufflingImages from '../components/shufflingImages';
+import { Parallax, ParallaxLayer } from '@react-spring/parallax'
+import { BsArrowRightShort } from 'react-icons/bs';
+import JobApplicationsThatFeelLikeAConvo from '../components/jobApplications';
 
 
-export default function LandingPage(){
-    return(
-        <div className="pt-[80px] h-full w-full flex flex-col justify-start items-center">
+export default function LandingPage() {
+    return (
+        <div className="relative pt-[80px] h-full w-full flex flex-col justify-start items-center">
 
-            <div className="mt-16 text-7xl text-purple font-bold text-center">Recruit for<br/>The Startup</div>
+            <div className="mt-16 text-7xl text-purple font-bold text-center">Recruit for<br />The Startup</div>
             <div className="text-xl mt-10 text-purple font-regular text-center"><b>Wave</b> takes the pain out of recruiting world class talent.</div>
-        
-            <ShufflingImages/>
-            <Page2/>
-            <Page3/>
-            <Page4/>
-            <Page5/>
-            
+
+            <ShufflingImages />
+            <WeBelieveEveryApplicationDeservesToBeSeen />
+
+
 
 
         </div>
