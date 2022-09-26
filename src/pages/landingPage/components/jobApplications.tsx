@@ -1,16 +1,28 @@
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { BsArrowRightShort } from "react-icons/bs";
+import MultipleChoice from "./multipleChoice";
 import PictureUpload from "./pictureUpload";
 import TextForm from "./textform";
 
 export default function JobApplicationsThatFeelLikeAConvo() {
 
-    const [showing, setShowing] = useState(false);
+    const [index, setIndex] = useState(0);
+    let components = [<TextForm />, <PictureUpload />, <MultipleChoice />]
+
+    function increase() {
+        setTimeout(() => {
+            if (index < components.length-1) {
+                setIndex(index + 1);
+                increase();
+            }
+        }, 4000);
+    }
+
 
     useEffect(() => {
-        setTimeout(() => { setShowing(true) }, 3000);
-    }, []);
+        increase();
+    }, [index]);
 
     return (
         <div className="relative h-screen w-full flex justify-start items-start px-[15%] py-24 flex flex-col justify-start items-start mt-24">
@@ -18,19 +30,22 @@ export default function JobApplicationsThatFeelLikeAConvo() {
             <div className="text-purple text-4xl font-bold">that feel like a conversation</div>
 
 
-            <div className="relative flex justify-start items-start h-72 w-96">
-                <AnimatePresence>
-                    {showing == false && <TextForm />}
-                </AnimatePresence>
+            <div className="relative flex justify-start items-start h-72 w-[500px]">
+                {
+                    components.map((e, localIndex) => {
+                        return (
+                            <AnimatePresence>
+                                {localIndex == index && e}
+                            </AnimatePresence>
+                        )
+                    })
+                }
 
-                <AnimatePresence>
-                    {showing == true && <PictureUpload />}
-                </AnimatePresence>
             </div>
 
 
 
-            <div className="h-16 w-16 mt-10 bg-purple rounded-md flex justify-center items-center">
+            <div className="h-12 w-12 mt-10 bg-purple rounded-md flex justify-center items-center">
                 <BsArrowRightShort size={40} color="white"></BsArrowRightShort>
             </div>
 

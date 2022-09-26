@@ -3,15 +3,36 @@ import { motion } from "framer-motion";
 import {AiFillCamera} from "react-icons/ai";
 import { useEffect, useState } from "react";
 
+interface OptionCardInputs{
+    title:string,
+}
+
+const Option=(props:OptionCardInputs)=>{
+
+    const [hovering,setHovering]=useState(false);
+
+    return (
+        <button
+         onMouseEnter={()=>{setHovering(true);}} onMouseLeave={()=>{ setHovering(false); }} 
+         style={{backgroundColor:hovering?"#64113F":"transparent",borderColor:hovering?"transparent":"#64113F",borderWidth:hovering?"0px":"2px"}}
+         className=" gap-5 h-16 w-72 border-[3px] rounded-md mt-2 flex flex-row justify-start p-5 items-center">
+
+            <div style={{opacity:hovering?"100%":"80%",backgroundColor:hovering?"white":"#64113F",color:hovering?"#64113F":"white"}} className="p-2 rounded-md w-10 h-10 flex justify-center items-center text-xl font-bold text-white">A</div>
+            <div style={{opacity:hovering?"100%":"80%",color:hovering?"white":"#64113F"}} className="p-2 rounded-md flex justify-center items-center text-xl font-bold">{props.title}</div>
+
+        </button>
+    )
+}
+
+
+
+
 export default function MultipleChoice() {
 
-    const [isShowingPicture,setIsShowingPicture]=useState(false);
 
 
     useEffect(()=>{
-        setTimeout(()=>{
-            setIsShowingPicture(true);
-        },2000)
+     
     },[]);
 
 
@@ -22,14 +43,12 @@ export default function MultipleChoice() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
             className="absolute">
-            <div className="mt-10 text-md text-purple">
-                Hey Jacob 👋 , we’re glad you’re here.<br />
-                Please Upload a profile picture.
+            <div className="mt-10 w-full text-xl text-purple mb-10">
+                Please select your current employment status.
             </div>
 
-            <div style={{backgroundImage:isShowingPicture?"url('https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80')":""}} className="bg-bray bg-cover bg-center h-36 w-36 rounded-2xl my-5 flex justify-center items-center">
-                {isShowingPicture==false&&<AiFillCamera size={50} color="white"/>}
-            </div>
+            <Option title="Unemployed" />
+            <Option title="Full Time" />
 
 
 
