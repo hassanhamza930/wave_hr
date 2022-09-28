@@ -1,9 +1,9 @@
 import WeBelieveEveryApplicationDeservesToBeSeen from '../components/everyApplication';
 import ShufflingImages from '../components/shufflingImages';
-import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 import { BsArrowRightShort } from 'react-icons/bs';
 import JobApplicationsThatFeelLikeAConvo from '../components/jobApplications';
 import SayGoodByeToExcelSheets from '../components/sayGoodByeToExcelSheet';
+import ScheduleInterviews from '../components/scheduleInterviews';
 
 
 export default function LandingPage() {
@@ -17,6 +17,7 @@ export default function LandingPage() {
             <WeBelieveEveryApplicationDeservesToBeSeen />
             <JobApplicationsThatFeelLikeAConvo/>
             <SayGoodByeToExcelSheets/>
+            <ScheduleInterviews/>
 
 
 
