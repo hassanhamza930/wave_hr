@@ -4,6 +4,7 @@ import { BsArrowRightShort } from 'react-icons/bs';
 import JobApplicationsThatFeelLikeAConvo from '../components/jobApplications';
 import SayGoodByeToExcelSheets from '../components/sayGoodByeToExcelSheet';
 import ScheduleInterviews from '../components/scheduleInterviews';
+import InterviewInApp from '../components/interviewInApp';
 
 
 export default function LandingPage() {
@@ -18,7 +19,7 @@ export default function LandingPage() {
             <JobApplicationsThatFeelLikeAConvo/>
             <SayGoodByeToExcelSheets/>
             <ScheduleInterviews/>
-
+            <InterviewInApp/>
 
 
         </div>
