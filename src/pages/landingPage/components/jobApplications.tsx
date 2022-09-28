@@ -16,6 +16,9 @@ export default function JobApplicationsThatFeelLikeAConvo() {
                 setIndex(index + 1);
                 increase();
             }
+            else{
+                setIndex(0);
+            }
         }, 4000);
     }
 
