@@ -38,7 +38,7 @@ function EarlyAccessPricingCard(props:PricingCardProps) {
     return (
         <button onClick={()=>{
             setIsEarlyAcessModalOpen(true);
-        }} className={`hover:border-2 ${props.bray==true?"border-bray/80":"border-[#F96666]"} hover:border-purple text-purple hover:text-white flex flex-col justify-start text-start items-start gap-1 p-5 w-3/4 ${props.bray==true?"text-bray/80":"text-bray"} hover:bg-purple bg-[#F96666]/90 rounded-xl`}>
+        }} className={`h-48 hover:border-2 ${props.bray==true?"border-bray/80":"border-[#F96666]"} hover:border-purple text-purple hover:text-white flex flex-col justify-start text-start items-start gap-1 p-5 w-3/4 ${props.bray==true?"text-bray/80":"text-bray"} hover:bg-purple bg-[#F96666]/90 rounded-xl`}>
             
             <div className="flex flex-row justify-between items-center w-full">
                 <div className="font-bold text-3xl">{props.title}</div>
@@ -65,7 +65,7 @@ export default function PricingOptions() {
     return (
         <div className="w-[50%] h-full flex justify-center items-start flex-col text-start p-20 gap-5">
 
-            <PricingCard bray={true} title="Free" price="$0.0" featureList={["1x1 Interview Calls","Upto 2 Job Postings","Email Automation"]} />
+            <PricingCard bray={true} title="Free" price="$0" featureList={["1x1 Interview Calls","Upto 2 Job Postings","Email Automation"]} />
             <PricingCard title="Pro" price="$17" featureList={["Multiple Team Members on Interview Calls","Upto 10 Job Postings","Customized Emails"]} />
             <EarlyAccessPricingCard title="Early Access" price="$5" featureList={["Early Access to Features before they roll out","Custom Company banner and sticker on job applications","Unlimited Job Postings"]} />
             <div className="ml-2 text-bray">Help us develop the future of Recruitment Software 😀</div>
