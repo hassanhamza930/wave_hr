@@ -38,7 +38,7 @@ function EarlyAccessPricingCard(props: PricingCardProps) {
     return (
         <button onClick={() => {
             setIsEarlyAcessModalOpen(true);
-        }} className={`h-48 hover:border-2 ${props.bray == true ? "border-bray/80" : "border-[#F96666]"} hover:border-purple text-purple hover:text-white flex flex-col justify-start text-start items-start gap-1 p-5 w-3/4 ${props.bray == true ? "text-bray/80" : "text-[#F96666]"} hover:bg-purple bg-bray/90 rounded-xl`}>
+        }} className={`h-48 hover:border-2 ${props.bray == true ? "border-bray/80" : "border-[#F96666]"} hover:border-purple text-purple hover:text-white flex flex-col justify-start text-start items-start gap-1 p-5 w-3/4 ${props.bray == true ? "text-bray/80" : "text-[#F96666]"} hover:bg-purple bg-transparent border-2 border-[#F96666] rounded-xl`}>
 
             <div className="flex flex-row justify-between items-center w-full">
                 <div className="font-bold text-3xl">{props.title}</div>
