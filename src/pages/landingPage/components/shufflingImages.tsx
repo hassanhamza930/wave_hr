@@ -7,7 +7,7 @@ export default function ShufflingImages(){
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            transition={{ duration: 0.9 }}
+            transition={{ duration: 0.9,delay:0.5 }}
             variants={{
                 visible: { opacity: 1, y: 0 },
                 hidden: { opacity: 0, y: 100 }
@@ -17,7 +17,7 @@ export default function ShufflingImages(){
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            transition={{ duration: 1.2 }}
+            transition={{ duration: 1.2,delay:0.5 }}
             variants={{
                 visible: { opacity: 1, y: 0 },
                 hidden: { opacity: 0, y: 100 }
