@@ -11,7 +11,7 @@ export default function Pricing() {
     return (
         <>
             {isEarlyAccessModalOpen==true&&<EarlyAccessModalPopup/>}
-            <div className="bg-tan h-screen w-full flex justify-center items-center p-20">
+            <div className="bg-tan h-full w-full flex justify-center items-center p-20">
 
                 <div className="flex h-full w-full flex-row justify-center items-center">
 

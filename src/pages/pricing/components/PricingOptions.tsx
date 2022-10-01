@@ -9,7 +9,6 @@ interface PricingCardProps {
 }
 
 
-
 function PricingCard(props: PricingCardProps) {
     return (
         <div className={`border-2 ${props.bray == true ? "border-bray/80" : "border-purple"} hover:border-purple text-purple hover:text-white flex flex-col justify-start items-start gap-1 p-5 w-3/4 ${props.bray == true ? "text-bray/80" : "text-purple"} hover:bg-purple rounded-xl`}>
@@ -57,7 +56,7 @@ function EarlyAccessPricingCard(props: PricingCardProps) {
 
 export default function PricingOptions() {
     return (
-        <div className="w-[50%] h-full flex justify-center items-start flex-col text-start p-20 gap-5">
+        <div className="w-[50%] h-full flex justify-start items-start flex-col text-start p-20 gap-5">
 
             <PricingCard bray={true} title="Free" price="$0" featureList={["1x1 Interview Calls", "Upto 2 Job Postings", "Email Automation"]} />
             <PricingCard title="Pro" price="$17" featureList={["Multiple Team Members on Interview Calls", "Upto 10 Job Postings", "Customized Emails"]} />

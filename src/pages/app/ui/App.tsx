@@ -4,6 +4,8 @@ import { initializeApp } from "firebase/app";
 import useLoggedInAndOnboarded from "../logic/useLoggedInAndOnboarded";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
 import { useRecoilState } from "recoil";
+import Loading from "../../../standards/components/loading";
+import LoggedInRoutes from "../components/LoggedInRoutes";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAleTmGUCRY87baXUHowrBhPGdY5YcGZak",
@@ -24,10 +26,10 @@ function App() {
 
   return (
     <>
-      {loading==true&&<div className="fixed h-screen w-full bg-red-500 "></div>}
+      {loading==true&&<Loading/>}
       <div style={{ fontFamily: "Inter" }} className=" h-full w-full bg-tan">
         <Header />
-        {loggedIn == true ? <div></div> : <LoggedOutRoutes />}
+        {loggedIn == true ? <LoggedInRoutes/> : <LoggedOutRoutes />}
       </div>
     </>
   );
