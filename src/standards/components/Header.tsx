@@ -19,8 +19,8 @@ export default function Header() {
                     navigate("/pricing");
                 }} className="hover:scale-[1.02] font-bold text-purple text-sm">Pricing</button>
 
-                <button className="hover:scale-[1.02] text-sm px-4 py-2 rounded-md bg-purple flex flex-row gap-2 justify-center items-center">
-                    <button onClick={()=>{navigate("/login")}} className="text-white font-medium">Login</button>
+                <button onClick={()=>{navigate("/login")}} className="hover:scale-[1.02] text-sm px-4 py-2 rounded-md bg-purple flex flex-row gap-2 justify-center items-center">
+                    <div className="text-white font-medium">Login</div>
                     <BsArrowRightShort color="white" size={20} />
                 </button>
 
