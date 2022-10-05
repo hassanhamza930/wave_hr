@@ -11,7 +11,7 @@ import globalUserAtom, { UserInterface } from '../../../atoms/app/globalUserAtom
 import isLoadingAtom from '../../../atoms/app/isLoadingAtom';
  
 
-export default function useLoggedInAndOnboarded() {
+export default function useLoggedIn() {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const [loggedInUser, setLoggedInUser] = useRecoilState(globalUserAtom);
   const [loading, setLoading] = useRecoilState(isLoadingAtom);

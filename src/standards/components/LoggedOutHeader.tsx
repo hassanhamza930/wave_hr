@@ -3,7 +3,7 @@ import { BsArrowRightShort } from "react-icons/bs";
 import { useNavigate } from "react-router";
 
 
-export default function Header() {
+export default function LoggedOutHeader() {
 
     const navigate = useNavigate();
 

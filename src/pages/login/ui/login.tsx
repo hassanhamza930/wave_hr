@@ -32,9 +32,8 @@ export default function Login() {
 
 
                     <div className="relative w-2/4 h-full flex justify-center items-center">
-                        <div className='-mb-36 -mr-36 absolute z-10 h-[450px] w-[450px] rounded-xl bg-purple bg-cover bg-start bg-[url("https://coda.newjobs.com/api/imagesproxy/ms/cms/content30/images/how_to_accept_job_offerA.png")]'></div>
-                        <div className='-mt-36 -ml-36 absolute z-0 h-[450px] w-[450px] rounded-xl bg-purple bg-cover bg-start bg-[url("https://blog.close.com/content/images/2021/01/sales-hiring-101-for-startups.jpg")]'></div>
-                        
+                        <div className='-mb-36 -mr-36 absolute z-10 h-[350px] w-[350px] rounded-xl bg-purple bg-cover bg-start bg-[url("https://coda.newjobs.com/api/imagesproxy/ms/cms/content30/images/how_to_accept_job_offerA.png")]'></div>
+                        <div className='-mt-36 -ml-36 absolute z-0 h-[350px] w-[350px] rounded-xl bg-purple bg-cover bg-start bg-[url("https://blog.close.com/content/images/2021/01/sales-hiring-101-for-startups.jpg")]'></div>
 
                     </div>
 

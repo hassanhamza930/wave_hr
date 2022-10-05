@@ -1,11 +1,13 @@
-import Header from "../../../standards/components/Header";
+import Header from "../../../standards/components/LoggedOutHeader";
 import LoggedOutRoutes from "../components/LoggedOutRoutes";
 import { initializeApp } from "firebase/app";
-import useLoggedInAndOnboarded from "../logic/useLoggedInAndOnboarded";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
 import { useRecoilState } from "recoil";
 import Loading from "../../../standards/components/loading";
 import LoggedInRoutes from "../components/LoggedInRoutes";
+import useLoggedIn from "../logic/useLoggedInAndOnboarded";
+import LoggedOutHeader from "../../../standards/components/LoggedOutHeader";
+import globalUserAtom from "../../../atoms/app/globalUserAtom";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAleTmGUCRY87baXUHowrBhPGdY5YcGZak",
@@ -21,14 +23,15 @@ const firebaseConfig = {
 function App() {
 
   const app = initializeApp(firebaseConfig);
-  const { loggedIn } = useLoggedInAndOnboarded();
+  const { loggedIn } = useLoggedIn();
   const [loading, setLoading] = useRecoilState(isLoadingAtom);
+  const [loggedInUser, setLoggedInUser] = useRecoilState(globalUserAtom);
+
 
   return (
     <>
       {loading==true&&<Loading/>}
       <div style={{ fontFamily: "Inter" }} className=" h-full w-full bg-tan">
-        <Header />
         {loggedIn == true ? <LoggedInRoutes/> : <LoggedOutRoutes />}
       </div>
     </>
