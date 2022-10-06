@@ -14,10 +14,10 @@ export default function Login() {
                 <div className="flex h-full w-full flex-row justify-center items-center">
 
                     <div className="w-2/4 h-full flex justify-center items-start p-20 flex-col ">
-                        <div className="text-7xl font-bold text-purple text-start">
+                        <div className="text-7xl font-bold text-breen text-start">
                             Let's get <br></br>you started
                         </div>
-                        <div className="text-xl mt-10 font-regular text-purple text-start">
+                        <div className="text-xl mt-10 font-regular text-breen text-start">
                             Use google to sign in and create an account in seconds.
                         </div>
 
@@ -32,8 +32,8 @@ export default function Login() {
 
 
                     <div className="relative w-2/4 h-full flex justify-center items-center">
-                        <div className='-mb-36 -mr-36 absolute z-10 h-[350px] w-[350px] rounded-xl bg-purple bg-cover bg-start bg-[url("https://coda.newjobs.com/api/imagesproxy/ms/cms/content30/images/how_to_accept_job_offerA.png")]'></div>
-                        <div className='-mt-36 -ml-36 absolute z-0 h-[350px] w-[350px] rounded-xl bg-purple bg-cover bg-start bg-[url("https://blog.close.com/content/images/2021/01/sales-hiring-101-for-startups.jpg")]'></div>
+                        <div className='-mb-36 -mr-36 absolute z-10 h-[350px] w-[350px] rounded-xl bg-breen bg-cover bg-start bg-[url("https://coda.newjobs.com/api/imagesproxy/ms/cms/content30/images/how_to_accept_job_offerA.png")]'></div>
+                        <div className='-mt-36 -ml-36 absolute z-0 h-[350px] w-[350px] rounded-xl bg-breen bg-cover bg-start bg-[url("https://blog.close.com/content/images/2021/01/sales-hiring-101-for-startups.jpg")]'></div>
 
                     </div>
 

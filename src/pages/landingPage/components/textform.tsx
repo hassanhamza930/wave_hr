@@ -32,7 +32,7 @@ export default function TextForm() {
         className="absolute"
         >
 
-            <input placeholder="What should we call you?" value={textVal} className="border-b-2 p-2 bg-transparent focus:ring-0 border-purple border-0 text-purple text-xl font-regular mt-10">
+            <input placeholder="What should we call you?" value={textVal} className="border-b-2 p-2 bg-transparent focus:ring-0 border-breen border-0 text-breen text-xl font-regular mt-10">
             </input>
 
         

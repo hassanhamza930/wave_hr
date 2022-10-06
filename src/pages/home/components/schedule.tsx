@@ -1,6 +1,6 @@
 function ScheduleCard() {
     return (
-        <div className="hover:bg-purple hover:text-white text-purple hover:border-transparent border-purple border-2 w-full bg-transparent rounded-xl flex justify-between items-center flex-row py-4 px-5 gap-3">
+        <div className="hover:bg-breen hover:text-white text-breen hover:border-transparent border-breen border-2 w-full bg-transparent rounded-xl flex justify-between items-center flex-row py-4 px-5 gap-3">
 
 
             <div className="flex flex-row justify-center items-center gap-5">

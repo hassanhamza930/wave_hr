@@ -11,7 +11,7 @@ export default function LandingPage() {
     return (
         <div className="relative pt-[80px] h-full w-full flex flex-col justify-start items-center">
 
-            <div className="h-36 mt-16 text-7xl text-purple font-bold text-center overflow-hidden">
+            <div className="h-36 mt-16 text-7xl text-breen font-bold text-center overflow-hidden">
                 <motion.div
                     initial="hidden"
                     whileInView="visible"
@@ -34,7 +34,7 @@ export default function LandingPage() {
                     visible: { opacity: 1, y: 0 },
                     hidden: { opacity: 0, y: 50 },
                 }}
-                className="text-xl mt-10 text-purple font-regular text-center">
+                className="text-xl mt-10 text-breen font-regular text-center">
                 <b>Wave</b> takes the pain out of recruiting world class talent.
             </motion.div>
 

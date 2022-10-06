@@ -22,7 +22,7 @@ export default function PictureUpload() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
             className="absolute">
-            <div className="mt-10 text-xl text-purple">
+            <div className="mt-10 text-xl text-breen">
                 Hey Jacob 👋 , we’re glad you’re here.<br />
                 Please Upload a profile picture.
             </div>

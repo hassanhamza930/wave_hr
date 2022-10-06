@@ -43,7 +43,7 @@ export default function MultipleChoice() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
             className="absolute">
-            <div className="mt-10 w-full text-xl text-purple mb-10">
+            <div className="mt-10 w-full text-xl text-breen mb-10">
                 Please select your current employment status.
             </div>
 

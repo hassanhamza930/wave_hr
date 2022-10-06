@@ -29,10 +29,10 @@ export default function JobApplicationsThatFeelLikeAConvo() {
 
     return (
         <div className="relative h-min w-full flex justify-start items-start px-[15%] py-24 flex flex-col justify-start items-start mt-24">
-            <div className="text-purple text-7xl font-bold">Job Applications</div>
-            <div className="text-purple text-4xl font-bold">that feel like a conversation</div>
+            <div className="text-breen text-7xl font-bold">Job Applications</div>
+            <div className="text-breen text-4xl font-bold">that feel like a conversation</div>
 
-            <div className="text-purple text-xl font-regular mt-10 mb-10">
+            <div className="text-breen text-xl font-regular mt-10 mb-10">
                 Post jobs directly on our platform, Improve user experience, get high quality applicants.
             </div>
 
@@ -52,7 +52,7 @@ export default function JobApplicationsThatFeelLikeAConvo() {
 
 
 
-            <div className="h-12 w-12 mt-12 bg-purple rounded-md flex justify-center items-center">
+            <div className="h-12 w-12 mt-12 bg-breen rounded-md flex justify-center items-center">
                 <BsArrowRightShort size={40} color="white"></BsArrowRightShort>
             </div>
 

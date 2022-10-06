@@ -6,8 +6,8 @@ module.exports = {
   theme: {
    extend:{
     colors:{
-      "tan":"#FCF8E8",
-      "purple":"#64113F",
+      "tan":"#eae0d5",
+      "breen":"#264653",
       "bray":"#16213E"
      }
    }

@@ -60,10 +60,10 @@ function TimeCardExpanded(props: TimeCardProps) {
 export default function ScheduleInterviews() {
     return (
         <div className="h-min w-full flex justify-start items-start px-[15%] py-24 flex-col">
-            <div className="text-purple text-7xl font-bold">Schedule Interviews in App</div>
-            <div className="text-purple text-4xl font-bold">No more back and forth on email or calendly </div>
+            <div className="text-breen text-7xl font-bold">Schedule Interviews in App</div>
+            <div className="text-breen text-4xl font-bold">No more back and forth on email or calendly </div>
 
-            <div className="text-purple text-xl font-regular mt-10 mb-10">
+            <div className="text-breen text-xl font-regular mt-10 mb-10">
                 Work in Async.<br />
                 Tell us your available timeslots and we’ll do the rest.
             </div>
@@ -82,7 +82,7 @@ export default function ScheduleInterviews() {
 
 
 
-            <div className="h-12 w-12 mt-20 bg-purple rounded-md flex justify-center items-center">
+            <div className="h-12 w-12 mt-20 bg-breen rounded-md flex justify-center items-center">
                 <BsArrowDownShort size={40} color="white"></BsArrowDownShort>
             </div>
 
