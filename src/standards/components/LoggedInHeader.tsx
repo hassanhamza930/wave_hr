@@ -47,7 +47,7 @@ export default function LoggedInHeader() {
                                     {({ active }) => (
                                         <button
                                             onClick={() => { navigate("/") }}
-                                            className={`${active ? 'bg-secondary text-white' : 'text-gray-900'} group flex w-full items-center justify-start  px-4 py-2 text-sm`}>
+                                            className={`${active ? 'bg-secondary text-purple' : 'text-gray-900'} group flex w-full items-center justify-start  px-4 py-2 text-sm`}>
                                             Home
                                         </button>
                                     )}
@@ -57,7 +57,7 @@ export default function LoggedInHeader() {
                                     {({ active }) => (
                                         <button
                                             onClick={() => { localStorage.clear(); window.location.href = "/" }}
-                                            className={`${active ? 'bg-secondary text-white' : 'text-gray-900'} group flex w-full items-center justify-start  px-4 py-2 text-sm`}>
+                                            className={`${active ? 'bg-secondary text-purple' : 'text-gray-900'} group flex w-full items-center justify-start  px-4 py-2 text-sm`}>
                                             Log Out
                                         </button>
                                     )}
