@@ -6,17 +6,30 @@ import SayGoodByeToExcelSheets from '../components/sayGoodByeToExcelSheet';
 import ScheduleInterviews from '../components/scheduleInterviews';
 import InterviewInApp from '../components/interviewInApp';
 import { motion } from "framer-motion";
+import Logo from "../../../images/logo.svg";
 
 export default function LandingPage() {
     return (
         <div className="relative pt-[80px] h-full w-full flex flex-col justify-start items-center">
 
-            <div className="h-36 mt-16 text-7xl text-breen font-bold text-center overflow-hidden">
+            <motion.img 
+            initial="hidden"
+            whileInView="visible"
+            // viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.5 }}
+            variants={{
+                visible: { opacity: 1, y: 0 },
+                hidden: { opacity: 0, y: 100 }
+            }}
+            src={Logo} className="invert h-36 mt-16 w-36"></motion.img>
+
+
+            <div className="h-36 mt-10 text-7xl text-breen font-bold text-center overflow-hidden">
                 <motion.div
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
-                    transition={{ duration: 0.7,delay:0.5 }}
+                    transition={{ duration: 0.7, delay: 0.5 }}
                     variants={{
                         visible: { opacity: 1, y: 0 },
                         hidden: { opacity: 0, y: 100 }
@@ -29,7 +42,7 @@ export default function LandingPage() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                transition={{ duration: 0.7,delay:0.5 }}
+                transition={{ duration: 0.7, delay: 0.5 }}
                 variants={{
                     visible: { opacity: 1, y: 0 },
                     hidden: { opacity: 0, y: 50 },

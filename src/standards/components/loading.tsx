@@ -11,7 +11,7 @@ export default function Loading() {
             initial={{opacity:0,y:50}}
             animate={{opacity:1,y:0}}
             transition={{duration:1}}
-            src={Logo} className="invert h-64 w-64"></motion.img>
+            src={Logo} className="h-64 w-64"></motion.img>
 
         </div>
     )
