@@ -28,7 +28,7 @@ export default function JobApplicationsThatFeelLikeAConvo() {
     }, [index]);
 
     return (
-        <div className="relative h-min w-full flex justify-start items-start px-[15%] py-24 flex flex-col justify-start items-start mt-24">
+        <div className="relative h-min w-full px-[15%] py-24 flex flex-col justify-start items-start mt-24">
             <div className="text-breen text-7xl font-bold">Job Applications</div>
             <div className="text-breen text-4xl font-bold">that feel like a conversation</div>
 

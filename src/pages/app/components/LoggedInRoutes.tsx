@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import LoggedInHeader from "../../../standards/components/LoggedInHeader";
 import Home from "../../home/ui/home";
-import LandingPage from '../../landingPage/ui/landingPage';
-import Login from "../../login/ui/login";
-import Pricing from '../../pricing/ui/pricing';
+import JobsPage from "../../jobs/ui/jobs";
+
+
 
 export default function LoggedInRoutes() {
     return (
@@ -11,6 +11,7 @@ export default function LoggedInRoutes() {
             <LoggedInHeader />
             <Routes>
                 <Route path="/" element={<Home />} ></Route>
+                <Route path="/jobs" element={<JobsPage/>} ></Route>
             </Routes>
         </>
 

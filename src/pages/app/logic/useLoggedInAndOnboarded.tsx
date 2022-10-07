@@ -28,7 +28,7 @@ export default function useLoggedIn() {
         const userData: UserInterface = data.data() as UserInterface;
         setLoggedInUser(userData);
         setLoggedIn(true);
-        setLoading(false);
+        setTimeout(()=>{setLoading(false);},1000)
       });
     } else {
       localStorage.clear();

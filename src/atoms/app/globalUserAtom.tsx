@@ -3,7 +3,8 @@ import { atom } from "recoil";
 export interface UserInterface{
     name:string|null,
     photoUrl:string|null,
-    email:string|null
+    email:string|null,
+    companyOnboarded:boolean|null
 }
 
 

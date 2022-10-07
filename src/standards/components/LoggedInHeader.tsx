@@ -17,10 +17,14 @@ export default function LoggedInHeader() {
     return (
         <div className="fixed h-[80px] bg-tan z-50 w-full flex flex-row justify-between items-center px-[5%] py-5">
             <button onClick={() => { navigate("/") }}>
-                <img src={Logo} className="h-16 w-16"></img>
+                <img src={Logo} className="h-14 w-14"></img>
             </button>
 
-            <div className="flex flex-row gap-20 justify-between items-center">
+            <div className="flex flex-row gap-16 justify-between items-center">
+
+                <button onClick={() => {
+                    navigate("/jobs");
+                }} className="hover:scale-[1.02] font-bold text-breen text-sm">Jobs</button>
 
                 <button onClick={() => {
                     navigate("/pricing");
