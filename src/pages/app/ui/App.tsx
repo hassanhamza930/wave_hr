@@ -8,6 +8,7 @@ import LoggedInRoutes from "../components/LoggedInRoutes";
 import useLoggedIn from "../logic/useLoggedInAndOnboarded";
 import LoggedOutHeader from "../../../standards/components/LoggedOutHeader";
 import globalUserAtom from "../../../atoms/app/globalUserAtom";
+import {Toaster} from "react-hot-toast";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAleTmGUCRY87baXUHowrBhPGdY5YcGZak",
@@ -30,9 +31,13 @@ function App() {
 
   return (
     <>
-      {loading==true&&<Loading/>}
+      {loading == true && <Loading />}
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+      />
       <div style={{ fontFamily: "Inter" }} className=" h-full w-full bg-tan">
-        {loggedIn == true ? <LoggedInRoutes/> : <LoggedOutRoutes />}
+        {loggedIn == true ? <LoggedInRoutes /> : <LoggedOutRoutes />}
       </div>
     </>
   );

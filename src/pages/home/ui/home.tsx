@@ -6,6 +6,8 @@ import Hello from "../components/hello";
 import Schedule from "../components/schedule";
 import useCheckCompanyOnboarding from "../logic/useCheckCompanyOnboarding";
 
+
+
 export default function Home() {
 
     const { companyOnboarded } = useCheckCompanyOnboarding();

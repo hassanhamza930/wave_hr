@@ -4,13 +4,13 @@ import { AiFillCamera } from "react-icons/ai";
 import selectedImageAtom from "../../../atoms/home/selectedImage";
 import useSaveImageToLocalStorage from "../logic/useSaveImageToLocalStorage";
 import { useForm } from "react-hook-form";
-import useSubmitOnboardingDataToFirebase from "../logic/useSubmitOnboardingDataToFirebase";
+import useSubmitOnboardingDataToFirebase, { CompanyOnboardingData } from "../logic/useSubmitOnboardingDataToFirebase";
 
 export default function CompanyOnboardingPopup() {
     const [globalUser, setGlobalUser] = useRecoilState(globalUserAtom);
     const [selectedImage, setSelectedImageState] = useRecoilState(selectedImageAtom);
     const { saveImageToLocalStorage } = useSaveImageToLocalStorage();
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, watch, formState: { errors } } = useForm<CompanyOnboardingData>();
     const { submitOnboardingDataToFirebase } = useSubmitOnboardingDataToFirebase();
 
     return (

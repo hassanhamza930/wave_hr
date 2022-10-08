@@ -9,6 +9,7 @@ export default function useSaveImageToLocalStorage() {
     function saveImageToLocalStorage() {
         var inputField = document.createElement("input");
         inputField.type = "file";
+        inputField.accept="image/png, image/jpeg, .svg";
         inputField.onchange = (e: any) => {
             e.preventDefault();
             var reader = new FileReader();
