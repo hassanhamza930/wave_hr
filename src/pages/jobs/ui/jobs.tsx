@@ -1,22 +1,6 @@
-function JobCard() {
-    return (
-        <div className="w-[500px] border-2 rounded-xl hover:bg-breen hover:text-white border-breen flex flex-col justify-start items-start p-4">
-            <div className="text-3xl font-bold">Senior Software Engineer</div>
-            <div className="text-md font-regular">at CareerNetwork.co</div>
-            <div className="w-full flex flex-row justify-end items-end text-md font-regular">27 Applicants</div>
-        </div>
-    )
-}
-
-
-function JobDetails() {
-    return (
-        <div className="w-[500px] border-2 rounded-xl hover:bg-breen hover:text-white border-breen flex flex-col justify-center items-center p-4">
-            <div className="text-3xl font-bold">This will show all details for selected job.</div>
-        
-        </div>
-    )
-}
+import JobCard from "../components/JobCard";
+import JobDetails from "../components/jobDetails";
+import {BsArrowRightShort} from "react-icons/bs";
 
 
 export default function JobsPage() {
@@ -25,11 +9,16 @@ export default function JobsPage() {
             <div className="text-6xl font-bold my-10">Your Job Postings</div>
 
             <div className="w-full h-full flex flex-row">
-                <div className="h-full border-2 border-breen w-2/4 flex flex-col justify-start items-start">
+                <div className="pr-10 h-full w-2/4 flex flex-col justify-start items-start ">
                     <JobCard />
+                    <button className=" mt-10 text-breen font-bold hover:text-tan flex flex-row gap-5 justify-center items-center px-6 py-3 bg-transparent border-2 border-breen hover:bg-breen rounded-md">
+                        Post a new Job
+                        <BsArrowRightShort className="" size={30}></BsArrowRightShort>
+                    </button>
+
                 </div>
 
-                <div className="border-2 border-red-500 h-full w-2/4 flex flex-col justify-center items-center">
+                <div className="bg-bray rounded-md h-full w-2/4 flex flex-col justify-center items-center">
                     <JobDetails />
                 </div>
 

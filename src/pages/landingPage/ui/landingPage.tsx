@@ -15,7 +15,7 @@ export default function LandingPage() {
             <motion.img 
             initial="hidden"
             whileInView="visible"
-            // viewport={{ once: true }}
+            viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.5 }}
             variants={{
                 visible: { opacity: 1, y: 0 },
