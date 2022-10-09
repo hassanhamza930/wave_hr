@@ -4,9 +4,7 @@ import Logo from "../../images/logo.svg";
 export default function Loading() {
     return (
         <div className="fixed z-[80] h-screen w-full bg-breen flex flex-col justify-center items-center gap-10">
-            {/* <div className="h-12 w-12 rounded-md animate-spin bg-white/90">
-
-            </div> */}
+            
             <motion.img
                 initial={{ opacity: 0}}
                 animate={{ opacity: 1 }}

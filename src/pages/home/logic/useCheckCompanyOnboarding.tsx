@@ -5,7 +5,7 @@ import { UserInterface } from "../../../atoms/app/globalUserAtom";
 
 export default function useCheckCompanyOnboarding() {
 
-    const [companyOnboarded, setCompanyOnboarded] = useState(false);
+    const [companyOnboarded, setCompanyOnboarded] = useState(true);
     const db = getFirestore();
 
 

@@ -14,20 +14,22 @@ export default function Home() {
 
 
     useEffect(() => {
+        console.log("testing");
     }, []);
 
 
     return (
         <>
-
+            {companyOnboarded == false && <CompanyOnboardingPopup />}
             <div className="pt-[80px] h-screen w-full bg-tan flex flex-col justify-start item-start p-20">
+
                 <div className="h-[600px] w-full flex flex-row mt-12">
                     <Hello />
                     <Schedule />
                 </div>
-            </div>
-            {companyOnboarded==false&&<CompanyOnboardingPopup/>}
 
+            </div>
         </>
+
     )
 }

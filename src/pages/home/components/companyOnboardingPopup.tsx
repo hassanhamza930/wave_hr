@@ -14,7 +14,7 @@ export default function CompanyOnboardingPopup() {
     const { submitOnboardingDataToFirebase } = useSubmitOnboardingDataToFirebase();
 
     return (
-        <div className="z-50 fixed h-screen w-full bg-bray/80 flex justify-center items-center">
+        <div className="fixed z-50 h-screen w-full bg-bray/80 flex justify-center items-center">
 
             <div className="w-[600px] h-[80%] text-breen overflow-y-scroll bg-white/90 rounded-xl flex-col justify-start items-start p-10 gap">
                 <div className="text-4xl font-bold">Hello {globalUser.name},</div>
