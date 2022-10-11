@@ -2,19 +2,17 @@ import JobCard from "../components/JobCard";
 import JobDetails from "../components/jobDetails";
 import { BsArrowRightShort } from "react-icons/bs";
 import { useRecoilState } from "recoil";
-import isPostJobModalOpenAtom from "../../../atoms/jobs/jobs";
-import PostNewJobModal from "../components/postNewJobModal";
+import isPostJobModalOpenAtom from "../../../atoms/newJob/newJobAtom";
 import { Navigate, useNavigate } from "react-router";
 
 
 export default function JobsPage() {
 
-    const [isPostJobModalOpen, setIsPostJobModalOpen] = useRecoilState(isPostJobModalOpenAtom);
     const navigate=useNavigate();
 
     return (
         <>
-            {isPostJobModalOpen==true&&<PostNewJobModal/>}
+
             <div className="pt-[80px] text-breen bg-tan h-screen w-full flex justify-start items-start p-20 flex-col">
                 <div className="text-6xl font-bold my-10">Your Job Postings</div>
 
