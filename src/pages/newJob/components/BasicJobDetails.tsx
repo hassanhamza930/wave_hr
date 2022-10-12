@@ -1,14 +1,22 @@
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
-import NewJobPageIndexAtom, { NewJobPosting } from "../../../atoms/newJob/newJobAtom";
+import NewJobPageIndexAtom, { NewJobPosting, NewJobPostingAtom } from "../atoms/newJobAtoms";
 import useSubmitOnboardingDataToFirebase from "../../home/logic/useSubmitOnboardingDataToFirebase";
-import useSubmitNewJob from "../logic/newJobLogic";
+import pageIndexAtom from "../atoms/newJobAtoms";
 
 
 export default function BasicJobDetails() {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm<NewJobPosting>();
-    const { syncBasicNewJobDetailsValue } = useSubmitNewJob();
+    const [pageIndex, setPageIndex] = useRecoilState(pageIndexAtom);
+    const [newJobPosting,setNewJobPosting]=useRecoilState(NewJobPostingAtom);
+
+    function syncBasicNewJobDetailsValue(data:NewJobPosting) {
+        console.log("submitting data to next page");
+        setNewJobPosting(data);
+        setPageIndex(1);
+    }
+
 
     return (
         <div className="h-full w-full bg-tan justify-center items-center flex flex-col text-left">

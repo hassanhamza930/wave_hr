@@ -1,15 +1,13 @@
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
-import NewJobPageIndexAtom, { NewJobPosting, NewJobPostingAtom } from "../../../atoms/newJob/newJobAtom";
+import NewJobPageIndexAtom, { NewJobPosting, NewJobPostingAtom } from "../atoms/newJobAtoms";
 import useSubmitOnboardingDataToFirebase from "../../home/logic/useSubmitOnboardingDataToFirebase";
-import useSubmitNewJob from "../logic/newJobLogic";
 
 
 export default function CustomQuestionsPage() {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm<NewJobPosting>();
-    const { syncBasicNewJobDetailsValue } = useSubmitNewJob();
-    const [newJobPosting,setNewJobPosting]=useRecoilState(NewJobPostingAtom);
+    const [newJobPosting, setNewJobPosting] = useRecoilState(NewJobPostingAtom);
 
 
     return (
@@ -20,11 +18,11 @@ export default function CustomQuestionsPage() {
                 <div className="text-white/90 text-xl mt-5">Make a new job post to start receiving applications</div>
 
                 <div className="text-white ">
-                {newJobPosting.endSalary.toString()}
-                {newJobPosting.startSalary.toString()}
-                {newJobPosting.jobTitle.toString()}
+                    {newJobPosting.endSalary.toString()}
+                    {newJobPosting.startSalary.toString()}
+                    {newJobPosting.jobTitle.toString()}
                 </div>
-            
+
             </div>
 
 
