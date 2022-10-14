@@ -5,11 +5,13 @@ import { useRecoilState } from "recoil";
 import isPostJobModalOpenAtom from "../../newJob/atoms/newJobAtoms";
 import { Navigate, useNavigate } from "react-router";
 import AllPostedJobs from "../components/AllPostedJobs";
+import { selectedJobAtom } from "../jobsAtoms";
 
 
 export default function JobsPage() {
 
     const navigate=useNavigate();
+    const [selectedJob, setSelectedJob] = useRecoilState(selectedJobAtom);
 
     return (
         <>
@@ -27,8 +29,8 @@ export default function JobsPage() {
 
                     </div>
 
-                    <div className="bg-bray rounded-md h-full w-2/4 flex flex-col justify-center items-center">
-                        <JobDetails />
+                    <div className="bg-bray rounded-md h-full w-2/4 overflow-y-scroll">
+                        {selectedJob.jobDetails!=null&&<JobDetails />}
                     </div>
 
                 </div>

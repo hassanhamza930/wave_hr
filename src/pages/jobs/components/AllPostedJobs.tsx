@@ -1,6 +1,9 @@
 import { collection, doc, getFirestore, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import JobCard, { JobData } from "./JobCard";
+import { useRecoilState } from "recoil";
+import { NewJobPosting } from "../../newJob/atoms/newJobAtoms";
+import { selectedJobAtom } from "../jobsAtoms";
+import JobCard, { JobData, JobPosting } from "./JobCard";
 
 export default function AllPostedJobs() {
 
@@ -12,8 +15,8 @@ export default function AllPostedJobs() {
         onSnapshot(
             collection(db, "jobs"),
             (docs) => {
-                var tempDocList:Array<Object>=[];
-                docs.docs.forEach((e)=>{
+                var tempDocList: Array<Object> = [];
+                docs.docs.forEach((e) => {
                     tempDocList.push(e.data() as Object);
                 })
                 setAllJobs(tempDocList);
@@ -25,9 +28,9 @@ export default function AllPostedJobs() {
     return (
         <div className="min:h-min max:h-[420px] w-full gap-3 overflow-y-scroll flex flex-col justify-start items-start">
             {
-                allJobs.map((e) => {
+                allJobs.map((e,index) => {
                     return (
-                        <JobCard jobData={e as any}/>
+                        <JobCard jobData={e as JobPosting} />
                     )
                 })
             }
