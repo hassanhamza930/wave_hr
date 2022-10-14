@@ -1,7 +1,6 @@
 import { useRecoilState } from "recoil";
 import NewJobPageIndexAtom, { NewJobPostingAtom } from "../atoms/newJobAtoms";
-import BasicJobDetails from "../components/BasicJobDetails";
-import CustomQuestionsPage from "../components/CustomQuestionsPage";
+import PostNewJobForm from "../components/BasicJobDetails";
 
 export default function NewJob() {
 
@@ -12,8 +11,7 @@ export default function NewJob() {
 
     return (
         <div className="pt-[50px] h-screen w-full flex justify-center items-center overflow-y-scroll ">
-            {pageIndex == 0 && <BasicJobDetails />}
-            {pageIndex == 1 && <CustomQuestionsPage />}
+            <PostNewJobForm />
         </div>
     )
 }
