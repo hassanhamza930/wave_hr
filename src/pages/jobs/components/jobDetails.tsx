@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { GiWeightLiftingDown } from "react-icons/gi";
 import { useRecoilState } from "recoil";
 import { selectedJobAtom } from "../jobsAtoms";
@@ -11,7 +12,7 @@ export default function JobDetails() {
     function copyJobLink(id:string){
         var jobLink=window.location.host+"/apply/"+id;
         navigator.clipboard.writeText(jobLink);
-        // window.open(jobLink,"_blank");
+        toast.success("Job Link Copied to Clipboard");
     }
 
     return (

@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import LoggedInHeader from "../../../standards/components/LoggedInHeader";
+import Apply from "../../apply/ui/apply";
 import Home from "../../home/ui/home";
 import JobsPage from "../../jobs/ui/jobs";
 import NewJob from '../../newJob/ui/newJob';
@@ -14,6 +15,7 @@ export default function LoggedInRoutes() {
                 <Route path="/" element={<Home />} ></Route>
                 <Route path="/jobs" element={<JobsPage/>} ></Route>
                 <Route path="/newJob" element={<NewJob/>} ></Route>
+                <Route path="/apply/:jobId" element={<Apply />} ></Route>
             </Routes>
         </>
 

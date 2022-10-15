@@ -109,7 +109,7 @@ export default function PostNewJobForm() {
                         }
                     </div>
 
-                    <input {...register("question")} placeholder="How many years of experience do you have with React.js?" className="mt-10 w-96 border-b-[1px] border-white/90 text-white/90 bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
+                    <input {...register("question")} placeholder="How many years of experience do you have with React.js?" className="mt-10 w-96 border-b-[1px] border-white/90 text-white/90 bg-transparent outline-0 px-2 py-1 flex justify-center items-center">
                     </input>
 
                     <button onClick={() => { AddQuestion() }} type="button" className=" mt-5 hover:text-breen text-white font-bold flex flex-row gap-5 justify-center items-center px-4 py-2 bg-transparent border-2 border-white/90 hover:bg-white/90 rounded-md">
