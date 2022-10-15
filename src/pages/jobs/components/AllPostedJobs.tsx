@@ -1,25 +1,35 @@
-import { collection, doc, getFirestore, onSnapshot } from "firebase/firestore";
+import { collection, doc, getFirestore, onSnapshot, query, setDoc, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { NewJobPosting } from "../../newJob/atoms/newJobAtoms";
-import { selectedJobAtom } from "../jobsAtoms";
+import { moreThanTwoJobsAtom, selectedJobAtom } from "../jobsAtoms";
 import JobCard, { JobData, JobPosting } from "./JobCard";
 
 export default function AllPostedJobs() {
 
     const [allJobs, setAllJobs] = useState<Array<Object>>([]);
+    const [docsIds,setDocIds]=useState<Array<string>>([]);
     const db = getFirestore();
+    const [moreThanTwoJobs,setMoreThanTwoJobs]=useRecoilState(moreThanTwoJobsAtom);
 
     useEffect(() => {
 
         onSnapshot(
-            collection(db, "jobs"),
+            query(collection(db, "jobs"),where("postedBy","==",localStorage.getItem("uid"))),
             (docs) => {
+                
                 var tempDocList: Array<Object> = [];
+                var tempDocIds:Array<string>=[];
                 docs.docs.forEach((e) => {
                     tempDocList.push(e.data() as Object);
+                    tempDocIds.push(e.id);
                 })
                 setAllJobs(tempDocList);
+                setDocIds(tempDocIds);
+                if(tempDocIds.length<2){
+                    setMoreThanTwoJobs(false);
+                }
+            
             }
         );
 
@@ -30,7 +40,7 @@ export default function AllPostedJobs() {
             {
                 allJobs.map((e,index) => {
                     return (
-                        <JobCard jobData={e as JobPosting} />
+                        <JobCard id={docsIds[index]}  jobData={e as JobPosting} />
                     )
                 })
             }

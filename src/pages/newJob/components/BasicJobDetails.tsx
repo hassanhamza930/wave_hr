@@ -26,12 +26,13 @@ export default function PostNewJobForm() {
         console.log(data);
         console.log(questions);
         delete data["question"];
-        await addDoc(collection(db, "jobs"), {
+        var doc= await addDoc(collection(db, "jobs"), {
             jobDetails: data,
             questions: questions,
             postedBy: localStorage.getItem("uid"),
             time:Timestamp.now()
         });
+    
         setLoading(false);
         navigate("/jobs");
 
