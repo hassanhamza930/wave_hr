@@ -23,7 +23,7 @@ export default function JobDetails() {
 
                 <div className="flex mt-5 flex-row w-full justify-between items-center">
                     <div className="text-md text-white">Posted on {selectedJob.jobData.time.toDate().toLocaleString()}</div>
-                    <div className="flex flex-row justify-center items-center gap-5">
+                    <div className="flex flex-wrap justify-center items-center gap-5">
                         <button onClick={()=>{copyJobLink(selectedJob.id)}} className="text-sm px-4 py-2 rounded-md border-white border-2 hover:font-bold hover:bg-white bg-transparent hover:text-breen text-white">Copy Job Link </button>
                         <button className="text-sm px-4 py-2 rounded-md border-white border-2 hover:font-bold hover:bg-white bg-transparent hover:text-breen text-white">Delete</button>
                     </div>
