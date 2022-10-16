@@ -17,7 +17,7 @@ export default function JobDetails() {
 
     return (
         <div className="mb-20 text-md text-white/80 font-regular flex flex-col justify-start items-start">
-            <div className="h-36 w-full bg-gradient-to-br from-red-700 to-yellow-800 bg-cover bg-center bg-[url('https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png')]"></div>
+            <div className="h-48 w-full bg-gradient-to-br from-red-700 to-yellow-800 bg-cover bg-center bg-[url('https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png')]"></div>
 
             <div className="flex flex-col justify-start items-start p-10 w-full">
                 <div className="text-4xl font-bold text-white">{selectedJob.jobData.jobDetails.jobTitle}</div>
