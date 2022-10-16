@@ -34,7 +34,12 @@ export default function JobsPage() {
                     </div>
 
                     <div className="bg-bray rounded-md h-full w-2/4 overflow-y-scroll">
-                        {selectedJob.jobData != null && <JobDetails />}
+                        {
+                            selectedJob.jobData != null ? <JobDetails /> :
+                                <div className="flex justify-center items-center h-full w-full">
+                                    <div className="text-white/80 text-sm">Select a job to see details</div>
+                                </div>
+                        }
                     </div>
 
                 </div>
