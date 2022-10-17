@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { useRecoilState } from "recoil";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
 import { JobPosting } from "../../jobs/components/JobCard";
+import { jobDataAtom } from "../atoms/applyPageAtoms";
 import ApplicationWindow from "../components/applicationWindow";
 
 
@@ -20,18 +21,8 @@ export default function Apply() {
     const { jobId } = useParams();
     const [loading, setLoading] = useRecoilState(isLoadingAtom);
     const [companyData, setCompanyData] = useState({} as CompanyData);
-    const [jobData, setJobData] = useState<JobPosting>({
-        jobDetails: {
-            jobDescription: "",
-            jobQualifications: "",
-            endSalary: "",
-            jobTitle: "",
-            startSalary: ""
-        },
-        questions: [] as Array<string>,
-        time: Timestamp.now(),
-        posedBy: ""
-    } as JobPosting);
+    const [jobData, setJobData] = useRecoilState(jobDataAtom);
+
     const db = getFirestore();
     const [applyStageInitiated, setApplyStageInitiated] = useState<boolean>(false);
 

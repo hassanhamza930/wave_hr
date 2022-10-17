@@ -14,7 +14,7 @@ export interface NewJobPosting{
 
  const pageIndexAtom = atom({
     key: 'pageIndexAtom', // unique ID (with respect to other atoms/selectors)
-    default: 0 as number, // default value (aka initial value)
+    default: 4 as number, // default value (aka initial value)
   });
 
 export const questionsAtom = atom({
