@@ -6,7 +6,7 @@ export interface JobApplication{
     email:string,
     profilePicture:string,
     questions:Array<string>,
-    resumeUrl:string
+    resume:string
 }
 
 const PageIndex = atom({

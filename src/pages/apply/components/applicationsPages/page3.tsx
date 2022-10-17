@@ -7,7 +7,7 @@ import { JobPosting } from "../../../jobs/components/JobCard";
 import pageIndexAtom from "../../../newJob/atoms/newJobAtoms";
 import JobApplicationAtom, { JobApplication, selectedProfilePictureAtom } from "../../atoms/applyPageAtoms";
 
-export default function Page1() {
+export default function Page3() {
 
     const [selectedProfilePicture, setSelectedProfilePicture] = useRecoilState(selectedProfilePictureAtom);
     const { watch, handleSubmit, register } = useForm<JobApplication>();
@@ -39,36 +39,32 @@ export default function Page1() {
 
     }
 
-    function handlePage1DataSubmit(data: JobApplication) {
+    function handlePage3DataSubmit(data: JobApplication) {
 
-        if (watch("name") == "" ) {
-            toast.error("Please enter your name")
+        if (selectedProfilePicture=="") {
+            toast.error("Please select an image")
         }
         else {
             setJobApplication({
                 ...jobApplication,
-                name:data.name
+                profilePicture:selectedProfilePicture
             });
-            setPageIndex(1);
+            setPageIndex(3);
         }
     }
 
 
     useEffect(() => {
+        console.log("this is coming from page3");
         console.log(jobApplication);
     }, [])
 
     return (
-        <form onSubmit={handleSubmit(handlePage1DataSubmit)} className="text-left h-full overflow-y-scroll flex justify-center items-start flex-col p-10 w-full md:w-[60%]">
-            <div className="text-3xl text-start font-bold text-white">Let's get your application started</div>
-            <div className="text-xl text-left text-white mt-2">Tell us a bit more about yourself</div>
+        <form onSubmit={handleSubmit(handlePage3DataSubmit)} className="text-left h-full rounded-md overflow-y-scroll flex justify-center items-start flex-col p-10 w-full md:w-[60%]">
+           
+            <div className="text-3xl text-start font-bold text-white">Upload your<br/>profile picture</div>
+            <div className="text-xl text-left text-white mt-2">Make a solid first impression.</div>
 
-
-            <input {...register("name")} placeholder="Full Name" className="mt-10 w-48 md:w-96 border-b-[1px] border-white/90 text-white/90 bg-transparent outline-0 px-2 py-1 flex justify-center items-center">
-            </input>
-
-            {/* <input {...register("email")} placeholder="Email" className="mt-10 w-96 border-b-[1px] border-white/90 text-white/90 bg-transparent outline-0 px-2 py-1 flex justify-center items-center">
-            </input>
 
             <div className="text-md text-white/80 mt-10">Add your profile picture</div>
             <button
@@ -80,7 +76,7 @@ export default function Page1() {
                 }}
                 className="hover:bg-bray bg-contain bg-no-repeat bg-center hover:scale-105 h-36 w-36 rounded-xl mt-3 flex justify-center items-center">
                 {selectedProfilePicture == "" && <AiFillCamera color="black" className="opacity-50" size={50} />}
-            </button> */}
+            </button>
 
             <button type="submit" className="border-white border-2 hover:bg-white bg-transparent text-white hover:text-breen px-8 py-2 flex flex-row justify-center items-center gap-2 rounded-md mt-20 w-min">
                 Next

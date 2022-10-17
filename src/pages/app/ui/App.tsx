@@ -33,7 +33,7 @@ function App() {
     <>
       {loading == true && <Loading />}
       <Toaster
-        position="top-center"
+        position="top-right"
         reverseOrder={false}
       />
       <div style={{ fontFamily: "Inter" }} className=" h-full w-full bg-tan">
