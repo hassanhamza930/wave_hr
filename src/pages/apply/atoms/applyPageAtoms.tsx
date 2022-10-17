@@ -5,7 +5,8 @@ export interface JobApplication{
     name:string,
     email:string,
     profilePicture:string,
-    questions:Array<string>
+    questions:Array<string>,
+    resumeUrl:string
 }
 
 const PageIndex = atom({
@@ -22,6 +23,12 @@ const PageIndex = atom({
 
 export const selectedProfilePictureAtom=atom({
     key:"selectedProfilePictureAtom",
+    default: "" as string
+  })
+
+
+export const selectedResumeAtom=atom({
+    key:"selectedResumeAtom",
     default: "" as string
   })
 
