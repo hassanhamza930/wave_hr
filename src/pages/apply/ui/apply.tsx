@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import { useRecoilState } from "recoil";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
 import { JobPosting } from "../../jobs/components/JobCard";
-import { jobDataAtom } from "../atoms/applyPageAtoms";
+import { ApplyStageInitiatedAtom, jobDataAtom, SelectedJobIdAtom } from "../atoms/applyPageAtoms";
 import ApplicationWindow from "../components/applicationWindow";
 
 
@@ -22,9 +22,10 @@ export default function Apply() {
     const [loading, setLoading] = useRecoilState(isLoadingAtom);
     const [companyData, setCompanyData] = useState({} as CompanyData);
     const [jobData, setJobData] = useRecoilState(jobDataAtom);
+    const [selectedJobId,setSelectedJobId]=useRecoilState(SelectedJobIdAtom);
 
     const db = getFirestore();
-    const [applyStageInitiated, setApplyStageInitiated] = useState<boolean>(false);
+    const [applyStageInitiated, setApplyStageInitiated] = useRecoilState<boolean>(ApplyStageInitiatedAtom);
 
 
     async function syncData(jobId:string) {
@@ -40,6 +41,7 @@ export default function Apply() {
     useEffect(() => {
         console.log("the recieved job id is ", jobId);
         console.log("applying");
+        setSelectedJobId(jobId as string);
         syncData(jobId as string);
     }, [])
 
@@ -50,13 +52,13 @@ export default function Apply() {
 
             <div className="h-screen w-full bg-breen flex justify-center items-center">
 
-                <div className="pb-20 text-breen w-full md:w-[70%] rounded-md h-full md:h-[90%] overflow-y-scroll flex-col justify-start items-start">
+                <div id="no_scroll" className="pb-20 text-breen w-full md:w-[70%] rounded-md h-full md:h-[90%] overflow-y-scroll flex-col justify-start items-start">
                     <div className="rounded-md h-72 w-full bg-gradient-to-br from-purple-700 to-blue-800 bg-cover bg-center bg-[url('https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png')]"></div>
 
                     <div className="flex flex-col justify-start items-start p-5">
                         <div className="flex flex-wrap justify-between items-center">
 
-                            <div className="flex flex-col justify-start items-start">
+                            <div className="flex flex-col justify-start items-start w-full">
                                 <div className="text-white/90 mt-5 font-bold text-4xl md:text-6xl">{jobData.jobDetails.jobTitle}</div>
                                 <div className="text-white/90 mt-5 text-sm">
                                     Posted on {jobData.time.toDate().toLocaleString().toString()}
@@ -64,7 +66,7 @@ export default function Apply() {
 
                             </div>
 
-                            <div className="flex flex-col justify-start items-start">
+                            <div className="w-full flex flex-col justify-start items-start">
                                 <div className="flex flex-row justify-start items-start gap-2 mt-10">
 
                                     <div style={{ backgroundImage: `url('${companyData.companyLogo}')` }} className="bg-cover bg-center h-16 w-16 rounded-sm bg-white/90"></div>

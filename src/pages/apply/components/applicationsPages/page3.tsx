@@ -15,11 +15,9 @@ export default function Page3() {
     const [pageIndex, setPageIndex] = useRecoilState(ApplyPageIndexAtom);
 
     async function saveImageToLocalStorage() {
-        console.log("saving image to loc storage");
-        var inputField = window.document.createElement("input");
-        inputField.id = "inputField";
+        var inputField = document.createElement("input");
         inputField.type = "file";
-        inputField.accept = "image/png, image/jpeg, .svg";
+        inputField.accept="image/png, image/jpeg, .svg";
         inputField.onchange = (e: any) => {
             e.preventDefault();
             var reader = new FileReader();
@@ -27,16 +25,12 @@ export default function Page3() {
             reader.readAsDataURL(file);
             reader.onloadend = (file) => {
                 console.log("loaded");
-                var base64Result = file!.target!.result! as string;
+                var base64Result=file!.target!.result! as string;
                 console.log(base64Result);
                 setSelectedProfilePicture(base64Result);
             }
         };
-        console.log("clicking");
         inputField.click();
-        console.log(inputField);
-        console.log("clicked");
-
     }
 
     function handlePage3DataSubmit(data: JobApplication) {
@@ -60,7 +54,7 @@ export default function Page3() {
     }, [])
 
     return (
-        <form onSubmit={handleSubmit(handlePage3DataSubmit)} className="text-left h-full rounded-md overflow-y-scroll flex justify-center items-start flex-col p-10 w-full md:w-[60%]">
+        <form onSubmit={handleSubmit(handlePage3DataSubmit)} className="text-left h-full rounded-md  flex justify-center items-start flex-col p-10 w-full md:w-[60%]">
            
             <div className="text-3xl text-start font-bold text-white">Upload your<br/>profile picture</div>
             <div className="text-xl text-left text-white mt-2">Make a solid first impression.</div>

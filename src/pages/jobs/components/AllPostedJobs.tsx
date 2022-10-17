@@ -36,7 +36,7 @@ export default function AllPostedJobs() {
     }, [])
 
     return (
-        <div className="min:h-min max:h-[420px] w-full gap-3 overflow-y-scroll flex flex-col justify-start items-start">
+        <div id="no_scroll" className="min:h-min max:h-[420px] w-full gap-3 overflow-y-scroll flex flex-col justify-start items-start">
             {
                 allJobs.map((e,index) => {
                     return (

@@ -33,7 +33,7 @@ export default function JobsPage() {
 
                     </div>
 
-                    <div className="bg-bray rounded-md h-full w-2/4 overflow-y-scroll">
+                    <div id="no_scroll" className="bg-bray rounded-md h-full w-2/4 overflow-y-scroll">
                         {
                             selectedJob.jobData != null ? <JobDetails /> :
                                 <div className="flex justify-center items-center h-full w-full">

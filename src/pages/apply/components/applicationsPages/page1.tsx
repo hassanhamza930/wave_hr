@@ -59,7 +59,7 @@ export default function Page1() {
     }, [])
 
     return (
-        <form onSubmit={handleSubmit(handlePage1DataSubmit)} className="text-left h-full overflow-y-scroll flex justify-center items-start flex-col p-10 w-full md:w-[60%]">
+        <form onSubmit={handleSubmit(handlePage1DataSubmit)} className="text-left h-full flex justify-center items-start flex-col p-10 w-full md:w-[60%]">
             <div className="text-3xl text-start font-bold text-white">Let's get your application started</div>
             <div className="text-xl text-left text-white mt-2">Tell us a bit more about yourself</div>
 

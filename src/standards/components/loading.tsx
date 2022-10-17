@@ -3,7 +3,7 @@ import Logo from "../../images/logo.svg";
 
 export default function Loading() {
     return (
-        <div className="fixed z-[80] h-screen w-full bg-breen flex flex-col justify-center items-center gap-10">
+        <div className="fixed z-[120] h-screen w-full bg-breen flex flex-col justify-center items-center gap-10">
             
             <motion.img
                 initial={{ opacity: 0}}

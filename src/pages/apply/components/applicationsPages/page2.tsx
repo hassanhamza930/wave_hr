@@ -59,7 +59,7 @@ export default function Page2() {
     }, [])
 
     return (
-        <form onSubmit={handleSubmit(handlePage2DataSubmit)} className="text-left h-full rounded-md overflow-y-scroll flex justify-center items-start flex-col p-10 w-full md:w-[60%]">
+        <form onSubmit={handleSubmit(handlePage2DataSubmit)} className="text-left h-full rounded-md  flex justify-center items-start flex-col p-10 w-full md:w-[60%]">
             <div className="text-3xl text-start font-bold text-white">Please enter your email</div>
             <div className="text-xl text-left text-white mt-2">This will be used for further communication</div>
 

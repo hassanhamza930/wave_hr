@@ -73,7 +73,7 @@ export default function Page4() {
     }
 
     return (
-        <div className="text-left h-full rounded-md overflow-y-scroll flex justify-center items-start flex-col p-10 w-full md:w-[60%]">
+        <div className="text-left h-full rounded-md  flex justify-center items-start flex-col p-10 w-full md:w-[60%]">
             <div className="text-3xl font-bold text-white">Upload your Resume</div>
             <div className="text-xl text-white mt-2">Add relevant resume for the job posting</div>
 

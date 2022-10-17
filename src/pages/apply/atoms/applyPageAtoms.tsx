@@ -20,6 +20,10 @@ export const ApplyPageIndexAtom = atom({
   default: 0 as number, // default value (aka initial value)
 });
 
+export const SelectedJobIdAtom = atom({
+  key: 'selectedJobIdAtom', // unique ID (with respect to other atoms/selectors)
+  default: "" as string, // default value (aka initial value)
+});
 
 const JobApplicationAtom = atom({
   key: 'JobApplicationAtom', // unique ID (with respect to other atoms/selectors)
@@ -58,6 +62,11 @@ export const selectedProfilePictureAtom = atom({
 export const selectedResumeAtom = atom({
   key: "selectedResumeAtom",
   default: "" as string
+})
+
+export const ApplyStageInitiatedAtom = atom({
+  key: "ApplyStageInitiatedAtom",
+  default: false as boolean
 })
 
 
