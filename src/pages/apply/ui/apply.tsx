@@ -36,10 +36,11 @@ export default function Apply() {
     const [applyStageInitiated, setApplyStageInitiated] = useState<boolean>(false);
 
 
-    async function syncData(jobId: string) {
-        // setLoading(true);
+    async function syncData(jobId:string) {
+        setLoading(true);
+        console.log("syncing");
         var docData = await getDoc(doc(db, "jobs", jobId as string));
-        var companyData = (await getDoc(doc(db, "users", localStorage.getItem("uid") as string))).data()!["companyDetails"];
+        var companyData = (await getDoc(doc(db, "users", docData.data()!["postedBy"] as string))).data()!["companyDetails"];
         setJobData(docData.data() as JobPosting);
         setCompanyData(companyData);
         setLoading(false);
@@ -47,6 +48,7 @@ export default function Apply() {
 
     useEffect(() => {
         console.log("the recieved job id is ", jobId);
+        console.log("applying");
         syncData(jobId as string);
     }, [])
 
