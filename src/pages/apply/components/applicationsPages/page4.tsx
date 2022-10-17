@@ -4,14 +4,14 @@ import toast from "react-hot-toast";
 import { AiFillFile } from "react-icons/ai";
 import { useRecoilState } from "recoil";
 import pageIndexAtom from "../../../newJob/atoms/newJobAtoms";
-import JobApplicationAtom, { JobApplication, selectedResumeAtom } from "../../atoms/applyPageAtoms";
+import JobApplicationAtom, { ApplyPageIndexAtom, JobApplication, selectedResumeAtom } from "../../atoms/applyPageAtoms";
 
 export default function Page4() {
 
     const { watch, handleSubmit, register } = useForm<JobApplication>();
     const [selectedResume, setSelectedResume] = useRecoilState(selectedResumeAtom);
     const [jobApplication, setJobApplication] = useRecoilState(JobApplicationAtom);
-    const [pageIndex, setPageIndex] = useRecoilState(pageIndexAtom);
+    const [pageIndex, setPageIndex] = useRecoilState(ApplyPageIndexAtom);
 
     useEffect(() => {
         console.log("this is coming from page 4");

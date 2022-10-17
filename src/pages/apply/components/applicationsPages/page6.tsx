@@ -5,14 +5,14 @@ import { AiFillCamera } from "react-icons/ai";
 import { useRecoilState } from "recoil";
 import { JobPosting } from "../../../jobs/components/JobCard";
 import pageIndexAtom from "../../../newJob/atoms/newJobAtoms";
-import JobApplicationAtom, { ApplyPageIndexAtom, JobApplication, selectedProfilePictureAtom } from "../../atoms/applyPageAtoms";
+import JobApplicationAtom, { JobApplication, selectedProfilePictureAtom } from "../../atoms/applyPageAtoms";
 
-export default function Page1() {
+export default function Page6() {
 
     const [selectedProfilePicture, setSelectedProfilePicture] = useRecoilState(selectedProfilePictureAtom);
     const { watch, handleSubmit, register } = useForm<JobApplication>();
     const [jobApplication, setJobApplication] = useRecoilState(JobApplicationAtom);
-    const [pageIndex, setPageIndex] = useRecoilState(ApplyPageIndexAtom);
+    const [pageIndex, setPageIndex] = useRecoilState(pageIndexAtom);
 
     async function saveImageToLocalStorage() {
         console.log("saving image to loc storage");
@@ -55,6 +55,7 @@ export default function Page1() {
 
 
     useEffect(() => {
+        console.log("this is coming from page 6");
         console.log(jobApplication);
     }, [])
 

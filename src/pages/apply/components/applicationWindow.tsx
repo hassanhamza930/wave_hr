@@ -1,14 +1,16 @@
 import { useRecoilState } from "recoil";
 import pageIndexAtom from "../../newJob/atoms/newJobAtoms";
+import { ApplyPageIndexAtom } from "../atoms/applyPageAtoms";
 import Page1 from "./applicationsPages/page1";
 import Page2 from "./applicationsPages/page2";
 import Page3 from "./applicationsPages/page3";
 import Page4 from "./applicationsPages/page4";
 import Page5 from "./applicationsPages/page5";
+import Page6 from "./applicationsPages/page6";
 
 export default function ApplicationWindow() {
 
-    const [pageIndex,setPageIndex]=useRecoilState(pageIndexAtom);
+    const [pageIndex,setPageIndex]=useRecoilState(ApplyPageIndexAtom);
 
     
 
@@ -20,6 +22,7 @@ export default function ApplicationWindow() {
                 {pageIndex==2&&<Page3/>}
                 {pageIndex==3&&<Page4/>}
                 {pageIndex==4&&<Page5/>}
+                {pageIndex==5&&<Page6/>}
             </div>
         </div>
     )

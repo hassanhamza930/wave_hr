@@ -5,14 +5,14 @@ import { AiFillCamera } from "react-icons/ai";
 import { useRecoilState } from "recoil";
 import { JobPosting } from "../../../jobs/components/JobCard";
 import pageIndexAtom from "../../../newJob/atoms/newJobAtoms";
-import JobApplicationAtom, { JobApplication, selectedProfilePictureAtom } from "../../atoms/applyPageAtoms";
+import JobApplicationAtom, { ApplyPageIndexAtom, JobApplication, selectedProfilePictureAtom } from "../../atoms/applyPageAtoms";
 
 export default function Page3() {
 
     const [selectedProfilePicture, setSelectedProfilePicture] = useRecoilState(selectedProfilePictureAtom);
     const { watch, handleSubmit, register } = useForm<JobApplication>();
     const [jobApplication, setJobApplication] = useRecoilState(JobApplicationAtom);
-    const [pageIndex, setPageIndex] = useRecoilState(pageIndexAtom);
+    const [pageIndex, setPageIndex] = useRecoilState(ApplyPageIndexAtom);
 
     async function saveImageToLocalStorage() {
         console.log("saving image to loc storage");

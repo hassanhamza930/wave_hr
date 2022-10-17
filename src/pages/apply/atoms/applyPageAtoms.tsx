@@ -2,16 +2,20 @@ import { Timestamp } from "firebase/firestore";
 import { atom } from "recoil";
 import { JobPosting } from "../../jobs/components/JobCard";
 
+export interface QuestionResponse {
+    question: string,
+    answer: string
+}
 
 export interface JobApplication {
   name: string,
   email: string,
   profilePicture: string,
-  questions: Array<string>,
-  resume: string
+  resume: string,
+  responses:Array<QuestionResponse>
 }
 
-const PageIndex = atom({
+export const ApplyPageIndexAtom = atom({
   key: 'PageIndex', // unique ID (with respect to other atoms/selectors)
   default: 0 as number, // default value (aka initial value)
 });
@@ -21,6 +25,11 @@ const JobApplicationAtom = atom({
   key: 'JobApplicationAtom', // unique ID (with respect to other atoms/selectors)
   default: {} as JobApplication, // default value (aka initial value)
 });
+
+export const ResponsesAtom= atom({
+  key:"ResponsesAtom",
+  default: [] as Array<QuestionResponse>
+})
 
 
 
