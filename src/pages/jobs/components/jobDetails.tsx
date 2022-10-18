@@ -1,3 +1,4 @@
+import { deleteDoc, doc, getFirestore } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { GiWeightLiftingDown } from "react-icons/gi";
@@ -8,12 +9,21 @@ import { JobData, JobPosting } from "./JobCard";
 export default function JobDetails() {
 
     const [selectedJob, setSelectedJob] = useRecoilState(selectedJobAtom);
+    const db = getFirestore();
 
-    function copyJobLink(id:string){
-        var jobLink=window.location.host+"/apply/"+id;
+    function copyJobLink(id: string) {
+        var jobLink = window.location.host + "/apply/" + id;
         navigator.clipboard.writeText(jobLink);
         toast.success("Job Link Copied to Clipboard");
     }
+
+    async function deleteJob(id: string) {
+        setSelectedJob({} as JobData);
+        await deleteDoc(doc(db, "jobs", id));
+        toast.success("Deleted job posting");
+    }
+
+
 
     return (
         <div id="no_scroll" className="mb-20 text-md text-white/80 font-regular flex flex-col justify-start items-start">
@@ -25,16 +35,16 @@ export default function JobDetails() {
                 <div className="flex mt-5 flex-row w-full justify-between items-center">
                     <div className="text-md text-white">Posted on {selectedJob.jobData.time.toDate().toLocaleString()}</div>
                     <div className="flex flex-wrap justify-center items-center gap-5">
-                        <button onClick={()=>{copyJobLink(selectedJob.id)}} className="text-sm px-4 py-2 rounded-md border-white border-2 hover:font-bold hover:bg-white bg-transparent hover:text-breen text-white">Copy Job Link </button>
-                        <button className="text-sm px-4 py-2 rounded-md border-white border-2 hover:font-bold hover:bg-white bg-transparent hover:text-breen text-white">Delete</button>
+                        <button onClick={() => { copyJobLink(selectedJob.id) }} className="text-sm px-4 py-2 rounded-md border-white border-2 hover:font-bold hover:bg-white bg-transparent hover:text-breen text-white">Copy Job Link </button>
+                        <button onClick={() => { deleteJob(selectedJob.id) }} className="text-sm px-4 py-2 rounded-md border-white border-2 hover:font-bold hover:bg-white bg-transparent hover:text-breen text-white">Delete</button>
                     </div>
                 </div>
 
 
                 <div className="text-xl font-bold text-white mt-10">Job Description</div>
-                <div className="text-md mt-2 text-white">{selectedJob.jobData.jobDetails.jobDescription}</div>
+                <div dangerouslySetInnerHTML={{__html: selectedJob.jobData.jobDetails.jobDescription}} className="text-md mt-2 text-white"></div>
                 <div className="text-xl font-bold text-white mt-10">Job Qualifications</div>
-                <div className="text-md mt-2 text-white">{selectedJob.jobData.jobDetails.jobQualifications}</div>
+                <div dangerouslySetInnerHTML={{__html: selectedJob.jobData.jobDetails.jobQualifications}} className="text-md mt-2 text-white"></div>
                 <div className="text-xl font-bold text-white mt-10">Salary Range</div>
                 <div className="text-md mt-2 text-white">${selectedJob.jobData.jobDetails.startSalary.toString()} - ${selectedJob.jobData.jobDetails.endSalary}</div>
                 <div className="text-xl font-bold text-white mt-10 mb-2">Questions</div>

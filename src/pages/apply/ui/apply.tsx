@@ -89,10 +89,10 @@ export default function Apply() {
 
 
                         <div className="text-white/90 mt-10 font-bold text-2xl">Job Description</div>
-                        <div className="text-white/90 mt-2 text-md">{jobData.jobDetails.jobDescription}</div>
+                        <div dangerouslySetInnerHTML={{__html: jobData.jobDetails.jobDescription}} className="text-white/90 mt-2 text-md"></div>
 
                         <div className="text-white/90 font-bold text-2xl mt-10">Job Qualifications</div>
-                        <div className="text-white/90 mt-2 text-md">{jobData.jobDetails.jobQualifications}</div>
+                        <div dangerouslySetInnerHTML={{__html: jobData.jobDetails.jobQualifications}} className="text-white/90 mt-2 text-md"></div>
 
                         <button onClick={() => { setApplyStageInitiated(true); }} className="border-white border-2 hover:bg-white bg-transparent text-white hover:text-breen px-8 py-2 rounded-md mt-10 w-min">
                             Apply

@@ -9,6 +9,8 @@ import { Navigate, useNavigate } from "react-router";
 import { addDoc, collection, doc, getFirestore, setDoc, Timestamp } from "firebase/firestore";
 import { useState } from "react";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 
 export default function PostNewJobForm() {
@@ -20,12 +22,17 @@ export default function PostNewJobForm() {
     const navigate = useNavigate();
     const db = getFirestore();
     const [loading, setLoading] = useRecoilState(isLoadingAtom);
+    const [jobDescription,setJobDescription]=useState("");
+    const [jobQualifications,setJobQualifications]=useState("");
 
     async function handleAddNewJob(data: any) {
         setLoading(true);
         console.log(data);
         console.log(questions);
         delete data["question"];
+        data["jobDescription"]=jobDescription;
+        data["jobQualifications"]=jobQualifications;
+
         var doc= await addDoc(collection(db, "jobs"), {
             jobDetails: data,
             questions: questions,
@@ -57,7 +64,7 @@ export default function PostNewJobForm() {
     return (
         <div className="h-full w-full bg-tan justify-center items-center flex flex-col text-left">
 
-            <div className="w-[700px] flex flex-col h-[90%] bg-bray rounded-md overflow-y-scroll p-10">
+            <div className="w-[700px] flex-col h-[90%] bg-bray rounded-md overflow-y-scroll p-10">
                 <form onSubmit={handleSubmit(handleAddNewJob)}>
                     <div className="text-white/90 text-6xl font-bold">Post a New Job</div>
                     <div className="text-white/90 text-xl mt-5">Make a new job post to start receiving applications</div>
@@ -68,14 +75,18 @@ export default function PostNewJobForm() {
                     </input>
 
                     <div className="text-white/90 text-md mt-10 font-bold w-3/4">Job Description</div>
-                    <textarea {...register("jobDescription")} placeholder="Describe the job title and responsibilities" className="h-28 w-96 border-b-[1px] border-white/90 text-white/90 bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
-                    </textarea>
+                    {/* <textarea {...register("jobDescription")} placeholder="Describe the job title and responsibilities" className="h-28 w-96 border-b-[1px] border-white/90 text-white/90 bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
+                    </textarea> */}
 
-                    <div className="text-white/90 text-md mt-10 font-bold w-3/4">Job Qualifications</div>
-                    <textarea {...register("jobQualifications")} placeholder="Describe the qualifications required for this job" className="h-28 w-96 border-b-[1px] text-white/90 border-white/90 bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
-                    </textarea>
+                    <ReactQuill className="h-36 text-white mb-10 mt-4" theme={"snow"} value={jobDescription} onChange={setJobDescription} />
 
-                    <div className="text-white/90 text-md mt-10 font-bold w-3/4">Annual Salary Range</div>
+                    <div className="text-white/90 text-md mt-20 font-bold w-3/4">Job Qualifications</div>
+                    {/* <textarea {...register("jobQualifications")} placeholder="Describe the qualifications required for this job" className="h-28 w-96 border-b-[1px] text-white/90 border-white/90 bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
+                    </textarea> */}
+                    <ReactQuill className="h-36 text-white mb-10 mt-4" theme={"snow"} value={jobQualifications} onChange={setJobQualifications} />
+
+
+                    <div className="text-white/90 text-md mt-20 font-bold w-3/4">Annual Salary Range</div>
 
                     <div className="flex flex-row justify-start item-start gap-10">
 
@@ -112,7 +123,7 @@ export default function PostNewJobForm() {
                     <input {...register("question")} placeholder="How many years of experience do you have with React.js?" className="mt-10 w-96 border-b-[1px] border-white/90 text-white/90 bg-transparent outline-0 px-2 py-1 flex justify-center items-center">
                     </input>
 
-                    <button onClick={() => { AddQuestion() }} type="button" className=" mt-5 hover:text-breen text-white font-bold flex flex-row gap-5 justify-center items-center px-4 py-2 bg-transparent border-2 border-white/90 hover:bg-white/90 rounded-md">
+                    <button onClick={() => { AddQuestion() }} type="button" className=" mt-6 hover:text-breen text-white font-bold flex flex-row gap-5 justify-center items-center px-4 py-2 bg-transparent border-2 border-white/90 hover:bg-white/90 rounded-md">
                         +
                     </button>
 
