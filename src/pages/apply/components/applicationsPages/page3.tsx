@@ -6,6 +6,7 @@ import { useRecoilState } from "recoil";
 import { JobPosting } from "../../../jobs/components/JobCard";
 import pageIndexAtom from "../../../newJob/atoms/newJobAtoms";
 import JobApplicationAtom, { ApplyPageIndexAtom, JobApplication, selectedProfilePictureAtom } from "../../atoms/applyPageAtoms";
+import { motion } from "framer-motion";
 
 export default function Page3() {
 
@@ -54,9 +55,18 @@ export default function Page3() {
     }, [])
 
     return (
-        <form onSubmit={handleSubmit(handlePage3DataSubmit)} className="text-left h-full rounded-md  flex justify-center items-start flex-col p-10 w-full md:w-[60%]">
+        <motion.form 
+        initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            variants={{
+                visible: { opacity: 1, y: 0 },
+                hidden: { opacity: 0, y: 50 }
+            }}
+        onSubmit={handleSubmit(handlePage3DataSubmit)} className="text-left h-full rounded-md  flex justify-center items-start flex-col p-10 w-full md:w-[60%]">
            
-            <div className="text-3xl text-start font-bold text-white">Upload your<br/>profile picture</div>
+            <div className="text-3xl text-start font-bold text-white">Upload your profile picture</div>
             <div className="text-xl text-left text-white mt-2">Make a solid first impression.</div>
 
 
@@ -77,6 +87,6 @@ export default function Page3() {
             </button>
 
 
-        </form>
+        </motion.form>
     )
 }

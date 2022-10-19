@@ -9,7 +9,7 @@ import isLoadingAtom from "../../../../atoms/app/isLoadingAtom";
 import { JobPosting } from "../../../jobs/components/JobCard";
 import pageIndexAtom from "../../../newJob/atoms/newJobAtoms";
 import JobApplicationAtom, { ApplyStageInitiatedAtom, JobApplication, ResponsesAtom, SelectedJobIdAtom, selectedProfilePictureAtom } from "../../atoms/applyPageAtoms";
-
+import {motion} from "framer-motion";
 
 
 async function dataUrlToFile(dataUrl: string, fileName: string): Promise<File> {
@@ -76,7 +76,7 @@ export default function Page6() {
         // Uploading Profile Pic to Firebase
         var profilePictureData = jobApplication.profilePicture;
         var profilePictureFileName = `profilePicture${Timestamp.now().nanoseconds}.png`;
-        var profilePictureFile = await dataUrlToFile(profilePictureData,profilePictureFileName);
+        var profilePictureFile = await dataUrlToFile(profilePictureData, profilePictureFileName);
         const profilePictureRef = ref(storage, `profilePictures/${finalJobApplicationData.email}/${profilePictureFileName}`);
 
         await uploadBytes(profilePictureRef, profilePictureFile).then(async (snapshot) => {
@@ -111,8 +111,19 @@ export default function Page6() {
         console.log(responses);
     }, [])
 
+
+
     return (
-        <div className="text-left h-full  flex justify-center items-start flex-col p-10 w-full md:w-[60%]">
+        <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            variants={{
+                visible: { opacity: 1, y: 0 },
+                hidden: { opacity: 0, y: 50 }
+            }}
+            className="text-left h-full  flex justify-center items-start flex-col p-10 w-full md:w-[60%]">
             <div className="text-3xl text-start font-bold text-white">All Done</div>
             <div className="text-xl text-left text-white mt-2">Nice Job 👋</div>
 
@@ -122,6 +133,6 @@ export default function Page6() {
             </button>
 
 
-        </div>
+        </motion.div>
     )
 }
