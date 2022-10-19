@@ -69,8 +69,8 @@ export default function Apply() {
                             <div className="w-full flex flex-col justify-start items-start">
                                 <div className="flex flex-row justify-start items-start gap-2 mt-10">
 
-                                    <div style={{ backgroundImage: `url('${companyData.companyLogo}')` }} className="bg-cover bg-center h-16 w-16 rounded-sm bg-white/90"></div>
-                                    <div className="flex w-full flex-col justify-start items-start">
+                                    <div style={{ backgroundImage: `url('${companyData.companyLogo}')` }} className="bg-contain bg-no-repeat bg-center h-16 w-16 rounded-sm bg-transparent"></div>
+                                    <div className="flex w-full flex-col justify-start items-start p-1">
                                         <div className="text-white/80 font-bold text-md">{companyData.companyName}</div>
                                         <div className="text-white/80 w-full md:w-96 text-md">{companyData.companyDescription}</div>
                                     </div>

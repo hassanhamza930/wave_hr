@@ -1,4 +1,4 @@
-import { collection, getDoc, getDocs, getFirestore, query, Timestamp } from "firebase/firestore"
+import { collection, getDoc, getDocs, getFirestore, onSnapshot, query, Timestamp } from "firebase/firestore"
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { jobDataAtom } from "../../apply/atoms/applyPageAtoms";
@@ -23,14 +23,11 @@ export default function JobCard(props:JobData) {
     const [selectedJob, setSelectedJob] = useRecoilState(selectedJobAtom);
     const db=getFirestore();
 
-    async function GetApplicants(){
-        var docsLength = (await getDocs(collection(db,"jobs",props.id,"applications"))).docs.length;
-        console.log(docsLength);
-        setApplicants(docsLength);
-    }
-
+  
     useEffect(()=>{
-        GetApplicants();
+        onSnapshot(collection(db,"jobs",props.id,"applications"),(docs)=>{
+            setApplicants(docs.docs.length);
+        })
     },[])
     
 

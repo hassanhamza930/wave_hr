@@ -1,4 +1,4 @@
-import { collection, doc, getFirestore, onSnapshot, query, setDoc, where } from "firebase/firestore";
+import { collection, doc, getFirestore, onSnapshot, query, setDoc, Timestamp, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { NewJobPosting } from "../../newJob/atoms/newJobAtoms";
@@ -28,8 +28,7 @@ export default function AllPostedJobs() {
                 setDocIds(tempDocIds);
                 if(tempDocIds.length<2){
                     setMoreThanTwoJobs(false);
-                }
-            
+                }     
             }
         );
 
@@ -40,7 +39,7 @@ export default function AllPostedJobs() {
             {
                 allJobs.map((e,index) => {
                     return (
-                        <JobCard id={docsIds[index]}  jobData={e as JobPosting} />
+                        <JobCard key={`${Timestamp.now()}${index}`} id={docsIds[index]}  jobData={e as JobPosting} />
                     )
                 })
             }
