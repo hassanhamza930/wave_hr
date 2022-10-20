@@ -8,6 +8,7 @@ export interface QuestionResponse {
 }
 
 export interface JobApplication {
+  id?:string,
   name: string,
   email: string,
   profilePicture: string,
