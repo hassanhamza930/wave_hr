@@ -75,14 +75,11 @@ export default function PostNewJobForm() {
                     </input>
 
                     <div className="text-white/90 text-md mt-10 font-bold w-3/4">Job Description</div>
-                    {/* <textarea {...register("jobDescription")} placeholder="Describe the job title and responsibilities" className="h-28 w-96 border-b-[1px] border-white/90 text-white/90 bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
-                    </textarea> */}
-
+               
                     <ReactQuill className="h-36 text-white mb-10 mt-4" theme={"snow"} value={jobDescription} onChange={setJobDescription} />
 
                     <div className="text-white/90 text-md mt-20 font-bold w-3/4">Job Qualifications</div>
-                    {/* <textarea {...register("jobQualifications")} placeholder="Describe the qualifications required for this job" className="h-28 w-96 border-b-[1px] text-white/90 border-white/90 bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
-                    </textarea> */}
+              
                     <ReactQuill className="h-36 text-white mb-10 mt-4" theme={"snow"} value={jobQualifications} onChange={setJobQualifications} />
 
 
