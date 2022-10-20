@@ -7,6 +7,7 @@ import { JobData, JobPosting } from '../../jobs/components/JobCard';
 import AllApplicants from "../components/AllApplicants";
 import { useRecoilState } from 'recoil';
 import { selectedApplicantAtom } from '../atoms/applicantsAtoms';
+import SelectedApplicantDetails from '../components/selectedApplicantDetails';
 
 
 
@@ -15,7 +16,6 @@ export default function Applicants() {
 
     const { jobId } = useParams();
     const [jobDetails, setJobDetails] = useState<JobData>({} as JobData);
-    const [selectedApplicant,setSelectedApplicant]=useRecoilState<JobApplication>(selectedApplicantAtom);
 
 
   
@@ -30,11 +30,7 @@ export default function Applicants() {
 
                 <AllApplicants/>
 
-                <div className="h-full w-[60%] text-white bg-bray rounded-md flex justify-center items-center">
-                    {
-                        selectedApplicant.email
-                    }
-                </div>
+                <SelectedApplicantDetails/>
 
             </div>
 
