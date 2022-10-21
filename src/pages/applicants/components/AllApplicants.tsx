@@ -68,13 +68,13 @@ export default function AllApplicants() {
 
                             <div className='flex flex-row justify-between items-center w-full'>
 
-                                <div className='flex flex-col justify-center items-start'>
-                                    <div className="text-md font-bold">{applicant.email}</div>
+                                <div className='flex flex-col w-full justify-center items-start '>
+                                    <div className="text-md font-bold ">{applicant.email}</div>
                                     <div className="text-md">{applicant.name}</div>
                                 </div>
 
                                 <div className=' w-full h-full flex justify-end pr-5 items-center'>
-                                    <div className='px-4 py-2 text-breen text-sm font-bold rounded-md bg-tan/90'>{applicant.rating != null ? applicant.rating : "Pending Review"}</div>
+                                    <div className='px-4 py-2 text-breen text-sm font-bold rounded-md bg-tan/90'>{applicant.rating != null ? applicant.rating : "Pending"}</div>
                                 </div>
 
                             </div>

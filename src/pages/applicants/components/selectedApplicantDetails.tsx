@@ -46,10 +46,9 @@ export default function SelectedApplicantDetails() {
                         <div style={{ backgroundImage: `url('${selectedApplicant.profilePicture}')` }} className='bg-cover bg-center h-48 w-48 bg-white rounded-md'></div>
                         <div className='bg-cover bg-center rounded-md text-tan font-bold text-4xl mt-5'>{selectedApplicant.name}</div>
                         <div className='bg-cover bg-center rounded-md text-tan font-regular text-xl mt-2'>{selectedApplicant.email}</div>
-
                     </div>
 
-                    <div className='flex flex-col justify-between items-end h-full'>
+                    <div className='flex flex-col justify-between items-end h-72'>
                         <form onSubmit={handleSubmit(SetRanking)} className='flex flex-row gap-4'>
                             <div className='text-md font-bold flex justify-center items-center text-tan '>Rank:</div>
                             <input min={1} max={10} {...register("rank")} type="number" placeholder='Rank out of 10' className='text-tan w-36 bg-transparent border-b-2 px-2 border-tan outline-none'></input>

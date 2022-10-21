@@ -7,6 +7,8 @@ import { JobPosting } from "../../../jobs/components/JobCard";
 import pageIndexAtom from "../../../newJob/atoms/newJobAtoms";
 import JobApplicationAtom, { ApplyPageIndexAtom, JobApplication, selectedProfilePictureAtom } from "../../atoms/applyPageAtoms";
 import { motion } from "framer-motion";
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
+import { useParams } from "react-router";
 
 
 export default function Page2() {
@@ -15,6 +17,8 @@ export default function Page2() {
     const { watch, handleSubmit, register } = useForm<JobApplication>();
     const [jobApplication, setJobApplication] = useRecoilState(JobApplicationAtom);
     const [pageIndex, setPageIndex] = useRecoilState(ApplyPageIndexAtom);
+    const {jobId}=useParams();
+    const db=getFirestore();
 
     async function saveImageToLocalStorage() {
         console.log("saving image to loc storage");
@@ -41,17 +45,24 @@ export default function Page2() {
 
     }
 
-    function handlePage2DataSubmit(data: JobApplication) {
+    async function handlePage2DataSubmit(data: JobApplication) {
 
         if (watch("email") == "" || watch("email").includes("@") != true) {
             toast.error("Please enter your email properly")
         }
         else {
-            setJobApplication({
-                ...jobApplication,
-                email: data.email
-            });
-            setPageIndex(2);
+
+            var docs= await getDocs(query(collection(db,"jobs",jobId as string,"applications"),where("email","==",watch("email"))));    
+            if(docs.docs.length>0){
+                toast.error("Job application already exists");
+            }
+            else{
+                setJobApplication({
+                    ...jobApplication,
+                    email: data.email
+                });
+                setPageIndex(2);
+            }
         }
     }
 
