@@ -89,7 +89,7 @@ export default function Page6() {
 
         console.log(finalJobApplicationData);
 
-        await addDoc(collection(db, "jobs", selectedJobId, "applications"), finalJobApplicationData);
+        await addDoc(collection(db, "jobs", selectedJobId, "applications"), {...finalJobApplicationData,rating:null});
         setApplyStageInitiated(false);
         toast.success("Job Application Successfully submitted");
         setLoading(false);

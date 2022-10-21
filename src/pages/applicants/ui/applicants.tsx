@@ -14,11 +14,6 @@ import SelectedApplicantDetails from '../components/selectedApplicantDetails';
 
 export default function Applicants() {
 
-    const { jobId } = useParams();
-    const [jobDetails, setJobDetails] = useState<JobData>({} as JobData);
-
-
-  
 
 
 
