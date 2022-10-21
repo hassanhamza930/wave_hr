@@ -16,8 +16,6 @@ export default function Applicants() {
 
 
 
-
-
     return (
         <div className="pt-[85px] pb-[25px] h-screen w-full flex justify-center items-center">
 

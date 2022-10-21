@@ -52,7 +52,7 @@ export default function AllApplicants() {
 
 
     return (
-        <div className="h-full w-[39%] border-2  rounded-md p-5 flex flex-col justify-start items-start">
+        <div id="no_scroll" className="h-full w-[39%] overflow-y-scroll rounded-md p-5 flex flex-col justify-start items-start">
             <div className="text-breen text-md mt-10 mb-2 ml-1">Seeing Applicants for <div className="mt-2 font-bold text-3xl mb-5">{jobDetails.jobData != null && jobDetails.jobData.jobDetails.jobTitle}</div></div>
 
             <input value={searchValue} onChange={(e) => { setSearchValue(e.target.value); }} placeholder="Search" className="w-full font-bold border-b-2 shadow-md mb-10 border-bray text-bray/90 bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
