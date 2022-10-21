@@ -37,7 +37,7 @@ export default function JobsPage() {
                         {
                             selectedJob.jobData != null ? <JobDetails /> :
                                 <div className="flex justify-center items-center h-full w-full">
-                                    <div className="text-white/80 text-sm">Select a job to see details</div>
+                                    <div className="text-tan/80 text-sm">Select a job to see details</div>
                                 </div>
                         }
                     </div>

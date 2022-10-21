@@ -29,7 +29,6 @@ export default function Applicants() {
             <div className="h-full w-full flex flex-row justify-between items-center px-10">
 
                 <AllApplicants/>
-
                 <SelectedApplicantDetails/>
 
             </div>
