@@ -20,30 +20,7 @@ export default function Page2() {
     const {jobId}=useParams();
     const db=getFirestore();
 
-    async function saveImageToLocalStorage() {
-        console.log("saving image to loc storage");
-        var inputField = window.document.createElement("input");
-        inputField.id = "inputField";
-        inputField.type = "file";
-        inputField.accept = "image/png, image/jpeg, .svg";
-        inputField.onchange = (e: any) => {
-            e.preventDefault();
-            var reader = new FileReader();
-            var file: File = e.target.files[0];
-            reader.readAsDataURL(file);
-            reader.onloadend = (file) => {
-                console.log("loaded");
-                var base64Result = file!.target!.result! as string;
-                console.log(base64Result);
-                setSelectedProfilePicture(base64Result);
-            }
-        };
-        console.log("clicking");
-        inputField.click();
-        console.log(inputField);
-        console.log("clicked");
 
-    }
 
     async function handlePage2DataSubmit(data: JobApplication) {
 

@@ -1,10 +1,12 @@
 import { atom } from "recoil";
+import { CompanyData } from '../../pages/apply/ui/apply';
 
 export interface UserInterface{
     name:string|null,
     photoUrl:string|null,
     email:string|null,
-    companyOnboarded:boolean|null
+    companyOnboarded:boolean|null,
+    companyDetails:CompanyData
 }
 
 

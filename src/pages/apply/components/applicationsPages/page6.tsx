@@ -1,4 +1,4 @@
-import { addDoc, collection, getFirestore, Timestamp } from "firebase/firestore";
+import { addDoc, collection, getFirestore, Timestamp, getDoc, doc } from 'firebase/firestore';
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form";
@@ -6,10 +6,13 @@ import toast from "react-hot-toast";
 import { AiFillCamera } from "react-icons/ai";
 import { useRecoilState } from "recoil";
 import isLoadingAtom from "../../../../atoms/app/isLoadingAtom";
-import { JobPosting } from "../../../jobs/components/JobCard";
+import { JobPosting, JobData } from '../../../jobs/components/JobCard';
 import pageIndexAtom from "../../../newJob/atoms/newJobAtoms";
 import JobApplicationAtom, { ApplyStageInitiatedAtom, JobApplication, ResponsesAtom, SelectedJobIdAtom, selectedProfilePictureAtom } from "../../atoms/applyPageAtoms";
 import {motion} from "framer-motion";
+import { useParams } from 'react-router';
+import { UserInterface } from '../../../../atoms/app/globalUserAtom';
+import { CompanyData } from '../../ui/apply';
 
 
 async function dataUrlToFile(dataUrl: string, fileName: string): Promise<File> {
@@ -46,6 +49,7 @@ export default function Page6() {
     const [applyStageInitiated, setApplyStageInitiated] = useRecoilState<boolean>(ApplyStageInitiatedAtom);
     const [selectedJobId, setSelectedJobId] = useRecoilState(SelectedJobIdAtom);
     const [loading, setLoading] = useRecoilState(isLoadingAtom);
+    const { jobId } = useParams();
 
     const db = getFirestore();
     const storage = getStorage();
@@ -91,8 +95,16 @@ export default function Page6() {
 
         await addDoc(collection(db, "jobs", selectedJobId, "applications"), {...finalJobApplicationData,rating:null});
         setApplyStageInitiated(false);
+        var jobData:JobPosting= (await getDoc(doc(db,"jobs",jobId as string))).data() as JobPosting;
+        console.log("reached 1");
+        var userDetails:UserInterface= (await getDoc(doc(db,"users",jobData.postedBy as string))).data() as UserInterface;
+        console.log("reached 2");
+        console.log(finalJobApplicationData.email);
+        console.log(userDetails.companyDetails.companyName);
+        fetch(`https://wavefunc.vercel.app/send?email=${finalJobApplicationData.email}&job=${jobData.jobDetails.jobTitle}&company=${userDetails.companyDetails.companyName}`)
         toast.success("Job Application Successfully submitted");
         setLoading(false);
+        setTimeout(()=>{ window.location.reload();},3000);
 
     }
 

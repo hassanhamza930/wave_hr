@@ -9,7 +9,7 @@ export interface JobPosting{
     jobDetails:NewJobPosting,
     questions:Array<string>,
     time:Timestamp
-    posedBy?:string
+    postedBy?:string
 }
 
 export interface JobData{
