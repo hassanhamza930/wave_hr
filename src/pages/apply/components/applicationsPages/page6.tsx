@@ -93,7 +93,7 @@ export default function Page6() {
 
         console.log(finalJobApplicationData);
 
-        await addDoc(collection(db, "jobs", selectedJobId, "applications"), {...finalJobApplicationData,rating:null});
+        await addDoc(collection(db, "jobs", selectedJobId, "applications"), {...finalJobApplicationData,rating:null,rejected:false});
         setApplyStageInitiated(false);
         var jobData:JobPosting= (await getDoc(doc(db,"jobs",jobId as string))).data() as JobPosting;
         console.log("reached 1");

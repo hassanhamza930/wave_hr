@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
 import { doc, setDoc, getFirestore } from 'firebase/firestore';
 import { useParams } from 'react-router';
+import { selectedJobAtom } from '../../jobs/jobsAtoms';
 
 
 export default function SelectedApplicantDetails() {
@@ -34,6 +35,12 @@ export default function SelectedApplicantDetails() {
 
     }
 
+    async function RejectApplicant(){
+        setSelectedApplicant({} as JobApplication);
+        await setDoc(doc(db,"jobs",jobId as string,"applications",selectedApplicant.id as string),{"rejected":true},{merge:true});
+        console.log(selectedApplicant.id);
+    }
+
 
     return (
 
@@ -56,7 +63,7 @@ export default function SelectedApplicantDetails() {
                         </form>
                         <div className='flex flex-row justify-start items-center gap-5'>
                             <button className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-md mt-2 px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan '>Interview</button>
-                            <button className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-md mt-2 px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan '>Reject</button>
+                            <button onClick={()=>{RejectApplicant()}} className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-md mt-2 px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan '>Reject</button>
                         </div>
                     </div>
 
@@ -86,7 +93,7 @@ export default function SelectedApplicantDetails() {
 
 
             </div> :
-            <div className="h-full w-[60%] text-white/60 bg-bray rounded-md text-xl flex flex-col justify-center items-center p-10">
+            <div className="h-full w-[60%] text-white/60 bg-bray rounded-md text-md flex flex-col justify-center items-center p-10">
                 Select a candidate to see details
             </div>
 

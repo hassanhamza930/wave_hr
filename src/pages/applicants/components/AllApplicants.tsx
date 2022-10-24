@@ -22,7 +22,7 @@ export default function AllApplicants() {
             var tempArray: Array<JobApplication> = [];
             docs.forEach((doc) => {
                 var userName: string = doc.data()["name"] as string;
-                if (userName.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) == true) {
+                if (userName.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())== true && doc.data()["rejected"]==false) {
                     tempArray.push({ ...doc.data(), id: doc.id } as JobApplication);
                 }
             })
