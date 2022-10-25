@@ -18,6 +18,7 @@ export default function SelectedApplicantDetails() {
 
     useEffect(() => {
         setValue("rank", selectedApplicant.rating?.toString());
+        setValue("notes",selectedApplicant.notes);
     }, [selectedApplicant]);
 
 
@@ -35,12 +36,17 @@ export default function SelectedApplicantDetails() {
 
     }
 
-    async function RejectApplicant(){
+    async function RejectApplicant() {
         setSelectedApplicant({} as JobApplication);
-        await setDoc(doc(db,"jobs",jobId as string,"applications",selectedApplicant.id as string),{"rejected":true},{merge:true});
+        await setDoc(doc(db, "jobs", jobId as string, "applications", selectedApplicant.id as string), { "rejected": true }, { merge: true });
         console.log(selectedApplicant.id);
     }
 
+
+    async function UpdateNotes(data:any) {
+        await setDoc(doc(db, "jobs", jobId as string, "applications", selectedApplicant.id as string), { "notes": data.notes }, { merge: true });
+        toast.success("Notes Updated");
+    }
 
     return (
 
@@ -63,11 +69,19 @@ export default function SelectedApplicantDetails() {
                         </form>
                         <div className='flex flex-row justify-start items-center gap-5'>
                             <button className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-md mt-2 px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan '>Interview</button>
-                            <button onClick={()=>{RejectApplicant()}} className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-md mt-2 px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan '>Reject</button>
+                            <button onClick={() => { RejectApplicant() }} className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-md mt-2 px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan '>Reject</button>
                         </div>
                     </div>
 
                 </div>
+
+                <div className='bg-cover bg-center rounded-md text-tan font-bold text-sm mt-20'>Notes:</div>
+
+                <form onSubmit={handleSubmit(UpdateNotes)} className='flex flex-row justify-start items-center gap-5'>
+                    <textarea id="no_scroll" {...register("notes")} placeholder="Email" className="mt-5 h-36 w-[500px] border-b-[1px] border-white/90 text-white/90 bg-transparent outline-0 px-2 py-1 flex justify-center items-center">
+                    </textarea>
+                    <button type="submit" className='py-2 px-4 rounded-md border-tan border-2 hover:bg-tan hover:text-breen text-tan'>Update</button>
+                </form>
 
 
                 <div className='flex flex-col justify-start items-start mt-20'>
