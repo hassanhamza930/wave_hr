@@ -68,8 +68,8 @@ export default function SelectedApplicantDetails() {
                             <button type="submit" className='py-2 px-4 rounded-md border-tan border-2 hover:bg-tan hover:text-breen text-tan'>Set</button>
                         </form>
                         <div className='flex flex-row justify-start items-center gap-5'>
-                            <button className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-md mt-2 px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan '>Interview</button>
-                            <button onClick={() => { RejectApplicant() }} className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-md mt-2 px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan '>Reject</button>
+                            <button className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-sm mt-2 px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan '>Interview</button>
+                            <button onClick={() => { RejectApplicant() }} className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-sm mt-2 px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan '>Reject</button>
                         </div>
                     </div>
 
@@ -80,7 +80,7 @@ export default function SelectedApplicantDetails() {
                 <form onSubmit={handleSubmit(UpdateNotes)} className='flex flex-row justify-start items-center gap-5'>
                     <textarea id="no_scroll" {...register("notes")} placeholder="Email" className="mt-5 h-36 w-[500px] border-b-[1px] border-white/90 text-white/90 bg-transparent outline-0 px-2 py-1 flex justify-center items-center">
                     </textarea>
-                    <button type="submit" className='py-2 px-4 rounded-md border-tan border-2 hover:bg-tan hover:text-breen text-tan'>Update</button>
+                    <button type="submit" className='py-2 px-4 rounded-md border-tan text-sm border-2 hover:bg-tan hover:text-breen text-tan'>Update</button>
                 </form>
 
 
