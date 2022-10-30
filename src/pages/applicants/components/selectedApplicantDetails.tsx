@@ -74,7 +74,7 @@ export default function SelectedApplicantDetails() {
                         <div className='bg-cover bg-center rounded-md text-tan font-regular text-xl mt-2'>{selectedApplicant.email}</div>
                         <div className='flex flex-row justify-start items-start gap-4'>
                             <div className='rounded-sm text-tan font-regular text-sm mt-5 py-2 font-bold'>Application Status:</div>
-                            <div className='rounded-sm text-tan font-regular text-sm mt-5 px-4 py-2 bg-tan text-breen'>{selectedApplicant.interviewStatus}</div>
+                            <div className='rounded-sm font-regular text-sm mt-5 px-4 py-2 bg-tan text-breen'>{selectedApplicant.interviewStatus}</div>
                         </div>
                     </div>
 
@@ -92,7 +92,7 @@ export default function SelectedApplicantDetails() {
 
                 </div>
 
-                <div className='bg-cover bg-center rounded-md text-tan font-bold text-sm mt-20'>Notes:</div>
+                <div className='bg-cover bg-center rounded-md text-tan font-bold text-sm mt-10'>Notes:</div>
 
                 <form onSubmit={handleSubmit(UpdateNotes)} className='flex flex-row justify-start items-center gap-5'>
                     <textarea id="no_scroll" {...register("notes")} placeholder="Notes" className="mt-5 h-24 w-[500px] border-b-[1px] border-white/90 text-white/90 bg-transparent outline-0 px-2 py-1 flex justify-center items-center">
