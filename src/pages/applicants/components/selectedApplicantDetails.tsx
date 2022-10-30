@@ -58,6 +58,7 @@ export default function SelectedApplicantDetails() {
 
     async function InterviewCandidate() {
         await setDoc(doc(db, "jobs", jobId as string, "applications", selectedApplicant.id as string), { "interviewStatus": "Invite Sent" }, { merge: true });
+        toast.success("Interview invite sent");
     }
 
 
@@ -74,7 +75,7 @@ export default function SelectedApplicantDetails() {
                         <div className='bg-cover bg-center rounded-md text-tan font-regular text-xl mt-2'>{selectedApplicant.email}</div>
                         <div className='flex flex-row justify-start items-start gap-4'>
                             <div className='rounded-sm text-tan font-regular text-sm mt-5 py-2 font-bold'>Application Status:</div>
-                            <div className='rounded-sm font-regular text-sm mt-5 px-4 py-2 bg-tan text-breen'>{selectedApplicant.interviewStatus}</div>
+                            <div className='rounded-sm font-regular text-sm mt-5 px-4 py-2 bg-tan/90 text-breen'>{selectedApplicant.interviewStatus}</div>
                         </div>
                     </div>
 
