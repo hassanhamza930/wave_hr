@@ -4,9 +4,12 @@ import { JobApplication } from '../../apply/atoms/applyPageAtoms';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
-import { doc, setDoc, getFirestore } from 'firebase/firestore';
+import { doc, setDoc, getFirestore, getDoc } from 'firebase/firestore';
 import { useParams } from 'react-router';
 import { selectedJobAtom } from '../../jobs/jobsAtoms';
+import sendEmail from '../../../standards/functions/sendEmail';
+import { JobPosting } from '../../jobs/components/JobCard';
+import { UserInterface } from '../../../atoms/app/globalUserAtom';
 
 
 export default function SelectedApplicantDetails() {
@@ -18,7 +21,7 @@ export default function SelectedApplicantDetails() {
 
     useEffect(() => {
         setValue("rank", selectedApplicant.rating?.toString());
-        setValue("notes",selectedApplicant.notes);
+        setValue("notes", selectedApplicant.notes);
     }, [selectedApplicant]);
 
 
@@ -36,29 +39,43 @@ export default function SelectedApplicantDetails() {
 
     }
 
+
+
     async function RejectApplicant() {
         setSelectedApplicant({} as JobApplication);
         await setDoc(doc(db, "jobs", jobId as string, "applications", selectedApplicant.id as string), { "rejected": true }, { merge: true });
+        var jobData: JobPosting = (await getDoc(doc(db, "jobs", jobId as string))).data() as JobPosting;
+        var posterData: UserInterface = (await getDoc(doc(db, "users", jobData.postedBy! as string))).data() as UserInterface;
+        sendEmail(selectedApplicant.email, `Your application for ${jobData.jobDetails.jobTitle} at ${posterData.companyDetails.companyName} was rejected.`, "Your application for the above mentioned job was rejected.");
         console.log(selectedApplicant.id);
     }
 
 
-    async function UpdateNotes(data:any) {
+    async function UpdateNotes(data: any) {
         await setDoc(doc(db, "jobs", jobId as string, "applications", selectedApplicant.id as string), { "notes": data.notes }, { merge: true });
         toast.success("Notes Updated");
     }
+
+    async function InterviewCandidate() {
+        await setDoc(doc(db, "jobs", jobId as string, "applications", selectedApplicant.id as string), { "interviewStatus": "Invite Sent" }, { merge: true });
+    }
+
 
     return (
 
         selectedApplicant.email != null ?
             <div id="no_scroll" className="h-full w-[60%] bg-bray rounded-md flex-col justify-start items-start overflow-y-scroll p-10">
 
-                <div className='flex flex-row w-full justify-between items-end h-48 mt-28'>
+                <div className='flex flex-row w-full justify-between items-end h-48 mt-36'>
 
                     <div className='flex flex-col justify-start items-start'>
                         <div style={{ backgroundImage: `url('${selectedApplicant.profilePicture}')` }} className='bg-cover bg-center h-48 w-48 bg-white rounded-md'></div>
                         <div className='bg-cover bg-center rounded-md text-tan font-bold text-4xl mt-5'>{selectedApplicant.name}</div>
                         <div className='bg-cover bg-center rounded-md text-tan font-regular text-xl mt-2'>{selectedApplicant.email}</div>
+                        <div className='flex flex-row justify-start items-start gap-4'>
+                            <div className='rounded-sm text-tan font-regular text-sm mt-5 py-2 font-bold'>Application Status:</div>
+                            <div className='rounded-sm text-tan font-regular text-sm mt-5 px-4 py-2 bg-tan text-breen'>{selectedApplicant.interviewStatus}</div>
+                        </div>
                     </div>
 
                     <div className='flex flex-col justify-between items-end h-72'>
@@ -68,7 +85,7 @@ export default function SelectedApplicantDetails() {
                             <button type="submit" className='py-2 px-4 rounded-md border-tan border-2 hover:bg-tan hover:text-breen text-tan'>Set</button>
                         </form>
                         <div className='flex flex-row justify-start items-center gap-5'>
-                            <button className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-sm mt-2 px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan '>Interview</button>
+                            <button onClick={() => { InterviewCandidate() }} className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-sm mt-2 px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan '>Interview</button>
                             <button onClick={() => { RejectApplicant() }} className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-sm mt-2 px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan '>Reject</button>
                         </div>
                     </div>
@@ -78,7 +95,7 @@ export default function SelectedApplicantDetails() {
                 <div className='bg-cover bg-center rounded-md text-tan font-bold text-sm mt-20'>Notes:</div>
 
                 <form onSubmit={handleSubmit(UpdateNotes)} className='flex flex-row justify-start items-center gap-5'>
-                    <textarea id="no_scroll" {...register("notes")} placeholder="Email" className="mt-5 h-24 w-[500px] border-b-[1px] border-white/90 text-white/90 bg-transparent outline-0 px-2 py-1 flex justify-center items-center">
+                    <textarea id="no_scroll" {...register("notes")} placeholder="Notes" className="mt-5 h-24 w-[500px] border-b-[1px] border-white/90 text-white/90 bg-transparent outline-0 px-2 py-1 flex justify-center items-center">
                     </textarea>
                     <button type="submit" className='py-2 px-4 rounded-md border-tan text-sm border-2 hover:bg-tan hover:text-breen text-tan'>Update</button>
                 </form>

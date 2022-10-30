@@ -15,7 +15,8 @@ export interface JobApplication {
   resume: string,
   responses:Array<QuestionResponse>,
   rating?:number,
-  notes?:string
+  notes?:string,
+  interviewStatus?:string
 }
 
 export const ApplyPageIndexAtom = atom({

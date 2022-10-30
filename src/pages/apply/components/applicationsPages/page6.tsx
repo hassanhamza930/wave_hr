@@ -13,6 +13,7 @@ import {motion} from "framer-motion";
 import { useParams } from 'react-router';
 import { UserInterface } from '../../../../atoms/app/globalUserAtom';
 import { CompanyData } from '../../ui/apply';
+import sendEmail from '../../../../standards/functions/sendEmail';
 
 
 async function dataUrlToFile(dataUrl: string, fileName: string): Promise<File> {
@@ -93,7 +94,7 @@ export default function Page6() {
 
         console.log(finalJobApplicationData);
 
-        await addDoc(collection(db, "jobs", selectedJobId, "applications"), {...finalJobApplicationData,rating:null,rejected:false});
+        await addDoc(collection(db, "jobs", selectedJobId, "applications"), {...finalJobApplicationData,rating:null,rejected:false,interviewStatus:"Invite Pending"});
         setApplyStageInitiated(false);
         var jobData:JobPosting= (await getDoc(doc(db,"jobs",jobId as string))).data() as JobPosting;
         console.log("reached 1");
@@ -110,14 +111,13 @@ export default function Page6() {
 
         var subject=`You applied for ${jobData.jobDetails.jobTitle} at ${userDetails.companyDetails.companyName}`;
         var emailBody=`Hello this is testing email body and you applied to the company, ${userDetails.companyDetails.companyName}`;
-        var respons= await fetch(`https://wavefunc.vercel.app/sendEmail?sendTo=${finalJobApplicationData.email}&emailBody=${emailBody}&subject=${subject}`, requestOptions);
-        console.log(respons);
-        
-
+        var email=finalJobApplicationData.email;
+        // var respons= await fetch(`https://wavefunc.vercel.app/sendEmail?sendTo=${finalJobApplicationData.email}&emailBody=${emailBody}&subject=${subject}`, requestOptions);
+        sendEmail(email,subject,emailBody);
         
         toast.success("Job Application Successfully submitted");
         setLoading(false);
-        // setTimeout(()=>{ window.location.reload();},3000);
+        setTimeout(()=>{ window.location.reload();},1500);
 
     }
 

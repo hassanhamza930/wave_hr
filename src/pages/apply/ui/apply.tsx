@@ -53,7 +53,7 @@ export default function Apply() {
             <div className="h-screen w-full bg-breen flex justify-center items-center">
 
                 <div id="no_scroll" className="pb-20 text-breen w-full md:w-[70%] rounded-md h-full md:h-[90%] overflow-y-scroll flex-col justify-start items-start">
-                    <div className="rounded-md h-72 w-full bg-gradient-to-br from-purple-700 to-blue-800 bg-cover bg-center bg-[url('https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png')]"></div>
+                    <div className="rounded-md h-72 w-full bg-gradient-to-br from-purple-700 to-blue-800 bg-cover bg-center bg-[url('https://assets-global.website-files.com/5c7fdbdd4e3feeee8dd96dd2/62c4ff55b8637de51557f5f0_growth-flat-color.gif')]"></div>
 
                     <div className="flex flex-col justify-start items-start p-5">
                         <div className="flex flex-wrap justify-between items-center">
