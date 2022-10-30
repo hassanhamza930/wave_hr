@@ -101,10 +101,23 @@ export default function Page6() {
         console.log("reached 2");
         console.log(finalJobApplicationData.email);
         console.log(userDetails.companyDetails.companyName);
-        fetch(`https://wavefunc.vercel.app/send?email=${finalJobApplicationData.email}&job=${jobData.jobDetails.jobTitle}&company=${userDetails.companyDetails.companyName}`)
+        
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title: 'React Hooks POST Request Example' })
+        };
+
+        var subject=`You applied for ${jobData.jobDetails.jobTitle} at ${userDetails.companyDetails.companyName}`;
+        var emailBody=`Hello this is testing email body and you applied to the company, ${userDetails.companyDetails.companyName}`;
+        var respons= await fetch(`https://wavefunc.vercel.app/sendEmail?sendTo=${finalJobApplicationData.email}&emailBody=${emailBody}&subject=${subject}`, requestOptions);
+        console.log(respons);
+        
+
+        
         toast.success("Job Application Successfully submitted");
         setLoading(false);
-        setTimeout(()=>{ window.location.reload();},3000);
+        // setTimeout(()=>{ window.location.reload();},3000);
 
     }
 

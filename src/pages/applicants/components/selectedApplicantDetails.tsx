@@ -78,7 +78,7 @@ export default function SelectedApplicantDetails() {
                 <div className='bg-cover bg-center rounded-md text-tan font-bold text-sm mt-20'>Notes:</div>
 
                 <form onSubmit={handleSubmit(UpdateNotes)} className='flex flex-row justify-start items-center gap-5'>
-                    <textarea id="no_scroll" {...register("notes")} placeholder="Email" className="mt-5 h-36 w-[500px] border-b-[1px] border-white/90 text-white/90 bg-transparent outline-0 px-2 py-1 flex justify-center items-center">
+                    <textarea id="no_scroll" {...register("notes")} placeholder="Email" className="mt-5 h-24 w-[500px] border-b-[1px] border-white/90 text-white/90 bg-transparent outline-0 px-2 py-1 flex justify-center items-center">
                     </textarea>
                     <button type="submit" className='py-2 px-4 rounded-md border-tan text-sm border-2 hover:bg-tan hover:text-breen text-tan'>Update</button>
                 </form>
