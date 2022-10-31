@@ -69,8 +69,8 @@ export default function AllApplicants() {
                             <div className='flex flex-row justify-between items-center w-full'>
 
                                 <div className='flex flex-col w-full justify-center items-start '>
-                                    <div className="text-md font-bold ">{applicant.email}</div>
-                                    <div className="text-md">{applicant.name}</div>
+                                    <div className="text-md font-bold ">{applicant.name}</div>
+                                    <div className="text-md">{applicant.email}</div>
                                 </div>
 
                                 <div className=' w-full h-full flex justify-end pr-5 items-center'>

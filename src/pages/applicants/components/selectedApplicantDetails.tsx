@@ -22,6 +22,7 @@ export default function SelectedApplicantDetails() {
     useEffect(() => {
         setValue("rank", selectedApplicant.rating?.toString());
         setValue("notes", selectedApplicant.notes);
+        console.log("just ran");
     }, [selectedApplicant]);
 
 
@@ -73,10 +74,6 @@ export default function SelectedApplicantDetails() {
                         <div style={{ backgroundImage: `url('${selectedApplicant.profilePicture}')` }} className='bg-cover bg-center h-48 w-48 bg-white rounded-md'></div>
                         <div className='bg-cover bg-center rounded-md text-tan font-bold text-4xl mt-5'>{selectedApplicant.name}</div>
                         <div className='bg-cover bg-center rounded-md text-tan font-regular text-xl mt-2'>{selectedApplicant.email}</div>
-                        <div className='flex flex-row justify-start items-start gap-4'>
-                            <div className='rounded-sm text-tan font-regular text-sm mt-5 py-2 font-bold'>Application Status:</div>
-                            <div className='rounded-sm font-regular text-sm mt-5 px-4 py-2 bg-tan/90 text-breen'>{selectedApplicant.interviewStatus}</div>
-                        </div>
                     </div>
 
                     <div className='flex flex-col justify-between items-end h-72'>
@@ -85,18 +82,23 @@ export default function SelectedApplicantDetails() {
                             <input min={1} max={10} {...register("rank")} type="number" placeholder='Rank out of 10' className='text-tan w-36 bg-transparent border-b-2 px-2 border-tan outline-none'></input>
                             <button type="submit" className='py-2 px-4 rounded-md border-tan border-2 hover:bg-tan hover:text-breen text-tan'>Set</button>
                         </form>
-                        <div className='flex flex-row justify-start items-center gap-5'>
-                            <button onClick={() => { InterviewCandidate() }} className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-sm mt-2 px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan '>Interview</button>
-                            <button onClick={() => { RejectApplicant() }} className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-sm mt-2 px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan '>Reject</button>
-                        </div>
+
                     </div>
 
                 </div>
 
-                <div className='bg-cover bg-center rounded-md text-tan font-bold text-sm mt-10'>Notes:</div>
+                {/* <div className='bg-cover bg-center rounded-md text-tan font-bold text-sm mt-10'>Notes:</div> */}
+                <div className='flex flex-row justify-start items-center gap-5 mt-10'>
+                    {
+                       selectedApplicant.interviewStatus == "Invite Sent" ?
+                        <button disabled={true} className='rounded-md font-regular text-sm mt-2 px-6 py-2 bg-tan/30 text-tan/90  w-36 '>Invite Sent</button>:
+                        <button onClick={() => { InterviewCandidate() }} className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-sm mt-2 px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan w-36 '>Interview</button>
+                    }
+                    <button onClick={() => { RejectApplicant() }} className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-sm mt-2 px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan w-36'>Reject</button>
+                </div>
 
                 <form onSubmit={handleSubmit(UpdateNotes)} className='flex flex-row justify-start items-center gap-5'>
-                    <textarea id="no_scroll" {...register("notes")} placeholder="Notes" className="mt-5 h-24 w-[500px] border-b-[1px] border-white/90 text-white/90 bg-transparent outline-0 px-2 py-1 flex justify-center items-center">
+                    <textarea id="no_scroll" {...register("notes")} placeholder="Notes" className="mt-10 h-24 w-[500px] border-2 border-white/90 text-white/90 bg-transparent outline-0 p-3 rounded-md flex justify-center items-center">
                     </textarea>
                     <button type="submit" className='py-2 px-4 rounded-md border-tan text-sm border-2 hover:bg-tan hover:text-breen text-tan'>Update</button>
                 </form>
