@@ -6,13 +6,30 @@ import isPostJobModalOpenAtom from "../../newJob/atoms/newJobAtoms";
 import { Navigate, useNavigate } from "react-router";
 import AllPostedJobs from "../components/AllPostedJobs";
 import { moreThanTwoJobsAtom, selectedJobAtom } from "../jobsAtoms";
-
+import {useEffect} from "react";
+import { collection, getDoc, getDocs, getFirestore, onSnapshot, query, where } from "firebase/firestore";
 
 export default function JobsPage() {
 
     const navigate = useNavigate();
     const [selectedJob, setSelectedJob] = useRecoilState(selectedJobAtom);
     const [moreThanTwoJobs, setMoreThanTwoJobs] = useRecoilState(moreThanTwoJobsAtom);
+    const db=getFirestore();
+
+    async function checkMoreThanTwoJobs(){
+        onSnapshot(query(collection(db,"jobs"),where("postedBy","==",localStorage.getItem("uid"))),(docs)=>{
+            if(docs.docs.length>=2){
+                setMoreThanTwoJobs(true);
+            }
+            else{
+                setMoreThanTwoJobs(false);
+            }
+        })
+    }
+
+    useEffect(()=>{
+        checkMoreThanTwoJobs();
+    },[])
 
     return (
         <>
