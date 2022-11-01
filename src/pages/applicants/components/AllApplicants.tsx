@@ -4,14 +4,13 @@ import { JobData, JobPosting } from '../../jobs/components/JobCard';
 import { getFirestore, collection, onSnapshot, doc, orderBy, query, Timestamp, where } from 'firebase/firestore';
 import { useParams } from 'react-router';
 import { useRecoilState } from 'recoil';
-import { selectedApplicantAtom } from '../atoms/applicantsAtoms';
+import { selectedApplicantDataAtom, selectedApplicantIdAtom } from '../atoms/applicantsAtoms';
 export default function AllApplicants() {
 
     const [applicants, setApplicants] = useState<Array<JobApplication>>([]);
     const [jobDetails, setJobDetails] = useState<JobData>({} as JobData);
     const [searchValue, setSearchValue] = useState<string>("");
-    const [selectedApplicant, setSelectedApplicant] = useRecoilState<JobApplication>(selectedApplicantAtom);
-
+    const [selectedApplicantId,setSelectedApplicantId]=useRecoilState(selectedApplicantIdAtom);
     const db = getFirestore();
     const { jobId } = useParams();
 
@@ -44,9 +43,8 @@ export default function AllApplicants() {
 
 
 
-
     function handleSelectApplicant(applicant: JobApplication) {
-        setSelectedApplicant(applicant);
+        setSelectedApplicantId(applicant.id as string);
     }
 
 
@@ -62,7 +60,7 @@ export default function AllApplicants() {
             {
                 applicants.map((applicant) => {
                     return (
-                        <button key={`${applicant.id}`} onClick={() => { handleSelectApplicant(applicant) }} className="hover:bg-bray hover:scale-[1.02] w-full gap-4 text-white bg-bray/90 rounded-md my-1 flex flex-row justify-start items-center p-3">
+                        <button key={`${applicant.id}`} onClick={() => { handleSelectApplicant(applicant) }} className={`hover:bg-bray hover:text-tan hover:scale-[1.02] w-full gap-4 ${applicant.rating!=null?"bg-transparent text-bray/90 border-bray/60":"bg-bray/90 text-white"} border-2 rounded-md my-1 flex flex-row justify-start items-center p-3`}>
 
                             <div style={{ backgroundImage: `url('${applicant.profilePicture}')` }} className='bg-cover bg-center h-12 w-12 bg-breen rounded-md'></div>
 
@@ -74,7 +72,7 @@ export default function AllApplicants() {
                                 </div>
 
                                 <div className=' w-full h-full flex justify-end pr-5 items-center'>
-                                    <div className='px-4 py-2 text-breen text-sm font-bold rounded-md bg-tan/90'>{applicant.rating != null ? applicant.rating : "Pending"}</div>
+                                    <div className='px-4 py-2 text-breen text-sm font-bold rounded-md bg-tan/90'>{applicant.rating != null ? applicant.rating : "Pending Review"}</div>
                                 </div>
 
                             </div>

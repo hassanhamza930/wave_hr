@@ -6,7 +6,6 @@ import { JobApplication } from '../../apply/atoms/applyPageAtoms';
 import { JobData, JobPosting } from '../../jobs/components/JobCard';
 import AllApplicants from "../components/AllApplicants";
 import { useRecoilState } from 'recoil';
-import { selectedApplicantAtom } from '../atoms/applicantsAtoms';
 import SelectedApplicantDetails from '../components/selectedApplicantDetails';
 
 

@@ -66,8 +66,9 @@ export default function Apply() {
 
                             </div>
 
-                            <div className="w-full flex flex-col justify-start items-start">
-                                <div className="flex flex-row justify-start items-start gap-2 mt-10">
+                            <div className="w-full md:w-min flex flex-col justify-start items-start mt-10 bg-tan/20 rounded-md shadow-xl p-3 md:p-5">
+
+                                <div className="flex flex-row justify-start items-start gap-2 ">
 
                                     <div style={{ backgroundImage: `url('${companyData.companyLogo}')` }} className="bg-contain bg-no-repeat bg-center h-16 w-16 rounded-sm bg-transparent"></div>
                                     <div className="flex w-full flex-col justify-start items-start p-1">
@@ -76,7 +77,9 @@ export default function Apply() {
                                     </div>
                                 </div>
 
-                                <div className="flex flex-col text-white/80 text-sm mt-5">
+                                <div className="w-full h-[1px] bg-tan/50 my-3"></div>
+
+                                <div className="flex flex-col text-white/80 text-sm">
                                     <div>
                                         {companyData.numberOfTeamMembers} Employees
                                     </div>
