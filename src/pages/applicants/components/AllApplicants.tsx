@@ -60,7 +60,7 @@ export default function AllApplicants() {
             {
                 applicants.map((applicant) => {
                     return (
-                        <button key={`${applicant.id}`} onClick={() => { handleSelectApplicant(applicant) }} className={`hover:bg-bray hover:text-tan hover:scale-[1.02] w-full gap-4 ${applicant.rating!=null?"bg-transparent text-bray/90 border-bray/60":"bg-bray/90 text-white"} border-2 rounded-md my-1 flex flex-row justify-start items-center p-3`}>
+                        <button key={`${applicant.id}`} onClick={() => { handleSelectApplicant(applicant) }} className={`hover:bg-bray hover:text-tan hover:scale-[1.02] w-full gap-4 ${applicant.rating!=null?"bg-bray/90 text-tan/90":"bg-breen text-white"} rounded-md my-1 flex flex-row justify-start items-center p-3`}>
 
                             <div style={{ backgroundImage: `url('${applicant.profilePicture}')` }} className='bg-cover bg-center h-12 w-12 bg-breen rounded-md'></div>
 
