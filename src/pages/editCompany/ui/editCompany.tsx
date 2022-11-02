@@ -34,11 +34,19 @@ export default function EditCompany() {
 
 
     return (
-        <div className="pt-[80px] h-screen w-full flex justify-center items-center overflow-y-scroll ">
+        <div className="pt-[50px] h-screen w-full flex justify-center items-center overflow-y-scroll ">
             <form className="h-full" onSubmit={handleSubmit(changeCompanyDetails)} >
-                <div className="h-full w-[600px] p-5 overflow-y-scroll flex flex-col justify-start items-start">
+                <div className="h-full w-[600px] p-5 overflow-y-scroll flex-1 flex-col justify-start items-start">
+                    
+                    <div className="text-bray font-bold text-4xl mt-10">Edit Company Details</div>
+                    
+                    
                     <div className="text-bray text-sm font-regular mt-10">What's your company called?</div>
                     <input {...register("name")} placeholder="Company Name" className="mt-5 w-48 md:w-full border-b-[1px] border-bray/90 text-bray/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></input>
+
+                    <div className="text-bray text-sm font-regular mt-10">Enter company description</div>
+                    <textarea {...register("name")} placeholder="Company Name" className="mt-5 w-48 h-36 md:w-full border-b-[1px] border-bray/90 text-bray/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></textarea>
+
 
                     <div className="text-bray text-sm font-regular mt-10">Select a company logo</div>
                     <button
@@ -48,13 +56,15 @@ export default function EditCompany() {
                             backgroundColor: selectedCompanyLogo == "" ? "#eae0d5" : "#eae0d5",
                             backgroundImage: `url('${selectedCompanyLogo}')`
                         }}
-                        className="hover:bg-bray bg-bray bg-contain bg-no-repeat bg-center hover:scale-105 h-36 w-36 rounded-xl mt-3 flex justify-center items-center">
+                        className="hover:bg-bray shadow-xl mt-5 bg-bray bg-contain bg-no-repeat bg-center hover:scale-105 h-36 w-36 rounded-xl mt-3 flex justify-center items-center">
                         {selectedCompanyLogo == "" && <AiFillCamera color="black" className="opacity-50" size={50} />}
                     </button>
 
-                    <div className="text-bray text-sm font-regular mt-10">What's your company called?</div>
-                    <input {...register("name")} placeholder="Company Name" className="mt-5 w-48 md:w-full border-b-[1px] border-bray/90 text-bray/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></input>
+                    <div className="text-bray text-sm font-regular mt-10 ">What's the average yearly salary of employees at your company?</div>
+                    <input {...register("name")} placeholder="Average Yearly Salary" className="mb-20 mt-5 w-48 md:w-full border-b-[1px] border-bray/90 text-bray/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></input>
 
+                    <div className="text-bray text-sm font-regular mt-10 ">What's the Number of employees at your company?</div>
+                    <input {...register("name")} placeholder="Number of Employees" className="mb-20 mt-5 w-48 md:w-full border-b-[1px] border-bray/90 text-bray/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></input>
 
 
                 </div>
