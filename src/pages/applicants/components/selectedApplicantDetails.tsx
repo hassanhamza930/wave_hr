@@ -11,6 +11,7 @@ import { JobPosting } from '../../jobs/components/JobCard';
 import { UserInterface } from '../../../atoms/app/globalUserAtom';
 import { selectedApplicantDataAtom, selectedApplicantIdAtom } from '../atoms/applicantsAtoms';
 import { AiFillPlusCircle, AiFillPlusSquare } from 'react-icons/ai';
+import { Menu } from '@headlessui/react';
 
 
 export default function SelectedApplicantDetails() {
@@ -23,15 +24,15 @@ export default function SelectedApplicantDetails() {
 
     useEffect(() => {
 
-        if(selectedApplicantId!=""){
-            onSnapshot( doc(db, "jobs", jobId as string, "applications",selectedApplicantId), (doc) => {
+        if (selectedApplicantId != "") {
+            onSnapshot(doc(db, "jobs", jobId as string, "applications", selectedApplicantId), (doc) => {
                 setSelectedApplicantData(doc.data() as JobApplication);
                 setValue("rank", doc.data()!["rating"]);
                 setValue("notes", doc.data()!["notes"]);
-             })
+            })
         }
 
-      
+
         console.log("just ran");
     }, [selectedApplicantId]);
 
@@ -112,15 +113,39 @@ export default function SelectedApplicantDetails() {
 
 
                 {/* <div className='bg-cover bg-center rounded-md text-tan font-bold text-sm mt-10'>Notes:</div> */}
-                <div className='flex flex-row justify-start items-center gap-5 mt-5 '>
-                    {
-                       selectedApplicantData.interviewStatus == "Invite Sent" ?
-                        <button disabled={true} className='rounded-md font-regular text-sm mt-2 px-6 py-2 bg-tan/30 text-tan/90  w-36 '>Invite Sent</button>:
-                        <button onClick={() => { InterviewCandidate() }} className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-sm mt-2 px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan w-36 '>Interview</button>
-                    }
-                    <button onClick={() => { RejectApplicant() }} className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-sm mt-2 px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan w-36'>Reject</button>
-                </div>
 
+                <div className='relative flex flex-row justify-start items-start mt-5 gap-2  '>
+                    <Menu>
+                        <Menu.Button className="bg-transparent text-tan border-2 border-tan hover:bg-tan hover:text-bray px-6 text-sm py-2 rounded-md">Invite Status</Menu.Button>
+                        <Menu.Items className="absolute top-0 left-0 mt-12 flex flex-col text-breen bg-tan rounded-md px-4 py-2">
+                            <Menu.Item>
+                                {({ active }) => (
+                                    <button className={`${active && 'bg-blue-500'}`}>
+                                        
+                                    </button>
+                                )}
+                            </Menu.Item>
+                            <Menu.Item>
+                                {({ active }) => (
+                                    <a
+                                        className={`${active && 'bg-blue-500'}`}
+                                        href="/account-settings"
+                                    >
+                                        Documentation
+                                    </a>
+                                )}
+                            </Menu.Item>
+                            <Menu.Item disabled>
+                                <span className="opacity-75">Invite a friend (coming soon!)</span>
+                            </Menu.Item>
+                        </Menu.Items>
+                    </Menu>
+
+
+                    <button onClick={() => { RejectApplicant() }} className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-sm px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan w-36'>Reject</button>
+
+
+                </div>
                 <form onSubmit={handleSubmit(UpdateNotes)} className='flex flex-row justify-start items-center gap-5'>
                     <textarea id="no_scroll" {...register("notes")} placeholder="Notes" className="mt-10 h-36 w-[500px] border-2 border-white/90 text-tan/90 bg-transparent outline-0 p-3 rounded-md flex justify-center items-center">
                     </textarea>
@@ -130,7 +155,7 @@ export default function SelectedApplicantDetails() {
 
                 <div className='flex flex-col justify-start items-start mt-10'>
                     {
-                        selectedApplicantData.responses!=null&&selectedApplicantData.responses.map((response, index) => {
+                        selectedApplicantData.responses != null && selectedApplicantData.responses.map((response, index) => {
                             return (
                                 <>
                                     <div className='text-md text-tan font-regular mb-10'>
