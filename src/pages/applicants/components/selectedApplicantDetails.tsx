@@ -117,26 +117,20 @@ export default function SelectedApplicantDetails() {
                 <div className='relative flex flex-row justify-start items-start mt-5 gap-2  '>
                     <Menu>
                         <Menu.Button className="bg-transparent text-tan border-2 border-tan hover:bg-tan hover:text-bray px-6 text-sm py-2 rounded-md">Invite Status</Menu.Button>
-                        <Menu.Items className="absolute top-0 left-0 mt-12 flex flex-col text-breen bg-tan rounded-md px-4 py-2">
+                        <Menu.Items className="absolute top-0 left-0 mt-12 flex flex-col text-breen bg-tan rounded-md">
                             <Menu.Item>
                                 {({ active }) => (
-                                    <button className={`${active && 'bg-blue-500'}`}>
-                                        
+                                    <button className={`${active && 'bg-breen text-tan'} px-4 py-2 text-start`}>
+                                        Interview Invite Sent
                                     </button>
                                 )}
                             </Menu.Item>
                             <Menu.Item>
                                 {({ active }) => (
-                                    <a
-                                        className={`${active && 'bg-blue-500'}`}
-                                        href="/account-settings"
-                                    >
-                                        Documentation
-                                    </a>
+                                    <button className={`${active && 'bg-breen text-tan'} px-4 py-2 text-start`}>
+                                    Interview Done
+                                </button>
                                 )}
-                            </Menu.Item>
-                            <Menu.Item disabled>
-                                <span className="opacity-75">Invite a friend (coming soon!)</span>
                             </Menu.Item>
                         </Menu.Items>
                     </Menu>
