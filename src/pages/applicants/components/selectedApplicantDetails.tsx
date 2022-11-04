@@ -10,7 +10,7 @@ import sendEmail from '../../../standards/functions/sendEmail';
 import { JobPosting } from '../../jobs/components/JobCard';
 import { UserInterface } from '../../../atoms/app/globalUserAtom';
 import { selectedApplicantDataAtom, selectedApplicantIdAtom } from '../atoms/applicantsAtoms';
-import { AiFillPlusCircle, AiFillPlusSquare, AiOutlineArrowDown } from 'react-icons/ai';
+import { IoMdArrowDropdown, IoMdArrowDropdownCircle } from 'react-icons/io';
 import { Listbox, Menu } from '@headlessui/react';
 
 
@@ -20,7 +20,7 @@ export default function SelectedApplicantDetails() {
     const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm();
     const db = getFirestore();
     const { jobId } = useParams();
-    const options=["Invite Sent","Interview Done","Didn't show up for interview"];
+    const options = ["Invite Sent", "Interview Done", "Didn't show up for interview"];
 
     const [selectedOption, setSelectedOption] = useState(options[0]);
 
@@ -92,7 +92,7 @@ export default function SelectedApplicantDetails() {
                         <div className='bg-cover bg-center rounded-md text-tan font-regular text-xl mt-2'>{selectedApplicantData.email}</div>
                     </div>
 
-                  
+
 
                     <div className='flex flex-col justify-between items-end h-full mt-10'>
                         <form onSubmit={handleSubmit(SetRanking)} className='flex flex-row gap-4'>
@@ -111,10 +111,14 @@ export default function SelectedApplicantDetails() {
 
                 <div className='relative flex flex-row justify-start items-start mt-5 gap-2  '>
                     <Listbox value={selectedOption} onChange={setSelectedOption}>
-                        <Listbox.Button className="px-6 py-2 bg-transparent border-2 text-sm text-tan border-tan rounded-md hover:bg-tan hover:text-bray flex flex-row justify-start items-start">{selectedOption}<AiOutlineArrowDown className=""></AiOutlineArrowDown></Listbox.Button>
-                        <Listbox.Options>
+                        <Listbox.Button className="px-6 py-2 bg-transparent border-2 text-sm text-tan border-tan rounded-md hover:bg-tan hover:text-bray flex flex-row justify-start items-start">
+                            {selectedOption}
+                            <IoMdArrowDropdown size={15} className="ml-4" />
+                        </Listbox.Button>
+                        <Listbox.Options className={"absolute top-0 left-0 mt-10 bg-tan/30 rounded-md"}>
                             {options.map((option) => (
                                 <Listbox.Option
+                                    className="px-4 py-2 text-tan hover:bg-bray"
                                     key={option}
                                     value={option}
                                     disabled={false}>
