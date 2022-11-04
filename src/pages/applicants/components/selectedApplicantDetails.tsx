@@ -10,8 +10,8 @@ import sendEmail from '../../../standards/functions/sendEmail';
 import { JobPosting } from '../../jobs/components/JobCard';
 import { UserInterface } from '../../../atoms/app/globalUserAtom';
 import { selectedApplicantDataAtom, selectedApplicantIdAtom } from '../atoms/applicantsAtoms';
-import { AiFillPlusCircle, AiFillPlusSquare } from 'react-icons/ai';
-import { Menu } from '@headlessui/react';
+import { AiFillPlusCircle, AiFillPlusSquare, AiOutlineArrowDown } from 'react-icons/ai';
+import { Listbox, Menu } from '@headlessui/react';
 
 
 export default function SelectedApplicantDetails() {
@@ -20,6 +20,10 @@ export default function SelectedApplicantDetails() {
     const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm();
     const db = getFirestore();
     const { jobId } = useParams();
+    const options=["Invite Sent","Interview Done","Didn't show up for interview"];
+
+    const [selectedOption, setSelectedOption] = useState(options[0]);
+
 
 
     useEffect(() => {
@@ -88,19 +92,10 @@ export default function SelectedApplicantDetails() {
                         <div className='bg-cover bg-center rounded-md text-tan font-regular text-xl mt-2'>{selectedApplicantData.email}</div>
                     </div>
 
-                    {/* <div className='flex h-full w-16 flex-col justify-start items-start gap-3'>
-                        <button className='h-16 w-full border-2 border-tan rounded-md flex text-tan text-4xl pb-1 justify-center items-center'>
-                            +
-                        </button>
-                        <div className='h-24 w-full border-2 border-tan rounded-md flex justify-center items-center font-bold text-tan text-3xl'>10</div>
-                        <button className='h-16 w-full border-2 border-tan rounded-md flex text-tan text-4xl pb-1 justify-center items-center'>
-                            -
-                        </button>
-                    </div> */}
+                  
 
                     <div className='flex flex-col justify-between items-end h-full mt-10'>
                         <form onSubmit={handleSubmit(SetRanking)} className='flex flex-row gap-4'>
-                            {/* <div className='text-md font-bold flex justify-center items-center text-tan '>Rank:</div> */}
                             <input min={1} max={10} {...register("rank")} type="number" placeholder='Rating' className='text-tan w-24 bg-transparent border-b-2 px-2 border-tan outline-none'></input>
                             <button type="submit" className='py-2 px-4 rounded-md border-tan border-2 hover:bg-tan  text-sm hover:text-breen text-tan'>Set</button>
                         </form>
@@ -115,25 +110,19 @@ export default function SelectedApplicantDetails() {
                 {/* <div className='bg-cover bg-center rounded-md text-tan font-bold text-sm mt-10'>Notes:</div> */}
 
                 <div className='relative flex flex-row justify-start items-start mt-5 gap-2  '>
-                    <Menu>
-                        <Menu.Button className="bg-transparent text-tan border-2 border-tan hover:bg-tan hover:text-bray px-6 text-sm py-2 rounded-md">Invite Status</Menu.Button>
-                        <Menu.Items className="absolute top-0 left-0 mt-12 flex flex-col text-breen bg-tan rounded-md">
-                            <Menu.Item>
-                                {({ active }) => (
-                                    <button className={`${active && 'bg-breen text-tan'} px-4 py-2 text-start`}>
-                                        Interview Invite Sent
-                                    </button>
-                                )}
-                            </Menu.Item>
-                            <Menu.Item>
-                                {({ active }) => (
-                                    <button className={`${active && 'bg-breen text-tan'} px-4 py-2 text-start`}>
-                                    Interview Done
-                                </button>
-                                )}
-                            </Menu.Item>
-                        </Menu.Items>
-                    </Menu>
+                    <Listbox value={selectedOption} onChange={setSelectedOption}>
+                        <Listbox.Button className="px-6 py-2 bg-transparent border-2 text-sm text-tan border-tan rounded-md hover:bg-tan hover:text-bray flex flex-row justify-start items-start">{selectedOption}<AiOutlineArrowDown className=""></AiOutlineArrowDown></Listbox.Button>
+                        <Listbox.Options>
+                            {options.map((option) => (
+                                <Listbox.Option
+                                    key={option}
+                                    value={option}
+                                    disabled={false}>
+                                    {option}
+                                </Listbox.Option>
+                            ))}
+                        </Listbox.Options>
+                    </Listbox>
 
 
                     <button onClick={() => { RejectApplicant() }} className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-sm px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan w-36'>Reject</button>
