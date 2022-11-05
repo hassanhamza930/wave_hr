@@ -43,9 +43,9 @@ export default function LoggedInHeader() {
                         }} className="hover:scale-[1.02] font-bold text-breen text-sm">Company</button>
 
 
-                        <button onClick={() => {
+                        {/* <button onClick={() => {
                             navigate("/pricing");
-                        }} className="hover:scale-[1.02] font-bold text-breen text-sm">Calendar</button>
+                        }} className="hover:scale-[1.02] font-bold text-breen text-sm">Calendar</button> */}
 
                         <Menu >
                             <Menu.Button onClick={() => { }} className="flex flex-row justify-center items-center gap-2">

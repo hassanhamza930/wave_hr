@@ -38,7 +38,7 @@ export default function JobsPage() {
                 <div className="text-md mt-10 mb-2 ml-1">Your Job Postings</div>
 
                 <div className="w-full h-full flex flex-row">
-                    <div className="pr-[10%] h-full w-2/4 flex flex-col justify-start items-start ">
+                    <div className="pr-20 h-full w-2/4 flex flex-col justify-start items-start ">
                         <AllPostedJobs />
                         {
                             moreThanTwoJobs == false &&

@@ -17,7 +17,7 @@ export default function AllApplicants() {
 
     useEffect(() => {
 
-        onSnapshot(query(collection(db, "jobs", jobId as string, "applications"),orderBy("rating","desc")), (docs) => {
+        onSnapshot(query(collection(db, "jobs", jobId as string, "applications")), (docs) => {
             var tempArray: Array<JobApplication> = [];
             docs.forEach((doc) => {
                 var userName: string = doc.data()["name"] as string;
@@ -25,6 +25,11 @@ export default function AllApplicants() {
                     tempArray.push({ ...doc.data(), id: doc.id } as JobApplication);
                 }
             })
+            // tempArray=tempArray.sort(function (a, b) {
+            //     return (+(a.rating?.toExponential()! > b.rating?.toExponential()!) || +(a.rating?.toExponential()! === b.rating?.toExponential()!) - 1) ||
+            //         (+(a.rating?.toExponential()! > b.rating?.toExponential()!) || +(a.rating?.toExponential()! === b.rating?.toExponential()!) - 1);
+            // });
+            console.log(tempArray);
             setApplicants(tempArray);
         })
 

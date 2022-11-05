@@ -104,21 +104,16 @@ export default function SelectedApplicantDetails() {
 
                 </div>
 
-
-
-
-                {/* <div className='bg-cover bg-center rounded-md text-tan font-bold text-sm mt-10'>Notes:</div> */}
-
                 <div className='relative flex flex-row justify-start items-start mt-5 gap-2  '>
                     <Listbox value={selectedOption} onChange={setSelectedOption}>
                         <Listbox.Button className="px-6 py-2 bg-transparent border-2 text-sm text-tan border-tan rounded-md hover:bg-tan hover:text-bray flex flex-row justify-start items-start">
                             {selectedOption}
-                            <IoMdArrowDropdown size={15} className="ml-4" />
+                            <IoMdArrowDropdown size={15} className="mt-1 ml-2" />
                         </Listbox.Button>
-                        <Listbox.Options className={"absolute top-0 left-0 mt-10 bg-tan/30 rounded-md"}>
+                        <Listbox.Options className={"absolute top-0 left-0 mt-10 bg-tan/90 rounded-md"}>
                             {options.map((option) => (
                                 <Listbox.Option
-                                    className="px-4 py-2 text-tan hover:bg-bray"
+                                    className="px-4 py-2 text-bray hover:bg-tan"
                                     key={option}
                                     value={option}
                                     disabled={false}>

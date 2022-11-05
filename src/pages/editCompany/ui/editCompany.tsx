@@ -116,14 +116,14 @@ export default function EditCompany() {
                     <div className="text-bray font-bold text-4xl mt-10">Edit Company Details</div>
 
 
-                    <div className="text-bray text-sm font-regular mt-10">What's your company called?</div>
+                    <div className="text-bray text-sm font-bold mt-10">What's your company called?</div>
                     <input {...register("name")} placeholder="Company Name" className="mt-5 w-48 md:w-full border-b-[1px] border-bray/90 text-bray/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></input>
 
-                    <div className="text-bray text-sm font-regular mt-10">Enter company description</div>
+                    <div className="text-bray text-sm font-bold mt-10">Enter company description</div>
                     <textarea {...register("description")} placeholder="Company Name" className="mt-5 w-48 h-36 md:w-full border-b-[1px] border-bray/90 text-bray/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></textarea>
 
 
-                    <div className="text-bray text-sm font-regular mt-10">Select a company logo</div>
+                    <div className="text-bray text-sm font-bold mt-10">Select a company logo</div>
                     <button
                         type="button"
                         onClick={() => { saveImageToLocalStorage() }}
@@ -135,13 +135,13 @@ export default function EditCompany() {
                         {selectedCompanyLogo == "" && <AiFillCamera color="black" className="opacity-50" size={50} />}
                     </button>
 
-                    <div className="text-bray text-sm font-regular mt-10 ">What's the average yearly salary of employees at your company?</div>
+                    <div className="text-bray text-sm font-bold mt-10 ">What's the average yearly salary of employees at your company?</div>
                     <input type="number" min={0} max={300000} {...register("avgYearlySalary")} placeholder="Average Yearly Salary" className="mt-5 w-48 md:w-full border-b-[1px] border-bray/90 text-bray/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></input>
 
-                    <div className="text-bray text-sm font-regular mt-10 ">What's the Number of employees at your company?</div>
-                    <input type="number" min={0} max={300} {...register("noOfEmployees")} placeholder="Number of Employees" className="mb-10 mt-5 w-48 md:w-full border-b-[1px] border-bray/90 text-bray/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></input>
+                    <div className="text-bray text-sm font-bold mt-10 ">What's the Number of employees at your company?</div>
+                    <input type="number" min={0} max={300} {...register("noOfEmployees")} placeholder="Number of Employees" className="mb-5 mt-5 w-48 md:w-full border-b-[1px] border-bray/90 text-bray/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></input>
 
-                    <button type="submit" className="mb-36 border-bray/80 border-[1px] hover:bg-bray/90 bg-transparent text-bray/80 hover:text-tan px-8 py-2 flex flex-row justify-center items-center gap-2 rounded-md mt-20 w-min">
+                    <button type="submit" className="mb-36 border-bray border-[1px] hover:bg-bray bg-transparent text-bray hover:text-tan px-6 py-2 flex flex-row justify-center items-center gap-2 rounded-md mt-10 text-sm">
                         Update
                     </button>
 
