@@ -6,6 +6,7 @@ import { NewJobPosting } from "../../newJob/atoms/newJobAtoms"
 import { selectedJobAtom } from "../jobsAtoms";
 
 export interface JobPosting{
+    id?:string,
     jobDetails:NewJobPosting,
     questions:Array<string>,
     time:Timestamp
