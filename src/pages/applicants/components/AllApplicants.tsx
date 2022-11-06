@@ -25,10 +25,18 @@ export default function AllApplicants() {
                     tempArray.push({ ...doc.data(), id: doc.id } as JobApplication);
                 }
             })
-            // tempArray=tempArray.sort(function (a, b) {
-            //     return (+(a.rating?.toExponential()! > b.rating?.toExponential()!) || +(a.rating?.toExponential()! === b.rating?.toExponential()!) - 1) ||
-            //         (+(a.rating?.toExponential()! > b.rating?.toExponential()!) || +(a.rating?.toExponential()! === b.rating?.toExponential()!) - 1);
-            // });
+            tempArray=tempArray.sort((a, b)=>{
+                if(+a.rating!>+b.rating!){
+                    return +1;
+                }
+                else if(+a.rating!<+b.rating!){
+                    return -1;
+                }
+                else{
+                    return 0;
+                }
+            });
+            tempArray=tempArray.reverse();
             console.log(tempArray);
             setApplicants(tempArray);
         })
