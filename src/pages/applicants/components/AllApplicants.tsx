@@ -84,7 +84,8 @@ export default function AllApplicants() {
                                     <div className="text-md">{applicant.email}</div>
                                 </div>
 
-                                <div className=' w-full h-full flex justify-end pr-5 items-center'>
+                                <div className=' w-full h-full flex justify-end flex-row pr-5 gap-3 items-center'>
+                                    <div className='hidden 2xl:flex px-4 py-2 text-bray text-[12px] rounded-full bg-tan/90'>{applicant.applicationStatus}</div>
                                     <div className='px-4 py-2 text-breen text-sm font-bold rounded-md bg-tan/90'>{applicant.rating != null ? applicant.rating : "Pending Review"}</div>
                                 </div>
 

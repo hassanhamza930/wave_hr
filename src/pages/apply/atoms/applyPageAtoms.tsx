@@ -16,7 +16,7 @@ export interface JobApplication {
   responses:Array<QuestionResponse>,
   rating?:number,
   notes?:string,
-  interviewStatus?:string,
+  applicationStatus?:string,
   applicationTime:Timestamp
 }
 
