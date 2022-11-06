@@ -20,7 +20,7 @@ export default function SelectedApplicantDetails() {
     const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm();
     const db = getFirestore();
     const { jobId } = useParams();
-    const options = ["Invite Sent", "Interview Done", "Didn't show up for interview"];
+    const options = ["Interview Invite Pending","Interview Invite Sent", "Interview Done", "Didn't show up for interview"];
 
     const [selectedOption, setSelectedOption] = useState(options[0]);
 

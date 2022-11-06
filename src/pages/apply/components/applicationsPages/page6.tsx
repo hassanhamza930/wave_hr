@@ -94,7 +94,7 @@ export default function Page6() {
 
         console.log(finalJobApplicationData);
 
-        await addDoc(collection(db, "jobs", selectedJobId, "applications"), {...finalJobApplicationData,rating:null,rejected:false,interviewStatus:"Invite Pending"});
+        await addDoc(collection(db, "jobs", selectedJobId, "applications"), {...finalJobApplicationData,rating:null,rejected:false,interviewStatus:"Invite Pending",applicationTime:Timestamp.now()});
         setApplyStageInitiated(false);
         var jobData:JobPosting= (await getDoc(doc(db,"jobs",jobId as string))).data() as JobPosting;
         console.log("reached 1");
