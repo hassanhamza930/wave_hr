@@ -56,8 +56,8 @@ export default function LandingPage() {
             <WeBelieveEveryApplicationDeservesToBeSeen />
             <JobApplicationsThatFeelLikeAConvo />
             <SayGoodByeToExcelSheets />
-            <ScheduleInterviews />
-            <InterviewInApp />
+            {/* <ScheduleInterviews />
+            <InterviewInApp /> */}
 
 
         </div >

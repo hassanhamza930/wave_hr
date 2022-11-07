@@ -9,7 +9,7 @@ import isLoadingAtom from "../../../../atoms/app/isLoadingAtom";
 import { JobPosting, JobData } from '../../../jobs/components/JobCard';
 import pageIndexAtom from "../../../newJob/atoms/newJobAtoms";
 import JobApplicationAtom, { ApplyStageInitiatedAtom, JobApplication, ResponsesAtom, SelectedJobIdAtom, selectedProfilePictureAtom } from "../../atoms/applyPageAtoms";
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
 import { useParams } from 'react-router';
 import { UserInterface } from '../../../../atoms/app/globalUserAtom';
 import { CompanyData } from '../../ui/apply';
@@ -94,30 +94,31 @@ export default function Page6() {
 
         console.log(finalJobApplicationData);
 
-        await addDoc(collection(db, "jobs", selectedJobId, "applications"), {...finalJobApplicationData,rating:null,rejected:false,applicationStatus:"Interview Invite Pending",applicationTime:Timestamp.now()});
+        await addDoc(collection(db, "jobs", selectedJobId, "applications"), { ...finalJobApplicationData, rating: null, rejected: false, applicationStatus: "Interview Invite Pending", applicationTime: Timestamp.now() });
         setApplyStageInitiated(false);
-        var jobData:JobPosting= (await getDoc(doc(db,"jobs",jobId as string))).data() as JobPosting;
+        var jobData: JobPosting = (await getDoc(doc(db, "jobs", jobId as string))).data() as JobPosting;
         console.log("reached 1");
-        var userDetails:UserInterface= (await getDoc(doc(db,"users",jobData.postedBy as string))).data() as UserInterface;
+        var userDetails: UserInterface = (await getDoc(doc(db, "users", jobData.postedBy as string))).data() as UserInterface;
         console.log("reached 2");
         console.log(finalJobApplicationData.email);
         console.log(userDetails.companyDetails.companyName);
-        
+
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ title: 'React Hooks POST Request Example' })
         };
 
-        var subject=`You applied for ${jobData.jobDetails.jobTitle} at ${userDetails.companyDetails.companyName}`;
-        var emailBody=`Hello this is testing email body and you applied to the company, ${userDetails.companyDetails.companyName}`;
-        var email=finalJobApplicationData.email;
+        var subject = `You applied for ${jobData.jobDetails.jobTitle} at ${userDetails.companyDetails.companyName}`;
+        var emailBody = `You will recieve a confirmation email from the employer upon further selection or rejection.-----${userDetails.companyDetails.companyName}---${Timestamp.now().toDate().toLocaleString()}`;
+       
+        var email = finalJobApplicationData.email;
         // var respons= await fetch(`https://wavefunc.vercel.app/sendEmail?sendTo=${finalJobApplicationData.email}&emailBody=${emailBody}&subject=${subject}`, requestOptions);
-        sendEmail(email,subject,emailBody);
-        
+        sendEmail(email, subject, emailBody);
+
         toast.success("Job Application Successfully submitted");
         setLoading(false);
-        setTimeout(()=>{ window.location.reload();},1500);
+        setTimeout(() => { window.location.reload(); }, 1500);
 
     }
 

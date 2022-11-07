@@ -52,9 +52,9 @@ export default function JobApplicationsThatFeelLikeAConvo() {
 
 
 
-            <div className="h-12 w-12 mt-12 bg-breen rounded-md flex justify-center items-center">
+            {/* <div className="h-12 w-12 mt-12 bg-breen rounded-md flex justify-center items-center">
                 <BsArrowRightShort size={40} color="white"></BsArrowRightShort>
-            </div>
+            </div> */}
 
 
         </div>

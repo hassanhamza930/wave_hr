@@ -14,11 +14,11 @@ const Option=(props:OptionCardInputs)=>{
     return (
         <button
          onMouseEnter={()=>{setHovering(true);}} onMouseLeave={()=>{ setHovering(false); }} 
-         style={{backgroundColor:hovering?"#64113F":"transparent",borderColor:hovering?"transparent":"#64113F",borderWidth:hovering?"0px":"2px"}}
+         style={{backgroundColor:hovering?"#16213E":"transparent",borderColor:hovering?"transparent":"#16213E",borderWidth:hovering?"0px":"2px"}}
          className=" gap-5 h-16 w-72 border-[3px] rounded-md mt-2 flex flex-row justify-start p-5 items-center">
 
-            <div style={{opacity:hovering?"100%":"80%",backgroundColor:hovering?"white":"#64113F",color:hovering?"#64113F":"white"}} className="p-2 rounded-md w-10 h-10 flex justify-center items-center text-xl font-bold text-white">A</div>
-            <div style={{opacity:hovering?"100%":"80%",color:hovering?"white":"#64113F"}} className="p-2 rounded-md flex justify-center items-center text-xl font-bold">{props.title}</div>
+            <div style={{opacity:hovering?"100%":"80%",backgroundColor:hovering?"white":"#16213E",color:hovering?"#16213E":"white"}} className="p-2 rounded-md w-10 h-10 flex justify-center items-center text-xl font-bold text-white">A</div>
+            <div style={{opacity:hovering?"100%":"80%",color:hovering?"white":"#16213E"}} className="p-2 rounded-md flex justify-center items-center text-xl font-bold">{props.title}</div>
 
         </button>
     )

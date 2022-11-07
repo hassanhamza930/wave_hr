@@ -27,7 +27,7 @@ function CandidateRowHollow(props: CandidateRowInputs) {
                 <div className="font-bold  text-md ">{props.name}</div>
             </div>
 
-            <div className="text-md">{props.score}</div>
+            <div className="text-md pr-5">{props.score}</div>
 
 
         </motion.div>
@@ -54,8 +54,8 @@ function CandidateRowFilled(props: CandidateRowInputs) {
                 <div className="font-bold  text-md ">{props.name}</div>
             </div>
 
-            <div className="flex flex-row justify-center items-center gap-5">
-                <button className="hover:scale-105 hover:bg-white bg-transparent hover:text-breen text-white ml-5 px-3 py-1 border-2 border-white hover:border-breen rounded-md font-bold text-sm">Interview</button>
+            <div className="flex flex-row justify-center items-center gap-5 pr-5">
+                {/* <button className="hover:scale-105 hover:bg-white bg-transparent hover:text-breen text-white ml-5 px-3 py-1 border-2 border-white hover:border-breen rounded-md font-bold text-sm">Interview</button> */}
                 <div className="text-md">{props.score}</div>
 
             </div>
@@ -69,11 +69,11 @@ function CandidateRowFilled(props: CandidateRowInputs) {
 export default function SayGoodByeToExcelSheets() {
     return (
         <div className="h-screen w-full flex justify-start items-start px-[15%] py-24 flex-col">
-            <div className="text-breen text-7xl font-bold">Say Goodbye to excel sheets</div>
-            <div className="text-breen text-4xl font-bold">Simple drag and drop to manage and sort talent</div>
+            <div className="text-breen text-7xl font-bold">Say Goodbye</div>
+            <div className="text-breen text-4xl font-bold">to excel sheets</div>
 
             <div className="text-breen text-xl font-regular mt-5 mb-10">
-                Bring exception talent to the top of the list.
+                Rate and bring exception talent to the top of the list.
             </div>
 
             <div className="flex flex-col gap-2 w-full">
@@ -94,9 +94,9 @@ export default function SayGoodByeToExcelSheets() {
                 }
             </div>
 
-            <div className="h-12 w-12 mt-20 bg-breen rounded-md flex justify-center items-center">
+            {/* <div className="h-12 w-12 mt-20 bg-breen rounded-md flex justify-center items-center">
                 <BsArrowRightShort size={40} color="white"></BsArrowRightShort>
-            </div>
+            </div> */}
         </div>
     )
 

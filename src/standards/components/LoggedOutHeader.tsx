@@ -29,9 +29,9 @@ export default function LoggedOutHeader() {
 
                     <div className="flex flex-row gap-16 justify-between items-center">
 
-                        <button onClick={() => {
+                        {/* <button onClick={() => {
                             navigate("/pricing");
-                        }} className="hover:scale-[1.02] font-bold text-breen text-sm">Pricing</button>
+                        }} className="hover:scale-[1.02] font-bold text-breen text-sm">Pricing</button> */}
 
                         <button onClick={() => { navigate("/login") }} className="hover:scale-[1.02] text-sm px-4 py-2 rounded-md bg-breen flex flex-row gap-2 justify-center items-center">
                             <div className="text-white font-medium">Login</div>

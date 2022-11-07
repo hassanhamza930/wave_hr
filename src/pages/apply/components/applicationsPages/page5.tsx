@@ -54,7 +54,7 @@ export default function Page5() {
                 hidden: { opacity: 0, y: 50 }
             }}
             className="text-left h-full rounded-md  flex justify-center items-start flex-col p-10 w-full md:w-[60%]">
-            <div className="text-3xl font-bold text-white">Custom Questions</div>
+            <div className="text-3xl font-bold text-white">Additional Questions</div>
             <div className="text-xl text-white mt-2">Please provide information for the required fields</div>
 
             {
@@ -84,8 +84,8 @@ export default function Page5() {
                 })
             }
 
-            <input value={responseValue} onChange={(e) => { setResponseValue(e.target.value) }} placeholder="Value" className="mt-10 w-48 md:w-96 border-b-[1px] border-white/90 text-white/90 bg-transparent outline-0 px-2 py-1 flex justify-center items-center">
-            </input>
+            <textarea value={responseValue} onChange={(e) => { setResponseValue(e.target.value) }} placeholder="Answer" className="mt-10 h-36 w-48 md:w-96 border-b-[1px] border-white/90 text-white/90 bg-transparent outline-0 px-2 py-1 flex justify-center items-center">
+            </textarea>
 
             <button onClick={() => { handleResponses() }} type="button" className="border-white border-2 hover:bg-white bg-transparent text-white hover:text-breen px-8 py-2 flex flex-row justify-center items-center gap-2 rounded-md mt-20 w-min">
                 Next

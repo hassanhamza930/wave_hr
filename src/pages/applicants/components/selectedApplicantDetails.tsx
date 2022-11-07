@@ -3,7 +3,7 @@ import { JobApplication } from '../../apply/atoms/applyPageAtoms';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
-import { doc, setDoc, getFirestore, getDoc, onSnapshot } from 'firebase/firestore';
+import { doc, setDoc, getFirestore, getDoc, onSnapshot, Timestamp } from 'firebase/firestore';
 import { useParams } from 'react-router';
 import { selectedJobAtom } from '../../jobs/jobsAtoms';
 import sendEmail from '../../../standards/functions/sendEmail';
@@ -62,7 +62,7 @@ export default function SelectedApplicantDetails() {
         await setDoc(doc(db, "jobs", jobId as string, "applications", selectedApplicantId as string), { "rejected": true }, { merge: true });
         var jobData: JobPosting = (await getDoc(doc(db, "jobs", jobId as string))).data() as JobPosting;
         var posterData: UserInterface = (await getDoc(doc(db, "users", jobData.postedBy! as string))).data() as UserInterface;
-        sendEmail(selectedApplicantData.email, `Your application for ${jobData.jobDetails.jobTitle} at ${posterData.companyDetails.companyName} was rejected.`, "Your application for the above mentioned job was rejected.");
+        sendEmail(selectedApplicantData.email, `Your application for ${jobData.jobDetails.jobTitle} at ${posterData.companyDetails.companyName} was rejected.`, `Thank you for the taking the time to apply but unfortunately we will not be moving forward with your application at this time.------${posterData.companyDetails.companyName}-----${Timestamp.now().toDate().toLocaleString()}`);
         console.log(selectedApplicantId);
     }
 
