@@ -26,11 +26,14 @@ export default function SelectedApplicantDetails() {
 
 
 
+
+
     useEffect(() => {
 
         if (selectedApplicantId != "") {
             onSnapshot(doc(db, "jobs", jobId as string, "applications", selectedApplicantId), (doc) => {
                 setSelectedApplicantData(doc.data() as JobApplication);
+                setSelectedOption(doc.data()!["applicationStatus"]);
                 setValue("rank", doc.data()!["rating"]);
                 setValue("notes", doc.data()!["notes"]);
             })
@@ -69,11 +72,19 @@ export default function SelectedApplicantDetails() {
         toast.success("Notes Updated");
     }
 
-
-    async function InterviewCandidate() {
-        await setDoc(doc(db, "jobs", jobId as string, "applications", selectedApplicantId as string), { "interviewStatus": "Invite Sent" }, { merge: true });
-        toast.success("Interview invite sent");
+    async function handleApplicationStatusChange(newValue:string){
+        setSelectedOption(newValue);
+        setDoc(doc(db,"jobs",jobId as string,"applications",selectedApplicantId as string),{
+            "applicationStatus":newValue
+        },{merge:true});
     }
+
+    // async function InterviewCandidate() {
+    //     await setDoc(doc(db, "jobs", jobId as string, "applications", selectedApplicantId as string), { "interviewStatus": "Invite Sent" }, { merge: true });
+    //     toast.success("Interview invite sent");
+    // }
+
+
 
 
 
@@ -105,15 +116,15 @@ export default function SelectedApplicantDetails() {
                 </div>
 
                 <div className='relative flex flex-row justify-start items-start mt-5 gap-2  '>
-                    <Listbox value={selectedOption} onChange={setSelectedOption}>
+                    <Listbox value={selectedOption} onChange={handleApplicationStatusChange}>
                         <Listbox.Button className="px-6 py-2 bg-transparent border-2 text-sm text-tan border-tan rounded-md hover:bg-tan hover:text-bray flex flex-row justify-start items-start">
                             {selectedOption}
                             <IoMdArrowDropdown size={15} className="mt-1 ml-2" />
                         </Listbox.Button>
-                        <Listbox.Options className={"absolute top-0 left-0 mt-10 bg-tan/90 rounded-md"}>
+                        <Listbox.Options className={"absolute top-0 left-0 mt-10 bg-tan rounded-md"}>
                             {options.map((option) => (
                                 <Listbox.Option
-                                    className="px-4 py-2 text-bray hover:bg-tan"
+                                    className="px-4 py-2 text-bray hover:text-tan hover:bg-breen"
                                     key={option}
                                     value={option}
                                     disabled={false}>
