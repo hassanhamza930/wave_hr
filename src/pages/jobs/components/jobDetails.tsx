@@ -14,7 +14,7 @@ export default function JobDetails() {
     const db = getFirestore();
 
     function copyJobLink(id: string) {
-        var jobLink = window.location.host + "/apply/" + id;
+        var jobLink = "https://wavehr.vercel.app" + "/apply/" + id;
         navigator.clipboard.writeText(jobLink);
         toast.success("Job Link Copied to Clipboard");
     }
