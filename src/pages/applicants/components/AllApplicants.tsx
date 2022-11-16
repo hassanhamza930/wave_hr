@@ -25,6 +25,16 @@ export default function AllApplicants() {
                     tempArray.push({ ...doc.data(), id: doc.id } as JobApplication);
                 }
             })
+
+            var pendingReviewsArray:any=[];
+
+            tempArray.forEach((data,index)=>{
+                if(data.rating==null){
+                    pendingReviewsArray.unshift(data);
+                    tempArray.splice(index,1);
+                }
+            })
+
             tempArray=tempArray.sort((a, b)=>{
                 if(+a.rating!>+b.rating!){
                     return +1;
@@ -37,8 +47,9 @@ export default function AllApplicants() {
                 }
             });
             tempArray=tempArray.reverse();
-            console.log(tempArray);
-            setApplicants(tempArray);
+            var combinedList=pendingReviewsArray.concat(tempArray);
+            console.log(combinedList);
+            setApplicants(combinedList);
         })
 
 
@@ -73,7 +84,7 @@ export default function AllApplicants() {
             {
                 applicants.map((applicant) => {
                     return (
-                        <button key={`${applicant.id}`} onClick={() => { handleSelectApplicant(applicant) }} className={`hover:bg-bray hover:text-tan hover:scale-[1.02] w-full gap-4 bg-bray/90 text-tan rounded-md my-1 flex flex-row justify-start items-center p-3`}>
+                        <button key={`${applicant.id}`} onClick={() => { handleSelectApplicant(applicant) }} className={`hover:bg-bray hover:text-tan hover:scale-[1.02] w-full gap-4 ${applicant.rating==null?"bg-bray/90 text-tan ":"bg-bray/[15%] shadow-sm text-bray/90"}  rounded-md my-1 flex flex-row justify-start items-center p-3`}>
 
                             <div style={{ backgroundImage: `url('${applicant.profilePicture}')` }} className='bg-cover bg-center h-12 w-12 bg-breen rounded-md'></div>
 

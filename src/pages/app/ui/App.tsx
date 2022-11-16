@@ -9,6 +9,8 @@ import useLoggedIn from "../logic/useLoggedInAndOnboarded";
 import LoggedOutHeader from "../../../standards/components/LoggedOutHeader";
 import globalUserAtom from "../../../atoms/app/globalUserAtom";
 import {Toaster} from "react-hot-toast";
+import { useState, useEffect } from "react";
+import WaveLooksGoodOnDesktop from "../components/waveLooksGoodOnDesktop";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAleTmGUCRY87baXUHowrBhPGdY5YcGZak",
@@ -21,13 +23,42 @@ const firebaseConfig = {
 };
 
 
+
+
+
+export const useWindowSize = () => {
+    const [windowSize, setWindowSize] = useState({
+        width: 0 as number,
+        height: 0 as number
+    });
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const handleResize=()=>{
+                // Set window width/height to state
+                setWindowSize({
+                    width: window.innerWidth,
+                    height: window.innerHeight
+                });
+            }
+            window.addEventListener("resize", handleResize);
+            handleResize();
+            return () => window.removeEventListener("resize", handleResize);
+        }
+    }, []);
+    return windowSize;
+};
+
+
+
+
 function App() {
 
   const app = initializeApp(firebaseConfig);
   const { loggedIn } = useLoggedIn();
   const [loading, setLoading] = useRecoilState(isLoadingAtom);
   const [loggedInUser, setLoggedInUser] = useRecoilState(globalUserAtom);
-
+  const {height,width}=useWindowSize();
 
   return (
     <>
@@ -37,7 +68,10 @@ function App() {
         reverseOrder={false}
       />
       <div style={{ fontFamily: "Inter" }} className=" h-full w-full bg-tan">
-        {loggedIn == true ? <LoggedInRoutes /> : <LoggedOutRoutes />}
+        {
+          width>=1280==true ? loggedIn == true ? <LoggedInRoutes /> : <LoggedOutRoutes />:
+          <WaveLooksGoodOnDesktop/>
+        }
       </div>
     </>
   );

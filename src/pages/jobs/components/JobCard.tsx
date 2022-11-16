@@ -1,4 +1,4 @@
-import { collection, getDoc, getDocs, getFirestore, onSnapshot, query, Timestamp } from "firebase/firestore"
+import { collection, getDoc, getDocs, getFirestore, onSnapshot, query, Timestamp, where } from "firebase/firestore"
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { jobDataAtom } from "../../apply/atoms/applyPageAtoms";
@@ -26,8 +26,8 @@ export default function JobCard(props:JobData) {
 
   
     useEffect(()=>{
-        onSnapshot(collection(db,"jobs",props.id,"applications"),(docs)=>{
-            setApplicants(docs.docs.length);
+        onSnapshot(query(collection(db,"jobs",props.id,"applications"),where("rejected","==",false)),(docs)=>{
+            setApplicants(docs.docs.length);    
         })
     },[])
     
