@@ -8,9 +8,10 @@ import LoggedInRoutes from "../components/LoggedInRoutes";
 import useLoggedIn from "../logic/useLoggedInAndOnboarded";
 import LoggedOutHeader from "../../../standards/components/LoggedOutHeader";
 import globalUserAtom from "../../../atoms/app/globalUserAtom";
-import {Toaster} from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { useState, useEffect } from "react";
 import WaveLooksGoodOnDesktop from "../components/waveLooksGoodOnDesktop";
+import { useLocation } from "react-router";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAleTmGUCRY87baXUHowrBhPGdY5YcGZak",
@@ -27,26 +28,26 @@ const firebaseConfig = {
 
 
 export const useWindowSize = () => {
-    const [windowSize, setWindowSize] = useState({
-        width: 0 as number,
-        height: 0 as number
-    });
+  const [windowSize, setWindowSize] = useState({
+    width: 0 as number,
+    height: 0 as number
+  });
 
-    useEffect(() => {
-        if (typeof window !== "undefined") {
-            const handleResize=()=>{
-                // Set window width/height to state
-                setWindowSize({
-                    width: window.innerWidth,
-                    height: window.innerHeight
-                });
-            }
-            window.addEventListener("resize", handleResize);
-            handleResize();
-            return () => window.removeEventListener("resize", handleResize);
-        }
-    }, []);
-    return windowSize;
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const handleResize = () => {
+        // Set window width/height to state
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight
+        });
+      }
+      window.addEventListener("resize", handleResize);
+      handleResize();
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []);
+  return windowSize;
 };
 
 
@@ -58,19 +59,29 @@ function App() {
   const { loggedIn } = useLoggedIn();
   const [loading, setLoading] = useRecoilState(isLoadingAtom);
   const [loggedInUser, setLoggedInUser] = useRecoilState(globalUserAtom);
-  const {height,width}=useWindowSize();
+  const { height, width } = useWindowSize();
+
+  const location = useLocation();
+
+  useEffect(()=>{
+    console.log("testignxyaZ");
+    console.log(location.pathname);
+  },[])
 
   return (
     <>
+      {
+        width < 1280 == true &&  location.pathname.includes("apply")==false ?<WaveLooksGoodOnDesktop />:<div></div>
+      }
+
       {loading == true && <Loading />}
       <Toaster
         position="top-center"
         reverseOrder={false}
       />
-      <div style={{ fontFamily: "Inter" }} className=" h-full w-full bg-tan">
+      <div style={{ fontFamily: "Inter" }} className=" h-full w-full bg-tan relative">
         {
-          width>=1280==true ? loggedIn == true ? <LoggedInRoutes /> : <LoggedOutRoutes />:
-          <WaveLooksGoodOnDesktop/>
+          loggedIn == true ? <LoggedInRoutes /> : <LoggedOutRoutes />
         }
       </div>
     </>
