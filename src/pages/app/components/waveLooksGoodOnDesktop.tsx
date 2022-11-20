@@ -2,7 +2,7 @@ import logo from "../../../images/logo.svg";
 
 export default function WaveLooksGoodOnDesktop(){
     return(
-        <div className="absolute z-[80] px-10 bg-breen h-screen gap-5 w-full flex justify-center flex-col items-center">
+        <div className="fixed z-[90] px-10 bg-breen h-screen gap-5 w-screen flex justify-center flex-col items-center">
             <img src={logo} className="h-24 w-24"></img>
             <div className="font-regular text-center text-xl text-tan">
                 <b>Wave</b> Looks best on Desktop

@@ -81,7 +81,7 @@ function App() {
       />
       <div style={{ fontFamily: "Inter" }} className=" h-full w-full bg-tan relative">
         {
-          loggedIn == true ? <LoggedInRoutes /> : <LoggedOutRoutes />
+          width > 1280 == true? loggedIn == true ? <LoggedInRoutes /> : <LoggedOutRoutes />:""
         }
       </div>
     </>
