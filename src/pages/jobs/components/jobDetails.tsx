@@ -53,8 +53,8 @@ export default function JobDetails() {
                 <div dangerouslySetInnerHTML={{ __html: selectedJob.jobData.jobDetails.jobDescription }} className="text-md mt-2 text-tan"></div>
                 <div className="text-xl font-bold text-tan mt-10">Job Qualifications</div>
                 <div dangerouslySetInnerHTML={{ __html: selectedJob.jobData.jobDetails.jobQualifications }} className="text-md mt-2 text-tan"></div>
-                <div className="text-xl font-bold text-tan mt-10">Salary Range</div>
-                <div className="text-md mt-2 text-tan">${selectedJob.jobData.jobDetails.startSalary.toString()} - ${selectedJob.jobData.jobDetails.endSalary}</div>
+                <div className="text-xl font-bold text-tan mt-10">Salary Compensation</div>
+                <div className="text-md mt-2 text-tan">{selectedJob.jobData.jobDetails.salaryCompensation.toString()}</div>
                 <div className="text-xl font-bold text-tan mt-10 mb-2">Questions</div>
                 {
                     selectedJob.jobData.questions.map((e, index) => {

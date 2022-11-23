@@ -28,7 +28,6 @@ export default function EditCompany() {
         if(newPictureUploaded==true){
             existingUserData.companyDetails["companyName"]=watch("name");
             existingUserData.companyDetails["companyDescription"]=watch("description");
-            existingUserData.companyDetails["averageSalaryOfEmployees"]=watch("avgYearlySalary");
             existingUserData.companyDetails["numberOfTeamMembers"]=watch("noOfEmployees");
             
             var companyLogoData = selectedCompanyLogo;
@@ -54,7 +53,6 @@ export default function EditCompany() {
         else{
             existingUserData.companyDetails["companyName"]=watch("name");
             existingUserData.companyDetails["companyDescription"]=watch("description");
-            existingUserData.companyDetails["averageSalaryOfEmployees"]=watch("avgYearlySalary");
             existingUserData.companyDetails["numberOfTeamMembers"]=watch("noOfEmployees");
             
             await setDoc(doc(db,"users",localStorage.getItem("uid") as string),{
@@ -93,7 +91,6 @@ export default function EditCompany() {
             setValue("name", userData.companyDetails.companyName);
             setValue("description", userData.companyDetails.companyDescription);
             setSelectedCompanyLogo(userData.companyDetails.companyLogo);
-            setValue("avgYearlySalary", userData.companyDetails.averageSalaryOfEmployees);
             setValue("noOfEmployees", userData.companyDetails.numberOfTeamMembers);
             console.log("set details");
             setLoading(false);
@@ -135,9 +132,7 @@ export default function EditCompany() {
                         {selectedCompanyLogo == "" && <AiFillCamera color="black" className="opacity-50" size={50} />}
                     </button>
 
-                    <div className="text-bray text-sm font-bold mt-10 ">What's the average yearly salary of employees at your company?</div>
-                    <input type="number" min={0} max={300000} {...register("avgYearlySalary")} placeholder="Average Yearly Salary" className="mt-5 w-48 md:w-full border-b-[1px] border-bray/90 text-bray/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></input>
-
+                
                     <div className="text-bray text-sm font-bold mt-10 ">What's the Number of employees at your company?</div>
                     <input type="number" min={0} max={300} {...register("noOfEmployees")} placeholder="Number of Employees" className="mb-5 mt-5 w-48 md:w-full border-b-[1px] border-bray/90 text-bray/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></input>
 

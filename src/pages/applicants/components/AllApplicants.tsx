@@ -5,6 +5,7 @@ import { getFirestore, collection, onSnapshot, doc, orderBy, query, Timestamp, w
 import { useParams } from 'react-router';
 import { useRecoilState } from 'recoil';
 import { selectedApplicantDataAtom, selectedApplicantIdAtom } from '../atoms/applicantsAtoms';
+import { UserInterface } from '../../../atoms/app/globalUserAtom';
 export default function AllApplicants() {
 
     const [applicants, setApplicants] = useState<Array<JobApplication>>([]);
@@ -27,15 +28,16 @@ export default function AllApplicants() {
             })
 
             var pendingReviewsArray:any=[];
+            var reviewsDoneArray:any=[];
 
+            
             tempArray.forEach((data,index)=>{
-                if(data.rating==null){
-                    pendingReviewsArray.unshift(data);
-                    tempArray.splice(index,1);
+                if(data.rating!=null){
+                   reviewsDoneArray.splice(0,0,data);
                 }
             })
 
-            tempArray=tempArray.sort((a, b)=>{
+            reviewsDoneArray=reviewsDoneArray.sort((a:JobApplication, b:JobApplication)=>{
                 if(+a.rating!>+b.rating!){
                     return +1;
                 }
@@ -46,10 +48,20 @@ export default function AllApplicants() {
                     return 0;
                 }
             });
-            tempArray=tempArray.reverse();
-            var combinedList=pendingReviewsArray.concat(tempArray);
-            console.log(combinedList);
-            setApplicants(combinedList);
+            reviewsDoneArray=reviewsDoneArray.reverse();
+
+            tempArray.forEach((data,index)=>{
+                if(data.rating==null){
+                    pendingReviewsArray.splice(0,0,data);
+                }
+            })
+
+            pendingReviewsArray.forEach((data:any,index:number)=>{
+                    reviewsDoneArray.splice(0,0,data);                
+            })
+
+            
+            setApplicants(reviewsDoneArray);
         })
 
 
@@ -74,17 +86,18 @@ export default function AllApplicants() {
 
 
     return (
-        <div id="no_scroll" className="h-full w-[39%] overflow-y-scroll rounded-md p-5 flex flex-col justify-start items-start">
+        <div id="no_scroll" className="h-full w-[39%] rounded-md p-5 flex flex-col justify-start items-start">
             <div className="text-breen text-md mt-10 mb-2 ml-1">Seeing Applicants for <div className="mt-2 font-bold text-3xl mb-5">{jobDetails.jobData != null && jobDetails.jobData.jobDetails.jobTitle}</div></div>
 
             <input value={searchValue} onChange={(e) => { setSearchValue(e.target.value); }} placeholder="Search" className="w-full font-bold border-b-2 shadow-md mb-10 border-bray text-bray/90 bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
             </input>
 
 
+            <div id="no_scroll" className='w-full flex-col justify-start items-center overflow-y-scroll px-2'>
             {
                 applicants.map((applicant) => {
                     return (
-                        <button key={`${applicant.id}`} onClick={() => { handleSelectApplicant(applicant) }} className={`hover:bg-bray hover:text-tan hover:scale-[1.02] w-full gap-4 ${applicant.rating==null?"bg-bray/90 text-tan ":"bg-bray/[10%] shadow-md border-bray/10  text-bray"}  rounded-md my-1 flex flex-row justify-start items-center p-3`}>
+                        <button key={`${applicant.id}`} onClick={() => { handleSelectApplicant(applicant) }} className={`hover:bg-bray hover:text-tan hover:scale-[1.02] mt-3 w-full gap-4 ${applicant.rating==null?"bg-bray/90 text-tan ":"bg-bray/[10%] shadow-md border-bray/10  text-bray"}  rounded-md my-1 flex flex-row justify-start items-center p-3`}>
 
                             <div style={{ backgroundImage: `url('${applicant.profilePicture}')` }} className='bg-cover bg-center h-12 w-12 bg-breen rounded-md'></div>
 
@@ -106,7 +119,10 @@ export default function AllApplicants() {
                     )
                 })
             }
-
+            {
+                applicants.length==0&&<div className='font-bold text-md text-bray/90 ml-1'>No Applicants Yet</div>
+            }
+            </div>
 
 
 

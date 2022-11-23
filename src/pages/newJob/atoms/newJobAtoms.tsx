@@ -8,8 +8,7 @@ export interface NewJobPosting{
   jobTitle:string,
   jobDescription:string,
   jobQualifications:string,
-  startSalary:string,
-  endSalary:string,
+  salaryCompensation:string
 }
 
  const pageIndexAtom = atom({

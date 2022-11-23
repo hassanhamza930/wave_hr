@@ -48,9 +48,8 @@ export const jobDataAtom = atom({
     jobDetails: {
       jobDescription: "",
       jobQualifications: "",
-      endSalary: "",
       jobTitle: "",
-      startSalary: ""
+      salaryCompensation:""
     },
     questions: [] as Array<string>,
     time: Timestamp.now(),

@@ -169,7 +169,7 @@ export default function SelectedApplicantDetails() {
 
 
             </div> :
-            <div className="h-full w-[60%] text-white/60 bg-bray rounded-md text-md flex flex-col justify-center items-center p-10">
+            <div className="h-full w-[60%] text-white/60 bg-bray rounded-md text-lg flex flex-col justify-center items-center p-10">
                 Select a candidate to see details  {selectedApplicantId}
             </div>
 

@@ -83,14 +83,11 @@ export default function PostNewJobForm() {
                     <ReactQuill className="h-36 text-tan mb-10 mt-4" theme={"snow"} value={jobQualifications} onChange={setJobQualifications} />
 
 
-                    <div className="text-tan/90 text-md mt-20 font-bold w-3/4">Annual Salary Range</div>
+                    <div className="text-tan/90 text-md mt-20 font-bold w-3/4">Salary Compensation</div>
 
                     <div className="flex flex-row justify-start item-start gap-10">
 
-                        <input type={"number"} min={0} {...register("startSalary")} placeholder="Lower Limit $" className="w-36 border-b-[1px] border-tan/90 text-tan/90 bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
-                        </input>
-
-                        <input {...register("endSalary")} type={"number"} min={watch("startSalary")} placeholder="Upper Limit $" className="w-36 border-b-[1px] border-tan/90 text-tan/90 bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
+                        <input {...register("salaryCompensation")} placeholder="Salary Compensation" className="w-48 border-b-[1px] border-tan/90 text-tan/90 bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
                         </input>
 
                     </div>

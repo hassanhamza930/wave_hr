@@ -9,7 +9,6 @@ import ApplicationWindow from "../components/applicationWindow";
 
 
 export interface CompanyData {
-    averageSalaryOfEmployees: string,
     companyDescription: string,
     companyLogo: string,
     companyName: string,
@@ -22,13 +21,13 @@ export default function Apply() {
     const [loading, setLoading] = useRecoilState(isLoadingAtom);
     const [companyData, setCompanyData] = useState({} as CompanyData);
     const [jobData, setJobData] = useRecoilState(jobDataAtom);
-    const [selectedJobId,setSelectedJobId]=useRecoilState(SelectedJobIdAtom);
+    const [selectedJobId, setSelectedJobId] = useRecoilState(SelectedJobIdAtom);
 
     const db = getFirestore();
     const [applyStageInitiated, setApplyStageInitiated] = useRecoilState<boolean>(ApplyStageInitiatedAtom);
 
 
-    async function syncData(jobId:string) {
+    async function syncData(jobId: string) {
         setLoading(true);
         console.log("syncing");
         var docData = await getDoc(doc(db, "jobs", jobId as string));
@@ -79,23 +78,26 @@ export default function Apply() {
 
                                 <div className="w-full h-[1px] bg-tan/50 my-3"></div>
 
-                                <div className="flex flex-col text-white/80 text-sm">
+                                <div className="flex flex-col font-bold text-white/80 text-sm">
                                     <div>
                                         {companyData.numberOfTeamMembers} Employees
                                     </div>
-                                    <div>
-                                        Annual Salary Range: ${jobData.jobDetails.startSalary} - ${jobData.jobDetails.endSalary}
-                                    </div>
+                
                                 </div>
                             </div>
                         </div>
 
 
                         <div className="text-white/90 mt-10 font-bold text-2xl">Job Description</div>
-                        <div dangerouslySetInnerHTML={{__html: jobData.jobDetails.jobDescription}} className="text-white/90 mt-2 text-md"></div>
+                        <div dangerouslySetInnerHTML={{ __html: jobData.jobDetails.jobDescription }} className="text-white/90 mt-2 text-md"></div>
 
                         <div className="text-white/90 font-bold text-2xl mt-10">Job Qualifications</div>
-                        <div dangerouslySetInnerHTML={{__html: jobData.jobDetails.jobQualifications}} className="text-white/90 mt-2 text-md"></div>
+                        <div dangerouslySetInnerHTML={{ __html: jobData.jobDetails.jobQualifications }} className="text-white/90 mt-2 text-md"></div>
+
+                        <div className="text-white/90 mt-10 flex flex-col justify-start items-start">
+                            <div className="text-2xl font-bold">Salary Compensation</div> 
+                            <div className="text-md mt-2">{jobData.jobDetails.salaryCompensation}</div>
+                        </div>
 
                         <button onClick={() => { setApplyStageInitiated(true); }} className="border-white border-2 hover:bg-white bg-transparent text-white hover:text-breen px-8 py-2 rounded-md mt-10 w-min">
                             Apply
