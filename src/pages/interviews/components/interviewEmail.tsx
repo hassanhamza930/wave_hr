@@ -1,5 +1,5 @@
-import { doc, getFirestore, setDoc } from "firebase/firestore";
-import { useState } from "react";
+import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router"
 import { UserInterface } from "../../../atoms/app/globalUserAtom";
@@ -9,12 +9,21 @@ export default function InterviewEmail() {
     const [email, setEmail] = useState("");
     const db = getFirestore();
 
+    async function fetchInterviewEmail(){
+        var userData:UserInterface= await (await getDoc(doc(db,"users",localStorage.getItem("uid") as string))).data() as UserInterface
+        setEmail(userData.interviewEmail);
+    }
+
     async function setInterviewEmail() {
         await setDoc(doc(db, "users", localStorage.getItem("uid") as string), {
             interviewEmail: email
         } as UserInterface, { merge: true })
         toast.success("Successfully Updated")
     }
+
+    useEffect(()=>{
+        fetchInterviewEmail()
+    },[])
 
     return (
         <div className="h-[95%] w-2/4 rounded-md p-5 flex flex-col justify-start items-start overflow-y-scroll">
