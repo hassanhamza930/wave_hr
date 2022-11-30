@@ -6,7 +6,8 @@ export interface UserInterface{
     photoUrl:string|null,
     email:string|null,
     companyOnboarded:boolean|null,
-    companyDetails:CompanyData
+    companyDetails:CompanyData,
+    interviewEmail:string
 }
 
 

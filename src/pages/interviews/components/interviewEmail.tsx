@@ -1,10 +1,29 @@
+import { doc, getFirestore, setDoc } from "firebase/firestore";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router"
+import { UserInterface } from "../../../atoms/app/globalUserAtom";
+
 export default function InterviewEmail() {
+    const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const db = getFirestore();
+
+    async function setInterviewEmail() {
+        await setDoc(doc(db, "users", localStorage.getItem("uid") as string), {
+            interviewEmail: email
+        } as UserInterface, { merge: true })
+        toast.success("Successfully Updated")
+    }
+
     return (
         <div className="h-[95%] w-2/4 rounded-md p-5 flex flex-col justify-start items-start overflow-y-scroll">
             <div className="text-4xl font-bold">Interview Email</div>
-            <div className="text-sm text-bray/90 mt-5 w-[70%]">This link will be used to send interview invites to candidates. Make sure you have all the meeting details on this link</div>
-            <textarea placeholder="Email Invitation" className="h-72 w-[90%] outline-none p-3 rounded-md bg-transparent border-2 border-bray/50 text-sm mt-5"></textarea>
-
+            <div className="text-sm text-bray/90 mt-5 w-[70%]">This email will be used to send interview invites to candidates. Make sure you have all the meeting scheduling details on this email</div>
+            <textarea value={email} onChange={(e) => { setEmail(e.target.value) }} placeholder="Email Invitation" className="h-72 w-[90%] outline-none p-3 rounded-md bg-transparent border-2 border-bray/50 text-sm mt-5"></textarea>
+            <button onClick={setInterviewEmail} className=" mt-8 text-breen font-bold hover:text-tan text-sm flex flex-row gap-5 justify-center items-center px-4 py-2 bg-transparent border-2 border-breen hover:bg-breen rounded-md">
+                Update
+            </button>
         </div>
     )
 }
