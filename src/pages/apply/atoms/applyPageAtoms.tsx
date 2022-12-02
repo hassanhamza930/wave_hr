@@ -17,6 +17,7 @@ export interface JobApplication {
   rating?:number,
   notes?:string,
   applicationStatus?:string,
+  interviewInviteSent:boolean,
   applicationTime:Timestamp
 }
 

@@ -20,7 +20,7 @@ export default function SelectedApplicantDetails() {
     const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm();
     const db = getFirestore();
     const { jobId } = useParams();
-    const options = ["Interview Invite Pending","Interview Invite Sent", "Interview Done", "Didn't show up for interview"];
+    const options = ["Interview Invite Sent", "Interview Done", "Didn't show up for interview", "Accepted"];
 
     const [selectedOption, setSelectedOption] = useState(options[0]);
 
@@ -72,17 +72,17 @@ export default function SelectedApplicantDetails() {
         toast.success("Notes Updated");
     }
 
-    async function handleApplicationStatusChange(newValue:string){
+    async function handleApplicationStatusChange(newValue: string) {
         setSelectedOption(newValue);
-        setDoc(doc(db,"jobs",jobId as string,"applications",selectedApplicantId as string),{
-            "applicationStatus":newValue
-        },{merge:true});
+        setDoc(doc(db, "jobs", jobId as string, "applications", selectedApplicantId as string), {
+            "applicationStatus": newValue
+        }, { merge: true });
     }
 
-    // async function InterviewCandidate() {
-    //     await setDoc(doc(db, "jobs", jobId as string, "applications", selectedApplicantId as string), { "interviewStatus": "Invite Sent" }, { merge: true });
-    //     toast.success("Interview invite sent");
-    // }
+    async function InterviewCandidate() {
+        await setDoc(doc(db, "jobs", jobId as string, "applications", selectedApplicantId as string), {applicationStatus: "Interview Invite Sent",interviewInviteSent:true} as JobApplication, { merge: true });
+        toast.success("Interview invite sent");
+    }
 
 
 
@@ -116,23 +116,29 @@ export default function SelectedApplicantDetails() {
                 </div>
 
                 <div className='relative flex flex-row justify-start items-start mt-5 gap-2  '>
-                    <Listbox value={selectedOption} onChange={handleApplicationStatusChange}>
-                        <Listbox.Button className="px-6 py-2 bg-transparent border-2 text-sm text-tan border-tan rounded-md hover:bg-tan hover:text-bray flex flex-row justify-start items-start">
-                            {selectedOption}
-                            <IoMdArrowDropdown size={15} className="mt-1 ml-2" />
-                        </Listbox.Button>
-                        <Listbox.Options className={"absolute top-0 left-0 mt-10 bg-tan rounded-md"}>
-                            {options.map((option) => (
-                                <Listbox.Option
-                                    className="px-4 py-2 text-bray hover:text-tan hover:bg-breen"
-                                    key={option}
-                                    value={option}
-                                    disabled={false}>
-                                    {option}
-                                </Listbox.Option>
-                            ))}
-                        </Listbox.Options>
-                    </Listbox>
+
+                    {
+                        selectedApplicantData.interviewInviteSent == true ?
+                            <Listbox value={selectedOption} onChange={handleApplicationStatusChange}>
+                                <Listbox.Button className="px-6 py-2 bg-transparent border-2 text-sm text-tan border-tan rounded-md hover:bg-tan hover:text-bray flex flex-row justify-start items-start">
+                                    {selectedOption}
+                                    <IoMdArrowDropdown size={15} className="mt-1 ml-2" />
+                                </Listbox.Button>
+                                <Listbox.Options className={"absolute top-0 left-0 mt-10 bg-tan rounded-md"}>
+                                    {options.map((option) => (
+                                        <Listbox.Option
+                                            className="px-4 py-2 text-bray hover:text-tan hover:bg-breen"
+                                            key={option}
+                                            value={option}
+                                            disabled={false}>
+                                            {option}
+                                        </Listbox.Option>
+                                    ))}
+                                </Listbox.Options>
+                            </Listbox>:
+                            <button onClick={() => { InterviewCandidate() }} className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-sm px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan w-36'>Interview</button>
+
+                    }
 
 
                     <button onClick={() => { RejectApplicant() }} className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-sm px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan w-36'>Reject</button>
