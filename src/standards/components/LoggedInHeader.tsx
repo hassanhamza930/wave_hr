@@ -34,9 +34,9 @@ export default function LoggedInHeader() {
 
                     <div className="flex flex-row gap-16 justify-between items-center">
 
-                        <button onClick={() => {
+                        {/* <button onClick={() => {
                             navigate("/interviews");
-                        }} className="hover:scale-[1.02] font-bold text-breen text-sm">Interviews</button>
+                        }} className="hover:scale-[1.02] font-bold text-breen text-sm">Interviews</button> */}
 
                         <button onClick={() => {
                             navigate("/jobs");
