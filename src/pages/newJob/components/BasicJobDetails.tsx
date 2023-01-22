@@ -64,7 +64,7 @@ export default function PostNewJobForm() {
     return (
         <div className="h-full w-full bg-tan justify-center items-center flex flex-col text-left">
 
-            <div id="no_scroll" className="w-[700px] flex-col h-[90%] bg-bray rounded-md overflow-y-scroll p-10">
+            <div id="no_scroll" className="w-[700px] flex-col h-[90%] bg-blue rounded-md overflow-y-scroll p-10">
                 <form onSubmit={handleSubmit(handleAddNewJob)}>
                     <div className="text-tan/90 text-6xl font-bold">Post a New Job</div>
                     <div className="text-tan/90 text-xl mt-5">Make a new job post to start receiving applications</div>

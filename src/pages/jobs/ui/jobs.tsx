@@ -44,7 +44,7 @@ export default function JobsPage() {
                         <AllPostedJobs />
                         {
                             moreThanTwoJobs == false &&
-                            <button onClick={() => { navigate("/newJob") }} className=" mt-10 text-breen font-bold hover:text-tan flex flex-row gap-5 justify-center items-center px-4 py-2 bg-transparent border-2 border-breen hover:bg-breen rounded-md">
+                            <button onClick={() => { navigate("/newJob") }} className=" mt-10 text-breen font-bold hover:text-tan flex flex-row gap-5 justify-center items-center px-4 py-2 bg-transparent border-2 border-breen hover:bg-blue rounded-md">
                                 Post a new Job
                                 <BsArrowRightShort className="" size={30}></BsArrowRightShort>
                             </button>
@@ -52,7 +52,7 @@ export default function JobsPage() {
 
                     </div>
 
-                    <div id="no_scroll" className="bg-bray rounded-md h-full w-2/4 overflow-y-scroll">
+                    <div id="no_scroll" className="bg-blue rounded-md h-full w-2/4 overflow-y-scroll">
                         {
                             selectedJob.jobData != null ? <JobDetails /> :
                                 <div className="flex justify-center items-center h-full w-full">

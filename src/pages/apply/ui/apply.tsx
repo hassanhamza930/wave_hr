@@ -49,7 +49,7 @@ export default function Apply() {
         <>
             {applyStageInitiated == true && <ApplicationWindow />}
 
-            <div className="relative h-screen w-full bg-breen flex justify-center items-center">
+            <div className="relative h-screen w-full bg-blue flex justify-center items-center">
 
                 <div id="no_scroll" className="pb-20 text-breen w-full md:w-[70%] rounded-md h-full md:h-[90%] overflow-y-scroll flex-col justify-start items-start">
                     <div className="rounded-md h-72 w-full bg-gradient-to-br from-purple-700 to-blue-800 bg-cover bg-center bg-[url('https://assets-global.website-files.com/5c7fdbdd4e3feeee8dd96dd2/62c4ff55b8637de51557f5f0_growth-flat-color.gif')]"></div>

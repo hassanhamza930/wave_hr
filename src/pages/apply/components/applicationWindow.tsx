@@ -16,7 +16,7 @@ export default function ApplicationWindow() {
 
     return (
         <div className="h-screen w-full flex justify-center items-center fixed z-[90] bg-tan">
-            <div className=" bg-breen flex justify-center items-center h-full w-full">
+            <div className=" bg-blue flex justify-center items-center h-full w-full">
                 {pageIndex==0&&<Page1/>}
                 {pageIndex==1&&<Page2/>}
                 {pageIndex==2&&<Page3/>}

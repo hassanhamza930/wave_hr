@@ -93,7 +93,7 @@ export default function SelectedApplicantDetails() {
     return (
 
         selectedApplicantId != "" ?
-            <div id="no_scroll" className="h-full w-[60%] bg-bray rounded-md flex-col justify-start items-start overflow-y-scroll p-10">
+            <div id="no_scroll" className="h-full w-[60%] bg-blue rounded-md flex-col justify-start items-start overflow-y-scroll p-10">
 
                 <div className='flex flex-row w-full justify-start items-start '>
 
@@ -127,7 +127,7 @@ export default function SelectedApplicantDetails() {
                                 <Listbox.Options className={"absolute top-0 left-0 mt-10 bg-tan rounded-md"}>
                                     {options.map((option) => (
                                         <Listbox.Option
-                                            className="px-4 py-2 text-bray hover:text-tan hover:bg-breen"
+                                            className="px-4 py-2 text-bray hover:text-tan hover:bg-blue"
                                             key={option}
                                             value={option}
                                             disabled={false}>
@@ -175,7 +175,7 @@ export default function SelectedApplicantDetails() {
 
 
             </div> :
-            <div className="h-full w-[60%] text-white/60 bg-bray rounded-md text-lg flex flex-col justify-center items-center p-10">
+            <div className="h-full w-[60%] text-white/60 bg-blue rounded-md text-lg flex flex-col justify-center items-center p-10">
                 Select a candidate to see details  {selectedApplicantId}
             </div>
 

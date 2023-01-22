@@ -101,7 +101,7 @@ export default function Page4() {
                             backgroundColor: selectedResume == "" ? "#eae0d5" : "#eae0d5",
                             backgroundImage: `url('${selectedResume}')`
                         }}
-                        className="hover:bg-bray bg-contain bg-no-repeat bg-center hover:scale-105 h-36 w-36 rounded-xl mt-10 flex justify-center items-center">
+                        className="hover:bg-blue bg-contain bg-no-repeat bg-center hover:scale-105 h-36 w-36 rounded-xl mt-10 flex justify-center items-center">
                         {selectedResume == "" && <AiFillFile color="black" className="opacity-50" size={50} />}
                     </button> :
                     <embed

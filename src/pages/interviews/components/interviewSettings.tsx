@@ -10,7 +10,7 @@ export default function InterviewSettings() {
             <div className="text-4xl font-bold">Interview Settings</div>
             <div className="text-md font-bold mt-10">Calendly Link</div>
             <input placeholder="Calendly Link" className="w-3/4 outline-none px-2 py-1 bg-transparent border-b-2 border-bray/90 text-sm mt-5"></input>
-            <button onClick={() => { navigate("/newJob") }} className=" mt-8 text-breen font-bold hover:text-tan text-sm flex flex-row gap-5 justify-center items-center px-4 py-2 bg-transparent border-2 border-breen hover:bg-breen rounded-md">
+            <button onClick={() => { navigate("/newJob") }} className=" mt-8 text-breen font-bold hover:text-tan text-sm flex flex-row gap-5 justify-center items-center px-4 py-2 bg-transparent border-2 border-breen hover:bg-blue rounded-md">
                 Update
             </button>
             <div className="text-sm text-bray/90 mt-5 w-[70%]">This link will be used to send interview invites to candidates. Make sure you have all the meeting details on this link</div>

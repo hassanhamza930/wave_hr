@@ -78,7 +78,7 @@ export default function Page3() {
                     backgroundColor: selectedProfilePicture == "" ? "#eae0d5" : "#eae0d5",
                     backgroundImage: `url('${selectedProfilePicture}')`
                 }}
-                className="hover:bg-bray bg-contain bg-no-repeat bg-center hover:scale-105 h-36 w-36 rounded-xl mt-3 flex justify-center items-center">
+                className="hover:bg-blue bg-contain bg-no-repeat bg-center hover:scale-105 h-36 w-36 rounded-xl mt-3 flex justify-center items-center">
                 {selectedProfilePicture == "" && <AiFillCamera color="black" className="opacity-50" size={50} />}
             </button>
 

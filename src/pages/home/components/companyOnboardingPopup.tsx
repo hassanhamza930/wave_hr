@@ -14,7 +14,7 @@ export default function CompanyOnboardingPopup() {
     const { submitOnboardingDataToFirebase } = useSubmitOnboardingDataToFirebase();
 
     return (
-        <div className="fixed z-50 h-screen w-full bg-bray/80 flex justify-center items-center">
+        <div className="fixed z-50 h-screen w-full bg-blue/80 flex justify-center items-center">
 
             <div className="w-[600px] h-[80%] text-breen overflow-y-scroll bg-white/90 rounded-xl flex-col justify-start items-start p-10 gap">
                 <div className="text-4xl font-bold">Hello {globalUser.name},</div>
@@ -34,7 +34,7 @@ export default function CompanyOnboardingPopup() {
                             backgroundColor: selectedImage == "" ? "#06283D" : "#eae0d5",
                             backgroundImage: `url('${selectedImage}')`
                         }}
-                        className="hover:bg-bray bg-contain bg-no-repeat bg-center hover:scale-105 h-36 w-36 rounded-xl mt-3 flex justify-center items-center">
+                        className="hover:bg-blue bg-contain bg-no-repeat bg-center hover:scale-105 h-36 w-36 rounded-xl mt-3 flex justify-center items-center">
                         {selectedImage == "" && <AiFillCamera color="white" className="opacity-50" size={50} />}
                     </button>
 
@@ -70,7 +70,7 @@ export default function CompanyOnboardingPopup() {
 
 
                     <div className="text-md font-regular mt-10 w-full flex flex-row justify-start items-end">
-                        <button type="submit" className="bg-breen hover:bg-bray hover:scale-105 rounded-md px-8 py-2 text-white">Start</button>
+                        <button type="submit" className="bg-blue hover:bg-blue hover:scale-105 rounded-md px-8 py-2 text-white">Start</button>
                     </div>
                 </form>
 

@@ -128,7 +128,7 @@ export default function EditCompany() {
                             backgroundColor: selectedCompanyLogo == "" ? "#eae0d5" : "#eae0d5",
                             backgroundImage: `url('${selectedCompanyLogo}')`
                         }}
-                        className="hover:bg-bray shadow-xl mt-5 bg-bray bg-contain bg-no-repeat bg-center hover:scale-105 h-36 w-36 rounded-xl flex justify-center items-center">
+                        className="hover:bg-blue shadow-xl mt-5 bg-blue bg-contain bg-no-repeat bg-center hover:scale-105 h-36 w-36 rounded-xl flex justify-center items-center">
                         {selectedCompanyLogo == "" && <AiFillCamera color="black" className="opacity-50" size={50} />}
                     </button>
 
@@ -136,7 +136,7 @@ export default function EditCompany() {
                     <div className="text-bray text-sm font-bold mt-10 ">What's the Number of employees at your company?</div>
                     <input type="number" min={0} max={300} {...register("noOfEmployees")} placeholder="Number of Employees" className="mb-5 mt-5 w-48 md:w-full border-b-[1px] border-bray/90 text-bray/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></input>
 
-                    <button type="submit" className="mb-36 border-bray border-[1px] hover:bg-bray bg-transparent text-bray hover:text-tan px-6 py-2 flex flex-row justify-center items-center gap-2 rounded-md mt-10 text-sm">
+                    <button type="submit" className="mb-36 border-bray border-[1px] hover:bg-blue bg-transparent text-bray hover:text-tan px-6 py-2 flex flex-row justify-center items-center gap-2 rounded-md mt-10 text-sm">
                         Update
                     </button>
 
