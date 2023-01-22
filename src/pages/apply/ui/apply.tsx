@@ -51,7 +51,7 @@ export default function Apply() {
 
             <div className="relative h-screen w-full bg-blue flex justify-center items-center">
 
-                <div id="no_scroll" className="pb-20 text-breen w-full md:w-[70%] rounded-md h-full md:h-[90%] overflow-y-scroll flex-col justify-start items-start">
+                <div id="no_scroll" className="pb-20 text-black w-full md:w-[70%] rounded-md h-full md:h-[90%] overflow-y-scroll flex-col justify-start items-start">
                     <div className="rounded-md h-72 w-full bg-gradient-to-br from-purple-700 to-blue-800 bg-cover bg-center bg-[url('https://assets-global.website-files.com/5c7fdbdd4e3feeee8dd96dd2/62c4ff55b8637de51557f5f0_growth-flat-color.gif')]"></div>
 
                     <div className="flex flex-col justify-start items-start p-5">
@@ -99,7 +99,7 @@ export default function Apply() {
                             <div className="text-md mt-2">{jobData.jobDetails.salaryCompensation}</div>
                         </div>
 
-                        <button onClick={() => { setApplyStageInitiated(true); }} className="border-white border-2 hover:bg-white bg-transparent text-white hover:text-breen px-8 py-2 rounded-md mt-10 w-min">
+                        <button onClick={() => { setApplyStageInitiated(true); }} className="border-white border-2 hover:bg-white bg-transparent text-white hover:text-black px-8 py-2 rounded-md mt-10 w-min">
                             Apply
                         </button>
                     </div>

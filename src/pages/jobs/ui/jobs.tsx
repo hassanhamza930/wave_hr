@@ -36,7 +36,7 @@ export default function JobsPage() {
     return (
         <>
 
-            <div className="pt-[80px] text-breen bg-tan h-screen w-full flex justify-start items-start p-20 flex-col">
+            <div className="pt-[80px] text-black bg-tan h-screen w-full flex justify-start items-start p-20 flex-col">
                 <div className="text-md mt-10 mb-2 ml-1">Your Job Postings</div>
 
                 <div className="w-full h-full flex flex-row">
@@ -44,7 +44,7 @@ export default function JobsPage() {
                         <AllPostedJobs />
                         {
                             moreThanTwoJobs == false &&
-                            <button onClick={() => { navigate("/newJob") }} className=" mt-10 text-breen font-bold hover:text-tan flex flex-row gap-5 justify-center items-center px-4 py-2 bg-transparent border-2 border-breen hover:bg-blue rounded-md">
+                            <button onClick={() => { navigate("/newJob") }} className=" mt-10 text-black font-bold hover:text-tan flex flex-row gap-5 justify-center items-center px-4 py-2 bg-transparent border-2 border-blue hover:bg-blue rounded-md">
                                 Post a new Job
                                 <BsArrowRightShort className="" size={30}></BsArrowRightShort>
                             </button>

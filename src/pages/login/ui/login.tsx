@@ -14,10 +14,10 @@ export default function Login() {
                 <div className="flex h-full w-full flex-row justify-center items-center">
 
                     <div className="w-2/4 h-full flex justify-center items-start p-20 flex-col ">
-                        <div className="text-7xl font-bold text-breen text-start">
+                        <div className="text-7xl font-bold text-black text-start">
                             Let's get <br></br>you started
                         </div>
-                        <div className="text-xl mt-10 font-regular text-breen text-start">
+                        <div className="text-xl mt-10 font-regular text-black text-start">
                             Use google to sign in and create an account in seconds.
                         </div>
 

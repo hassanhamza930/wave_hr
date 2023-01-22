@@ -7,7 +7,7 @@ export default function Hello() {
 
     return (
         <div className="w-2/4 h-full flex justify-center items-center">
-            <div className="font-bold text-6xl text-breen">Good Morning,<br></br>{globalUser.name}👋</div>
+            <div className="font-bold text-6xl text-black">Good Morning,<br></br>{globalUser.name}👋</div>
         </div>
 
     )

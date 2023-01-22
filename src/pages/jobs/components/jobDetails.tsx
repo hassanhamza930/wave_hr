@@ -43,9 +43,9 @@ export default function JobDetails() {
                 </div>
 
                 <div className="flex flex-row justify-center items-start gap-2 mt-5">
-                    <button onClick={() => { copyJobLink(selectedJob.id) }} className="text-sm px-4 py-2 rounded-md border-tan border-2 hover:font-bold hover:bg-tan bg-transparent hover:text-breen text-tan">Copy Job Link</button>
-                    <button onClick={() => { deleteJob(selectedJob.id) }} className="text-sm px-4 py-2 rounded-md border-tan border-2 hover:font-bold hover:bg-tan bg-transparent hover:text-breen text-tan">Delete</button>
-                    <button onClick={() => { seeApplicants(selectedJob.id) }} className="text-sm px-4 py-2 rounded-md border-tan border-2 hover:font-bold hover:bg-tan bg-transparent hover:text-breen text-tan">See Applicants</button>
+                    <button onClick={() => { copyJobLink(selectedJob.id) }} className="text-sm px-4 py-2 rounded-md border-tan border-2 hover:font-bold hover:bg-tan bg-transparent hover:text-black text-tan">Copy Job Link</button>
+                    <button onClick={() => { deleteJob(selectedJob.id) }} className="text-sm px-4 py-2 rounded-md border-tan border-2 hover:font-bold hover:bg-tan bg-transparent hover:text-black text-tan">Delete</button>
+                    <button onClick={() => { seeApplicants(selectedJob.id) }} className="text-sm px-4 py-2 rounded-md border-tan border-2 hover:font-bold hover:bg-tan bg-transparent hover:text-black text-tan">See Applicants</button>
                 </div>
 
 

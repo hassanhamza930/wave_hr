@@ -16,7 +16,7 @@ export default function CompanyOnboardingPopup() {
     return (
         <div className="fixed z-50 h-screen w-full bg-blue/80 flex justify-center items-center">
 
-            <div className="w-[600px] h-[80%] text-breen overflow-y-scroll bg-white/90 rounded-xl flex-col justify-start items-start p-10 gap">
+            <div className="w-[600px] h-[80%] text-black overflow-y-scroll bg-white/90 rounded-xl flex-col justify-start items-start p-10 gap">
                 <div className="text-4xl font-bold">Hello {globalUser.name},</div>
                 <div className="text-2xl font-bold">Let's get you started</div>
                 <div className="text-md font-regular mt-3">Please tell us more about your company</div>
@@ -40,28 +40,28 @@ export default function CompanyOnboardingPopup() {
 
 
                     <div className="text-md font-bold mt-10">What's your company called?</div>
-                    <input {...register("companyName")} className=" w-96 border-b-2 border-breen bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
+                    <input {...register("companyName")} className=" w-96 border-b-2 border-blue bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
                     </input>
 
                     <div className="text-md font-bold mt-10">A brief description of your company.</div>
                     <textarea
                         {...register("companyDescription")}
-                        className="h-16 w-96 border-b-2 border-breen bg-transparent outline-0 px-2 font-medium py-1 mt-3 flex justify-center items-center">
+                        className="h-16 w-96 border-b-2 border-blue bg-transparent outline-0 px-2 font-medium py-1 mt-3 flex justify-center items-center">
                     </textarea>
 
                     <div className="text-md font-bold mt-10">How many team members do you currently have?</div>
                     <input
                         {...register("numberOfTeamMembers")}
-                        type="number" min={0} max={300} className=" w-96 border-b-2 border-breen bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
+                        type="number" min={0} max={300} className=" w-96 border-b-2 border-blue bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
                     </input>
 
 
                     <div className="text-md font-bold mt-10">What's the average yearly salary of<br />employees at your company?</div>
                     <div className="flex flex-row justify-start items-start ">
-                        <div className="h-14 w-8 flex justify-center items-center text-md text-breen font-bold">$</div>
+                        <div className="h-14 w-8 flex justify-center items-center text-md text-black font-bold">$</div>
                         <input
                             {...register("averageSalaryOfEmployees")}
-                            type="number" min={0} max={300000} className=" w-[350px] border-b-2 border-breen bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
+                            type="number" min={0} max={300000} className=" w-[350px] border-b-2 border-blue bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
                         </input>
                     </div>
                     <div className="text-sm text-bray/70 font-regular mt-2">This information is kept private</div>

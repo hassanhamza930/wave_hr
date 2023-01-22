@@ -111,7 +111,7 @@ export default function Page4() {
                     </embed>
             }
 
-            <button onClick={() => { handlePage4Submit() }} type="button" className="border-white border-2 hover:bg-white bg-transparent text-white hover:text-breen px-8 py-2 flex flex-row justify-center items-center gap-2 rounded-md mt-10 w-min">
+            <button onClick={() => { handlePage4Submit() }} type="button" className="border-white border-2 hover:bg-white bg-transparent text-white hover:text-black px-8 py-2 flex flex-row justify-center items-center gap-2 rounded-md mt-10 w-min">
                 Next
             </button>
 

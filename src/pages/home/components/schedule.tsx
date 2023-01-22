@@ -20,7 +20,7 @@ function JobPostingCard({ jobDetails, questions, time, postedBy }: JobPosting, i
     }, []);
 
     return (
-        <button onClick={()=>{navigate("/jobs")}} className="hover:bg-blue hover:text-white text-breen hover:border-transparent border-breen border-2 w-full bg-transparent rounded-xl flex justify-between items-center flex-row py-4 px-5 gap-3">
+        <button onClick={()=>{navigate("/jobs")}} className="hover:bg-blue hover:text-white text-black hover:border-blue border-blue border-2 w-full bg-transparent rounded-xl flex justify-between items-center flex-row py-4 px-5 gap-3">
 
 
             <div className="flex text-left flex-row justify-center items-center gap-5">
@@ -34,6 +34,10 @@ function JobPostingCard({ jobDetails, questions, time, postedBy }: JobPosting, i
 
     )
 }
+
+
+
+
 
 
 export default function Schedule() {
@@ -60,7 +64,7 @@ export default function Schedule() {
 
 
 
-                <div className="text-xl text-bray">You have {newApps} active jobs.</div>
+                <div className="text-xl text-black">You have {newApps} active jobs.</div>
 
                 <div className="flex flex-col justify-start items-start w-full h-full gap-2 pt-10">
                     {

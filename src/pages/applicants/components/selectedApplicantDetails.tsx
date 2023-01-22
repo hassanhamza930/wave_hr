@@ -108,7 +108,7 @@ export default function SelectedApplicantDetails() {
                     <div className='flex flex-col justify-between items-end h-full mt-10'>
                         <form onSubmit={handleSubmit(SetRanking)} className='flex flex-row gap-4'>
                             <input min={1} max={10} {...register("rank")} type="number" placeholder='Rating' className='text-tan w-24 bg-transparent border-b-2 px-2 border-tan outline-none'></input>
-                            <button type="submit" className='py-2 px-4 rounded-md border-tan border-2 hover:bg-tan  text-sm hover:text-breen text-tan'>Set</button>
+                            <button type="submit" className='py-2 px-4 rounded-md border-tan border-2 hover:bg-tan  text-sm hover:text-black text-tan'>Set</button>
                         </form>
 
                     </div>
@@ -136,19 +136,19 @@ export default function SelectedApplicantDetails() {
                                     ))}
                                 </Listbox.Options>
                             </Listbox>:
-                            <button onClick={() => { InterviewCandidate() }} className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-sm px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan w-36'>Interview</button>
+                            <button onClick={() => { InterviewCandidate() }} className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-sm px-6 py-2 hover:bg-tan bg-transparent hover:text-black text-tan/90 border-2 border-tan w-36'>Interview</button>
 
                     }
 
 
-                    <button onClick={() => { RejectApplicant() }} className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-sm px-6 py-2 hover:bg-tan bg-transparent hover:text-breen text-tan/90 border-2 border-tan w-36'>Reject</button>
+                    <button onClick={() => { RejectApplicant() }} className='bg-cover hover:scale-[1.05] hover:bg- bg-center rounded-md font-regular text-sm px-6 py-2 hover:bg-tan bg-transparent hover:text-black text-tan/90 border-2 border-tan w-36'>Reject</button>
 
 
                 </div>
                 <form onSubmit={handleSubmit(UpdateNotes)} className='flex flex-row justify-start items-center gap-5'>
                     <textarea id="no_scroll" {...register("notes")} placeholder="Notes" className="mt-10 h-36 w-[500px] border-2 border-white/90 text-tan/90 bg-transparent outline-0 p-3 rounded-md flex justify-center items-center">
                     </textarea>
-                    <button type="submit" className='py-2 px-4 rounded-md border-tan text-sm border-2 hover:bg-tan hover:text-breen text-tan'>Update</button>
+                    <button type="submit" className='py-2 px-4 rounded-md border-tan text-sm border-2 hover:bg-tan hover:text-black text-tan'>Update</button>
                 </form>
 
 
