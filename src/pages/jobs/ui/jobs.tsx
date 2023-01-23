@@ -36,7 +36,7 @@ export default function JobsPage() {
     return (
         <>
 
-            <div className="pt-[80px] text-black bg-tan h-screen w-full flex justify-start items-start p-20 flex-col">
+            <div className="pt-[70px] text-black bg-tan h-screen w-full flex justify-start items-start p-20 flex-col">
                 <div className="text-md mt-10 mb-2 ml-1">Your Job Postings</div>
 
                 <div className="w-full h-full flex flex-row">

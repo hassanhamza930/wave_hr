@@ -110,17 +110,17 @@ export default function EditCompany() {
             <form className="h-full" onSubmit={handleSubmit(UpdateCompanyData)} >
                 <div className="h-full w-[600px] p-5 overflow-y-scroll flex-1 flex-col justify-start items-start">
 
-                    <div className="text-bray font-bold text-4xl mt-10">Edit Company Details</div>
+                    <div className="text-black font-bold text-4xl mt-10">Edit Company Details</div>
 
 
-                    <div className="text-bray text-sm font-bold mt-10">What's your company called?</div>
-                    <input {...register("name")} placeholder="Company Name" className="mt-5 w-48 md:w-full border-b-[1px] border-bray/90 text-bray/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></input>
+                    <div className="text-black text-sm font-bold mt-10">What's your company called?</div>
+                    <input {...register("name")} placeholder="Company Name" className="mt-5 w-48 md:w-full border-b-[1px] border-black/90 text-black/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></input>
 
-                    <div className="text-bray text-sm font-bold mt-10">Enter company description</div>
-                    <textarea {...register("description")} placeholder="Company Name" className="mt-5 w-48 h-36 md:w-full border-b-[1px] border-bray/90 text-bray/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></textarea>
+                    <div className="text-black text-sm font-bold mt-10">Enter company description</div>
+                    <textarea {...register("description")} placeholder="Company Name" className="mt-5 w-48 h-36 md:w-full border-b-[1px] border-black/90 text-black/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></textarea>
 
 
-                    <div className="text-bray text-sm font-bold mt-10">Select a company logo</div>
+                    <div className="text-black text-sm font-bold mt-10">Select a company logo</div>
                     <button
                         type="button"
                         onClick={() => { saveImageToLocalStorage() }}
@@ -133,10 +133,10 @@ export default function EditCompany() {
                     </button>
 
                 
-                    <div className="text-bray text-sm font-bold mt-10 ">What's the Number of employees at your company?</div>
-                    <input type="number" min={0} max={300} {...register("noOfEmployees")} placeholder="Number of Employees" className="mb-5 mt-5 w-48 md:w-full border-b-[1px] border-bray/90 text-bray/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></input>
+                    <div className="text-black text-sm font-bold mt-10 ">What's the Number of employees at your company?</div>
+                    <input type="number" min={0} max={300} {...register("noOfEmployees")} placeholder="Number of Employees" className="mb-5 mt-5 w-48 md:w-full border-b-[1px] border-black/90 text-black/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></input>
 
-                    <button type="submit" className="mb-36 border-bray border-[1px] hover:bg-blue bg-transparent text-bray hover:text-tan px-6 py-2 flex flex-row justify-center items-center gap-2 rounded-md mt-10 text-sm">
+                    <button type="submit" className="mb-36 border-black border-[1px] hover:bg-blue bg-transparent text-black hover:text-tan px-6 py-2 flex flex-row justify-center items-center gap-2 rounded-md mt-10 text-sm">
                         Update
                     </button>
 

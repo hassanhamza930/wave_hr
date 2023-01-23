@@ -1,4 +1,4 @@
-import logo from "../../../images/logo.svg";
+import logo from "../../../images/logoBlackWhite.svg";
 
 export default function WaveLooksGoodOnDesktop(){
     return(

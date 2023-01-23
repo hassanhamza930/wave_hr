@@ -71,7 +71,7 @@ function App() {
   return (
     <>
       {
-        width < 1280 == true &&  location.pathname.includes("apply")==false ?<WaveLooksGoodOnDesktop />:<div></div>
+        width < 1280 == true && location.pathname.includes("apply")==false && <WaveLooksGoodOnDesktop />
       }
 
       {loading == true && <Loading />}
@@ -81,7 +81,7 @@ function App() {
       />
       <div style={{ fontFamily: "Inter" }} className=" h-full w-full bg-tan relative">
         {
-          width >= 1280 == true? loggedIn == true ? <LoggedInRoutes /> : <LoggedOutRoutes />:""
+          loggedIn == true ? <LoggedInRoutes />:<LoggedOutRoutes />
         }
       </div>
     </>

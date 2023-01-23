@@ -127,7 +127,7 @@ export default function SelectedApplicantDetails() {
                                 <Listbox.Options className={"absolute top-0 left-0 mt-10 bg-tan rounded-md"}>
                                     {options.map((option) => (
                                         <Listbox.Option
-                                            className="px-4 text-sm py-2 text-bray hover:text-tan hover:bg-blue"
+                                            className="px-4 text-sm py-2 text-black hover:text-tan hover:bg-blue"
                                             key={option}
                                             value={option}
                                             disabled={false}>

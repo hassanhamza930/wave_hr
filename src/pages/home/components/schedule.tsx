@@ -60,7 +60,7 @@ export default function Schedule() {
     return (
         <div className="w-2/4 h-full flex justify-center items-center">
 
-            <div className="flex flex-col h-full w-full justify-start items-start p-20 border-bray">
+            <div className="flex flex-col h-full w-full justify-start items-start p-20 border-black">
 
 
 

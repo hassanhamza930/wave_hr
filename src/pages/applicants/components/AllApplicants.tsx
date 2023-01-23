@@ -87,9 +87,9 @@ export default function AllApplicants() {
 
     return (
         <div id="no_scroll" className="h-full w-[39%] rounded-md p-5 flex flex-col justify-start items-start">
-            <div className="text-black text-md mt-10 mb-2 ml-1">Seeing Applicants for <div className="mt-2 font-bold text-black text-3xl mb-5">{jobDetails.jobData != null && jobDetails.jobData.jobDetails.jobTitle}</div></div>
+            <div className="text-black text-md mt-5 mb-2 ml-1">Seeing Applicants for <div className="mt-2 font-bold text-black text-3xl mb-5">{jobDetails.jobData != null && jobDetails.jobData.jobDetails.jobTitle}</div></div>
 
-            <input value={searchValue} onChange={(e) => { setSearchValue(e.target.value); }} placeholder="Search" className="w-full font-bold border-b-2 shadow-md mb-10 border-blue text-black bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
+            <input value={searchValue} onChange={(e) => { setSearchValue(e.target.value); }} placeholder="Search" className="w-full font-medium border-b-2 shadow-md mb-10 text-sm border-blue text-black bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
             </input>
 
 
@@ -97,7 +97,7 @@ export default function AllApplicants() {
             {
                 applicants.map((applicant) => {
                     return (
-                        <button key={`${applicant.id}`} onClick={() => { handleSelectApplicant(applicant) }} className={`hover:bg-blue hover:text-tan hover:scale-[1.02] mt-3 w-full gap-4 ${applicant.rating==null?"bg-blue text-tan ":"bg-tan shadow-md border-bray/10  text-bray"}  rounded-md my-1 flex flex-row justify-start items-center p-3`}>
+                        <button key={`${applicant.id}`} onClick={() => { handleSelectApplicant(applicant) }} className={`hover:bg-blue hover:text-tan mt-3 w-full gap-4 ${applicant.rating==null?"bg-blue text-tan ":"bg-black/90 shadow-md border-black/10  text-tan"}  rounded-md my-1 flex w-full flex-row justify-start items-center p-3`}>
 
                             <div style={{ backgroundImage: `url('${applicant.profilePicture}')` }} className='bg-cover bg-center h-12 w-12 bg-blue rounded-md'></div>
 
@@ -109,7 +109,7 @@ export default function AllApplicants() {
                                 </div>
 
                                 <div className=' w-full h-full flex justify-end flex-row pr-3 gap-3 items-center'>
-                                    {/* <div className='hidden 2xl:flex px-4 py-2 text-bray text-[12px] rounded-full bg-tan/90'>{applicant.applicationStatus}</div> */}
+                                    {/* <div className='hidden 2xl:flex px-4 py-2 text-black text-[12px] rounded-full bg-tan/90'>{applicant.applicationStatus}</div> */}
                                     <div className='px-4 py-2 text-blue text-sm font-bold rounded-md bg-tan'>{applicant.rating != null ? applicant.rating : "Pending Review"}</div>
                                 </div>
 
@@ -120,7 +120,7 @@ export default function AllApplicants() {
                 })
             }
             {
-                applicants.length==0&&<div className='font-bold text-md text-bray/90 ml-1'>No Applicants Yet</div>
+                applicants.length==0&&<div className='font-bold text-md text-black/90 ml-1'>No Applicants Yet</div>
             }
             </div>
 

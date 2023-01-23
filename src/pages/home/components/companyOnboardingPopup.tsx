@@ -64,7 +64,7 @@ export default function CompanyOnboardingPopup() {
                             type="number" min={0} max={300000} className=" w-[350px] border-b-2 border-blue bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
                         </input>
                     </div>
-                    <div className="text-sm text-bray/70 font-regular mt-2">This information is kept private</div>
+                    <div className="text-sm text-black/70 font-regular mt-2">This information is kept private</div>
 
 
 
