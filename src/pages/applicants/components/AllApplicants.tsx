@@ -87,7 +87,7 @@ export default function AllApplicants() {
 
     return (
         <div id="no_scroll" className="h-full w-[39%] rounded-md p-5 flex flex-col justify-start items-start">
-            <div className="text-black text-md mt-10 mb-2 ml-1">Seeing Applicants for <div className="mt-2 font-bold text-3xl mb-5">{jobDetails.jobData != null && jobDetails.jobData.jobDetails.jobTitle}</div></div>
+            <div className="text-black text-md mt-10 mb-2 ml-1">Seeing Applicants for <div className="mt-2 font-bold text-black text-3xl mb-5">{jobDetails.jobData != null && jobDetails.jobData.jobDetails.jobTitle}</div></div>
 
             <input value={searchValue} onChange={(e) => { setSearchValue(e.target.value); }} placeholder="Search" className="w-full font-bold border-b-2 shadow-md mb-10 border-blue text-black bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
             </input>
@@ -110,7 +110,7 @@ export default function AllApplicants() {
 
                                 <div className=' w-full h-full flex justify-end flex-row pr-3 gap-3 items-center'>
                                     {/* <div className='hidden 2xl:flex px-4 py-2 text-bray text-[12px] rounded-full bg-tan/90'>{applicant.applicationStatus}</div> */}
-                                    <div className='px-4 py-2 text-white text-sm font-bold rounded-md bg-blue/60'>{applicant.rating != null ? applicant.rating : "Pending Review"}</div>
+                                    <div className='px-4 py-2 text-blue text-sm font-bold rounded-md bg-tan'>{applicant.rating != null ? applicant.rating : "Pending Review"}</div>
                                 </div>
 
                             </div>
