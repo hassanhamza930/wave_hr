@@ -120,14 +120,14 @@ export default function SelectedApplicantDetails() {
                     {
                         selectedApplicantData.interviewInviteSent == true ?
                             <Listbox value={selectedOption} onChange={handleApplicationStatusChange}>
-                                <Listbox.Button className="px-6 py-2 bg-transparent border-2 text-sm text-tan border-tan rounded-md hover:bg-tan hover:text-bray flex flex-row justify-start items-start">
+                                <Listbox.Button className="px-6 py-2 bg-transparent border-2 text-sm text-tan border-tan rounded-md hover:bg-tan hover:text-black flex flex-row justify-start items-start">
                                     {selectedOption}
                                     <IoMdArrowDropdown size={15} className="mt-1 ml-2" />
                                 </Listbox.Button>
                                 <Listbox.Options className={"absolute top-0 left-0 mt-10 bg-tan rounded-md"}>
                                     {options.map((option) => (
                                         <Listbox.Option
-                                            className="px-4 py-2 text-bray hover:text-tan hover:bg-blue"
+                                            className="px-4 text-sm py-2 text-bray hover:text-tan hover:bg-blue"
                                             key={option}
                                             value={option}
                                             disabled={false}>
@@ -175,7 +175,7 @@ export default function SelectedApplicantDetails() {
 
 
             </div> :
-            <div className="h-full w-[60%] text-white/60 bg-blue rounded-md text-lg flex flex-col justify-center items-center p-10">
+            <div className="h-full w-[60%] text-white/60 bg-blue rounded-md text-md flex flex-col justify-center items-center p-10">
                 Select a candidate to see details  {selectedApplicantId}
             </div>
 
