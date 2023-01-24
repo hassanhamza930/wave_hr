@@ -95,7 +95,7 @@ export default function SelectedApplicantDetails() {
         selectedApplicantId != "" ?
             <div id="no_scroll" className="h-full w-[60%] bg-blue rounded-md flex-col justify-start items-start overflow-y-scroll p-10">
 
-                <div className='flex flex-row w-full justify-start items-start '>
+                <div className='flex w-full flex-row justify-start items-start '>
 
                     <div className='flex flex-col justify-start items-start'>
                         <div style={{ backgroundImage: `url('${selectedApplicantData.profilePicture}')` }} className='bg-cover bg-center h-48 w-48 bg-white rounded-md'></div>
@@ -105,9 +105,9 @@ export default function SelectedApplicantDetails() {
 
 
 
-                    <div className='flex flex-col justify-between items-end h-full mt-10'>
+                    <div className='flex flex-col w-full justify-between items-end h-full mt-10'>
                         <form onSubmit={handleSubmit(SetRanking)} className='flex flex-row gap-4'>
-                            <input min={1} max={10} {...register("rank")} type="number" placeholder='Rating' className='text-tan w-24 bg-transparent border-b-2 px-2 border-tan outline-none'></input>
+                            <input min={1} max={10} {...register("rank")} type="number" placeholder='Rating' className='text-tan w-20 bg-transparent border-b-2 px-2 border-tan outline-none'></input>
                             <button type="submit" className='py-2 px-4 rounded-md border-tan border-2 hover:bg-tan  text-sm hover:text-black text-tan'>Set</button>
                         </form>
 
