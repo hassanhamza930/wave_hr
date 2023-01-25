@@ -18,12 +18,12 @@ function GetAccess() {
                     <div className="text-xl ml-2 tracking-tighter mt-10 text-black">
                         Wave is an integrated suite of highly effective tools that allows you to streamline your hiring process, find the best candidates, and fill open positions faster than ever before.
                     </div>
-                    <div className="text-md ml-2 mt-10 tracking-tighter underline text-black">
-                        Filter all candidates to remove the clutter <br />
-                        Track Candidates and resumes in one integrated dashboard<br />
-                        Schedule and conduct interviews with ease<br />
-                        Onboard with ease<br />
-                        Get a shareable link to your company’s careers page<br />
+                    <div className="text-md ml-2 mt-10 tracking-tighter underline gap-1 flex flex-col  text-black">
+                        <div>Filter all candidates to remove the clutter</div>
+                        <div>Track Candidates and resumes in one integrated dashboard</div>
+                        <div>Schedule and conduct interviews with ease</div>
+                        <div>Onboard with ease</div>
+                        <div>Get a shareable link to your company’s careers page</div>
                     </div>
 
                     <button onClick={()=>{navigate("/login")}} className="flex flex-row justify-center items-center text-md font-medium px-6 py-1 hover:bg-purp bg-blue rounded-full mt-10 text-white/80">

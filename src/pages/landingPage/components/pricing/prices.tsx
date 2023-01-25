@@ -10,10 +10,12 @@ export function Indivisual() {
 
 
 
-            <div className="font-medium text-md mt-10">Post 2 jobs at a time</div>
-            <div className="font-medium text-md">Email Automation</div>
-            <div className="font-medium text-md">Talent Pool Management</div>
-            <div className="font-medium text-md">Onboarding</div>
+            <div className="flex flex-col gap-1 justify-start items-start">
+                <div className="font-medium text-md mt-10">Post 2 jobs at a time</div>
+                <div className="font-medium text-md">Email Automation</div>
+                <div className="font-medium text-md">Talent Pool Management</div>
+                <div className="font-medium text-md">Onboarding</div>
+            </div>
 
 
 
@@ -35,16 +37,18 @@ export function Startup() {
             <div className="flex flex-row justify-between w-full items-center">
                 <div className="font-bold text-4xl">Startup</div>
                 <div className="font-bold text-md mt-2">15 USD/month</div>
-            </div>  
-
+            </div>
             <div className="font-bold text-xl">For a smaller team</div>
-            <div className="font-medium text-md mt-10">Post 5 jobs at a time</div>
-            <div className="font-medium text-md">Collaboration</div>
-            <div className="font-medium text-md">Interview Scheduling</div>
-            <div className="font-medium text-md">Email Automation</div>
-            <div className="font-medium text-md">Talent Pool Management</div>
-            <div className="font-medium text-md">Company Profile</div>
-            <div className="font-medium text-md">Careers Page</div>
+
+            <div className="flex flex-col justify-start items-start gap-1">
+                <div className="font-medium text-md mt-10">Post 5 jobs at a time</div>
+                <div className="font-medium text-md">Collaboration</div>
+                <div className="font-medium text-md">Interview Scheduling</div>
+                <div className="font-medium text-md">Email Automation</div>
+                <div className="font-medium text-md">Talent Pool Management</div>
+                <div className="font-medium text-md">Company Profile</div>
+                <div className="font-medium text-md">Careers Page</div>
+            </div>
 
         </button>
     );
@@ -57,7 +61,7 @@ export function HRFirm() {
             <div className="flex flex-row justify-between w-full items-center">
                 <div className="font-bold text-4xl">HR Firm</div>
                 <div className="font-bold text-md mt-2">25 USD/month</div>
-            </div>  
+            </div>
 
             <div className="font-bold text-xl">For a larger team</div>
             <div className="font-medium text-md mt-10">Post unlimited jobs</div>
