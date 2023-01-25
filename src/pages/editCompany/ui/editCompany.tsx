@@ -108,7 +108,7 @@ export default function EditCompany() {
     return (
         <div className="pt-[80px] h-screen w-full flex flex-row justify-center items-center overflow-y-scroll ">
 
-            <div className="w-[30%] h-full bg-blue flex flex-col justify-start items-start p-5">
+            <div className="w-[30%] h-full bg-blue/90 flex flex-col justify-start items-start p-5">
                 <div className="text-tan text-sm font-bold mt-10">Company Logo</div>
                 <button
                     type="button"
@@ -133,6 +133,10 @@ export default function EditCompany() {
 
             <div className="w-[70%] h-full bg-tan flex flex-col justify-start items-start">
                 <div className="w-full h-48 bg-blue  bg-[url('https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png')] bg-cover bg-center"></div>
+
+                <div className="text-black text-sm font-bold mt-10 ml-5">Enter company description</div>
+                <textarea {...register("description")} placeholder="Explain what your company does" className=" mt-5 w-2/4 h-48 ml-5 border-b-[1px] border-black/90 text-black/80 bg-transparent outline-0  py-1 flex justify-center items-center"></textarea>
+
             </div>
 
             {/* <form className="h-full" onSubmit={handleSubmit(UpdateCompanyData)} >
