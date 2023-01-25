@@ -143,12 +143,12 @@ function EditJob() {
                     </input>
 
                     <button onClick={() => { AddQuestion() }} type="button" className=" mt-6 hover:text-tan text-blue font-bold flex flex-row gap-5 justify-center items-center px-4 py-2 bg-transparent border-2 border-blue hover:bg-blue/90 rounded-md">
-                        +
+                        Add Question
                     </button>
 
 
 
-                    <button type="submit" className=" mt-20 mb-20 hover:text-tan text-blue font-bold flex flex-row gap-5 justify-center items-center px-8 py-2 bg-transparent border-2 border-blue hover:bg-blue rounded-md">
+                    <button type="submit" className=" mt-20 mb-20 text-tan bg-blue font-bold flex flex-row gap-5 justify-center items-center px-8 py-2 hover:bg-purp rounded-md">
                         Update Job
                     </button>
 

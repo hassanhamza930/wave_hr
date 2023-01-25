@@ -17,47 +17,47 @@ export default function EditCompany() {
     const db = getFirestore();
     const [loading, setLoading] = useRecoilState(isLoadingAtom);
     const [newPictureUploaded, setNewPictureUploaded] = useRecoilState(NewPictureUploadedAtom);
-    const storage=getStorage();
+    const storage = getStorage();
 
 
 
     async function UpdateCompanyData() {
 
-        var existingUserData:UserInterface= (await getDoc(doc(db, "users", localStorage.getItem("uid") as string))).data() as UserInterface;
+        var existingUserData: UserInterface = (await getDoc(doc(db, "users", localStorage.getItem("uid") as string))).data() as UserInterface;
 
-        if(newPictureUploaded==true){
-            existingUserData.companyDetails["companyName"]=watch("name");
-            existingUserData.companyDetails["companyDescription"]=watch("description");
-            existingUserData.companyDetails["numberOfTeamMembers"]=watch("noOfEmployees");
-            
+        if (newPictureUploaded == true) {
+            existingUserData.companyDetails["companyName"] = watch("name");
+            existingUserData.companyDetails["companyDescription"] = watch("description");
+            existingUserData.companyDetails["numberOfTeamMembers"] = watch("noOfEmployees");
+
             var companyLogoData = selectedCompanyLogo;
             var companyLogoFileName = `companyLogos/${Timestamp.now().nanoseconds}.png`;
             var profilePictureFile = await dataUrlToFile(companyLogoData, companyLogoFileName);
             const profilePictureRef = ref(storage, `profilePictures/${localStorage.getItem("uid")}/${companyLogoFileName}`);
-    
+
             await uploadBytes(profilePictureRef, profilePictureFile).then(async (snapshot) => {
                 console.log('Uploaded the profilePicture');
                 console.log(snapshot.metadata);
                 var downloadLink = await getDownloadURL(profilePictureRef);
-                existingUserData.companyDetails["companyLogo"]=downloadLink;
-                await setDoc(doc(db,"users",localStorage.getItem("uid") as string),{
-                    "companyDetails":existingUserData.companyDetails
-                },{merge:true});
+                existingUserData.companyDetails["companyLogo"] = downloadLink;
+                await setDoc(doc(db, "users", localStorage.getItem("uid") as string), {
+                    "companyDetails": existingUserData.companyDetails
+                }, { merge: true });
                 window.location.reload();
             });
             toast.success("Company Details Updated");
 
 
-           
+
         }
-        else{
-            existingUserData.companyDetails["companyName"]=watch("name");
-            existingUserData.companyDetails["companyDescription"]=watch("description");
-            existingUserData.companyDetails["numberOfTeamMembers"]=watch("noOfEmployees");
-            
-            await setDoc(doc(db,"users",localStorage.getItem("uid") as string),{
-                "companyDetails":existingUserData.companyDetails
-            },{merge:true});
+        else {
+            existingUserData.companyDetails["companyName"] = watch("name");
+            existingUserData.companyDetails["companyDescription"] = watch("description");
+            existingUserData.companyDetails["numberOfTeamMembers"] = watch("noOfEmployees");
+
+            await setDoc(doc(db, "users", localStorage.getItem("uid") as string), {
+                "companyDetails": existingUserData.companyDetails
+            }, { merge: true });
             window.location.reload();
             toast.success("Company Details Updated");
         }
@@ -103,11 +103,39 @@ export default function EditCompany() {
     }, [])
 
 
-    
+
 
     return (
-        <div className="pt-[50px] h-screen w-full flex justify-center items-center overflow-y-scroll ">
-            <form className="h-full" onSubmit={handleSubmit(UpdateCompanyData)} >
+        <div className="pt-[80px] h-screen w-full flex flex-row justify-center items-center overflow-y-scroll ">
+
+            <div className="w-[30%] h-full bg-blue flex flex-col justify-start items-start p-5">
+                <div className="text-tan text-xl font-bold mt-10">Company Logo</div>
+                <button
+                    type="button"
+                    onClick={() => { saveImageToLocalStorage() }}
+                    style={{
+                        backgroundColor: selectedCompanyLogo == "" ? "#eae0d5" : "#eae0d5",
+                        backgroundImage: `url('${selectedCompanyLogo}')`
+                    }}
+                    className="hover:bg-blue  mt-5 bg-blue bg-contain bg-no-repeat bg-center hover:scale-105 h-36 w-36 rounded-xl flex justify-center items-center">
+                    {selectedCompanyLogo == "" && <AiFillCamera color="black" className="opacity-50" size={50} />}
+                </button>
+
+                <div className="text-tan text-sm font-bold mt-10">What's your company called?</div>
+                <input {...register("name")} placeholder="Company Name" className="mt-5 w-48 md:w-full border-b-[1px] border-tan text-tan bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></input>
+
+
+                <div className="text-tan text-sm font-bold mt-10 ">What's the Number of employees at your company?</div>
+                <input type="number" min={0} max={300} {...register("noOfEmployees")} placeholder="Number of Employees" className="mb-5 mt-5 w-48 md:w-full border-b-[1px] border-tan text-tan bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></input>
+
+
+            </div>
+
+            <div className="w-[70%] h-full bg-tan flex flex-col justify-start items-start">
+                <div className="w-full h-48 bg-blue  bg-[url('https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png')] bg-cover bg-center"></div>
+            </div>
+
+            {/* <form className="h-full" onSubmit={handleSubmit(UpdateCompanyData)} >
                 <div className="h-full w-[600px] p-5 overflow-y-scroll flex-1 flex-col justify-start items-start">
 
                     <div className="text-black font-bold text-4xl mt-10">Edit Company Details</div>
@@ -128,7 +156,7 @@ export default function EditCompany() {
                             backgroundColor: selectedCompanyLogo == "" ? "#eae0d5" : "#eae0d5",
                             backgroundImage: `url('${selectedCompanyLogo}')`
                         }}
-                        className="hover:bg-blue shadow-xl mt-5 bg-blue bg-contain bg-no-repeat bg-center hover:scale-105 h-36 w-36 rounded-xl flex justify-center items-center">
+                        className="hover:bg-blue  mt-5 bg-blue bg-contain bg-no-repeat bg-center hover:scale-105 h-36 w-36 rounded-xl flex justify-center items-center">
                         {selectedCompanyLogo == "" && <AiFillCamera color="black" className="opacity-50" size={50} />}
                     </button>
 
@@ -142,7 +170,7 @@ export default function EditCompany() {
 
 
                 </div>
-            </form>
+            </form> */}
         </div>
     )
 }

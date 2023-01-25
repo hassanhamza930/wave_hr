@@ -132,7 +132,7 @@ export default function PostNewJobForm() {
                     </input>
 
                     <button onClick={() => { AddQuestion() }} type="button" className=" mt-6 hover:text-tan text-blue font-bold flex flex-row gap-5 justify-center items-center px-4 py-2 bg-transparent border-2 border-blue hover:bg-blue/90 rounded-md">
-                        +
+                        Add Question
                     </button>
 
 
