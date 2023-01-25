@@ -109,7 +109,7 @@ export default function EditCompany() {
         <div className="pt-[80px] h-screen w-full flex flex-row justify-center items-center overflow-y-scroll ">
 
             <div className="w-[30%] h-full bg-blue flex flex-col justify-start items-start p-5">
-                <div className="text-tan text-xl font-bold mt-10">Company Logo</div>
+                <div className="text-tan text-sm font-bold mt-10">Company Logo</div>
                 <button
                     type="button"
                     onClick={() => { saveImageToLocalStorage() }}
