@@ -12,11 +12,12 @@ import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { toast } from "react-hot-toast";
+import { ButtonOutlined, ButtonSolid } from "../../../standards/styles/button";
 
 
 export default function PostNewJobForm() {
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, watch, formState: { errors }, } = useForm();
     const [pageIndex, setPageIndex] = useRecoilState(pageIndexAtom);
     const [newJobPosting, setNewJobPosting] = useRecoilState(NewJobPostingAtom);
     const [questions, setQuestions] = useRecoilState(questionsAtom);
@@ -135,11 +136,13 @@ export default function PostNewJobForm() {
                         Add Question
                     </button>
 
+                    
+                    <ButtonSolid onClick={()=>{}} text={"Post Job"}/>
+                    <ButtonOutlined onClick={()=>{}} text={"Post Job"}/>
 
-
-                    <button type="submit" className=" mt-20 mb-20 hover:text-tan text-blue font-bold flex flex-row gap-5 justify-center items-center px-8 py-2 bg-transparent border-2 border-blue hover:bg-blue rounded-md">
+                    {/* <button type="submit" className=" mt-20 mb-20 hover:text-tan text-blue font-bold flex flex-row gap-5 justify-center items-center px-8 py-2 bg-transparent border-2 border-blue hover:bg-blue rounded-md">
                         Post Job
-                    </button>
+                    </button> */}
 
 
                 </form>
