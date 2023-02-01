@@ -28,3 +28,9 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+
+
+#simpleInput{
+  @apply w-96 border-b-[1px] border-blue text-blue bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center 
+}
