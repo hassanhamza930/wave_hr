@@ -21,6 +21,7 @@ function TextArea({width="",placeholder="",value="",customStyles="",onChange}:Si
         <textarea id="no_scroll" className={`${customStyles} h-48 w-full pb-12 text-blue border-b-[1px] outline-none border-blue bg-transparent`} value={value} placeholder={placeholder} onChange={(newVal)=>{onChange(newVal.target.value)}} />
      );
 }
+//Need to figure out some way to add line breaks here.
 
 
 
