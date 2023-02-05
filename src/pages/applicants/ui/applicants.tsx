@@ -7,6 +7,7 @@ import { JobData, JobPosting } from '../../jobs/components/JobCard';
 import AllApplicants from "../components/AllApplicants";
 import { useRecoilState } from 'recoil';
 import SelectedApplicantDetails from '../components/selectedApplicantDetails';
+import PageLayout from "../../../standards/styles/layouts/pageLayout";
 
 
 
@@ -16,15 +17,17 @@ export default function Applicants() {
 
 
     return (
-        <div className="pt-[85px] pb-[25px] h-screen w-full flex justify-center items-center">
+        <PageLayout>
+        {/* <div className="pt-[85px] pb-[25px] h-screen w-full flex justify-center items-center"> */}
 
-            <div className="h-full w-full flex flex-row justify-between items-center px-10">
+            <div className="h-full w-full flex flex-row justify-between items-center">
 
                 <AllApplicants/>
                 <SelectedApplicantDetails/>
 
             </div>
+        {/* </div> */}
+        </PageLayout>
 
-        </div>
     )
 }

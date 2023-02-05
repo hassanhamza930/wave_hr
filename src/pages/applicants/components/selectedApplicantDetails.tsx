@@ -107,7 +107,7 @@ export default function SelectedApplicantDetails() {
 
                     <div className='flex flex-col w-full justify-between items-end h-full mt-10'>
                         <form onSubmit={handleSubmit(SetRanking)} className='flex flex-row gap-4'>
-                            <input min={1} max={10} {...register("rank")} type="number" placeholder='Rating' className='text-tan w-20 bg-transparent border-b-2 px-2 border-tan outline-none'></input>
+                            <input min={1} max={10} {...register("rank")} type="number" placeholder='Rating' className='text-tan w-24 bg-transparent border-b-2 px-2 border-tan outline-none'></input>
                             <button type="submit" className='py-2 px-4 rounded-md border-tan border-2 hover:bg-tan  text-sm hover:text-black text-tan'>Set</button>
                         </form>
 

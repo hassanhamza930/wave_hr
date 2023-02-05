@@ -6,38 +6,39 @@ import isPostJobModalOpenAtom from "../../newJob/atoms/newJobAtoms";
 import { Navigate, useNavigate } from "react-router";
 import AllPostedJobs from "../components/AllPostedJobs";
 import { moreThanTwoJobsAtom, selectedJobAtom } from "../jobsAtoms";
-import {useEffect} from "react";
+import { useEffect } from "react";
 import { collection, getDoc, getDocs, getFirestore, onSnapshot, query, where } from "firebase/firestore";
+import PageLayout from "../../../standards/styles/layouts/pageLayout";
 
 export default function JobsPage() {
 
     const navigate = useNavigate();
     const [selectedJob, setSelectedJob] = useRecoilState(selectedJobAtom);
     const [moreThanTwoJobs, setMoreThanTwoJobs] = useRecoilState(moreThanTwoJobsAtom);
-    const db=getFirestore();
+    const db = getFirestore();
 
-    async function checkMoreThanTwoJobs(){
-        onSnapshot(query(collection(db,"jobs"),where("postedBy","==",localStorage.getItem("uid"))),(docs)=>{
-            if(docs.docs.length>=2){
+    async function checkMoreThanTwoJobs() {
+        onSnapshot(query(collection(db, "jobs"), where("postedBy", "==", localStorage.getItem("uid"))), (docs) => {
+            if (docs.docs.length >= 2) {
                 setMoreThanTwoJobs(true);
             }
-            else{
+            else {
                 setMoreThanTwoJobs(false);
             }
         })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         checkMoreThanTwoJobs();
-    },[])
+    }, [])
 
 
-    
+
     return (
         <>
 
-            <div className="pt-[70px] text-black bg-tan h-screen w-full flex justify-start items-start p-20 flex-col">
-                <div className="text-md mt-10 mb-2 ml-1">Your Job Postings</div>
+            <PageLayout>
+                <div className="text-md mb-2 ml-1">Your Job Postings</div>
 
                 <div className="w-full h-full flex flex-row">
                     <div className="pr-20 h-full w-2/4 flex flex-col justify-start items-start ">
@@ -52,7 +53,7 @@ export default function JobsPage() {
 
                     </div>
 
-                    <div id="no_scroll" className="bg-blue rounded-md h-full w-2/4 overflow-y-scroll">
+                    <div id="no_scroll" className="bg-blue rounded-md mb-10 w-2/4 overflow-y-scroll">
                         {
                             selectedJob.jobData != null ? <JobDetails /> :
                                 <div className="flex justify-center items-center h-full w-full">
@@ -63,7 +64,7 @@ export default function JobsPage() {
 
                 </div>
 
-            </div>
+            </PageLayout>
         </>
     )
 

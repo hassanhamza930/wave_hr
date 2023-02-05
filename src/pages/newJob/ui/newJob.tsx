@@ -88,7 +88,7 @@ export default function NewJob() {
     return (
         <PageLayout>
             <FormLayout>
-
+                
                 <Heading text="Post a new job" />
                 <SubHeading text="Open a new job posting and start receiving applications" customStyles="mt-2" />
 
@@ -128,9 +128,8 @@ export default function NewJob() {
                 <ButtonSolid text="Post Job" onClick={handleAddNewJob} customStyles="mt-10 mb-48" />
 
 
-
-
             </FormLayout>
+
         </PageLayout>
 
     )

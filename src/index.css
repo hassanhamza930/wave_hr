@@ -31,12 +31,4 @@
   background: #555;
 }
 
-input::placeholder {
-  color: #243763;
-  opacity: 1;
-}
 
-textarea::placeholder {
-  color: #243763;
-  opacity: 1;
-}

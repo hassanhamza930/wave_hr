@@ -9,6 +9,7 @@ import Home from "../../home/ui/home";
 import Interviews from "../../interviews/ui/interview";
 import JobsPage from "../../jobs/ui/jobs";
 import NewJob from '../../newJob/ui/newJob';
+import Test from "../../test/test";
 import { useWindowSize } from "../ui/App";
 
 
@@ -42,6 +43,7 @@ export default function LoggedInRoutes() {
                     <Route path="/companies" element={<Companies />} ></Route>
                     <Route path="/applicants/:jobId" element={<Applicants />} ></Route>
                     <Route path="/apply/:jobId" element={<Apply />} ></Route>
+                    <Route path="/test" element={<Test />} ></Route>
                 </Routes>
             </>
 
