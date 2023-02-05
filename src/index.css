@@ -31,8 +31,12 @@
   background: #555;
 }
 
+input::placeholder {
+  color: #243763;
+  opacity: 1;
+}
 
-
-#simpleInput{
-  @apply w-96 border-b-[1px] border-blue text-blue bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center 
+textarea::placeholder {
+  color: #243763;
+  opacity: 1;
 }

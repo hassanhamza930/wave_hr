@@ -1,6 +1,6 @@
 export function Indivisual() {
     return (
-        <button className="h-96 w-96 -mb-10 tracking-tighter p-5 hover:bg-black bg-transparent border-2 border-black/50 rounded-md flex justify-start items-start flex-col text-black hover:text-white/80">
+        <button className="h-96 w-96 -mb-10 tracking-tighter p-5 hover:bg-black bg-transparent border-2 border-black/50 rounded-md flex justify-start items-start flex-col text-black hover:text-tan/80">
             <div className="flex flex-row justify-between w-full items-center">
                 <div className="font-bold text-4xl">Indivisual</div>
                 <div className="font-bold text-md mt-2">8 USD/month</div>
@@ -33,7 +33,7 @@ export function Indivisual() {
 
 export function Startup() {
     return (
-        <button className="h-96 w-96 tracking-tighter p-5 hover:bg-purp bg-transparent border-2 border-purp/50 rounded-md flex justify-start items-start flex-col text-purp hover:text-white/80">
+        <button className="h-96 w-96 tracking-tighter p-5 hover:bg-purp bg-transparent border-2 border-purp/50 rounded-md flex justify-start items-start flex-col text-purp hover:text-tan/80">
             <div className="flex flex-row justify-between w-full items-center">
                 <div className="font-bold text-4xl">Startup</div>
                 <div className="font-bold text-md mt-2">15 USD/month</div>
@@ -57,7 +57,7 @@ export function Startup() {
 
 export function HRFirm() {
     return (
-        <button className="h-3/5 w-96 -mb-10 tracking-tighter p-5 hover:bg-blue bg-transparent border-2 border-blue/50 rounded-md flex justify-start items-start flex-col text-blue hover:text-white/80">
+        <button className="h-3/5 w-96 -mb-10 tracking-tighter p-5 hover:bg-blue bg-transparent border-2 border-blue/50 rounded-md flex justify-start items-start flex-col text-blue hover:text-tan/80">
             <div className="flex flex-row justify-between w-full items-center">
                 <div className="font-bold text-4xl">HR Firm</div>
                 <div className="font-bold text-md mt-2">25 USD/month</div>

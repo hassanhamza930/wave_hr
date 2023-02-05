@@ -26,7 +26,7 @@ function GetAccess() {
                         <div>Get a shareable link to your company’s careers page</div>
                     </div>
 
-                    <button onClick={()=>{navigate("/login")}} className="flex flex-row justify-center items-center text-md font-medium px-6 py-1 hover:bg-purp bg-blue rounded-full mt-10 text-white/80">
+                    <button onClick={()=>{navigate("/login")}} className="flex flex-row justify-center items-center text-md font-medium px-6 py-1 hover:bg-purp bg-blue rounded-full mt-10 text-tan/80">
                         Get Access
                         <AiOutlineArrowRight  className="h-10 mt-[1px]  ml-5"/>
                     </button>

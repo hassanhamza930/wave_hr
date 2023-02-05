@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useRecoilState } from "recoil";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
+import { ButtonOutlinedWhite } from "../../../standards/styles/components/button";
 import { JobPosting } from "../../jobs/components/JobCard";
 import { ApplyStageInitiatedAtom, jobDataAtom, SelectedJobIdAtom } from "../atoms/applyPageAtoms";
 import ApplicationWindow from "../components/applicationWindow";
@@ -58,8 +59,8 @@ export default function Apply() {
                         <div className="flex flex-wrap justify-between items-center">
 
                             <div className="flex flex-col justify-start items-start w-full">
-                                <div className="text-white/90 mt-5 font-bold text-4xl md:text-6xl">{jobData.jobDetails.jobTitle}</div>
-                                <div className="text-white/90 mt-5 text-sm">
+                                <div className="text-tan/90 mt-5 font-bold text-4xl md:text-6xl">{jobData.jobDetails.jobTitle}</div>
+                                <div className="text-tan/90 mt-5 text-sm">
                                     Posted on {jobData.time.toDate().toLocaleString().toString()}
                                 </div>
 
@@ -71,14 +72,14 @@ export default function Apply() {
 
                                     <div style={{ backgroundImage: `url('${companyData.companyLogo}')` }} className="bg-contain bg-no-repeat bg-center h-16 w-16 rounded-sm bg-transparent"></div>
                                     <div className="flex w-full flex-col justify-start items-start p-1">
-                                        <div className="text-white/80 font-bold text-md">{companyData.companyName}</div>
-                                        <div className="text-white/80 w-full md:w-96 text-md">{companyData.companyDescription}</div>
+                                        <div className="text-tan/80 font-bold text-md">{companyData.companyName}</div>
+                                        <div className="text-tan/80 w-full md:w-96 text-md">{companyData.companyDescription}</div>
                                     </div>
                                 </div>
 
                                 <div className="w-full h-[1px] bg-tan/50 my-3"></div>
 
-                                <div className="flex flex-col font-bold text-white/80 text-sm">
+                                <div className="flex flex-col font-bold text-tan/80 text-sm">
                                     <div>
                                         {companyData.numberOfTeamMembers} Employees
                                     </div>
@@ -88,20 +89,19 @@ export default function Apply() {
                         </div>
 
 
-                        <div className="text-white/90 mt-10 font-bold text-2xl">Job Description</div>
-                        <div dangerouslySetInnerHTML={{ __html: jobData.jobDetails.jobDescription }} className="text-white/90 mt-2 text-md"></div>
+                        <div className="text-tan/90 mt-10 font-bold text-2xl">Job Description</div>
+                        <div dangerouslySetInnerHTML={{ __html: jobData.jobDetails.jobDescription }} className="text-tan/90 mt-2 text-md"></div>
 
-                        <div className="text-white/90 font-bold text-2xl mt-10">Job Qualifications</div>
-                        <div dangerouslySetInnerHTML={{ __html: jobData.jobDetails.jobQualifications }} className="text-white/90 mt-2 text-md"></div>
+                        <div className="text-tan/90 font-bold text-2xl mt-10">Job Qualifications</div>
+                        <div dangerouslySetInnerHTML={{ __html: jobData.jobDetails.jobQualifications }} className="text-tan/90 mt-2 text-md"></div>
 
-                        <div className="text-white/90 mt-10 flex flex-col justify-start items-start">
+                        <div className="text-tan/90 mt-10 flex flex-col justify-start items-start">
                             <div className="text-2xl font-bold">Salary Compensation</div> 
                             <div className="text-md mt-2">{jobData.jobDetails.salaryCompensation}</div>
                         </div>
 
-                        <button onClick={() => { setApplyStageInitiated(true); }} className="border-white border-2 hover:bg-white bg-transparent text-white hover:text-black px-8 py-2 rounded-md mt-10 w-min">
-                            Apply
-                        </button>
+                        <ButtonOutlinedWhite customStyles="mt-10" text="Apply" onClick={() => { setApplyStageInitiated(true); }} />
+                        
                     </div>
 
                 </div>

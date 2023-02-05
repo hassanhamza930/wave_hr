@@ -12,7 +12,7 @@ import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { toast } from "react-hot-toast";
-import { ButtonOutlined, ButtonSolid } from "../../../standards/styles/components/button";
+import { ButtonOutlinedWhite, ButtonSolid } from "../../../standards/styles/components/button";
 
 
 export default function PostNewJobForm() {
@@ -137,7 +137,7 @@ export default function PostNewJobForm() {
                     </button>
                     
                     <ButtonSolid onClick={()=>{}} text={"Post Job"}/>
-                    <ButtonOutlined onClick={()=>{}} text={"Post Job"}/>
+                    <ButtonOutlinedWhite onClick={()=>{}} text={"Post Job"}/>
 
                 </form>
             </div>

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 import { useRecoilState } from "recoil";
 import { UserInterface } from "../../../atoms/app/globalUserAtom";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
-import { ButtonOutlined, ButtonSolid } from "../../../standards/styles/components/button";
+import { ButtonOutlinedWhite, ButtonSolid } from "../../../standards/styles/components/button";
 import { Heading, SubHeading } from "../../../standards/styles/components/heading";
 import SimpleInput, { TextArea } from "../../../standards/styles/components/inputs";
 import FormLayout from "../../../standards/styles/layouts/FormLayout";
