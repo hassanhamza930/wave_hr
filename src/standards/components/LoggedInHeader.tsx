@@ -43,7 +43,7 @@ export default function LoggedInHeader() {
                         }} className="hover:scale-[1.02] font-bold text-black text-sm">Jobs</button>
 
                         <button onClick={() => {
-                            navigate("/editcompany");
+                            navigate("/companies");
                         }} className="hover:scale-[1.02] font-bold text-black text-sm">Company</button>
 
 

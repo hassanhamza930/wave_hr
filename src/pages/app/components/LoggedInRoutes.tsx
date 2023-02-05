@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import LoggedInHeader from "../../../standards/components/LoggedInHeader";
 import Applicants from "../../applicants/ui/applicants";
 import Apply from "../../apply/ui/apply";
+import Companies from "../../companies/ui/companies";
 import EditCompany from "../../editCompany/ui/editCompany";
 import EditJob from "../../editJob/ui/editJob";
 import Home from "../../home/ui/home";
@@ -38,6 +39,7 @@ export default function LoggedInRoutes() {
                     <Route path="/newJob" element={<NewJob />} ></Route>
                     <Route path="/editJob/:jobId" element={<EditJob />} ></Route>
                     <Route path="/editcompany" element={<EditCompany />} ></Route>
+                    <Route path="/companies" element={<Companies />} ></Route>
                     <Route path="/applicants/:jobId" element={<Applicants />} ></Route>
                     <Route path="/apply/:jobId" element={<Apply />} ></Route>
                 </Routes>

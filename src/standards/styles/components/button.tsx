@@ -12,6 +12,16 @@ function ButtonOutlinedWhite(props:ButtonInputs) {
       );
 }
 
+function ButtonOutlinedBlue(props:ButtonInputs) {
+    return (
+        <button type={"submit"} onClick={()=>{props.onClick()}} className={`${props.customStyles} font-bold flex flex-row gap-5 justify-center items-center px-8 py-2 bg-transparent border-2 border-blue hover:bg-blue hover:text-tan text-blue rounded-md `}>
+            {props.text}
+        </button>
+      );
+}
+
+
+
 
 function ButtonSolid(props:ButtonInputs) {
     return (
@@ -23,4 +33,4 @@ function ButtonSolid(props:ButtonInputs) {
 
 
 
-export {ButtonOutlinedWhite,ButtonSolid};
+export {ButtonOutlinedWhite,ButtonOutlinedBlue,ButtonSolid};
