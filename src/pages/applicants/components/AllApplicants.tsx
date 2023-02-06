@@ -93,7 +93,7 @@ export default function AllApplicants() {
             </input>
 
 
-            <div id="no_scroll" className='w-full flex-col justify-start items-center overflow-y-scroll px-2'>
+            <div id="no_scroll" className='w-full h-96 flex-col justify-start items-center overflow-y-scroll px-2'>
             {
                 applicants.map((applicant) => {
                     return (
