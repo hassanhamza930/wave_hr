@@ -66,11 +66,11 @@ export default function Page3() {
             }}
         onSubmit={handleSubmit(handlePage3DataSubmit)} className="text-left h-full rounded-md  flex justify-center items-start flex-col p-10 w-full md:w-[60%]">
            
-            <div className="text-3xl text-start font-bold text-white">Upload your profile picture</div>
-            <div className="text-xl text-left text-white mt-2">Make a solid first impression.</div>
+            <div className="text-3xl text-start font-bold text-tan">Upload your profile picture</div>
+            <div className="text-xl text-left text-tan mt-2">Make a solid first impression.</div>
 
 
-            <div className="text-md text-white/80 mt-10">Add your profile picture</div>
+            <div className="text-md text-tan/80 mt-10">Add your profile picture</div>
             <button
                 type="button"
                 onClick={() => { saveImageToLocalStorage() }}
@@ -82,7 +82,7 @@ export default function Page3() {
                 {selectedProfilePicture == "" && <AiFillCamera color="black" className="opacity-50" size={50} />}
             </button>
 
-            <button type="submit" className="border-white border-2 hover:bg-white bg-transparent text-white hover:text-black px-8 py-2 flex flex-row justify-center items-center gap-2 rounded-md mt-20 w-min">
+            <button type="submit" className="border-tan border-2 hover:bg-tan bg-transparent text-tan hover:text-black px-8 py-2 flex flex-row justify-center items-center gap-2 rounded-md mt-20 w-min">
                 Next
             </button>
 

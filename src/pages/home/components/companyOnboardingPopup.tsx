@@ -70,7 +70,7 @@ export default function CompanyOnboardingPopup() {
 
 
                     <div className="text-md font-regular mt-10 w-full flex flex-row justify-start items-end">
-                        <button type="submit" className="bg-blue hover:bg-blue hover:scale-105 rounded-md px-8 py-2 text-white">Start</button>
+                        <button type="submit" className="bg-blue hover:bg-blue hover:scale-105 rounded-md px-8 py-2 text-tan">Start</button>
                     </div>
                 </form>
 

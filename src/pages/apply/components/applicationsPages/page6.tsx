@@ -150,11 +150,11 @@ export default function Page6() {
                 hidden: { opacity: 0, y: 50 }
             }}
             className="text-left h-full  flex justify-center items-start flex-col p-10 w-full md:w-[60%]">
-            <div className="text-3xl text-start font-bold text-white">All Done</div>
-            <div className="text-xl text-left text-white mt-2">Nice Job 👋</div>
+            <div className="text-3xl text-start font-bold text-tan">All Done</div>
+            <div className="text-xl text-left text-tan mt-2">Nice Job 👋</div>
 
 
-            <button onClick={() => { SubmitApplication() }} className="border-white border-2 hover:bg-white bg-transparent text-white hover:text-black px-8 py-2 flex flex-row justify-center items-center gap-2 rounded-md mt-20 w-min">
+            <button onClick={() => { SubmitApplication() }} className="border-white border-2 hover:bg-white bg-transparent text-tan hover:text-black px-8 py-2 flex flex-row justify-center items-center gap-2 rounded-md mt-20 w-min">
                 Submit
             </button>
 

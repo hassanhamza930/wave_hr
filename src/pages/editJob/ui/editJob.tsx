@@ -1,62 +1,68 @@
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { addDoc, collection, doc, DocumentData, getDoc, getFirestore, setDoc, Timestamp } from "firebase/firestore";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router";
 import { useRecoilState } from "recoil";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
-import pageIndexAtom, { NewJobPostingAtom, questionsAtom } from "../../newJob/atoms/newJobAtoms";
+import pageIndexAtom, { NewJobPosting, NewJobPostingAtom, questionsAtom } from "../../newJob/atoms/newJobAtoms";
 import ReactQuill from "react-quill";
 import { MdDelete } from "react-icons/md";
 import { JobPosting } from "../../jobs/components/JobCard";
+import SimpleInput, { TextArea } from "../../../standards/styles/components/inputs";
+import { Heading, SubHeading } from "../../../standards/styles/components/heading";
+import FormLayout from "../../../standards/styles/layouts/FormLayout";
+import PageLayout from "../../../standards/styles/layouts/pageLayout";
+import { AiFillPlusCircle } from "react-icons/ai";
+import { ButtonSolid } from "../../../standards/styles/components/button";
 
 function EditJob() {
     const { jobId } = useParams();
-    const { register, handleSubmit, watch, formState: { errors },setValue } = useForm();
-    const [pageIndex, setPageIndex] = useRecoilState(pageIndexAtom);
-    const [newJobPosting, setNewJobPosting] = useRecoilState(NewJobPostingAtom);
-    const [questions, setQuestions] = useRecoilState(questionsAtom);
-    const navigate = useNavigate();
     const db = getFirestore();
     const [loading, setLoading] = useRecoilState(isLoadingAtom);
-    const [jobDescription,setJobDescription]=useState("");
-    const [jobQualifications,setJobQualifications]=useState("");
+    const [jobTitle, setjobTitle] = useState("" as string);
+    const [jobDescription, setJobDescription] = useState("" as string);
+    const [jobQualifications, setjobQualifications] = useState("" as string);
+    const [salaryCompensation, setSalaryCompensation] = useState("" as string);
+    const [customQuestion, setcustomQuestion] = useState("" as string);
+    const [questions, setQuestions] = useRecoilState(questionsAtom);
+    const navigate = useNavigate();
+
+    async function UpdateJob() {
 
 
-    async function UpdateJob(data: any) {
-
-
-        if(watch("jobTitle").trim()=="" || jobDescription.trim()=="" || jobQualifications.trim()=="" || watch("salaryCompensation")=="" ){
+        if (jobTitle.trim() == "" || jobDescription.trim() == "" || jobQualifications.trim() == "" || salaryCompensation == "") {
             toast.error("Kindly enter all mandatory details");
             return 0;
         }
 
         setLoading(true);
-        console.log(data);
         console.log(questions);
-        delete data["question"];
-        data["jobDescription"]=jobDescription;
-        data["jobQualifications"]=jobQualifications;
 
-        await setDoc(doc(db, "jobs",jobId as string), {
-            jobDetails: data,
+        await setDoc(doc(db, "jobs", jobId as string), {
+            jobDetails: {
+                jobDescription: jobDescription,
+                jobQualifications: jobQualifications,
+                jobTitle: jobTitle,
+                salaryCompensation: salaryCompensation
+            } as NewJobPosting,
             questions: questions,
-            postedBy: localStorage.getItem("uid"),
-            time:Timestamp.now()
-        });
-    
+            time: Timestamp.now(),
+            postedBy: localStorage.getItem("uid") as string
+        } as JobPosting);
+
         setLoading(false);
         navigate("/jobs");
 
     }
 
     function AddQuestion() {
-        var question:string=watch("question") as string;
-        if(question.trim()==""){
+
+        if (customQuestion.trim() == "") {
             toast.error("Kindly enter a question");
         }
-        else{
-            setQuestions([...questions, watch("question")]);
+        else {
+            setQuestions([...questions, customQuestion]);
         }
     }
 
@@ -69,97 +75,71 @@ function EditJob() {
         setQuestions(temp);
     }
 
-    async function PreFillValues(){
+    async function PreFillValues() {
         setLoading(true);
-        var jobData:JobPosting= (await getDoc(doc(db,"jobs",jobId as string))).data() as JobPosting;
-        setValue("jobTitle",jobData.jobDetails.jobTitle);
+        var jobData: JobPosting = (await getDoc(doc(db, "jobs", jobId as string))).data() as JobPosting;
+        setjobTitle(jobData.jobDetails.jobTitle);
         setJobDescription(jobData.jobDetails.jobDescription);
-        setJobQualifications(jobData.jobDetails.jobQualifications);
-        setValue("salaryCompensation",jobData.jobDetails.salaryCompensation);
+        setjobQualifications(jobData.jobDetails.jobQualifications);
+        setSalaryCompensation(jobData.jobDetails.salaryCompensation);
         setQuestions(jobData.questions)
         setLoading(false);
 
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         PreFillValues();
-    },[])
+    }, [])
 
 
-    return ( 
-        <div className="h-full w-full bg-tan justify-center items-center flex flex-col text-left">
+    return (
+        <PageLayout>
+            <FormLayout>
 
-            <div id="no_scroll" className="w-[80%] flex-1  justify-start items-center pt-20 px-20 flex-col h-[90%] bg-transparent rounded-md overflow-y-scroll p-10">
-                <form onSubmit={handleSubmit(UpdateJob)}>
-                    <div className="text-blue text-4xl font-bold">Edit Job</div>
-                    <div className="text-blue text-md mt-2">Make a new job post to start receiving applications</div>
+                <Heading text="Post a new job" />
+                <SubHeading text="Open a new job posting and start receiving applications" customStyles="mt-2" />
 
+                <SimpleInput value={jobTitle} onChange={setjobTitle} placeholder="Job Title" customStyles="mt-14" />
 
-                    <div className="text-blue text-md mt-10 font-bold w-3/4">Job Title</div>
-                    <input {...register("jobTitle")} placeholder="Senior Software Engineer" className=" w-96 border-b-[1px] border-blue text-blue bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
-                    </input>
+                <TextArea customStyles="mt-10" placeholder="Please provide a description of the job." value={jobDescription} onChange={setJobDescription} />
+                <TextArea customStyles="mt-10" placeholder="Please provide qualifications required for the job." value={jobQualifications} onChange={setjobQualifications} />
 
-                    <div className="text-blue text-md mt-10 font-bold w-3/4">Job Description</div>
-               
-                    <ReactQuill className="h-48 w-2/4 pb-12 text-blue border-[1px] border-blue mt-4" theme={"snow"} value={jobDescription} onChange={setJobDescription} />
+                <SimpleInput value={salaryCompensation} onChange={setSalaryCompensation} placeholder="Salary Compensation" customStyles="mt-14" />
 
-                    <div className="text-blue text-md mt-10 font-bold w-3/4">Job Qualifications</div>
-              
-                    <ReactQuill className="h-48 w-2/4 pb-12 text-blue mb-10 border-[1px] border-blue mt-4" theme={"snow"} value={jobQualifications} onChange={setJobQualifications} />
+                <SubHeading text="Custom Questions" customStyles="mt-14 font-bold mb-5" />
 
-
-                    <div className="text-blue text-md mt-20 font-bold w-3/4">Salary Compensation</div>
-
-                    <div className="flex flex-row justify-start item-start gap-10">
-
-                        <input {...register("salaryCompensation")} placeholder="Salary Compensation" className="w-48 border-b-[1px] border-blue text-blue bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
-                        </input>
-
-                    </div>
-
-
-
-                    <div className="text-blue w-full text-4xl font-bold mt-20">Custom Questions</div>
-                    <div className="text-blue text-md mt-2 mb-10">Filter candidates based on answers</div>
-
-
-                    <div className="flex-col h-min gap-2 mt-10 w-full flex justify-start items-start">
-                        {
-                            questions.map((e: any, index: any) => {
-                                return (
-                                    <div key={`${e}${index}`} className="h-min flex flex-row justify-start items-start text-blue text-md border-2 rounded-md border-blue pt-3 px-4 py-2 w-2/4">
-                                        <div className="w-10 mr-3 h-full  font-bold">Q.{index + 1}</div>
-                                        <div className="w-full h-full ">{e}</div>
-                                        <button onClick={() => { DeleteQuestion(index) }} type="button" className="w-[10%] h-full flex justify-center items-end">
-                                            <MdDelete className="hover:scale-105" size={30} />
-                                        </button>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-
-                    <input {...register("question")} placeholder="How many years of experience do you have with React.js?" className="mt-10 w-96 border-b-[1px] text-sm border-blue text-blue bg-transparent outline-0 px-2 py-1 flex justify-center items-center">
-                    </input>
-
-                    <button onClick={() => { AddQuestion() }} type="button" className=" mt-6 hover:text-tan text-blue font-bold flex flex-row gap-5 justify-center items-center px-4 py-2 bg-transparent border-2 border-blue hover:bg-blue/90 rounded-md">
-                        Add Question
+                <div className="flex flex-row justify-start items-end w-full">
+                    <SimpleInput value={customQuestion} onChange={setcustomQuestion} placeholder="Add a custom question" customStyles="" />
+                    <button onClick={AddQuestion}>
+                        <AiFillPlusCircle className="text-purp  h-10 w-10 ml-5" />
                     </button>
+                </div>
+
+
+                <div className="flex-col h-min gap-2 mt-10 w-full flex justify-start items-start">
+                    {
+                        questions.map((e: any, index: any) => {
+                            return (
+                                <div key={`${e}${index}`} className="h-min flex flex-row justify-start items-start text-blue text-md border-2 rounded-md border-blue pt-3 px-4 py-2 w-full">
+                                    <div className="w-10 mr-3 h-full  font-bold">Q.{index + 1}</div>
+                                    <div className="w-full h-full ">{e}</div>
+                                    <button onClick={() => { DeleteQuestion(index) }} type="button" className="w-[10%] h-full flex justify-center items-end">
+                                        <MdDelete className="hover:scale-105" size={30} />
+                                    </button>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+
+                <ButtonSolid text="Post Job" onClick={UpdateJob} customStyles="mt-10 mb-48" />
 
 
 
-                    <button type="submit" className=" mt-20 mb-20 text-tan bg-blue font-bold flex flex-row gap-5 justify-center items-center px-8 py-2 hover:bg-purp rounded-md">
-                        Update Job
-                    </button>
 
-
-                </form>
-            </div>
-
-
-
-        </div>
-     );
+            </FormLayout>
+        </PageLayout>
+    );
 }
 
 export default EditJob;

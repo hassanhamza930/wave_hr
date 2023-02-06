@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 import { useRecoilState } from "recoil";
 import { UserInterface } from "../../../atoms/app/globalUserAtom";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
-import { ButtonOutlined, ButtonSolid } from "../../../standards/styles/components/button";
+import { ButtonOutlinedWhite, ButtonSolid } from "../../../standards/styles/components/button";
 import { Heading, SubHeading } from "../../../standards/styles/components/heading";
 import SimpleInput, { TextArea } from "../../../standards/styles/components/inputs";
 import FormLayout from "../../../standards/styles/layouts/FormLayout";
@@ -88,7 +88,7 @@ export default function NewJob() {
     return (
         <PageLayout>
             <FormLayout>
-
+                
                 <Heading text="Post a new job" />
                 <SubHeading text="Open a new job posting and start receiving applications" customStyles="mt-2" />
 
@@ -128,9 +128,8 @@ export default function NewJob() {
                 <ButtonSolid text="Post Job" onClick={handleAddNewJob} customStyles="mt-10 mb-48" />
 
 
-
-
             </FormLayout>
+
         </PageLayout>
 
     )
