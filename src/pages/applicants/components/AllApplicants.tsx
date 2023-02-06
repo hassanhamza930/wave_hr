@@ -1,131 +1,206 @@
-import { useState, useEffect } from 'react';
-import { JobApplication } from '../../apply/atoms/applyPageAtoms';
-import { JobData, JobPosting } from '../../jobs/components/JobCard';
-import { getFirestore, collection, onSnapshot, doc, orderBy, query, Timestamp, where } from 'firebase/firestore';
-import { useParams } from 'react-router';
-import { useRecoilState } from 'recoil';
-import { selectedApplicantDataAtom, selectedApplicantIdAtom } from '../atoms/applicantsAtoms';
-import { UserInterface } from '../../../atoms/app/globalUserAtom';
+import { useState, useEffect, Fragment } from "react";
+import { JobApplication } from "../../apply/atoms/applyPageAtoms";
+import { JobData, JobPosting } from "../../jobs/components/JobCard";
+import { useParams } from "react-router";
+import { useRecoilState } from "recoil";
+import { selectedApplicantIdAtom } from "../atoms/applicantsAtoms";
+import { Menu, Transition } from "@headlessui/react";
+import { AiFillCaretDown } from "react-icons/ai";
+import getJob from "../logic/getJob";
+import { dropDownItems } from "../../../standards/HardcodedLists";
+import getCurrentJobApplications from "../logic/getCurrentJobApplications";
+import getAllJobApplications from "../logic/getAllJobApplication";
+import ApplicantCard from "./ApplicantCard";
 export default function AllApplicants() {
+  const [applicants, setApplicants] = useState<Array<JobApplication>>([]);
+  const [allApplicants, setAllApplicants] = useState<Array<JobApplication>>([]);
+  const [jobDetails, setJobDetails] = useState<JobData>({} as JobData);
+  const [searchValue, setSearchValue] = useState<string>("");
+  const { jobId } = useParams();
+  const [dropDown, setDropDown] = useState(dropDownItems[0]);
+  const [selectedApplicantId, setSelectedApplicantId] = useRecoilState(
+    selectedApplicantIdAtom
+  );
 
-    const [applicants, setApplicants] = useState<Array<JobApplication>>([]);
-    const [jobDetails, setJobDetails] = useState<JobData>({} as JobData);
-    const [searchValue, setSearchValue] = useState<string>("");
-    const [selectedApplicantId,setSelectedApplicantId]=useRecoilState(selectedApplicantIdAtom);
-    const db = getFirestore();
-    const { jobId } = useParams();
+  useEffect(() => {
+    getJob(setJobDetails, jobId!);
+  }, []);
 
-
-    useEffect(() => {
-
-        onSnapshot(query(collection(db, "jobs", jobId as string, "applications")), (docs) => {
-            var tempArray: Array<JobApplication> = [];
-            docs.forEach((doc) => {
-                var userName: string = doc.data()["name"] as string;
-                if (userName.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())== true && doc.data()["rejected"]==false) {
-                    tempArray.push({ ...doc.data(), id: doc.id } as JobApplication);
-                }
-            })
-
-            var pendingReviewsArray:any=[];
-            var reviewsDoneArray:any=[];
-
-            
-            tempArray.forEach((data,index)=>{
-                if(data.rating!=null){
-                   reviewsDoneArray.splice(0,0,data);
-                }
-            })
-
-            reviewsDoneArray=reviewsDoneArray.sort((a:JobApplication, b:JobApplication)=>{
-                if(+a.rating!>+b.rating!){
-                    return +1;
-                }
-                else if(+a.rating!<+b.rating!){
-                    return -1;
-                }
-                else{
-                    return 0;
-                }
-            });
-            reviewsDoneArray=reviewsDoneArray.reverse();
-
-            tempArray.forEach((data,index)=>{
-                if(data.rating==null){
-                    pendingReviewsArray.splice(0,0,data);
-                }
-            })
-
-            pendingReviewsArray.forEach((data:any,index:number)=>{
-                    reviewsDoneArray.splice(0,0,data);                
-            })
-
-            
-            setApplicants(reviewsDoneArray);
-        })
-
-
-        onSnapshot(doc(db, "jobs", jobId as string), (doc) => {
-            setJobDetails(
-                {
-                    id: doc.id,
-                    jobData: doc.data() as JobPosting
-                }
-            );
-        })
-
-    }, [searchValue]);
-
-
-
-
-    function handleSelectApplicant(applicant: JobApplication) {
-        setSelectedApplicantId(applicant.id as string);
+  useEffect(() => {
+    if (dropDown === "All applications") {
+      getCurrentJobApplications(setApplicants, jobId!, searchValue);
+    } else {
+      getAllJobApplications(setApplicants, jobId!).then(() => {
+        console.log(applicants);
+      });
     }
+  }, [searchValue, dropDown]);
 
+  const handleMenuSelection = (di: string) => {
+    setDropDown(di);
+  };
 
+  function handleSelectAllApplicant(applicant: JobApplication) {
+    setSelectedApplicantId(applicant?.id as string);
+  }
+  function handleSelectApplicant(applicant: string) {
+    setSelectedApplicantId(applicant as string);
+  }
 
-    return (
-        <div id="no_scroll" className="h-full w-[39%] rounded-md p-5 flex flex-col justify-start items-start">
-            <div className="text-black text-md mt-5 mb-2 ml-1">Seeing Applicants for <div className="mt-2 font-bold text-black text-3xl mb-5">{jobDetails.jobData != null && jobDetails.jobData.jobDetails.jobTitle}</div></div>
-
-            <input value={searchValue} onChange={(e) => { setSearchValue(e.target.value); }} placeholder="Search" className="w-full font-medium border-b-2 shadow-md mb-10 text-sm border-blue text-black bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center">
-            </input>
-
-
-            <div id="no_scroll" className='w-full flex-col justify-start items-center overflow-y-scroll px-2'>
-            {
-                applicants.map((applicant) => {
-                    return (
-                        <button key={`${applicant.id}`} onClick={() => { handleSelectApplicant(applicant) }} className={`hover:bg-blue hover:text-tan mt-3 w-full gap-4 ${applicant.rating==null?"bg-blue text-tan ":"bg-black/90 shadow-md border-black/10  text-tan"}  rounded-md my-1 flex w-full flex-row justify-start items-center p-3`}>
-
-                            <div style={{ backgroundImage: `url('${applicant.profilePicture}')` }} className='bg-cover bg-center h-12 w-12 bg-blue rounded-md'></div>
-
-                            <div className='flex flex-row justify-between items-center w-full'>
-
-                                <div className='flex flex-col w-full justify-center items-start pr-2'>
-                                    <div className="text-md font-bold ">{applicant.name}</div>
-                                    <div className="text-md">{applicant.email}</div>
-                                </div>
-
-                                <div className=' w-full h-full flex justify-end flex-row pr-3 gap-3 items-center'>
-                                    {/* <div className='hidden 2xl:flex px-4 py-2 text-black text-[12px] rounded-full bg-tan/90'>{applicant.applicationStatus}</div> */}
-                                    <div className='px-4 py-2 text-blue text-sm font-bold rounded-md bg-tan'>{applicant.rating != null ? applicant.rating : "Pending Review"}</div>
-                                </div>
-
-                            </div>
-
-                        </button>
-                    )
-                })
-            }
-            {
-                applicants.length==0&&<div className='font-bold text-md text-black/90 ml-1'>No Applicants Yet</div>
-            }
-            </div>
-
-
-
+  return (
+    <div
+      id="no_scroll"
+      className="h-full w-[39%] rounded-md p-5 flex flex-col justify-start items-start"
+    >
+      <div className="text-black text-md mt-5 mb-2 ml-1">
+        Seeing Applicants for{" "}
+        <div className="mt-2 font-bold text-black text-3xl mb-5">
+          {jobDetails.jobData != null && jobDetails.jobData.jobDetails.jobTitle}
         </div>
-    )
+      </div>
+
+      <input
+        value={searchValue}
+        onChange={(e) => {
+          setSearchValue(e.target.value);
+        }}
+        placeholder="Search"
+        className="w-full font-medium border-b-2 shadow-md mb-10 text-sm border-blue text-black bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center"
+      ></input>
+
+      <div className="bg-blue rounded-lg">
+        <Menu as="div" className="relative inline-block text-left">
+          <div>
+            <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+              {dropDown}
+              <AiFillCaretDown
+                className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100"
+                aria-hidden="true"
+              />
+            </Menu.Button>
+          </div>
+          <Transition
+            as={Fragment}
+            enter="transition ease-out duration-100"
+            enterFrom="transform opacity-0 scale-95"
+            enterTo="transform opacity-100 scale-100"
+            leave="transition ease-in duration-75"
+            leaveFrom="transform opacity-100 scale-100"
+            leaveTo="transform opacity-0 scale-95"
+          >
+            <Menu.Items className="absolute mt-2 w-60    origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+              {dropDownItems.map((di, index) => {
+                return (
+                  <Menu.Item>
+                    {({ active }) => {
+                      return (
+                        <div className="">
+                          <button
+                            key={index}
+                            onClick={() => handleMenuSelection(di)}
+                            className={`${
+                              active ? "bg-blue text-white" : "text-gray-900"
+                            } flex w-full font-normal text-sm rounded-md px-2 py-[10px]`}
+                          >
+                            {di}
+                          </button>
+                        </div>
+                      );
+                    }}
+                  </Menu.Item>
+                );
+              })}
+            </Menu.Items>
+          </Transition>
+        </Menu>
+      </div>
+
+      <div
+        id="no_scroll"
+        className="w-full flex-col justify-start items-center overflow-y-scroll px-2"
+      >
+        <>
+          {applicants?.map((applicant: JobApplication, index) => {
+            if (dropDown === "All applications") {
+              return (
+                <div onClick={() => handleSelectAllApplicant(applicant)}>
+                  <ApplicantCard key={index} applicant={applicant} />
+                </div>
+              );
+            } else if (dropDown === "Pending Review") {
+              return (
+                applicant[1]?.rejected === false &&
+                (applicant[1]?.rating === undefined ||
+                  applicant[1]?.rating === null) && (
+                  <div onClick={() => handleSelectApplicant(applicant[0])}>
+                    <ApplicantCard key={index} applicant={applicant[1]} />
+                  </div>
+                )
+              );
+            } else if (dropDown === "Interview Invite Pending") {
+              return (
+                applicant[1]?.applicationStatus ===
+                  "Interview Invite Pending" &&
+                applicant[1]?.rejected === false && (
+                  <div onClick={() => handleSelectApplicant(applicant[0])}>
+                    <ApplicantCard key={index} applicant={applicant[1]} />
+                  </div>
+                )
+              );
+            } else if (dropDown === "Interview Invide Sent") {
+              return (
+                applicant[1]?.applicationStatus === "Interview Invite Sent" &&
+                applicant[1]?.rejected === false && (
+                  <div onClick={() => handleSelectApplicant(applicant[0])}>
+                    <ApplicantCard key={index} applicant={applicant[1]} />
+                  </div>
+                )
+              );
+            } else if (dropDown === "Interview Done") {
+              return (
+                applicant[1]?.applicationStatus === "Interview Done" &&
+                applicant[1]?.rejected === false && (
+                  <div onClick={() => handleSelectApplicant(applicant[0])}>
+                    <ApplicantCard key={index} applicant={applicant[1]} />
+                  </div>
+                )
+              );
+            } else if (dropDown === "Didn't show up for interview") {
+              return (
+                applicant[1]?.applicationStatus ===
+                  "Didn't show up for interview" &&
+                applicant[1]?.rejected === false && (
+                  <div onClick={() => handleSelectApplicant(applicant[0])}>
+                    <ApplicantCard key={index} applicant={applicant[1]} />
+                  </div>
+                )
+              );
+            } else if (dropDown === "Accepted applications") {
+              return (
+                applicant[1]?.applicationStatus === "Accepted" &&
+                applicant[1]?.rejected === false && (
+                  <div onClick={() => handleSelectApplicant(applicant[0])}>
+                    <ApplicantCard key={index} applicant={applicant[1]} />
+                  </div>
+                )
+              );
+            } else if (dropDown === "Rejected applications") {
+              return (
+                applicant[1]?.rejected === true && (
+                  <div onClick={() => handleSelectApplicant(applicant[0])}>
+                    <ApplicantCard key={index} applicant={applicant[1]} />
+                  </div>
+                )
+              );
+            }
+          })}
+          {applicants.length == 0 && (
+            <div className="font-bold text-md text-black/90 mt-3">
+              No Applicants Yet
+            </div>
+          )}
+        </>
+      </div>
+    </div>
+  );
 }
