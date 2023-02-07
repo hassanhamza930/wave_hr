@@ -13,6 +13,7 @@ function Companies() {
             
             <SubHeading text="No companies setup yet." customStyles="mt-20"/>
             <ButtonOutlinedBlue text="Add Company" onClick={()=>{navigate("/addNewCompany")}} customStyles="mt-5"/>
+         
 
         </PageLayout>
      );

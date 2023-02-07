@@ -41,7 +41,7 @@ export default function JobDetails() {
 
 
     return (
-        <div id="no_scroll" className="text-md text-tan/80 font-regular h-full flex-1 flex-col justify-start items-start">
+        <div id="no_scroll" className="text-md bg-blue text-tan/80 font-regular h-[90%] rounded-md flex-col justify-start items-start w-2/4 overflow-y-scroll">
             <div className="h-48 w-full bg-gradient-to-br from-red-700 to-yellow-800 bg-cover bg-center bg-[url('https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png')]"></div>
 
             <div className="flex flex-col justify-start items-start p-10 w-full">

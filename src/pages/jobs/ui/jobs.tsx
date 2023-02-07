@@ -35,37 +35,33 @@ export default function JobsPage() {
 
 
     return (
-        <>
 
-            <PageLayout>
-                <div className="text-md mb-2 ml-1">Your Job Postings</div>
+        <PageLayout>
+            <div className="text-md mb-2 ml-1">Your Job Postings</div>
 
-                <div className="w-full h-full flex flex-row">
-                    <div className="pr-20 h-full w-2/4 flex flex-col justify-start items-start ">
-                        <AllPostedJobs />
-                        {
-                            moreThanTwoJobs == false &&
-                            <button onClick={() => { navigate("/newJob") }} className=" mt-10 text-black font-bold hover:text-tan flex flex-row gap-5 justify-center items-center px-4 py-2 bg-transparent border-2 border-blue hover:bg-blue rounded-md">
-                                Post a new Job
-                                <BsArrowRightShort className="" size={30}></BsArrowRightShort>
-                            </button>
-                        }
-
-                    </div>
-
-                    <div id="no_scroll" className="bg-blue rounded-md mb-10 w-2/4 overflow-y-scroll">
-                        {
-                            selectedJob.jobData != null ? <JobDetails /> :
-                                <div className="flex justify-center items-center h-96 w-full">
-                                    <div className="text-tan/80 text-sm">Select a job to see details</div>
-                                </div>
-                        }
-                    </div>
+            <div className="w-full h-full flex flex-row">
+                <div className="pr-20 h-full w-2/4 flex flex-col justify-start items-start ">
+                    <AllPostedJobs />
+                    {
+                        moreThanTwoJobs == false &&
+                        <button onClick={() => { navigate("/newJob") }} className=" mt-10 text-black font-bold hover:text-tan flex flex-row gap-5 justify-center items-center px-4 py-2 bg-transparent border-2 border-blue hover:bg-blue rounded-md">
+                            Post a new Job
+                            <BsArrowRightShort className="" size={30}></BsArrowRightShort>
+                        </button>
+                    }
 
                 </div>
 
-            </PageLayout>
-        </>
+                {
+                    selectedJob.jobData != null ? <JobDetails /> :
+                        <div id="no_scroll" className="flex justify-center items-center h-[500px] rounded-md mb-10 w-2/4 overflow-y-scroll">
+                            <div className="text-blue text-md">Select a job to see details</div>
+                        </div>
+                }
+
+            </div>
+
+        </PageLayout>
     )
 
 
