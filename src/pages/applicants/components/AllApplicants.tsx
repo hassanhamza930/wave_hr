@@ -13,7 +13,7 @@ import getAllJobApplications from "../logic/getAllJobApplication";
 import ApplicantCard from "./ApplicantCard";
 export default function AllApplicants() {
   const [applicants, setApplicants] = useState<Array<JobApplication>>([]);
-  const [allApplicants, setAllApplicants] = useState<Array<JobApplication>>([]);
+  // const [allApplicants, setAllApplicants] = useState<Array<JobApplication>>([]);
   const [jobDetails, setJobDetails] = useState<JobData>({} as JobData);
   const [searchValue, setSearchValue] = useState<string>("");
   const { jobId } = useParams();
@@ -30,9 +30,7 @@ export default function AllApplicants() {
     if (dropDown === "All applications") {
       getCurrentJobApplications(setApplicants, jobId!, searchValue);
     } else {
-      getAllJobApplications(setApplicants, jobId!).then(() => {
-        console.log(applicants);
-      });
+      getAllJobApplications(setApplicants, jobId!, searchValue);
     }
   }, [searchValue, dropDown]);
 
@@ -68,7 +66,7 @@ export default function AllApplicants() {
         className="w-full font-medium border-b-2 shadow-md mb-10 text-sm border-blue text-black bg-transparent outline-0 px-2 py-1 mt-3 flex justify-center items-center"
       ></input>
 
-      <div className="bg-blue rounded-lg">
+      <div className="bg-blue rounded-lg ml-2">
         <Menu as="div" className="relative inline-block text-left">
           <div>
             <Menu.Button className="inline-flex w-full justify-center rounded-md bg-blue px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
