@@ -9,6 +9,7 @@ import CompanyLogo from "../components/companyLogo";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 import { MdCancel } from "react-icons/md"
+import { ButtonOutlinedBlue } from "../../../standards/styles/components/button";
 
 
 function AddNewCompany() {
@@ -46,22 +47,23 @@ function AddNewCompany() {
             <SubHeading text="Setup a company profile and start posting jobs." customStyles="mt-2" />
 
             <SubHeading text="Add a Company Banner (Optional)" customStyles="mt-12 text-sm" />
-            <CompanyBanner customStyles="mt-2" />
+            <CompanyBanner companyBannerValue={companyCoverImage} setCompanyBanner={setcompanyCoverImage} customStyles="mt-2" />
 
-            <SubHeading text="Add Company Logo" customStyles="mt-12 text-sm" />
-            <CompanyLogo />
-            <SimpleInput placeholder="Enter company name" onChange={setcompanyName} value={companyName} customStyles="mt-10" />
-            <TextArea placeholder="Enter company description" onChange={setcompanyDescription} value={companyDescription} customStyles="mt-10" />
+            <SubHeading text="Add Company Logo*" customStyles="mt-12 text-sm" />
+            <CompanyLogo companyLogoValue={companyLogo} setCompanyLogo={setcompanyLogo}  />
+            
+            <SimpleInput placeholder="Enter company name*" onChange={setcompanyName} value={companyName} customStyles="mt-10" />
+            <TextArea placeholder="Enter company description*" onChange={setcompanyDescription} value={companyDescription} customStyles="mt-10" />
 
 
             <div className="flex flex-row justify-start items-end w-full mt-10">
-                <SimpleInput value={companyTagValue} onChange={setcompanyTagValue} placeholder="Add a Company Tag, ex Consulting, Software Services" customStyles="" />
+                <SimpleInput value={companyTagValue} onChange={setcompanyTagValue} placeholder="Add a Company Tag, ex Consulting, Software Services*" customStyles="" />
                 <button onClick={AddCompanyTag}>
                     <AiFillPlusCircle className="text-purp  h-10 w-10 ml-5" />
                 </button>
             </div>
 
-            <div className="flex flex-wrap w-2/5 justify-start items-start mb-10 mt-10 gap-2">
+            <div className="flex flex-wrap w-2/5 justify-start items-start mb-10 mt-5 gap-2">
                 {
                     companyTags.map((tag, index) => {
                         return (
@@ -76,9 +78,11 @@ function AddNewCompany() {
                 }
             </div>
 
-            <SimpleInput value={companyLocation} onChange={setcompanyLocation} placeholder="Location" customStyles="mt-10" />
+            <SimpleInput value={companyLocation} onChange={setcompanyLocation} placeholder="Location*" customStyles="mt-10" />
 
-            <SimpleInput value={numberOfEmployees} onChange={setnumberOfEmployees} placeholder="Number of Employees" customStyles="mt-10 mb-96" />
+            <SimpleInput value={numberOfEmployees} onChange={setnumberOfEmployees} placeholder="Number of Employees*" customStyles="mt-10" />
+
+            <ButtonOutlinedBlue text="Add Company" onClick={()=>{}} customStyles="mt-20 mb-96"/>
 
 
         </PageLayout>
