@@ -9,6 +9,7 @@ import { moreThanTwoJobsAtom, selectedJobAtom } from "../jobsAtoms";
 import { useEffect } from "react";
 import { collection, getDoc, getDocs, getFirestore, onSnapshot, query, where } from "firebase/firestore";
 import PageLayout from "../../../standards/styles/layouts/pageLayout";
+import { ButtonOutlinedBlue } from "../../../standards/styles/components/button";
 
 export default function JobsPage() {
 
@@ -44,10 +45,11 @@ export default function JobsPage() {
                     <AllPostedJobs />
                     {
                         moreThanTwoJobs == false &&
-                        <button onClick={() => { navigate("/newJob") }} className=" mt-10 text-black font-bold hover:text-tan flex flex-row gap-5 justify-center items-center px-4 py-2 bg-transparent border-2 border-blue hover:bg-blue rounded-md">
-                            Post a new Job
-                            <BsArrowRightShort className="" size={30}></BsArrowRightShort>
-                        </button>
+                        <ButtonOutlinedBlue text="Post a New Job" onClick={() => { navigate("/newJob") }} customStyles="mt-10"/>
+                        // <button onClick={() => { navigate("/newJob") }} className=" mt-10 text-black font-bold hover:text-tan flex flex-row gap-5 justify-center items-center px-4 py-2 bg-transparent border-2 border-blue hover:bg-blue rounded-md">
+                        //     Post a new Job
+                        //     <BsArrowRightShort className="" size={30}></BsArrowRightShort>
+                        // </button>
                     }
 
                 </div>

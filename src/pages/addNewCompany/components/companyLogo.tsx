@@ -23,6 +23,8 @@ function CompanyLogo({setCompanyLogo,companyLogoValue}:CompanyLogoInputs) {
                 var base64Result = file!.target!.result! as string;
                 console.log(base64Result);
                 setCompanyLogo(base64Result);
+                console.log("set company logo value")
+                
             }
         };
         inputField.click();
