@@ -12,7 +12,7 @@ function CompanyLogo({setCompanyLogo,companyLogoValue}:CompanyLogoInputs) {
     function UpdateCompanyLogo() {
         var inputField = document.createElement("input");
         inputField.type = "file";
-        inputField.accept = "image/png, image/jpeg, .svg";
+        inputField.accept = "image/png, image/jpeg";
         inputField.onchange = (e: any) => {
             e.preventDefault();
             var reader = new FileReader();

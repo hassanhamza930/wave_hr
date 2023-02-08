@@ -10,6 +10,7 @@ import { AiFillPlusCircle } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 import { MdCancel } from "react-icons/md"
 import { ButtonOutlinedBlue } from "../../../standards/styles/components/button";
+import { CompanyInformation, useHandleAddCompany } from "../logic/addCompany";
 
 
 function AddNewCompany() {
@@ -21,7 +22,10 @@ function AddNewCompany() {
     const [companyTagValue, setcompanyTagValue] = useState("" as string);
     const [companyTags, setcompanyTags] = useState([] as Array<string>);
     const [numberOfEmployees, setnumberOfEmployees] = useState("" as string);
-    const [companyLocation, setcompanyLocation] = useState();
+    const [companyLocation, setcompanyLocation] = useState("" as string);
+    const {AddCompany}= useHandleAddCompany();
+
+
 
     const AddCompanyTag = () => {
         if (companyTagValue.trim() == "") {
@@ -31,7 +35,6 @@ function AddNewCompany() {
             setcompanyTags([...companyTags, companyTagValue]);
         }
     }
-
 
     const RemoveTag = (indexToRemove: number) => {
         setcompanyTags((tags) =>
@@ -82,7 +85,15 @@ function AddNewCompany() {
 
             <SimpleInput value={numberOfEmployees} onChange={setnumberOfEmployees} placeholder="Number of Employees*" customStyles="mt-10" />
 
-            <ButtonOutlinedBlue text="Add Company" onClick={()=>{}} customStyles="mt-20 mb-96"/>
+            <ButtonOutlinedBlue text="Add Company" onClick={()=>{AddCompany({
+                companyCover:companyCoverImage,
+                companyDescription:companyDescription,
+                companyLocation:companyLocation,
+                companyLogo:companyLogo,
+                companyName:companyName,
+                companyTags:companyTags,
+                numberOfEmployees:numberOfEmployees
+            } as CompanyInformation)}} customStyles="mt-20 mb-96"/>
 
 
         </PageLayout>
