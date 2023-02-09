@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router";
+import { useRecoilState } from "recoil";
 import { ButtonOutlinedBlue, ButtonOutlinedWhite, ButtonSolid } from "../../../standards/styles/components/button";
 import { Heading, SubHeading } from "../../../standards/styles/components/heading";
 import PageLayout from "../../../standards/styles/layouts/pageLayout";
+import { selectedCompanyAtom } from "../atoms/selectedCompany";
 import AllCompaniesPostedByUser from "../components/allCompaniesPostedByUser";
 import CompanyDetails from "../components/companyDetails";
 

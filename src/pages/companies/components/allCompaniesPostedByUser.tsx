@@ -1,14 +1,20 @@
 import { collection, getDocs, getFirestore, onSnapshot, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
+import { useRecoilState } from "recoil";
 import { Heading, SubHeading } from "../../../standards/styles/components/heading";
 import { CompanyInformation } from "../../addNewCompany/logic/addCompany";
+import { selectedCompanyAtom } from "../atoms/selectedCompany";
 
 
 function CompanyCard(companyData: CompanyInformation) {
+
+    const [selectedCompany, setSelectedCompany] = useRecoilState(selectedCompanyAtom);
+
+
     return (
         <div className="flex w-full h-full flex-row justify-start items-start">
-            <button style={{ backgroundImage: `url('${companyData.companyCover}')` }} className="h-48 w-full hover:scale-[1.02] rounded-md bg-cover bg-center">
+            <button onClick={() => { setSelectedCompany(companyData) }} style={{ backgroundImage: `url('${companyData.companyCover}')` }} className="h-48 w-full hover:scale-[1.02] rounded-md bg-cover bg-center">
                 <div className="h-full bg-cover bg-center bg-black/[95%] backdrop-hue-rotate-90 text-tan w-full rounded-md flex flex-1 flex-row justify-between items-center p-5">
 
                     <div className="text-tan text-4xl h-32 w-3/5 overflow-hidden font-bold flex justify-start items-start">
@@ -36,7 +42,11 @@ function AllCompaniesPostedByUser() {
     async function fetchAllCompaniesPostedByUser() {
 
         onSnapshot(query(collection(db, "companies"), where("companyOwnerId", "==", localStorage.getItem("uid"))), (docs) => {
-            var docsData: Array<CompanyInformation> = docs.docs.map((doc) => { return doc.data() as CompanyInformation });
+            var docsData: Array<CompanyInformation> = docs.docs.map((doc) => {
+                var tempData: CompanyInformation = doc.data() as CompanyInformation;
+                tempData.docId = doc.id;
+                return tempData as CompanyInformation
+            });
             setAllCompaniesPostedByUser(docsData as Array<CompanyInformation>);
         })
 
