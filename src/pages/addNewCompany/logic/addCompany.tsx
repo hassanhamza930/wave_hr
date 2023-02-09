@@ -8,6 +8,7 @@ import { base64toPdfBlob } from "../../apply/components/applicationsPages/page6"
 import CompanyLogo from "../components/companyLogo";
 
 export interface CompanyInformation{
+    companyId?:string,
     companyOwnerId?:string,
     companyLogo:string,
     companyCover:string,
