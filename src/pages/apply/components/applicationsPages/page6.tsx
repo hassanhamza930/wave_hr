@@ -23,7 +23,7 @@ async function dataUrlToFile(dataUrl: string, fileName: string): Promise<File> {
 }
 
 
-const base64toPdfBlob = (data: string) => {
+export const base64toPdfBlob = (data: string) => {
     // Cut the prefix `data:application/pdf;base64` from the raw base 64
     const base64WithoutPrefix = data.substr('data:application/pdf;base64,'.length);
 

@@ -12,6 +12,8 @@ function Heading({color="text-blue",text,customStyles=""}:HeadingInterface) {
      );
 }
 
+
+
 function SubHeading({color="text-blue",text,customStyles=""}:HeadingInterface) {
     return ( 
         <div className={`${color} ${customStyles} text-md`}>
