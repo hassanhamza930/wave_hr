@@ -145,7 +145,7 @@ export default function AllApplicants() {
                   </div>
                 )
               );
-            } else if (dropDown === "Interview Invide Sent") {
+            } else if (dropDown === "Interview Invite Sent") {
               return (
                 applicant[1]?.applicationStatus === "Interview Invite Sent" &&
                 applicant[1]?.rejected === false && (
