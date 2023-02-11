@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useRecoilState } from "recoil";
 import { ButtonOutlinedBlue, ButtonOutlinedWhite, ButtonSolid } from "../../../standards/styles/components/button";
@@ -9,6 +10,10 @@ import CompanyDetails from "../components/companyDetails";
 
 function Companies() {
     const navigate = useNavigate();
+
+    useEffect(()=>{
+        
+    },[])
 
     return (
         <PageLayout>

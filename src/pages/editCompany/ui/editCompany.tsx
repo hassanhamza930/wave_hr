@@ -1,180 +1,132 @@
-import { doc, getDoc, getFirestore, onSnapshot, setDoc, Timestamp } from "firebase/firestore";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
-import { AiFillCamera } from "react-icons/ai";
+import { Heading, SubHeading } from "../../../standards/styles/components/heading";
+import SimpleInput, { TextArea } from "../../../standards/styles/components/inputs";
+import FormLayout from "../../../standards/styles/layouts/FormLayout";
+import PageLayout from "../../../standards/styles/layouts/pageLayout";
+import { useState, useEffect } from "react";
+import PublicFacingPageLayout, { PublicFacingPageLayoutWhite } from "../../../standards/styles/layouts/publicFacingPageLayout";
+import { AiFillPlusCircle } from "react-icons/ai";
+import { toast } from "react-hot-toast";
+import { MdCancel } from "react-icons/md"
+import { ButtonOutlinedBlue } from "../../../standards/styles/components/button";
+import { CompanyInformation, useHandleAddCompany } from "../../addNewCompany/logic/addCompany";
+import CompanyBanner from "../../addNewCompany/components/companyBanner";
+import CompanyLogo from "../../addNewCompany/components/companyLogo";
+import { useParams } from "react-router";
+import { doc, getDoc, getFirestore, onSnapshot } from "firebase/firestore";
 import { useRecoilState } from "recoil";
-import { UserInterface } from "../../../atoms/app/globalUserAtom";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
-import { dataUrlToFile } from "../../home/logic/useSubmitOnboardingDataToFirebase";
-import { NewPictureUploadedAtom, SelectedCompanyLogoAtom } from "../atoms/editCompanyAtoms";
+import { useHandleEditCompany } from "../logic/editCompany";
 
-export default function EditCompany() {
 
-    const { watch, handleSubmit, register, setValue } = useForm();
-    const [selectedCompanyLogo, setSelectedCompanyLogo] = useRecoilState<string>(SelectedCompanyLogoAtom);
-    const db = getFirestore();
+function EditCompany(props: any) {
+
+    const [companyName, setcompanyName] = useState("" as string);
+    const [companyLogo, setcompanyLogo] = useState("" as string);
+    const [companyDescription, setcompanyDescription] = useState("" as string);
+    const [companyCoverImage, setcompanyCoverImage] = useState("" as string);
+    const [companyTagValue, setcompanyTagValue] = useState("" as string);
+    const [companyTags, setcompanyTags] = useState([] as Array<string>);
+    const [numberOfEmployees, setnumberOfEmployees] = useState("" as string);
+    const [companyLocation, setcompanyLocation] = useState("" as string);
+    const { EditCompany } = useHandleEditCompany();
+    const { companyId } = useParams();
     const [loading, setLoading] = useRecoilState(isLoadingAtom);
-    const [newPictureUploaded, setNewPictureUploaded] = useRecoilState(NewPictureUploadedAtom);
-    const storage = getStorage();
 
+    const db = getFirestore();
 
-
-    async function UpdateCompanyData() {
-
-        var existingUserData: UserInterface = (await getDoc(doc(db, "users", localStorage.getItem("uid") as string))).data() as UserInterface;
-
-        if (newPictureUploaded == true) {
-            existingUserData.companyDetails["companyName"] = watch("name");
-            existingUserData.companyDetails["companyDescription"] = watch("description");
-            existingUserData.companyDetails["numberOfTeamMembers"] = watch("noOfEmployees");
-
-            var companyLogoData = selectedCompanyLogo;
-            var companyLogoFileName = `companyLogos/${Timestamp.now().nanoseconds}.png`;
-            var profilePictureFile = await dataUrlToFile(companyLogoData, companyLogoFileName);
-            const profilePictureRef = ref(storage, `profilePictures/${localStorage.getItem("uid")}/${companyLogoFileName}`);
-
-            await uploadBytes(profilePictureRef, profilePictureFile).then(async (snapshot) => {
-                console.log('Uploaded the profilePicture');
-                console.log(snapshot.metadata);
-                var downloadLink = await getDownloadURL(profilePictureRef);
-                existingUserData.companyDetails["companyLogo"] = downloadLink;
-                await setDoc(doc(db, "users", localStorage.getItem("uid") as string), {
-                    "companyDetails": existingUserData.companyDetails
-                }, { merge: true });
-                window.location.reload();
-            });
-            toast.success("Company Details Updated");
-
-
-
+    const AddCompanyTag = () => {
+        if (companyTagValue.trim() == "") {
+            toast.error("Kindly enter a question");
         }
         else {
-            existingUserData.companyDetails["companyName"] = watch("name");
-            existingUserData.companyDetails["companyDescription"] = watch("description");
-            existingUserData.companyDetails["numberOfTeamMembers"] = watch("noOfEmployees");
-
-            await setDoc(doc(db, "users", localStorage.getItem("uid") as string), {
-                "companyDetails": existingUserData.companyDetails
-            }, { merge: true });
-            window.location.reload();
-            toast.success("Company Details Updated");
+            setcompanyTags([...companyTags, companyTagValue]);
         }
-
     }
 
-    async function saveImageToLocalStorage() {
-        var inputField = document.createElement("input");
-        inputField.type = "file";
-        inputField.accept = "image/png, image/jpeg, .svg";
-        inputField.onchange = (e: any) => {
-            e.preventDefault();
-            var reader = new FileReader();
-            var file: File = e.target.files[0];
-            reader.readAsDataURL(file);
-            reader.onloadend = (file) => {
-                console.log("loaded");
-                var base64Result = file!.target!.result! as string;
-                console.log(base64Result);
-                setSelectedCompanyLogo(base64Result);
-                setNewPictureUploaded(true);
-            }
-        };
-        inputField.click();
+    const RemoveTag = (indexToRemove: number) => {
+        setcompanyTags((tags) =>
+            tags.filter((tag, index) => index !== indexToRemove)
+        );
     }
 
-    async function syncDetails() {
-        onSnapshot(doc(db, "users", localStorage.getItem("uid") as string), (doc) => {
-            var userData: UserInterface = doc.data() as UserInterface;
-            setLoading(true);
-            setValue("name", userData.companyDetails.companyName);
-            setValue("description", userData.companyDetails.companyDescription);
-            setSelectedCompanyLogo(userData.companyDetails.companyLogo);
-            setValue("noOfEmployees", userData.companyDetails.numberOfTeamMembers);
-            console.log("set details");
-            setLoading(false);
-        });
+    async function FetchCompanyDetails() {
+        setLoading(true);
+        var companyData: CompanyInformation = (await getDoc(doc(db, "companies", companyId as string))).data() as CompanyInformation;
+        setcompanyCoverImage(companyData.companyCover);
+        setcompanyDescription(companyData.companyDescription);
+        setcompanyLocation(companyData.companyLocation);
+        setcompanyLogo(companyData.companyLogo);
+        setcompanyName(companyData.companyName);
+        setcompanyTags(companyData.companyTags);
+        setnumberOfEmployees(companyData.numberOfEmployees);
+        setLoading(false);
+
     }
 
 
     useEffect(() => {
-        syncDetails();
+        FetchCompanyDetails();
     }, [])
 
 
-
-
     return (
-        <div className="pt-[80px] h-screen w-full flex flex-row justify-center items-center overflow-y-scroll ">
+        <PageLayout>
 
-            <div className="w-[30%] h-full bg-blue/90 flex flex-col justify-start items-start p-5">
-                <div className="text-tan text-sm font-bold mt-10">Company Logo</div>
-                <button
-                    type="button"
-                    onClick={() => { saveImageToLocalStorage() }}
-                    style={{
-                        backgroundColor: selectedCompanyLogo == "" ? "#eae0d5" : "#eae0d5",
-                        backgroundImage: `url('${selectedCompanyLogo}')`
-                    }}
-                    className="hover:bg-blue  mt-5 bg-blue bg-contain bg-no-repeat bg-center hover:scale-105 h-36 w-36 rounded-xl flex justify-center items-center">
-                    {selectedCompanyLogo == "" && <AiFillCamera color="black" className="opacity-50" size={50} />}
+            <Heading text="Add a new company profile" />
+            <SubHeading text="Setup a company profile and start posting jobs." customStyles="mt-2" />
+
+            <SubHeading text="Add a Company Banner (Optional)" customStyles="mt-12 text-sm" />
+            <CompanyBanner companyBannerValue={companyCoverImage} setCompanyBanner={setcompanyCoverImage} customStyles="mt-2" />
+
+            <SubHeading text="Add Company Logo*" customStyles="mt-12 text-sm" />
+            <CompanyLogo companyLogoValue={companyLogo} setCompanyLogo={setcompanyLogo} />
+
+            <SimpleInput placeholder="Enter company name*" onChange={setcompanyName} value={companyName} customStyles="mt-10" />
+            <TextArea placeholder="Enter company description*" onChange={setcompanyDescription} value={companyDescription} customStyles="mt-10" />
+
+
+            <div className="flex flex-row justify-start items-end w-full mt-10">
+                <SimpleInput value={companyTagValue} onChange={setcompanyTagValue} placeholder="Add a Company Tag, ex Consulting, Software Services*" customStyles="" />
+                <button onClick={AddCompanyTag}>
+                    <AiFillPlusCircle className="text-purp  h-10 w-10 ml-5" />
                 </button>
-
-                <div className="text-tan text-sm font-bold mt-10">What's your company called?</div>
-                <input {...register("name")} placeholder="Company Name" className="mt-5 w-48 md:w-full border-b-[1px] border-tan text-tan bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></input>
-
-
-                <div className="text-tan text-sm font-bold mt-10 ">What's the Number of employees at your company?</div>
-                <input type="number" min={0} max={300} {...register("noOfEmployees")} placeholder="Number of Employees" className="mb-5 mt-5 w-48 md:w-full border-b-[1px] border-tan text-tan bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></input>
-
-
             </div>
 
-            <div className="w-[70%] h-full bg-tan flex flex-col justify-start items-start">
-                <div className="w-full h-48 bg-blue  bg-[url('https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png')] bg-cover bg-center"></div>
-
-                <div className="text-black text-sm font-bold mt-10 ml-5">Enter company description</div>
-                <textarea {...register("description")} placeholder="Explain what your company does" className=" mt-5 w-2/4 h-48 ml-5 border-b-[1px] border-black/90 text-black/80 bg-transparent outline-0  py-1 flex justify-center items-center"></textarea>
-
+            <div className="flex flex-wrap w-2/5 justify-start items-start mb-10 mt-5 gap-2">
+                {
+                    companyTags.map((tag, index) => {
+                        return (
+                            <div key={tag + index.toString()} className="flex gap-3 justify-center items-center flex-row px-6 py-2 text-sm text-tan bg-blue rounded-full">
+                                {tag}
+                                <button onClick={() => { RemoveTag(index) }}>
+                                    <MdCancel className="text-tan h-5 w-5" />
+                                </button>
+                            </div>
+                        )
+                    })
+                }
             </div>
 
-            {/* <form className="h-full" onSubmit={handleSubmit(UpdateCompanyData)} >
-                <div className="h-full w-[600px] p-5 overflow-y-scroll flex-1 flex-col justify-start items-start">
+            <SimpleInput value={companyLocation} onChange={setcompanyLocation} placeholder="Location*" customStyles="mt-10" />
 
-                    <div className="text-black font-bold text-4xl mt-10">Edit Company Details</div>
+            <SimpleInput value={numberOfEmployees} onChange={setnumberOfEmployees} placeholder="Number of Employees*" customStyles="mt-10" />
 
-
-                    <div className="text-black text-sm font-bold mt-10">What's your company called?</div>
-                    <input {...register("name")} placeholder="Company Name" className="mt-5 w-48 md:w-full border-b-[1px] border-black/90 text-black/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></input>
-
-                    <div className="text-black text-sm font-bold mt-10">Enter company description</div>
-                    <textarea {...register("description")} placeholder="Company Name" className="mt-5 w-48 h-36 md:w-full border-b-[1px] border-black/90 text-black/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></textarea>
-
-
-                    <div className="text-black text-sm font-bold mt-10">Select a company logo</div>
-                    <button
-                        type="button"
-                        onClick={() => { saveImageToLocalStorage() }}
-                        style={{
-                            backgroundColor: selectedCompanyLogo == "" ? "#eae0d5" : "#eae0d5",
-                            backgroundImage: `url('${selectedCompanyLogo}')`
-                        }}
-                        className="hover:bg-blue  mt-5 bg-blue bg-contain bg-no-repeat bg-center hover:scale-105 h-36 w-36 rounded-xl flex justify-center items-center">
-                        {selectedCompanyLogo == "" && <AiFillCamera color="black" className="opacity-50" size={50} />}
-                    </button>
-
-                
-                    <div className="text-black text-sm font-bold mt-10 ">What's the Number of employees at your company?</div>
-                    <input type="number" min={0} max={300} {...register("noOfEmployees")} placeholder="Number of Employees" className="mb-5 mt-5 w-48 md:w-full border-b-[1px] border-black/90 text-black/80 bg-transparent outline-0 px-2 py-1 flex justify-center items-center"></input>
-
-                    <button type="submit" className="mb-36 border-black border-[1px] hover:bg-blue bg-transparent text-black hover:text-tan px-6 py-2 flex flex-row justify-center items-center gap-2 rounded-md mt-10 text-sm">
-                        Update
-                    </button>
+            <ButtonOutlinedBlue text="Update" onClick={() => {
+                EditCompany({
+                    companyCover: companyCoverImage,
+                    companyDescription: companyDescription,
+                    companyLocation: companyLocation,
+                    companyLogo: companyLogo,
+                    companyName: companyName,
+                    companyTags: companyTags,
+                    numberOfEmployees: numberOfEmployees,
+                    docId:companyId
+                } as CompanyInformation)
+            }} customStyles="mt-20 mb-96" />
 
 
-                </div>
-            </form> */}
-        </div>
-    )
+        </PageLayout>
+    );
 }
+
+export default EditCompany;

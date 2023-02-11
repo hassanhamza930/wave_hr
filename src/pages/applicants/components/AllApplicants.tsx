@@ -11,6 +11,9 @@ import { dropDownItems } from "../../../standards/HardcodedLists";
 import getCurrentJobApplications from "../logic/getCurrentJobApplications";
 import getAllJobApplications from "../logic/getAllJobApplication";
 import ApplicantCard from "./ApplicantCard";
+
+
+
 export default function AllApplicants() {
   const [applicants, setApplicants] = useState<Array<JobApplication>>([]);
   // const [allApplicants, setAllApplicants] = useState<Array<JobApplication>>([]);
