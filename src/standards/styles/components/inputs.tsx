@@ -23,7 +23,7 @@ function TextArea({ width = "", placeholder = "", value = "", customStyles = "",
     return (
         <div className={` ${customStyles} flex justify-start items-start flex-col`}>
             <SubHeading text={placeholder} customStyles="mb-2 text-sm"></SubHeading>
-            <textarea id="no_scroll" value={value} onChange={(newVal) => { onChange(newVal.target.value) }} className={` h-48 w-96 border-[1px] border-blue text-sm text-blue bg-transparent outline-0 py-2 px-4 rounded-md flex justify-center items-center`}>
+            <textarea id="no_scroll" value={value} onChange={(newVal) => { onChange(newVal.target.value) }} className={` h-48 w-[600px] border-[1px] border-blue text-sm text-blue bg-transparent outline-0 py-2 px-4 rounded-md flex justify-center items-center`}>
             </textarea>
         </div>
         // <textarea id="no_scroll" className={`${customStyles} h-48 w-full pb-12 text-blue border-b-[1px] outline-none border-blue bg-transparent`} value={value} placeholder={placeholder} onChange={(newVal) => { onChange(newVal.target.value) }} />

@@ -92,12 +92,12 @@ export default function NewJob() {
                 <Heading text="Post a new job" />
                 <SubHeading text="Open a new job posting and start receiving applications" customStyles="mt-2" />
 
-                <SimpleInput value={jobTitle} onChange={setjobTitle} placeholder="Job Title" customStyles="mt-14" />
+                <SimpleInput value={jobTitle} onChange={setjobTitle} placeholder="Job Title*" customStyles="mt-14" />
 
-                <TextArea customStyles="mt-10" placeholder="Please provide a description of the job." value={jobDescription} onChange={setJobDescription} />
-                <TextArea customStyles="mt-10" placeholder="Please provide qualifications required for the job." value={jobQualifications} onChange={setjobQualifications} />
+                <TextArea customStyles="mt-10" placeholder="Please provide a description of the job*" value={jobDescription} onChange={setJobDescription} />
+                <TextArea customStyles="mt-10" placeholder="Please provide qualifications required for the job*" value={jobQualifications} onChange={setjobQualifications} />
 
-                <SimpleInput value={salaryCompensation} onChange={setSalaryCompensation} placeholder="Salary Compensation" customStyles="mt-14" />
+                <SimpleInput value={salaryCompensation} onChange={setSalaryCompensation} placeholder="Salary Compensation*" customStyles="mt-14" />
 
                 <SubHeading text="Custom Questions" customStyles="mt-14 font-bold mb-5" />
 

@@ -132,7 +132,7 @@ function EditJob() {
                     }
                 </div>
 
-                <ButtonSolid text="Post Job" onClick={UpdateJob} customStyles="mt-10 mb-48" />
+                <ButtonSolid text="Update" onClick={UpdateJob} customStyles="mt-10 mb-48" />
 
 
 
