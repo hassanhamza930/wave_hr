@@ -16,6 +16,7 @@ import PageLayout from "../../../standards/styles/layouts/pageLayout";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { ButtonSolid } from "../../../standards/styles/components/button";
 
+
 function EditJob() {
     const { jobId } = useParams();
     const db = getFirestore();
@@ -133,9 +134,6 @@ function EditJob() {
                 </div>
 
                 <ButtonSolid text="Update" onClick={UpdateJob} customStyles="mt-10 mb-48" />
-
-
-
 
             </FormLayout>
         </PageLayout>
