@@ -2,6 +2,7 @@ import { collection, doc, getFirestore, onSnapshot, query, setDoc, Timestamp, wh
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { NewJobPosting } from "../../newJob/atoms/newJobAtoms";
+import { selectedCompanyAtom } from "../atoms/selectedCompanyAtom";
 import { moreThanTwoJobsAtom, selectedJobAtom } from "../jobsAtoms";
 import JobCard, { JobData, JobPosting } from "./JobCard";
 
@@ -11,6 +12,14 @@ export default function AllPostedJobs() {
     const [docsIds,setDocIds]=useState<Array<string>>([]);
     const db = getFirestore();
     const [moreThanTwoJobs,setMoreThanTwoJobs]=useRecoilState(moreThanTwoJobsAtom);
+    const [selectedCompany, setSelectedCompany] = useRecoilState(selectedCompanyAtom);
+
+
+    async function fetchAllJobsPostingsUnderCompany(){
+        
+    }
+
+
 
     useEffect(() => {
 

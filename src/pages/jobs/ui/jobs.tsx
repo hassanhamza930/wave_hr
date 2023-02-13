@@ -12,18 +12,17 @@ import PageLayout from "../../../standards/styles/layouts/pageLayout";
 import { ButtonOutlinedBlue } from "../../../standards/styles/components/button";
 import { Listbox } from "@headlessui/react";
 import { MdArrowDropDown } from "react-icons/md";
+import { CompanyInformation } from "../../addNewCompany/logic/addCompany";
+import { selectedCompanyAtom } from "../atoms/selectedCompanyAtom";
 
 export default function JobsPage() {
 
     const navigate = useNavigate();
     const [selectedJob, setSelectedJob] = useRecoilState(selectedJobAtom);
     const [moreThanTwoJobs, setMoreThanTwoJobs] = useRecoilState(moreThanTwoJobsAtom);
-    const [selectedCompany, setSelectedCompany] = useState("" as string);
-    const [allCompanies, setAllCompanies] = useState<Array<string>>([
-        "CareerNetwork",
-        "WaveHR",
-        "Testing Company 3"
-    ] as Array<string>);
+    const [selectedCompany, setSelectedCompany] = useRecoilState(selectedCompanyAtom);
+    const [allCompanies, setAllCompanies] = useState<Array<CompanyInformation>>([] as Array<CompanyInformation>);
+    
 
     const db = getFirestore();
 
@@ -38,8 +37,22 @@ export default function JobsPage() {
         })
     }
 
+    async function fetchAllCompaniesPostedByUser() {
+
+        onSnapshot(query(collection(db, "companies"), where("companyOwnerId", "==", localStorage.getItem("uid"))), (docs) => {
+            var docsData: Array<CompanyInformation> = docs.docs.map((doc) => {
+                var tempData: CompanyInformation = doc.data() as CompanyInformation;
+                tempData.docId = doc.id;
+                return tempData as CompanyInformation
+            });
+            setAllCompanies(docsData as Array<CompanyInformation>);
+        })
+
+    }
+
     useEffect(() => {
         checkMoreThanTwoJobs();
+        fetchAllCompaniesPostedByUser();
     }, [])
 
 
@@ -51,7 +64,7 @@ export default function JobsPage() {
             <Listbox value={selectedCompany} onChange={setSelectedCompany} >
 
                 <Listbox.Button className={"px-4 py-2 rounded-md text-sm bg-tan border-blue border-[1px] text-blue flex flex-row justify-center items-center gap-3"}>
-                    {selectedCompany == "" ? "Select a Company" : selectedCompany}
+                    {selectedCompany.companyName == null ? "Select a Company" : selectedCompany.companyName}
                     <MdArrowDropDown className="text-blue h-4 w-4"/>
                 </Listbox.Button>
                 
@@ -59,9 +72,9 @@ export default function JobsPage() {
 
                     {allCompanies.map((company) => {
                         return (
-                            <Listbox.Option key={company} value={company} className="hover:font-bold px-4 w-full py-2 hover:bg-purp">
-                                {company}
-                            </Listbox.Option>
+                            <button onClick={()=>{setSelectedCompany(company)}} key={company.companyName} className="hover:font-bold px-4 flex justify-start items-start w-full py-2 hover:bg-purp">
+                                {company.companyName}
+                            </button>
                         )
                     })}
 
