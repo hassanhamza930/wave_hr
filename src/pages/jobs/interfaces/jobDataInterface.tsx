@@ -1,6 +1,6 @@
 import { Timestamp } from "firebase/firestore"
 
-export interface JobData {
+export interface JobDataInterface {
     id?: string,
     companyId: string,
     questions: Array<string>,
