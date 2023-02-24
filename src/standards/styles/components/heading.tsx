@@ -4,7 +4,7 @@ interface HeadingInterface{
     customStyles?:string
 }
 
-function Heading({color="text-blue",text,customStyles=""}:HeadingInterface) {
+function Heading({color="text-black",text,customStyles=""}:HeadingInterface) {
     return ( 
         <div className={`${color} ${customStyles}  text-4xl font-bold`}>
             {text}
@@ -14,7 +14,7 @@ function Heading({color="text-blue",text,customStyles=""}:HeadingInterface) {
 
 
 
-function SubHeading({color="text-blue",text,customStyles=""}:HeadingInterface) {
+function SubHeading({color="text-black",text,customStyles=""}:HeadingInterface) {
     return ( 
         <div className={`${color} ${customStyles} text-md`}>
             {text}

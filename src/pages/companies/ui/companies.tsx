@@ -11,8 +11,8 @@ import CompanyDetails from "../components/companyDetails";
 function Companies() {
     const navigate = useNavigate();
 
+
     useEffect(()=>{
-        
     },[])
 
     return (
@@ -24,7 +24,7 @@ function Companies() {
                     <Heading text="All Companies" />
                     <SubHeading text="Setup company profiles to start hiring." customStyles="mt-2" />
                     <AllCompaniesPostedByUser />
-                    <ButtonOutlinedBlue text="Add Company" onClick={() => { navigate("/addNewCompany") }} customStyles="mt-5 mb-24" />
+                    <ButtonSolid text="Add Company" onClick={() => { navigate("/addNewCompany") }} customStyles="mt-5 mb-24" />
 
                 </div>
 

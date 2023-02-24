@@ -9,7 +9,7 @@ import CompanyLogo from "../components/companyLogo";
 import { AiFillPlusCircle, AiFillPlusSquare } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 import { MdCancel } from "react-icons/md"
-import { ButtonOutlinedBlue } from "../../../standards/styles/components/button";
+import { ButtonOutlinedBlue, ButtonSolid } from "../../../standards/styles/components/button";
 import { CompanyInformation, useHandleAddCompany } from "../logic/addCompany";
 import { CompanyDataInterface } from "../../../standards/interfaces/interfaces";
 
@@ -86,7 +86,7 @@ function AddNewCompany() {
 
             <SimpleInput value={numberOfEmployees} onChange={setnumberOfEmployees} placeholder="Number of Employees*" customStyles="mt-10" />
 
-            <ButtonOutlinedBlue text="Add Company" onClick={()=>{AddCompany({
+            <ButtonSolid text="Add Company" onClick={()=>{AddCompany({
                 companyCover:companyCoverImage,
                 companyDescription:companyDescription,
                 companyLocation:companyLocation,

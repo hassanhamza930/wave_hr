@@ -5,33 +5,37 @@ import { useNavigate } from "react-router";
 import { useRecoilState } from "recoil";
 import { Heading } from "../../../standards/styles/components/heading";
 import { selectedCompanyAtom } from "../atoms/selectedCompany";
-
+import { Dropdown, MenuProps, Space } from "antd";
+import { ButtonOutlinedWhite } from "../../../standards/styles/components/button";
 
 
 function CompanyDetails() {
 
   const [selectedCompany, setSelectedCompany] = useRecoilState(selectedCompanyAtom);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+
+
+
 
   return (
-    selectedCompany.id== null ?
+    selectedCompany.id == null ?
 
       <div id="no_scroll" className="relative flex justify-center items-center h-full rounded-md mb-10 w-full overflow-y-scroll">
         <div className="text-blue text-md">Select a company profile to see details</div>
       </div> :
 
-      <div id="no_scroll" className="w-full h-[90%] mt-10 bg-blue rounded-md overflow-y-scroll">
+      <div id="no_scroll" className="w-full h-[90%] mt-10 bg-black rounded-md overflow-y-scroll">
 
         <div style={{ backgroundImage: `url('${selectedCompany.companyCover}')` }} className="h-72 w-full bg-blue bg-cover bg-center bg-[url('https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png')]"></div>
         <div style={{ backgroundImage: `url('${selectedCompany.companyLogo}')` }} className="h-36 w-36 bg-blue rounded-md ml-10 -mt-24 bg-cover bg-center bg-[url('https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png')]"></div>
 
-        <div className="relative text-tan text-4xl font-bold px-10 pt-5 w-full flex flex-row justify-between items-center">
+        <div className="relative text-tan text-4xl px-10 pt-5 w-full flex flex-row justify-between items-center">
 
-          <div>
+          <div className="font-bold">
             {selectedCompany.companyName}
           </div>
 
-          <Menu>
+          {/* <Menu>
             <Menu.Button className="text-tan hover:scale-105">
               <BsThreeDots size={30} />
             </Menu.Button>
@@ -50,7 +54,7 @@ function CompanyDetails() {
                     {({ active }) => (
                       <button
                         onClick={() => { }}
-                        className={`${active ? 'bg-secondary text-black' : 'text-gray-900'} group flex w-full items-center justify-start outline-none hover:bg-purp hover:text-tan  px-4 py-2 text-sm`}>
+                        className={`${active ? 'bg-secondary text-black' : 'text-gray-900'} group font-regular flex w-full items-center justify-start outline-none hover:bg-purp hover:text-tan  px-4 py-2 text-sm`}>
                         Copy Company Link
                       </button>
                     )}
@@ -59,8 +63,8 @@ function CompanyDetails() {
                   <Menu.Item>
                     {({ active }) => (
                       <button
-                        onClick={() => { navigate("/editCompany/"+selectedCompany.id)}}
-                        className={`${active ? 'bg-secondary text-black' : 'text-gray-900'} group flex w-full items-center justify-start outline-none hover:bg-purp hover:text-tan  px-4 py-2 text-sm`}>
+                        onClick={() => { navigate("/editCompany/" + selectedCompany.id) }}
+                        className={`${active ? 'bg-secondary text-black' : 'text-gray-900'} group font-regular flex w-full items-center justify-start outline-none hover:bg-purp hover:text-tan  px-4 py-2 text-sm`}>
                         Edit
                       </button>
                     )}
@@ -71,7 +75,13 @@ function CompanyDetails() {
               </Menu.Items>
             </Transition>
 
-          </Menu>
+          </Menu> */}
+
+          <div className="flex flex-row justify-start items-start">
+            <ButtonOutlinedWhite text="Edit" onClick={() => {navigate("/editCompany/" + selectedCompany.id)}} />
+            <ButtonOutlinedWhite customStyles="ml-2" text="Company Page" onClick={() => { }} />
+          </div>
+
 
         </div>
 

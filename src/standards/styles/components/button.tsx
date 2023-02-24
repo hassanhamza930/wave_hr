@@ -6,7 +6,7 @@ interface ButtonInputs{
 
 function ButtonOutlinedWhite(props:ButtonInputs) {
     return (
-        <button type={"submit"} onClick={()=>{props.onClick()}} className={`${props.customStyles} font-bold flex flex-row gap-5 justify-center items-center px-8 py-2 bg-transparent border-2 border-tan hover:bg-tan hover:text-blue text-tan rounded-md `}>
+        <button type={"submit"} onClick={()=>{props.onClick()}} className={`${props.customStyles} hover:font-bold font-regular flex flex-row gap-5 justify-center items-center px-8 py-2 bg-transparent border-[1px] border-tan hover:bg-tan text-sm hover:text-blue text-tan rounded-md `}>
             {props.text}
         </button>
       );
@@ -14,7 +14,7 @@ function ButtonOutlinedWhite(props:ButtonInputs) {
 
 function ButtonOutlinedBlue(props:ButtonInputs) {
     return (
-        <button type={"submit"} onClick={()=>{props.onClick()}} className={`${props.customStyles} font-bold flex flex-row gap-5 justify-center items-center px-8 py-2 bg-transparent border-2 border-blue hover:bg-blue hover:text-tan text-blue rounded-md `}>
+        <button type={"submit"} onClick={()=>{props.onClick()}} className={`${props.customStyles} hover:font-bold font-regular flex flex-row gap-5 justify-center items-center px-8 py-2 bg-transparent border-[1px] border-blue hover:bg-blue text-sm hover:text-tan text-blue rounded-md `}>
             {props.text}
         </button>
       );
@@ -25,7 +25,7 @@ function ButtonOutlinedBlue(props:ButtonInputs) {
 
 function ButtonSolid(props:ButtonInputs) {
     return (
-        <button type="submit" onClick={()=>{props.onClick()}} className={` hover:text-tan hover:bg-purp text-tan font-bold flex flex-row gap-5 justify-center items-center px-8 py-2 bg-blue rounded-md ${props.customStyles}`}>
+        <button type="submit" onClick={()=>{props.onClick()}} className={` hover:text-tan hover:shadow-xl text-tan font-regular flex flex-row gap-5 justify-center items-center px-8 py-2 bg-blue hover:bg-black rounded-md text-sm ${props.customStyles}`}>
             {props.text}
         </button>
       );

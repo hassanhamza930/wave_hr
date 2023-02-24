@@ -7,7 +7,7 @@ import PublicFacingPageLayout, { PublicFacingPageLayoutWhite } from "../../../st
 import { AiFillPlusCircle } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 import { MdCancel } from "react-icons/md"
-import { ButtonOutlinedBlue } from "../../../standards/styles/components/button";
+import { ButtonOutlinedBlue, ButtonSolid } from "../../../standards/styles/components/button";
 import { CompanyInformation, useHandleAddCompany } from "../../addNewCompany/logic/addCompany";
 import CompanyBanner from "../../addNewCompany/components/companyBanner";
 import CompanyLogo from "../../addNewCompany/components/companyLogo";
@@ -112,7 +112,7 @@ function EditCompany(props: any) {
 
             <SimpleInput value={numberOfEmployees} onChange={setnumberOfEmployees} placeholder="Number of Employees*" customStyles="mt-10" />
 
-            <ButtonOutlinedBlue text="Update" onClick={() => {
+            <ButtonSolid text="Update" onClick={() => {
                 EditCompany({
                     companyCover: companyCoverImage,
                     companyDescription: companyDescription,

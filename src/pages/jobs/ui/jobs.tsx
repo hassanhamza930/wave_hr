@@ -9,7 +9,7 @@ import { moreThanTwoJobsAtom, selectedJobAtom } from "../jobsAtoms";
 import { Fragment, useEffect, useState } from "react";
 import { collection, getDoc, getDocs, getFirestore, onSnapshot, query, where } from "firebase/firestore";
 import PageLayout from "../../../standards/styles/layouts/pageLayout";
-import { ButtonOutlinedBlue } from "../../../standards/styles/components/button";
+import { ButtonOutlinedBlue, ButtonSolid } from "../../../standards/styles/components/button";
 import { Listbox, Menu, Transition } from "@headlessui/react";
 import { MdArrowDropDown } from "react-icons/md";
 import { CompanyInformation } from "../../addNewCompany/logic/addCompany";
@@ -69,7 +69,7 @@ export default function JobsPage() {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95">
 
-                    <Menu.Items className="absolute ml-20 -mb-72 justify-center left-0 w-48 rounded-md origin-top-right divide-y divide-gray-100  bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="absolute ml-24 mt-1 justify-center left-0 w-48 rounded-md origin-top-right divide-y divide-gray-100  bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
 
                         {allCompanies.map((company) => {
                             return (
@@ -105,7 +105,7 @@ export default function JobsPage() {
                     <AllPostedJobs />
                     {
                         selectedCompany.companyName != null &&
-                        <ButtonOutlinedBlue text="Post a New Job" onClick={() => { navigate("/newJob") }} customStyles="mt-10" />
+                        <ButtonSolid text="Post a New Job" onClick={() => { navigate("/newJob") }} customStyles="mt-10" />
                     }
 
                 </div>
