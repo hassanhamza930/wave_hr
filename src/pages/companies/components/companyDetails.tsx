@@ -14,10 +14,10 @@ function CompanyDetails() {
   const navigate=useNavigate();
 
   return (
-    selectedCompany.docId == null ?
+    selectedCompany.id== null ?
 
       <div id="no_scroll" className="relative flex justify-center items-center h-full rounded-md mb-10 w-full overflow-y-scroll">
-        <div className="text-blue text-md">Select a job to see details</div>
+        <div className="text-blue text-md">Select a company profile to see details</div>
       </div> :
 
       <div id="no_scroll" className="w-full h-[90%] mt-10 bg-blue rounded-md overflow-y-scroll">
@@ -59,7 +59,7 @@ function CompanyDetails() {
                   <Menu.Item>
                     {({ active }) => (
                       <button
-                        onClick={() => { navigate("/editCompany/"+selectedCompany.docId)}}
+                        onClick={() => { navigate("/editCompany/"+selectedCompany.id)}}
                         className={`${active ? 'bg-secondary text-black' : 'text-gray-900'} group flex w-full items-center justify-start outline-none hover:bg-purp hover:text-tan  px-4 py-2 text-sm`}>
                         Edit
                       </button>

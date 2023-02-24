@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router";
 import { useRecoilState } from "recoil";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
+import { CompanyDataInterface } from "../../../standards/interfaces/interfaces";
 
 export interface CompanyInformation{
     docId?:string,
@@ -51,14 +52,13 @@ export function useHandleEditCompany(){
 
 
 
-    async function EditCompany(companyDetails:CompanyInformation) {
-        // if(false){
+    async function EditCompany(companyDetails:CompanyDataInterface) {
         if(companyDetails.companyDescription=="" || companyDetails.companyLogo=="" || companyDetails.companyName=="" || companyDetails.companyLocation=="" || companyDetails.companyTags.length==0 || companyDetails.numberOfEmployees==""){
             toast.error("Kindly enter all required information");
         }
         else{
             setLoading(true);
-            var finalCompanyData:CompanyInformation=companyDetails;
+            var finalCompanyData:CompanyDataInterface=companyDetails;
             
             console.log("Company Logo Data is"+finalCompanyData.companyLogo);
             if(finalCompanyData.companyLogo.toString().includes("data")==true){
@@ -72,7 +72,7 @@ export function useHandleEditCompany(){
             }
             
             finalCompanyData.companyOwnerId=localStorage.getItem('uid') as string;
-            await setDoc(doc(db,"companies",finalCompanyData.docId as string),finalCompanyData,{merge:true});
+            await setDoc(doc(db,"companies",finalCompanyData.id as string),finalCompanyData,{merge:true});
             setLoading(false);
             navigate("/companies")
 

@@ -16,6 +16,7 @@ import { doc, getDoc, getFirestore, onSnapshot } from "firebase/firestore";
 import { useRecoilState } from "recoil";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
 import { useHandleEditCompany } from "../logic/editCompany";
+import { CompanyDataInterface } from "../../../standards/interfaces/interfaces";
 
 
 function EditCompany(props: any) {
@@ -120,8 +121,8 @@ function EditCompany(props: any) {
                     companyName: companyName,
                     companyTags: companyTags,
                     numberOfEmployees: numberOfEmployees,
-                    docId:companyId
-                } as CompanyInformation)
+                    id:companyId
+                } as CompanyDataInterface)
             }} customStyles="mt-20 mb-96" />
 
 

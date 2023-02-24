@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router";
 import { useRecoilState } from "recoil";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
+import { CompanyDataInterface } from "../../../standards/interfaces/interfaces";
 import { base64toPdfBlob } from "../../apply/components/applicationsPages/page6";
 import CompanyLogo from "../components/companyLogo";
 
@@ -53,8 +54,7 @@ export function useHandleAddCompany(){
 
 
 
-    async function AddCompany(companyDetails:CompanyInformation) {
-        // if(false){
+    async function AddCompany(companyDetails:CompanyDataInterface) {
         if(companyDetails.companyDescription=="" || companyDetails.companyLogo=="" || companyDetails.companyName=="" || companyDetails.companyLocation=="" || companyDetails.companyTags.length==0 || companyDetails.numberOfEmployees==""){
             toast.error("Kindly enter all required information");
         }

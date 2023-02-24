@@ -6,11 +6,12 @@ import { useState, useEffect } from "react";
 import CompanyBanner from "../components/companyBanner";
 import PublicFacingPageLayout, { PublicFacingPageLayoutWhite } from "../../../standards/styles/layouts/publicFacingPageLayout";
 import CompanyLogo from "../components/companyLogo";
-import { AiFillPlusCircle } from "react-icons/ai";
+import { AiFillPlusCircle, AiFillPlusSquare } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 import { MdCancel } from "react-icons/md"
 import { ButtonOutlinedBlue } from "../../../standards/styles/components/button";
 import { CompanyInformation, useHandleAddCompany } from "../logic/addCompany";
+import { CompanyDataInterface } from "../../../standards/interfaces/interfaces";
 
 
 function AddNewCompany() {
@@ -62,7 +63,7 @@ function AddNewCompany() {
             <div className="flex flex-row justify-start items-end w-full mt-10">
                 <SimpleInput value={companyTagValue} onChange={setcompanyTagValue} placeholder="Add a Company Tag, ex Consulting, Software Services*" customStyles="" />
                 <button onClick={AddCompanyTag}>
-                    <AiFillPlusCircle className="text-purp  h-10 w-10 ml-5" />
+                    <AiFillPlusSquare className="text-purp  h-10 w-10 ml-5" />
                 </button>
             </div>
 
@@ -93,7 +94,7 @@ function AddNewCompany() {
                 companyName:companyName,
                 companyTags:companyTags,
                 numberOfEmployees:numberOfEmployees
-            } as CompanyInformation)}} customStyles="mt-20 mb-96"/>
+            } as CompanyDataInterface)}} customStyles="mt-20 mb-96"/>
 
 
         </PageLayout>

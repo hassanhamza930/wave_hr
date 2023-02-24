@@ -2,27 +2,27 @@ import { collection, getDocs, getFirestore, onSnapshot, query, where } from "fir
 import { useEffect, useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { useRecoilState } from "recoil";
+import { CompanyDataInterface } from "../../../standards/interfaces/interfaces";
 import { Heading, SubHeading } from "../../../standards/styles/components/heading";
 import { CompanyInformation } from "../../addNewCompany/logic/addCompany";
 import { selectedCompanyAtom } from "../atoms/selectedCompany";
 
 
-function CompanyCard(companyData: CompanyInformation) {
+function CompanyCard(companyData: CompanyDataInterface) {
 
     const [selectedCompany, setSelectedCompany] = useRecoilState(selectedCompanyAtom);
 
 
     return (
         <div className="flex w-full h-full flex-row justify-start items-start">
-            <button onClick={() => { setSelectedCompany(companyData) }} style={{ backgroundImage: `url('${companyData.companyCover}')` }} className="h-48 w-full hover:scale-[1.02] rounded-md bg-cover bg-center">
+            <button onClick={() => { setSelectedCompany(companyData) }} style={{ backgroundImage: `url('${companyData.companyCover}')` }} className="h-36 w-full hover:scale-[1.02] rounded-md bg-cover bg-center">
                 <div className="h-full bg-cover bg-center bg-black/[95%] backdrop-hue-rotate-90 text-tan w-full rounded-md flex flex-1 flex-row justify-between items-center p-5">
 
-                    <div className="text-tan text-4xl h-32 w-3/5 overflow-hidden font-bold flex justify-start items-start">
+                    <div className="text-tan text-4xl h-full w-3/5 overflow-hidden font-bold flex justify-start items-start">
                         {companyData.companyName}
-
                     </div>
 
-                    <div style={{ backgroundImage: `url('${companyData.companyLogo}')` }} className="h-32 w-32 rounded-md bg-cover bg-center bg-blue"></div>
+                    <div style={{ backgroundImage: `url('${companyData.companyLogo}')` }} className="h-24 w-24 rounded-md bg-cover bg-center bg-blue"></div>
 
                 </div>
             </button>
@@ -36,18 +36,18 @@ function CompanyCard(companyData: CompanyInformation) {
 
 function AllCompaniesPostedByUser() {
 
-    const [allCompaniesPostedByUser, setAllCompaniesPostedByUser] = useState<Array<CompanyInformation>>([] as Array<CompanyInformation>);
+    const [allCompaniesPostedByUser, setAllCompaniesPostedByUser] = useState<Array<CompanyDataInterface>>([] as Array<CompanyDataInterface>);
     const db = getFirestore();
 
     async function fetchAllCompaniesPostedByUser() {
 
         onSnapshot(query(collection(db, "companies"), where("companyOwnerId", "==", localStorage.getItem("uid"))), (docs) => {
-            var docsData: Array<CompanyInformation> = docs.docs.map((doc) => {
-                var tempData: CompanyInformation = doc.data() as CompanyInformation;
-                tempData.docId = doc.id;
-                return tempData as CompanyInformation
+            var docsData: Array<CompanyDataInterface> = docs.docs.map((doc) => {
+                var tempData: CompanyDataInterface = doc.data() as CompanyDataInterface;
+                tempData.id = doc.id;
+                return tempData as CompanyDataInterface
             });
-            setAllCompaniesPostedByUser(docsData as Array<CompanyInformation>);
+            setAllCompaniesPostedByUser(docsData as Array<CompanyDataInterface>);
         })
 
     }
@@ -65,7 +65,7 @@ function AllCompaniesPostedByUser() {
                     )
                 })
             }
-            {allCompaniesPostedByUser.length == 0 && <SubHeading text="No companies setup yet." customStyles="mt-20" />}
+            {/* {allCompaniesPostedByUser.length == 0 && <SubHeading text="No companies setup yet." customStyles="mt-20" />} */}
 
         </div>
     );
