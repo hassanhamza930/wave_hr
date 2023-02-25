@@ -7,6 +7,7 @@ import { CompanyDataInterface } from "../../../standards/interfaces/interfaces";
 import { Heading, SubHeading } from "../../../standards/styles/components/heading";
 import FormLayout from "../../../standards/styles/layouts/FormLayout";
 import PageLayout from "../../../standards/styles/layouts/pageLayout";
+import PublicFacingLayout from "../../../standards/styles/layouts/PublicFacingLayout";
 import CompanyBanner from "../../addNewCompany/components/companyBanner";
 import { CompanyData } from "../../apply/ui/apply";
 
@@ -30,10 +31,10 @@ function CompanyProfilePage() {
     }, [])
 
     return (
-        <PageLayout>
-            <FormLayout>
+        // <PageLayout>
+            <PublicFacingLayout>
 
-                <div style={{ backgroundImage: `url('${companyDetails.companyCover == "" ? "https://assets-global.website-files.com/5c7fdbdd4e3feeee8dd96dd2/62c4ff55b8637de51557f5f0_growth-flat-color.gif" : companyDetails.companyCover}')` }} className={`  w-[1000px] h-72 bg-blue bg-cover shadow-xl bg-center rounded-md flex justify-end items-end p-10`}>
+                <div style={{ backgroundImage: `url('${companyDetails.companyCover == "" ? "https://assets-global.website-files.com/5c7fdbdd4e3feeee8dd96dd2/62c4ff55b8637de51557f5f0_growth-flat-color.gif" : companyDetails.companyCover}')` }} className={`  w-full h-72 bg-blue bg-cover shadow-xl bg-center rounded-md flex justify-end items-end p-10`}>
                     <div className="flex flex-row justify-end items-center">
                     </div>
                 </div>
@@ -70,11 +71,13 @@ function CompanyProfilePage() {
 
                 <div className="mt-10 ml-12 text-2xl text-black font-['Inter'] font-bold">Careers</div>
 
-            </FormLayout>
+                
+
+            </PublicFacingLayout>
                
 
 
-        </PageLayout>
+        // </PageLayout>
     );
 }
 
