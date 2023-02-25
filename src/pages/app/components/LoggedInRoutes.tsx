@@ -4,6 +4,7 @@ import AddNewCompany from "../../addNewCompany/ui/addNewCompany";
 import Applicants from "../../applicants/ui/applicants";
 import Apply from "../../apply/ui/apply";
 import Companies from "../../companies/ui/companies";
+import CompanyProfilePage from "../../companyProfilePage/ui/companyProfilePage";
 import EditCompany from "../../editCompany/ui/editCompany";
 import EditJob from "../../editJob/ui/editJob";
 import Home from "../../home/ui/home";
@@ -45,7 +46,7 @@ export default function LoggedInRoutes() {
                     <Route path="/applicants/:jobId" element={<Applicants />} ></Route>
                     <Route path="/apply/:jobId" element={<Apply />} ></Route>
                     <Route path="/addNewCompany" element={<AddNewCompany />} ></Route>
-                    <Route path="/test" element={<Test />} ></Route>
+                    <Route path="/company/:companyId" element={<CompanyProfilePage />} ></Route>
                 </Routes>
             </>
 

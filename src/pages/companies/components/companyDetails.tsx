@@ -79,7 +79,7 @@ function CompanyDetails() {
 
           <div className="flex flex-row justify-start items-start">
             <ButtonOutlinedWhite text="Edit" onClick={() => {navigate("/editCompany/" + selectedCompany.id)}} />
-            <ButtonOutlinedWhite customStyles="ml-2" text="Company Page" onClick={() => { }} />
+            <ButtonOutlinedWhite onClick={() => {navigate("/company/" + selectedCompany.id)}} customStyles="ml-2" text="Company Page" />
           </div>
 
 

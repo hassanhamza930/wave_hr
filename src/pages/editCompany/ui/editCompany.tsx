@@ -72,8 +72,9 @@ function EditCompany(props: any) {
 
     return (
         <PageLayout>
+            <FormLayout>
 
-            <Heading text="Add a new company profile" />
+            <Heading text="Edit company profile" />
             <SubHeading text="Setup a company profile and start posting jobs." customStyles="mt-2" />
 
             <SubHeading text="Add a Company Banner (Optional)" customStyles="mt-12 text-sm" />
@@ -125,7 +126,7 @@ function EditCompany(props: any) {
                 } as CompanyDataInterface)
             }} customStyles="mt-20 mb-96" />
 
-
+        </FormLayout>
         </PageLayout>
     );
 }

@@ -47,4 +47,7 @@ function CompanyBanner({ customStyles = "", setCompanyBanner, companyBannerValue
     );
 }
 
+
+
+
 export default CompanyBanner;
