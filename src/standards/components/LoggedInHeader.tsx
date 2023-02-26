@@ -27,9 +27,12 @@ export default function LoggedInHeader() {
     return (
         <>
             {isApplyPage == false &&
-                <div className="fixed h-[80px] bg-tan z-50 w-full flex flex-row justify-between items-center px-[5%] py-5">
-                    <button onClick={() => { navigate("/") }}>
-                        <img src={Logo} className="h-14 w-14"></img>
+                <div className="fixed shadow-md shadow-black/10 h-[60px] bg-tan z-50 w-full flex flex-row justify-between items-center px-[5%] py-5">
+                    {/* <button onClick={() => { navigate("/") }}>
+                        <img src={Logo} className="h-10 w-10"></img>
+                    </button> */}
+                    <button onClick={()=>{navigate("/")}} className="font-black text-purp text-xl">
+                        WAVE
                     </button>
 
                     <div className="flex flex-row gap-16 justify-between items-center">
