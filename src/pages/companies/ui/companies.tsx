@@ -20,7 +20,7 @@ function Companies() {
 
             <div className="flex h-full flex-row justify-start items-start gap-5">
 
-                <div className="w-2/4">
+                <div className="w-2/4 pr-20">
                     <Heading text="All Companies" />
                     <SubHeading text="Setup company profiles to start hiring." customStyles="mt-2" />
                     <AllCompaniesPostedByUser />
