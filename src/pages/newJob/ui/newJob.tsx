@@ -1,8 +1,9 @@
+import { ItemType } from "antd/es/menu/hooks/useItems";
 import { addDoc, collection, doc, getDoc, getFirestore, Timestamp } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { AiFillPlusCircle } from "react-icons/ai";
-import { MdDelete, MdHdrPlus, MdPlusOne } from "react-icons/md";
+import { MdArrowDropDown, MdDelete, MdHdrPlus, MdPlusOne } from "react-icons/md";
 import { useNavigate } from "react-router";
 import { useRecoilState } from "recoil";
 import { UserInterface } from "../../../atoms/app/globalUserAtom";
@@ -16,6 +17,8 @@ import Page from "../../../standards/styles/layouts/pageLayout";
 import { JobPosting } from "../../jobs/components/JobCard";
 import NewJobPageIndexAtom, { NewJobPosting, NewJobPostingAtom, questionsAtom } from "../atoms/newJobAtoms";
 import PostNewJobForm from "../components/PostNewJob";
+import { Dropdown } from "react-bootstrap";
+import { Menu } from "@headlessui/react";
 
 export default function NewJob() {
 
@@ -27,7 +30,15 @@ export default function NewJob() {
     const [jobQualifications, setjobQualifications] = useState("" as string);
     const [salaryCompensation, setSalaryCompensation] = useState("" as string);
     const [customQuestion, setcustomQuestion] = useState("" as string);
+    const [location, setLocation] = useState("" as string);
+    const [jobType, setjobType] = useState("" as string);
+    const [workModel, setWorkModel] = useState("" as string);
     const [questions, setQuestions] = useRecoilState(questionsAtom);
+    const workModels = ["Remote", "Onsite", "Hybrid"];
+    const jobTypes = ["Full-time", "Part-Time"];
+
+
+
 
     const db = getFirestore();
     const navigate = useNavigate();
@@ -88,7 +99,7 @@ export default function NewJob() {
     return (
         <PageLayout>
             <FormLayout>
-                
+
                 <Heading text="Post a new job" />
                 <SubHeading text="Open a new job posting and start receiving applications" customStyles="mt-2" />
 
@@ -98,6 +109,57 @@ export default function NewJob() {
                 <TextArea customStyles="mt-10" placeholder="Please provide qualifications required for the job*" value={jobQualifications} onChange={setjobQualifications} />
 
                 <SimpleInput value={salaryCompensation} onChange={setSalaryCompensation} placeholder="Salary Compensation*" customStyles="mt-14" />
+                <SimpleInput value={location} onChange={setLocation} placeholder="Location*" customStyles="mt-14" />
+                {/* job site and type of job need to be added */}
+
+                <SubHeading text="Work Model*" customStyles="mt-10  mb-2 text-sm" />
+                <div className="relative">
+                    <Menu>
+                        <Menu.Button className="border-[1px] border-black px-6 flex flex-row gap-2 justify-start items-center py-2 rounded-md text-sm">
+                            {workModel == "" ? "Select a work model" : workModel}
+                            <MdArrowDropDown className="text-blue h-4 w-4" />
+                        </Menu.Button>
+                        <Menu.Items className={"absolute z-50 mt-1 rounded-md bg-white flex flex-col justify-start items-start"}>
+                            {
+                                workModels.map((workModel) => {
+                                    return (
+                                        <Menu.Item>
+                                            <button onClick={() => { setWorkModel(workModel) }} className="text-sm flex justify-start items-start px-4 py-2 w-36">
+                                                {workModel}
+                                            </button>
+                                        </Menu.Item>
+                                    )
+                                })
+                            }
+                        </Menu.Items>
+                    </Menu>
+                </div>
+
+
+                <SubHeading text="Job Type*" customStyles="mt-10  mb-2 text-sm" />
+
+                <div className="relative">
+                    <Menu>
+                        <Menu.Button className="border-[1px] border-black px-6 flex flex-row gap-2 justify-start items-center py-2 rounded-md text-sm">
+                            {jobType == "" ? "Select a job type" : jobType}
+                            <MdArrowDropDown className="text-blue h-4 w-4" />
+                        </Menu.Button>
+                        <Menu.Items className={"absolute z-50 mt-1 rounded-md bg-white flex flex-col justify-start items-start"}>
+                            {
+                                jobTypes.map((jobType) => {
+                                    return (
+                                        <Menu.Item>
+                                            <button onClick={() => { setjobType(jobType) }} className="text-sm flex justify-start items-start px-4 py-2 w-36">
+                                                {jobType}
+                                            </button>
+                                        </Menu.Item>
+                                    )
+                                })
+                            }
+                        </Menu.Items>
+                    </Menu>
+                </div>
+
 
                 <SubHeading text="Custom Questions" customStyles="mt-14 font-bold mb-5" />
 

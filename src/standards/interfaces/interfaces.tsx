@@ -12,7 +12,7 @@ export interface JobDataInterface {
     salaryCompensation: string,
     location: string,
     typeOfJob: string, //full time / part time
-    jobSite: string, //remote/ hybrid/ on site
+    workModel: string, //remote/ hybrid/ on site
 }
 
 

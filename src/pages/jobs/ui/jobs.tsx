@@ -15,6 +15,8 @@ import { MdArrowDropDown } from "react-icons/md";
 import { CompanyInformation } from "../../addNewCompany/logic/addCompany";
 import { selectedCompanyAtom } from "../atoms/selectedCompanyAtom";
 import { SubHeading } from "../../../standards/styles/components/heading";
+import { Dropdown, MenuProps, Space } from "antd";
+import { ItemType } from "antd/es/menu/hooks/useItems";
 
 
 
@@ -25,7 +27,19 @@ export default function JobsPage() {
     const [moreThanTwoJobs, setMoreThanTwoJobs] = useRecoilState(moreThanTwoJobsAtom);
     const [selectedCompany, setSelectedCompany] = useRecoilState(selectedCompanyAtom);
     const [allCompanies, setAllCompanies] = useState<Array<CompanyInformation>>([] as Array<CompanyInformation>);
-
+    const items: MenuProps['items'] = allCompanies.map((company) => {
+        return (
+            {
+                label: <button
+                    onClick={() => { setSelectedCompany(company) }}
+                    className={` group flex w-full items-start justify-start text-sm`}>
+                    {company.companyName}
+                </button>,
+                key:company.companyName
+            }
+        )
+    }) as Array<ItemType>
+  
 
     const db = getFirestore();
 
@@ -55,7 +69,7 @@ export default function JobsPage() {
 
         <PageLayout>
 
-            <Menu>
+            {/* <Menu>
                 <Menu.Button className={"px-4 py-2 rounded-md text-sm bg-tan border-blue border-[1px] text-blue flex flex-row justify-center items-center gap-3"}>
                     {selectedCompany.companyName == null ? "Select a Company" : selectedCompany.companyName}
                     <MdArrowDropDown className="text-blue h-4 w-4" />
@@ -78,7 +92,7 @@ export default function JobsPage() {
                                         <button
                                             onClick={() => { setSelectedCompany(company) }}
                                             className={`${active ? 'bg-secondary text-black' : 'text-gray-900'} group flex w-full items-center justify-start  px-4 py-2 text-sm`}>
-                                                {company.companyName}
+                                            {company.companyName}
                                         </button>
                                     )}
                                 </Menu.Item>
@@ -86,7 +100,16 @@ export default function JobsPage() {
                         })}
                     </Menu.Items>
                 </Transition>
-            </Menu>
+            </Menu> */}
+
+            <Dropdown menu={{ items }} trigger={['click']} className="border-[1px] border-black px-4 py-2  rounded-md">
+                <a onClick={(e) => e.preventDefault()}>
+                    <Space>
+                        {selectedCompany.companyName==null?"Click me":selectedCompany.companyName}
+                        <MdArrowDropDown className="text-blue h-4 w-4" />
+                    </Space>
+                </a>
+            </Dropdown>
 
             {
                 selectedCompany.companyName != null &&
