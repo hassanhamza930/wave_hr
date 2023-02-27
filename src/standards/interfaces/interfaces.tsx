@@ -11,7 +11,7 @@ export interface JobDataInterface {
     jobQualifications: string,
     salaryCompensation: string,
     location: string,
-    typeOfJob: string, //full time / part time
+    jobType: string, //full time / part time
     workModel: string, //remote/ hybrid/ on site
 }
 
@@ -41,6 +41,16 @@ export interface ApplicationDataInterface {
     applicationStatus?: string;
     interviewInviteSent: boolean;
     applicationTime: Timestamp;
+}
+
+
+
+export interface UserDataInterface {
+    id?:string,
+    name:string|null,
+    photoUrl:string|null,
+    email:string|null,
+    interviewsSetup:boolean,
 }
 
 

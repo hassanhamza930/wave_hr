@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import NewJobPageIndexAtom, { NewJobPosting, NewJobPostingAtom } from "../atoms/newJobAtoms";
-import useSubmitOnboardingDataToFirebase from "../../home/logic/useSubmitOnboardingDataToFirebase";
 import pageIndexAtom from "../atoms/newJobAtoms";
 import { questionsAtom } from "../atoms/newJobAtoms";
 import { MdDelete } from "react-icons/md";

@@ -1,6 +1,6 @@
 import { Timestamp } from "firebase/firestore";
 import { atom } from "recoil";
-import { JobPosting } from "../../jobs/components/JobCard";
+import { JobDataInterface } from "../../../standards/interfaces/interfaces";
 
 export interface QuestionResponse {
   question: string;
@@ -44,17 +44,7 @@ export const ResponsesAtom = atom({
 
 export const jobDataAtom = atom({
   key: "JobDataAtom",
-  default: {
-    jobDetails: {
-      jobDescription: "",
-      jobQualifications: "",
-      jobTitle: "",
-      salaryCompensation: "",
-    },
-    questions: [] as Array<string>,
-    time: Timestamp.now(),
-    posedBy: "",
-  } as JobPosting,
+  default: {} as JobDataInterface,
 });
 
 export const selectedProfilePictureAtom = atom({

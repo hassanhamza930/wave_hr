@@ -28,12 +28,12 @@ export default function LoggedInHeader() {
         <>
             {isApplyPage == false &&
                 <div className="fixed shadow-md shadow-black/10 h-[60px] bg-tan z-50 w-full flex flex-row justify-between items-center px-[5%] py-5">
-                    {/* <button onClick={() => { navigate("/") }}>
+                    <button onClick={() => { navigate("/") }}>
                         <img src={Logo} className="h-10 w-10"></img>
-                    </button> */}
-                    <button onClick={()=>{navigate("/")}} className="font-black text-purp text-xl">
-                        WAVE
                     </button>
+                    {/* <button onClick={()=>{navigate("/")}} className="font-black text-purp text-xl">
+                        WAVE
+                    </button> */}
 
                     <div className="flex flex-row gap-16 justify-between items-center">
 

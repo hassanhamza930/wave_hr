@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useRecoilState } from "recoil";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
+import { JobDataInterface } from "../../../standards/interfaces/interfaces";
 import { ButtonOutlinedWhite } from "../../../standards/styles/components/button";
-import { JobPosting } from "../../jobs/components/JobCard";
 import { ApplyStageInitiatedAtom, jobDataAtom, SelectedJobIdAtom } from "../atoms/applyPageAtoms";
 import ApplicationWindow from "../components/applicationWindow";
 
@@ -33,7 +33,7 @@ export default function Apply() {
         console.log("syncing");
         var docData = await getDoc(doc(db, "jobs", jobId as string));
         var companyData = (await getDoc(doc(db, "users", docData.data()!["postedBy"] as string))).data()!["companyDetails"];
-        setJobData(docData.data() as JobPosting);
+        setJobData(docData.data() as JobDataInterface);
         setCompanyData(companyData);
         setLoading(false);
     }
@@ -50,7 +50,7 @@ export default function Apply() {
         <>
             {applyStageInitiated == true && <ApplicationWindow />}
 
-            <div className="relative h-screen w-full bg-blue flex justify-center items-center">
+            {/* <div className="relative h-screen w-full bg-blue flex justify-center items-center">
 
                 <div id="no_scroll" className="pb-20 text-black w-full md:w-[70%] rounded-md h-full md:h-[90%] overflow-y-scroll flex-col justify-start items-start">
                     <div className="rounded-md h-72 w-full bg-gradient-to-br from-purple-700 to-blue-800 bg-cover bg-center bg-[url('https://assets-global.website-files.com/5c7fdbdd4e3feeee8dd96dd2/62c4ff55b8637de51557f5f0_growth-flat-color.gif')]"></div>
@@ -106,7 +106,7 @@ export default function Apply() {
 
                 </div>
 
-            </div>
+            </div> */}
         </>
     )
 }

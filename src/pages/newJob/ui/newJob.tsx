@@ -14,17 +14,19 @@ import SimpleInput, { TextArea } from "../../../standards/styles/components/inpu
 import FormLayout from "../../../standards/styles/layouts/FormLayout";
 import PageLayout from "../../../standards/styles/layouts/pageLayout";
 import Page from "../../../standards/styles/layouts/pageLayout";
-import { JobPosting } from "../../jobs/components/JobCard";
 import NewJobPageIndexAtom, { NewJobPosting, NewJobPostingAtom, questionsAtom } from "../atoms/newJobAtoms";
 import PostNewJobForm from "../components/PostNewJob";
 import { Dropdown } from "react-bootstrap";
 import { Menu } from "@headlessui/react";
+import { JobDataInterface } from "../../../standards/interfaces/interfaces";
+import { selectedCompanyAtom } from "../../jobs/atoms/selectedCompanyAtom";
 
 export default function NewJob() {
 
     const [pageIndex, setPageIndex] = useRecoilState(NewJobPageIndexAtom);
     const [newJobPosting, setNewJobPosting] = useRecoilState(NewJobPostingAtom);
     const [loading, setLoading] = useRecoilState(isLoadingAtom);
+    const [selectedCompany, setSelectedCompany] = useRecoilState(selectedCompanyAtom);
     const [jobTitle, setjobTitle] = useState("" as string);
     const [jobDescription, setJobDescription] = useState("" as string);
     const [jobQualifications, setjobQualifications] = useState("" as string);
@@ -45,9 +47,7 @@ export default function NewJob() {
 
 
     async function handleAddNewJob() {
-
-
-        if (jobTitle.trim() == "" || jobDescription.trim() == "" || jobQualifications.trim() == "" || salaryCompensation == "") {
+        if (jobTitle.trim() == "" || jobDescription.trim() == "" || jobQualifications.trim() == "" || salaryCompensation == "" || location=="" || jobType=="" || workModel=="") {
             toast.error("Kindly enter all mandatory details");
             return 0;
         }
@@ -56,16 +56,18 @@ export default function NewJob() {
         console.log(questions);
 
         var doc = await addDoc(collection(db, "jobs"), {
-            jobDetails: {
-                jobDescription: jobDescription,
-                jobQualifications: jobQualifications,
-                jobTitle: jobTitle,
-                salaryCompensation: salaryCompensation
-            } as NewJobPosting,
-            questions: questions,
-            time: Timestamp.now(),
+            companyId:selectedCompany.id,
+            jobDescription:jobDescription,
+            jobQualifications:jobQualifications,
+            jobTitle:jobTitle,
+            jobType:jobType,
+            location:location,
+            questions:questions,
+            salaryCompensation:salaryCompensation,
+            time:Timestamp.now(),
+            workModel:workModel,
             postedBy: localStorage.getItem("uid") as string
-        } as JobPosting);
+        } as JobDataInterface);
 
         setLoading(false);
         navigate("/jobs");
@@ -110,7 +112,6 @@ export default function NewJob() {
 
                 <SimpleInput value={salaryCompensation} onChange={setSalaryCompensation} placeholder="Salary Compensation*" customStyles="mt-14" />
                 <SimpleInput value={location} onChange={setLocation} placeholder="Location*" customStyles="mt-14" />
-                {/* job site and type of job need to be added */}
 
                 <SubHeading text="Work Model*" customStyles="mt-10  mb-2 text-sm" />
                 <div className="relative">

@@ -1,7 +1,7 @@
 import { atom } from "recoil";
-import { CompanyInformation } from "../../addNewCompany/logic/addCompany";
+import { CompanyDataInterface } from "../../../standards/interfaces/interfaces";
 
 export const selectedCompanyAtom= atom({
     key:"selectedCompanyAtomJobsDropdown",
-    default: {} as CompanyInformation
+    default: {} as CompanyDataInterface
   });

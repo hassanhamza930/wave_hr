@@ -1,9 +1,9 @@
 import { atom } from "recoil";
-import { JobData, JobPosting } from "./components/JobCard";
+import { JobDataInterface } from "../../standards/interfaces/interfaces";
 
 export const selectedJobAtom = atom({
     key: 'selectedJob', // unique ID (with respect to other atoms/selectors)
-    default: {} as JobData, // default value (aka initial value)
+    default: {} as JobDataInterface, // default value (aka initial value)
   });
 
 

@@ -5,12 +5,12 @@ import { GiWeightLiftingDown } from "react-icons/gi";
 import { Navigate, useNavigate, useParams } from "react-router";
 import { useRecoilState } from "recoil";
 import { selectedJobAtom } from "../jobsAtoms";
-import { JobData, JobPosting } from "./JobCard";
 import { BsThreeDots, BsThreeDotsVertical } from "react-icons/bs";
 import { Menu } from "@headlessui/react";
 import { Transition } from "@headlessui/react";
 import ReactQuill from "react-quill";
 import { jobDataAtom } from "../../apply/atoms/applyPageAtoms";
+import { JobDataInterface } from "../../../standards/interfaces/interfaces";
 
 export default function JobDetails() {
 
@@ -29,7 +29,7 @@ export default function JobDetails() {
     }
 
     async function deleteJob(id: string) {
-        setSelectedJob({} as JobData);
+        setSelectedJob({} as JobDataInterface);
         await deleteDoc(doc(db, "jobs", id));
         toast.success("Deleted job posting");
     }
@@ -41,13 +41,13 @@ export default function JobDetails() {
 
 
     return (
-        <div id="no_scroll" className="text-md bg-blue text-tan/80 font-regular h-[90%] rounded-md flex-col justify-start items-start w-2/4 overflow-y-scroll">
+        <div id="no_scroll" className="mt-10 text-md bg-blue text-tan/80 font-regular h-[90%] rounded-md flex-col justify-start items-start w-2/4 overflow-y-scroll">
             <div className="h-48 w-full bg-blue bg-cover bg-center bg-[url('https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png')]"></div>
 
             <div className="flex flex-col justify-start items-start p-10 w-full">
 
                 <div className="relative flex flex-row justify-between items-center w-full">
-                    <div className="text-4xl font-bold text-tan">{selectedJob.jobData.jobDetails.jobTitle}</div>
+                    <div className="text-4xl font-bold text-tan">{selectedJob.jobTitle}</div>
                     <Menu>
                         <Menu.Button className="text-tan hover:scale-105">
                             <BsThreeDots size={30} />
@@ -61,12 +61,12 @@ export default function JobDetails() {
                                 leaveFrom="transform opacity-100 scale-100"
                                 leaveTo="transform opacity-0 scale-95"
                             >
-                                <Menu.Items className="absolute -mb-24  justify-center right-0 w-36 origin-top-right divide-y rounded-md divide-gray-100 bg-tan shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                <Menu.Items className="absolute -mb-24 justify-center right-0 w-36 origin-top-right divide-y rounded-md divide-gray-100 bg-tan shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <div className="">
                                         <Menu.Item>
                                             {({ active }) => (
                                                 <button
-                                                    onClick={() => { copyJobLink(selectedJob.id) }}
+                                                    onClick={() => { copyJobLink(selectedJob.id!) }}
                                                     className={`${active ? 'bg-secondary text-black' : 'text-gray-900'} group flex w-full items-center justify-start outline-none hover:bg-purp hover:text-tan  px-4 py-2 text-sm`}>
                                                     Copy Apply Link
                                                 </button>
@@ -76,7 +76,7 @@ export default function JobDetails() {
                                         <Menu.Item>
                                             {({ active }) => (
                                                 <button
-                                                    onClick={() => { editJob(selectedJob.id) }}
+                                                    onClick={() => { editJob(selectedJob.id!) }}
                                                     className={`${active ? 'bg-secondary text-black' : 'text-gray-900'} group flex w-full items-center justify-start hover:bg-purp hover:text-tan  px-4 py-2 text-sm`}>
                                                     Edit
                                                 </button>
@@ -86,7 +86,7 @@ export default function JobDetails() {
                                         <Menu.Item>
                                             {({ active }) => (
                                                 <button
-                                                    onClick={() => { deleteJob(selectedJob.id) }}
+                                                    onClick={() => { deleteJob(selectedJob.id!) }}
                                                     className={`${active ? 'bg-secondary text-black' : 'text-gray-900'} group flex w-full items-center justify-start hover:bg-purp hover:text-tan  px-4 py-2 text-sm`}>
                                                     Delete
                                                 </button>
@@ -103,27 +103,27 @@ export default function JobDetails() {
                 </div>
 
                 <div className="flex mt-5 flex-row w-full justify-between items-center">
-                    <div className="text-md text-tan">Posted on {selectedJob.jobData.time.toDate().toLocaleString()}</div>
+                    <div className="text-md text-tan">Posted on {selectedJob.time.toDate().toLocaleString()}</div>
                 </div>
 
                 <div className="flex flex-row justify-center items-start gap-2 mt-5">
                     {/* <button onClick={() => { copyJobLink(selectedJob.id) }} className="text-sm px-4 py-2 rounded-md border-tan border-2 hover:font-bold hover:bg-tan bg-transparent hover:text-black text-tan">Copy Job Link</button>
                     <button onClick={() => { deleteJob(selectedJob.id) }} className="text-sm px-4 py-2 rounded-md border-tan border-2 hover:font-bold hover:bg-tan bg-transparent hover:text-black text-tan">Delete</button> */}
-                    <button onClick={() => { seeApplicants(selectedJob.id) }} className="text-sm px-4 py-2 rounded-md border-tan border-2 hover:font-bold hover:bg-tan bg-transparent hover:text-black text-tan">See Applicants</button>
+                    <button onClick={() => { seeApplicants(selectedJob.id!) }} className="text-sm px-4 py-2 rounded-md border-tan border-2 hover:font-bold hover:bg-tan bg-transparent hover:text-black text-tan">See Applicants</button>
                 </div>
 
 
                 <div className="text-xl font-bold text-tan mt-10">Job Description</div>
-                {/* <ReactQuill value={selectedJob.jobData.jobDetails.jobDescription} readOnly={true} theme="bubble" className="" /> */}
-                <div dangerouslySetInnerHTML={{ __html: selectedJob.jobData.jobDetails.jobDescription }} className="text-md mt-2 text-tan"></div>
+                {/* <ReactQuill value={selectedJob.jobDescription} readOnly={true} theme="bubble" className="" /> */}
+                <div dangerouslySetInnerHTML={{ __html: selectedJob.jobDescription }} className="text-md mt-2 text-tan"></div>
                 <div className="text-xl font-bold text-tan mt-10">Job Qualifications</div>
-                <div dangerouslySetInnerHTML={{ __html: selectedJob.jobData.jobDetails.jobQualifications }} className="text-md mt-2 text-tan"></div>
-                {/* <ReactQuill value={selectedJob.jobData.jobDetails.jobQualifications} readOnly={true} theme="bubble" className="" /> */}
+                <div dangerouslySetInnerHTML={{ __html: selectedJob.jobQualifications }} className="text-md mt-2 text-tan"></div>
+                {/* <ReactQuill value={selectedJob.jobQualifications} readOnly={true} theme="bubble" className="" /> */}
                 <div className="text-xl font-bold text-tan mt-10">Salary Compensation</div>
-                <div className="text-md mt-2 text-tan">{selectedJob.jobData.jobDetails.salaryCompensation.toString()}</div>
+                <div className="text-md mt-2 text-tan">{selectedJob.salaryCompensation.toString()}</div>
                 <div className="text-xl font-bold text-tan mt-10 mb-2">Questions</div>
                 {
-                    selectedJob.jobData.questions.map((e, index) => {
+                    selectedJob.questions.map((e, index) => {
                         return (
                             <div className="text-md text-tan mt-2   ">
                                 <b>Q{index + 1})</b> {e}

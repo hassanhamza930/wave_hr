@@ -1,23 +1,22 @@
 import { useState, useEffect, Fragment } from "react";
 import { JobApplication } from "../../apply/atoms/applyPageAtoms";
-import { JobData, JobPosting } from "../../jobs/components/JobCard";
 import { useParams } from "react-router";
 import { useRecoilState } from "recoil";
 import { selectedApplicantIdAtom } from "../atoms/applicantsAtoms";
 import { Menu, Transition } from "@headlessui/react";
 import { AiFillCaretDown } from "react-icons/ai";
-import getJob from "../logic/getJob";
 import { dropDownItems } from "../../../standards/HardcodedLists";
 import getCurrentJobApplications from "../logic/getCurrentJobApplications";
 import getAllJobApplications from "../logic/getAllJobApplication";
 import ApplicantCard from "./ApplicantCard";
+import { JobDataInterface } from "../../../standards/interfaces/interfaces";
 
 
 
 export default function AllApplicants() {
   const [applicants, setApplicants] = useState<Array<JobApplication>>([]);
   // const [allApplicants, setAllApplicants] = useState<Array<JobApplication>>([]);
-  const [jobDetails, setJobDetails] = useState<JobData>({} as JobData);
+  const [jobDetails, setJobDetails] = useState<JobDataInterface>({} as JobDataInterface);
   const [searchValue, setSearchValue] = useState<string>("");
   const { jobId } = useParams();
   const [dropDown, setDropDown] = useState(dropDownItems[0]);
@@ -26,8 +25,8 @@ export default function AllApplicants() {
   );
 
   useEffect(() => {
-    getJob(setJobDetails, jobId!);
   }, []);
+
 
   useEffect(() => {
     if (dropDown === "All applications") {
@@ -44,6 +43,7 @@ export default function AllApplicants() {
   function handleSelectAllApplicant(applicant: JobApplication) {
     setSelectedApplicantId(applicant?.id as string);
   }
+
   function handleSelectApplicant(applicant: string) {
     setSelectedApplicantId(applicant as string);
   }
@@ -53,10 +53,10 @@ export default function AllApplicants() {
       id="no_scroll"
       className="h-full w-[39%] rounded-md p-5 flex flex-col justify-start items-start"
     >
-      <div className="text-black text-md mt-5 mb-2 ml-1">
+      {/* <div className="text-black text-md mt-5 mb-2 ml-1">
         Seeing Applicants for{" "}
         <div className="mt-2 font-bold text-black text-3xl mb-5">
-          {jobDetails.jobData != null && jobDetails.jobData.jobDetails.jobTitle}
+          {jobDetails.companyId != null && jobDetails.jobTitle}
         </div>
       </div>
 
@@ -201,7 +201,7 @@ export default function AllApplicants() {
             </div>
           )}
         </>
-      </div>
+      </div> */}
     </div>
   );
 }

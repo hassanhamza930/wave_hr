@@ -7,11 +7,11 @@ import { doc, setDoc, getFirestore, getDoc, onSnapshot, Timestamp } from 'fireba
 import { useParams } from 'react-router';
 import { selectedJobAtom } from '../../jobs/jobsAtoms';
 import sendEmail from '../../../standards/functions/sendEmail';
-import { JobPosting } from '../../jobs/components/JobCard';
 import { UserInterface } from '../../../atoms/app/globalUserAtom';
 import { selectedApplicantDataAtom, selectedApplicantIdAtom } from '../atoms/applicantsAtoms';
 import { IoMdArrowDropdown, IoMdArrowDropdownCircle } from 'react-icons/io';
 import { Listbox, Menu } from '@headlessui/react';
+import { JobDataInterface } from '../../../standards/interfaces/interfaces';
 
 
 export default function SelectedApplicantDetails() {
@@ -60,9 +60,9 @@ export default function SelectedApplicantDetails() {
     async function RejectApplicant() {
         setSelectedApplicantId("");
         await setDoc(doc(db, "jobs", jobId as string, "applications", selectedApplicantId as string), { "rejected": true }, { merge: true });
-        var jobData: JobPosting = (await getDoc(doc(db, "jobs", jobId as string))).data() as JobPosting;
+        var jobData: JobDataInterface = (await getDoc(doc(db, "jobs", jobId as string))).data() as JobDataInterface;
         var posterData: UserInterface = (await getDoc(doc(db, "users", jobData.postedBy! as string))).data() as UserInterface;
-        sendEmail(selectedApplicantData.email, `Your application for ${jobData.jobDetails.jobTitle} at ${posterData.companyDetails.companyName} was rejected.`, `Thank you for the taking the time to apply but unfortunately we will not be moving forward with your application at this time.------${posterData.companyDetails.companyName}-----${Timestamp.now().toDate().toLocaleString()}`);
+        sendEmail(selectedApplicantData.email, `Your application for ${jobData.jobTitle} at ${posterData.companyDetails.companyName} was rejected.`, `Thank you for the taking the time to apply but unfortunately we will not be moving forward with your application at this time.------${posterData.companyDetails.companyName}-----${Timestamp.now().toDate().toLocaleString()}`);
         console.log(selectedApplicantId);
     }
 

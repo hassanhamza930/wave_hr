@@ -3,7 +3,6 @@ import AllPostedJobs from "../../jobs/components/AllPostedJobs"
 import { useEffect, useState } from 'react';
 import { getDocs, collection, getFirestore, onSnapshot, doc } from 'firebase/firestore';
 import { JobApplication } from '../../apply/atoms/applyPageAtoms';
-import { JobData, JobPosting } from '../../jobs/components/JobCard';
 import AllApplicants from "../components/AllApplicants";
 import { useRecoilState } from 'recoil';
 import SelectedApplicantDetails from '../components/selectedApplicantDetails';

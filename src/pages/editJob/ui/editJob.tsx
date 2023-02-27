@@ -7,26 +7,34 @@ import { useRecoilState } from "recoil";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
 import pageIndexAtom, { NewJobPosting, NewJobPostingAtom, questionsAtom } from "../../newJob/atoms/newJobAtoms";
 import ReactQuill from "react-quill";
-import { MdDelete } from "react-icons/md";
-import { JobPosting } from "../../jobs/components/JobCard";
+import { MdArrowDropDown, MdDelete } from "react-icons/md";
 import SimpleInput, { TextArea } from "../../../standards/styles/components/inputs";
 import { Heading, SubHeading } from "../../../standards/styles/components/heading";
 import FormLayout from "../../../standards/styles/layouts/FormLayout";
 import PageLayout from "../../../standards/styles/layouts/pageLayout";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { ButtonSolid } from "../../../standards/styles/components/button";
+import { JobDataInterface } from "../../../standards/interfaces/interfaces";
+import { selectedCompanyAtom } from "../../jobs/atoms/selectedCompanyAtom";
+import { Menu } from "@headlessui/react";
 
 
 function EditJob() {
     const { jobId } = useParams();
     const db = getFirestore();
     const [loading, setLoading] = useRecoilState(isLoadingAtom);
+    const [selectedCompany, setSelectedCompany] = useRecoilState(selectedCompanyAtom);
     const [jobTitle, setjobTitle] = useState("" as string);
     const [jobDescription, setJobDescription] = useState("" as string);
     const [jobQualifications, setjobQualifications] = useState("" as string);
     const [salaryCompensation, setSalaryCompensation] = useState("" as string);
     const [customQuestion, setcustomQuestion] = useState("" as string);
+    const [location, setLocation] = useState("" as string);
+    const [jobType, setjobType] = useState("" as string);
+    const [workModel, setWorkModel] = useState("" as string);
     const [questions, setQuestions] = useRecoilState(questionsAtom);
+    const workModels = ["Remote", "Onsite", "Hybrid"];
+    const jobTypes = ["Full-time", "Part-Time"];
     const navigate = useNavigate();
 
     async function UpdateJob() {
@@ -41,16 +49,18 @@ function EditJob() {
         console.log(questions);
 
         await setDoc(doc(db, "jobs", jobId as string), {
-            jobDetails: {
-                jobDescription: jobDescription,
-                jobQualifications: jobQualifications,
-                jobTitle: jobTitle,
-                salaryCompensation: salaryCompensation
-            } as NewJobPosting,
+            companyId: selectedCompany.id,
+            jobDescription: jobDescription,
+            jobQualifications: jobQualifications,
+            jobTitle: jobTitle,
+            jobType: jobType,
+            location: location,
             questions: questions,
+            salaryCompensation: salaryCompensation,
             time: Timestamp.now(),
+            workModel: workModel,
             postedBy: localStorage.getItem("uid") as string
-        } as JobPosting);
+        } as JobDataInterface);
 
         setLoading(false);
         navigate("/jobs");
@@ -78,14 +88,16 @@ function EditJob() {
 
     async function PreFillValues() {
         setLoading(true);
-        var jobData: JobPosting = (await getDoc(doc(db, "jobs", jobId as string))).data() as JobPosting;
-        setjobTitle(jobData.jobDetails.jobTitle);
-        setJobDescription(jobData.jobDetails.jobDescription);
-        setjobQualifications(jobData.jobDetails.jobQualifications);
-        setSalaryCompensation(jobData.jobDetails.salaryCompensation);
-        setQuestions(jobData.questions)
+        var jobData: JobDataInterface = (await getDoc(doc(db, "jobs", jobId as string))).data() as JobDataInterface;
+        setJobDescription(jobData.jobDescription);
+        setjobQualifications(jobData.jobQualifications);
+        setjobTitle(jobData.jobTitle);
+        setjobType(jobData.jobType);
+        setLocation(location);
+        setQuestions(jobData.questions);
+        setSalaryCompensation(jobData.salaryCompensation);
+        setWorkModel(jobData.workModel);
         setLoading(false);
-
     }
 
     useEffect(() => {
@@ -106,6 +118,54 @@ function EditJob() {
                 <TextArea customStyles="mt-10" placeholder="Please provide qualifications required for the job." value={jobQualifications} onChange={setjobQualifications} />
 
                 <SimpleInput value={salaryCompensation} onChange={setSalaryCompensation} placeholder="Salary Compensation" customStyles="mt-14" />
+                <SimpleInput value={location} onChange={setLocation} placeholder="Location*" customStyles="mt-14" />
+
+                <SubHeading text="Work Model*" customStyles="mt-10  mb-2 text-sm" />
+                <div className="relative">
+                    <Menu>
+                        <Menu.Button className="border-[1px] border-black px-6 flex flex-row gap-2 justify-start items-center py-2 rounded-md text-sm">
+                            {workModel == "" ? "Select a work model" : workModel}
+                            <MdArrowDropDown className="text-blue h-4 w-4" />
+                        </Menu.Button>
+                        <Menu.Items className={"absolute z-50 mt-1 rounded-md bg-white flex flex-col justify-start items-start"}>
+                            {
+                                workModels.map((workModel) => {
+                                    return (
+                                        <Menu.Item>
+                                            <button onClick={() => { setWorkModel(workModel) }} className="text-sm flex justify-start items-start px-4 py-2 w-36">
+                                                {workModel}
+                                            </button>
+                                        </Menu.Item>
+                                    )
+                                })
+                            }
+                        </Menu.Items>
+                    </Menu>
+                </div>
+
+                <SubHeading text="Job Type*" customStyles="mt-10  mb-2 text-sm" />
+
+                <div className="relative">
+                    <Menu>
+                        <Menu.Button className="border-[1px] border-black px-6 flex flex-row gap-2 justify-start items-center py-2 rounded-md text-sm">
+                            {jobType == "" ? "Select a job type" : jobType}
+                            <MdArrowDropDown className="text-blue h-4 w-4" />
+                        </Menu.Button>
+                        <Menu.Items className={"absolute z-50 mt-1 rounded-md bg-white flex flex-col justify-start items-start"}>
+                            {
+                                jobTypes.map((jobType) => {
+                                    return (
+                                        <Menu.Item>
+                                            <button onClick={() => { setjobType(jobType) }} className="text-sm flex justify-start items-start px-4 py-2 w-36">
+                                                {jobType}
+                                            </button>
+                                        </Menu.Item>
+                                    )
+                                })
+                            }
+                        </Menu.Items>
+                    </Menu>
+                </div>
 
                 <SubHeading text="Custom Questions" customStyles="mt-14 font-bold mb-5" />
 
@@ -115,6 +175,7 @@ function EditJob() {
                         <AiFillPlusCircle className="text-purp  h-10 w-10 ml-5" />
                     </button>
                 </div>
+
 
 
                 <div className="flex-col h-min gap-2 mt-10 w-full flex justify-start items-start">
