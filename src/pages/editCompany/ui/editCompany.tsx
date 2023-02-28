@@ -3,7 +3,6 @@ import SimpleInput, { TextArea } from "../../../standards/styles/components/inpu
 import FormLayout from "../../../standards/styles/layouts/FormLayout";
 import PageLayout from "../../../standards/styles/layouts/pageLayout";
 import { useState, useEffect } from "react";
-import PublicFacingPageLayout, { PublicFacingPageLayoutWhite } from "../../../standards/styles/layouts/publicFacingPageLayout";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 import { MdCancel } from "react-icons/md"

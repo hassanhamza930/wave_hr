@@ -1,4 +1,4 @@
-import { collection, doc, getFirestore, onSnapshot, query, setDoc, Timestamp, where } from "firebase/firestore";
+import { collection, doc, getDocs, getFirestore, onSnapshot, query, setDoc, Timestamp, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { JobDataInterface } from "../../../standards/interfaces/interfaces";
@@ -16,37 +16,32 @@ export default function AllPostedJobs() {
     const [selectedCompany, setSelectedCompany] = useRecoilState(selectedCompanyAtom);
 
 
-  
-    useEffect(()=>{
-        console.log("selected company id is ",selectedCompany.id);
-    },[])
+
+    async function fetchAllPostedJobsUnderCompany(){
+        var docs=await getDocs(query(collection(db, "jobs"),where("companyId","==",selectedCompany.id==undefined?"":selectedCompany.id ),where("postedBy","==",localStorage.getItem("uid") )))
+        var tempDocList: Array<JobDataInterface> = [];
+        docs.docs.forEach((e) => {
+            var tempData:JobDataInterface=e.data() as JobDataInterface;
+            tempData.id=e.id;
+            tempDocList.push(tempData);
+        })
+        setAllJobs(tempDocList);
+    }
 
 
     useEffect(() => {
-
-        onSnapshot(
-            query(collection(db, "jobs"),where("postedBy","==",localStorage.getItem("uid") ),where("companyId","==",selectedCompany.id==undefined?"":selectedCompany.id ) ),
-            (docs) => {
-                
-                var tempDocList: Array<JobDataInterface> = [];
-                docs.docs.forEach((e) => {
-                    var tempData:JobDataInterface=e.data() as JobDataInterface;
-                    tempData.id=e.id;
-                    tempDocList.push(tempData);
-                    setAllJobs(tempDocList);
-                })
-                
-            }
-        );
-
-    }, [selectedCompany])
+        console.log("Company Id is",selectedCompany.id);
+       fetchAllPostedJobsUnderCompany();
+       console.log("fetching");
+    
+    }, [selectedCompany.companyName])
 
     return (
         <div id="no_scroll" className="min:h-min max:h-[420px] pr-20 w-full gap-3 overflow-y-scroll flex flex-col justify-start items-start">
             {
                 allJobs.map((e,index) => {
                     return (
-                        <JobCard {...e} />
+                        <JobCard key={index} {...e} />
                     )
                 })
             }

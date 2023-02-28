@@ -4,26 +4,20 @@ import {
   query,
   onSnapshot,
 } from "firebase/firestore";
-import { JobApplication } from "../../apply/atoms/applyPageAtoms";
+import { ApplicationDataInterface } from "../../../standards/interfaces/interfaces";
 
-export default function getCurrentJobApplications(
-  setApplicants: Function,
-  jobID: string,
-  searchValue: string
-) {
+
+export default function getCurrentApplicationDataInterfaces(setApplicants: Function,jobID: string,searchValue: string) {
+  
   const db = getFirestore();
 
   onSnapshot(query(collection(db, "jobs", jobID, "applications")), (docs) => {
-    var tempArray: Array<JobApplication> = [];
+    var tempArray: Array<ApplicationDataInterface> = [];
     docs.forEach((doc) => {
-      var userName: string = doc.data()["name"] as string;
-      if (
-        userName
-          .toLocaleLowerCase()
-          .includes(searchValue.toLocaleLowerCase()) == true &&
-        doc.data()["rejected"] == false
-      ) {
-        tempArray.push({ ...doc.data(), id: doc.id } as JobApplication);
+      var applicantData:ApplicationDataInterface=doc.data() as ApplicationDataInterface;
+      
+      if (applicantData.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) == true && applicantData.applicationStatus!="rejected") {
+        tempArray.push({ ...doc.data(), id: doc.id } as ApplicationDataInterface);
       }
     });
 
@@ -31,13 +25,15 @@ export default function getCurrentJobApplications(
     var reviewsDoneArray: any = [];
 
     tempArray.forEach((data, index) => {
-      if (data.rating != null) {
+      if (data.rating != 0) {
         reviewsDoneArray.splice(0, 0, data);
+      }else{
+        pendingReviewsArray.splice(0, 0, data);
       }
     });
 
     reviewsDoneArray = reviewsDoneArray.sort(
-      (a: JobApplication, b: JobApplication) => {
+      (a: ApplicationDataInterface, b: ApplicationDataInterface) => {
         if (+a.rating! > +b.rating!) {
           return +1;
         } else if (+a.rating! < +b.rating!) {
@@ -48,12 +44,6 @@ export default function getCurrentJobApplications(
       }
     );
     reviewsDoneArray = reviewsDoneArray.reverse();
-
-    tempArray.forEach((data, index) => {
-      if (data.rating == null) {
-        pendingReviewsArray.splice(0, 0, data);
-      }
-    });
 
     pendingReviewsArray.forEach((data: any, index: number) => {
       reviewsDoneArray.splice(0, 0, data);

@@ -27,7 +27,7 @@ function CompanyDetails() {
       <div id="no_scroll" className="w-full h-[90%] mt-10 bg-black rounded-md overflow-y-scroll">
 
         <div style={{ backgroundImage: `url('${selectedCompany.companyCover}')` }} className="h-72 w-full bg-blue bg-cover bg-center bg-[url('https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png')]"></div>
-        <div style={{ backgroundImage: `url('${selectedCompany.companyLogo}')` }} className="h-36 w-36 bg-blue rounded-md ml-10 -mt-24 bg-cover bg-center bg-[url('https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png')]"></div>
+        <div style={{ backgroundImage: `url('${selectedCompany.companyLogo}')` }} className="h-36 w-36 bg-transparent rounded-md ml-10 -mt-24 bg-cover bg-center bg-[url('https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png')]"></div>
 
         <div className="relative text-tan text-4xl px-10 pt-5 w-full flex flex-row justify-between items-center">
 

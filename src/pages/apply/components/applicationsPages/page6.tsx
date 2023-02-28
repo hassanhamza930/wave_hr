@@ -94,7 +94,7 @@ export default function Page6() {
 
         console.log(finalJobApplicationData);
 
-        await addDoc(collection(db, "jobs", jobData.id! as string, "applications"), { ...finalJobApplicationData, rating: 0, rejected: false, applicationStatus: "Interview Invite Pending", applicationTime: Timestamp.now() } as ApplicationDataInterface);
+        await addDoc(collection(db, "jobs", jobData.id! as string, "applications"), { ...finalJobApplicationData, rating: 0, applicationStatus: "Pending Review", applicationTime: Timestamp.now() } as ApplicationDataInterface);
         setApplyStageInitiated(false);
         console.log("reached 1");
         // var userDetails: UserInterface = (await getDoc(doc(db, "users", jobData.postedBy as string))).data() as UserInterface;

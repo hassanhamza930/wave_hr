@@ -17,7 +17,6 @@ export default function Applicants() {
 
     return (
         <PageLayout>
-        {/* <div className="pt-[85px] pb-[25px] h-screen w-full flex justify-center items-center"> */}
 
             <div className="h-full w-full flex flex-row justify-between items-center">
 
@@ -25,7 +24,6 @@ export default function Applicants() {
                 <SelectedApplicantDetails/>
 
             </div>
-        {/* </div> */}
         </PageLayout>
 
     )

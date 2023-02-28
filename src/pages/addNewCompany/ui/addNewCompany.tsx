@@ -4,7 +4,6 @@ import FormLayout from "../../../standards/styles/layouts/FormLayout";
 import PageLayout from "../../../standards/styles/layouts/pageLayout";
 import { useState, useEffect } from "react";
 import CompanyBanner from "../components/companyBanner";
-import PublicFacingPageLayout, { PublicFacingPageLayoutWhite } from "../../../standards/styles/layouts/publicFacingPageLayout";
 import CompanyLogo from "../components/companyLogo";
 import { AiFillPlusCircle, AiFillPlusSquare } from "react-icons/ai";
 import { toast } from "react-hot-toast";

@@ -17,7 +17,7 @@ import { selectedCompanyAtom } from "../atoms/selectedCompanyAtom";
 import { SubHeading } from "../../../standards/styles/components/heading";
 import { Dropdown, MenuProps, Space } from "antd";
 import { ItemType } from "antd/es/menu/hooks/useItems";
-import { CompanyDataInterface } from "../../../standards/interfaces/interfaces";
+import { CompanyDataInterface, JobDataInterface } from "../../../standards/interfaces/interfaces";
 
 
 
@@ -34,9 +34,9 @@ export default function JobsPage() {
 
 
 
-    async function fetchAllCompaniesPostedByUser() {
-
-        onSnapshot(query(collection(db, "companies"), where("companyOwnerId", "==",localStorage.getItem("uid") as string ) ), (docs) => {
+  
+    useEffect(() => {
+        onSnapshot(query(collection(db, "companies"), where("companyOwnerId", "==", localStorage.getItem("uid") as string)), (docs) => {
             var docsData: Array<CompanyDataInterface> = docs.docs.map((doc) => {
                 var tempData: CompanyDataInterface = doc.data() as CompanyDataInterface;
                 tempData.id = doc.id;
@@ -44,11 +44,6 @@ export default function JobsPage() {
             });
             setAllCompanies(docsData as Array<CompanyDataInterface>);
         })
-
-    }
-
-    useEffect(() => {
-        fetchAllCompaniesPostedByUser();
     }, [])
 
 
@@ -58,12 +53,8 @@ export default function JobsPage() {
 
         <PageLayout>
 
-
-
             <div className="w-full h-full flex flex-row">
-
                 <div className="h-full w-2/4 flex flex-col justify-start items-start ">
-
                     <div className="relative">
                         <Menu>
                             <Menu.Button className={"px-4 py-2 rounded-md text-sm bg-tan border-black border-[1px] text-black flex flex-row justify-center items-center gap-3"}>
@@ -81,12 +72,12 @@ export default function JobsPage() {
 
                                 <Menu.Items className="absolute mt-1 justify-center left-0 w-48 rounded-md origin-top-right divide-y divide-gray-100  bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
 
-                                    {allCompanies.map((company) => {
+                                    {allCompanies.map((company,index) => {
                                         return (
-                                            <Menu.Item>
+                                            <Menu.Item key={index}>
                                                 {({ active }) => (
                                                     <button
-                                                        onClick={() => { setSelectedCompany(company) }}
+                                                        onClick={() => { setSelectedCompany(company);setSelectedJob({} as JobDataInterface) }}
                                                         className={`${active ? 'bg-secondary text-black' : 'text-gray-900'} group flex w-full items-center justify-start  px-4 py-2 text-sm`}>
                                                         {company.companyName}
                                                     </button>
