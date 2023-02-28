@@ -6,6 +6,7 @@ import { useRecoilState } from "recoil";
 import pageIndexAtom from "../../../newJob/atoms/newJobAtoms";
 import JobApplicationAtom, { ApplyPageIndexAtom, JobApplication, jobDataAtom, QuestionResponse, ResponsesAtom, selectedResumeAtom } from "../../atoms/applyPageAtoms";
 import { motion } from "framer-motion";
+import { ButtonOutlinedWhite } from "../../../../standards/styles/components/button";
 
 
 export default function Page5() {
@@ -20,6 +21,9 @@ export default function Page5() {
     const [responses, setResponses] = useRecoilState(ResponsesAtom);
 
     useEffect(() => {
+        if(jobData.questions.length==0){
+            setPageIndex(5);
+        }
         console.log("this is coming from page 5");
         console.log(jobApplication);
         setQuestions(jobData.questions);
@@ -55,7 +59,7 @@ export default function Page5() {
             }}
             className="text-left h-full rounded-md  flex justify-center items-start flex-col p-10 w-full md:w-[60%]">
             <div className="text-3xl font-bold text-tan">Additional Questions</div>
-            <div className="text-xl text-tan mt-2">Please provide information for the required fields</div>
+            <div className="text-xl text-tan mt-2">Please provide answers for following questions</div>
 
             {
                 questions.map((question, index) => {
@@ -71,7 +75,7 @@ export default function Page5() {
                                     visible: { opacity: 1, y: 0 },
                                     hidden: { opacity: 0, y: 50 }
                                 }}
-                                className="text-md md:text-xl font-bold text-tan mt-10">
+                                className="text-md font-bold text-tan mt-10">
                                 Q{questionIndex + 1}) {questions[questionIndex]}
                             </motion.div>
                         )

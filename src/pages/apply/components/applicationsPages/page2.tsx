@@ -8,6 +8,7 @@ import JobApplicationAtom, { ApplyPageIndexAtom, JobApplication, selectedProfile
 import { motion } from "framer-motion";
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import { useParams } from "react-router";
+import { ApplicationDataInterface } from "../../../../standards/interfaces/interfaces";
 
 
 export default function Page2() {
@@ -21,7 +22,7 @@ export default function Page2() {
 
 
 
-    async function handlePage2DataSubmit(data: JobApplication) {
+    async function handlePage2DataSubmit(data: ApplicationDataInterface) {
 
         if (watch("email") == "" || watch("email").includes("@") != true) {
             toast.error("Please enter your email properly")

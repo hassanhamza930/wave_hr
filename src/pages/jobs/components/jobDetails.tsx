@@ -19,7 +19,7 @@ export default function JobDetails() {
     const db = getFirestore();
 
     function copyJobLink(id: string) {
-        var jobLink = "https://wavehr.vercel.app" + "/apply/" + id;
+        var jobLink =  window.location.href.includes("localhost")==true?"http://localhost:3000/" + "apply/" + id:"https://wavehr.vercel.app" + "/apply/" + id;
         navigator.clipboard.writeText(jobLink);
         toast.success("Job Link Copied to Clipboard");
     }
@@ -41,7 +41,7 @@ export default function JobDetails() {
 
 
     return (
-        <div id="no_scroll" className="mt-10 text-md bg-blue text-tan/80 font-regular h-[90%] rounded-md flex-col justify-start items-start w-2/4 overflow-y-scroll">
+        <div id="no_scroll" className="mt-10 text-md bg-black text-tan/80 font-regular h-[90%] rounded-md flex-col justify-start items-start w-2/4 overflow-y-scroll">
             <div className="h-48 w-full bg-blue bg-cover bg-center bg-[url('https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png')]"></div>
 
             <div className="flex flex-col justify-start items-start p-10 w-full">

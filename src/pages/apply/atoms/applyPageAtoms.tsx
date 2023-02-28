@@ -1,6 +1,6 @@
 import { Timestamp } from "firebase/firestore";
 import { atom } from "recoil";
-import { JobDataInterface } from "../../../standards/interfaces/interfaces";
+import { ApplicationDataInterface, JobDataInterface } from "../../../standards/interfaces/interfaces";
 
 export interface QuestionResponse {
   question: string;
@@ -27,14 +27,10 @@ export const ApplyPageIndexAtom = atom({
   default: 0 as number, // default value (aka initial value)
 });
 
-export const SelectedJobIdAtom = atom({
-  key: "selectedJobIdAtom", // unique ID (with respect to other atoms/selectors)
-  default: "" as string, // default value (aka initial value)
-});
 
 const JobApplicationAtom = atom({
   key: "JobApplicationAtom", // unique ID (with respect to other atoms/selectors)
-  default: {} as JobApplication, // default value (aka initial value)
+  default: {} as ApplicationDataInterface, // default value (aka initial value)
 });
 
 export const ResponsesAtom = atom({

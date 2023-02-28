@@ -23,7 +23,7 @@ export default function JobCard(props:JobDataInterface) {
     
 
     return (
-        <button onClick={()=>{setSelectedJob(props)}} className="text-blue text-left w-full border-2 rounded-xl hover:bg-blue hover:text-tan border-blue flex flex-col justify-start items-start p-4">            
+        <button onClick={()=>{setSelectedJob(props)}} className="text-black text-left w-full border-2 rounded-xl hover:bg-blue hover:text-tan border-black flex flex-col justify-start items-start p-4">            
             <div className="text-3xl font-bold">{props.jobTitle}</div>
             <div className="text-sm mt-1 font-regular">Posted on {props.time.toDate().toLocaleString().toString()}</div>
             <div className="mt-3 w-full flex flex-row justify-end items-end text-md font-regular">{applicants} Applicant{applicants>1?"s":""}</div>

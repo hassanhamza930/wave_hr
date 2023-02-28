@@ -6,6 +6,7 @@ import { useRecoilState } from "recoil";
 import pageIndexAtom from "../../../newJob/atoms/newJobAtoms";
 import JobApplicationAtom, { ApplyPageIndexAtom, JobApplication, selectedProfilePictureAtom } from "../../atoms/applyPageAtoms";
 import { motion } from "framer-motion";
+import { ApplicationDataInterface } from "../../../../standards/interfaces/interfaces";
 
 
 export default function Page1() {
@@ -40,7 +41,7 @@ export default function Page1() {
 
     }
 
-    function handlePage1DataSubmit(data: JobApplication) {
+    function handlePage1DataSubmit(data: ApplicationDataInterface) {
 
         if (watch("name") == "") {
             toast.error("Please enter your name")
