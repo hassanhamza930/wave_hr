@@ -95,7 +95,7 @@ export default function SelectedApplicantDetails() {
 
                 <div className='flex w-full flex-row justify-start items-start '>
 
-                    <div className='flex flex-col justify-start items-start'>
+                    <div className='flex flex-col w-full justify-start items-start'>
                         <div style={{ backgroundImage: `url('${selectedApplicantData.profilePicture}')` }} className='bg-cover bg-center h-48 w-48 bg-white rounded-md'></div>
                         <div className='bg-cover bg-center rounded-md text-tan font-bold text-4xl mt-5'>{selectedApplicantData.name}</div>
                         <div className='bg-cover bg-center rounded-md text-tan font-regular text-md mt-1'>{selectedApplicantData.email}</div>
