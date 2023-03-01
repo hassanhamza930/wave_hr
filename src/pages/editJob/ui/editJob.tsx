@@ -93,7 +93,7 @@ function EditJob() {
         setjobQualifications(jobData.jobQualifications);
         setjobTitle(jobData.jobTitle);
         setjobType(jobData.jobType);
-        setLocation(location);
+        setLocation(jobData.location);
         setQuestions(jobData.questions);
         setSalaryCompensation(jobData.salaryCompensation);
         setWorkModel(jobData.workModel);

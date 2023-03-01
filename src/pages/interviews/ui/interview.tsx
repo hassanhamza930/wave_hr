@@ -1,9 +1,8 @@
 import dayjs, { Dayjs } from 'dayjs'
 import Timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
-import { Timestamp } from "firebase/firestore"
+import { doc, getFirestore, setDoc, Timestamp } from "firebase/firestore"
 import { useEffect, useState } from "react"
-import { AvailabilityInterface } from '../../../standards/interfaces/interfaces';
 import { Heading, SubHeading } from "../../../standards/styles/components/heading"
 import PageLayout from "../../../standards/styles/layouts/pageLayout"
 import TimePicker from 'react-time-picker';
@@ -14,6 +13,11 @@ import Logo from "../../../images/logo.svg";
 import calendlyLogo from "../../../images/calendly.svg";
 import { GiInfinity } from 'react-icons/gi';
 import { BiInfinite } from 'react-icons/bi';
+import { ButtonOutlinedWhite, ButtonSolid } from '../../../standards/styles/components/button';
+import { useRecoilState } from 'recoil';
+import isLoadingAtom from '../../../atoms/app/isLoadingAtom';
+import { UserDataInterface } from '../../../standards/interfaces/interfaces';
+import { toast } from 'react-hot-toast';
 
 
 
@@ -21,19 +25,31 @@ import { BiInfinite } from 'react-icons/bi';
 export default function Interviews() {
 
 
-    var availability: AvailabilityInterface = {} as AvailabilityInterface;
     const [calendlyLink, setCalendlyLink] = useState("");
+    const [loading, setloading] = useRecoilState(isLoadingAtom);
     const navigate = useNavigate();
+    const db=getFirestore();
 
     useEffect(() => {
-        var foreignTime = Timestamp.now().toDate().toLocaleString('en-EN', { hour: 'numeric', year: "numeric", hour12: false, timeZone: 'Asia/Calcutta', minute: "numeric" });
-        const parsedDate = Date.parse(foreignTime);
-        console.log(parsedDate);
-        const localTime = new Date(parsedDate);
-        console.log(localTime);
+        // var foreignTime = Timestamp.now().toDate().toLocaleString('en-EN', { hour: 'numeric', year: "numeric", hour12: false, timeZone: 'Asia/Calcutta', minute: "numeric" });
+        // const parsedDate = Date.parse(foreignTime);
+        // console.log(parsedDate);
+        // const localTime = new Date(parsedDate);
+        // console.log(localTime);
     }, [])
 
 
+    async function UpdateCalendlyLink(){
+       if(calendlyLink!=""){
+        setloading(true);
+        await setDoc(doc(db,"users",localStorage.getItem("uid") as string),{interviewsSetup:true,calendlyLink:calendlyLink} as UserDataInterface,{merge:true});
+        setloading(false);
+        toast.success("Calendly link updated.")
+       }
+       else{
+        toast.error("Kindly provide a calendly link")
+       }
+    }
 
 
     return (
@@ -58,6 +74,10 @@ export default function Interviews() {
                     To Setup a new calendly link, <button onClick={() => { window.open('https://www.calendly.com', '_blank') }} className='text-blue/90 pl-1 hover:scale-105 hover:px-1 font-medium'>Click Here</button>
                 </div>
 
+
+                <ButtonSolid customStyles='mt-10' text='Update' onClick={()=>{
+                    UpdateCalendlyLink();
+                }}/>
 
 
             </FormLayout>

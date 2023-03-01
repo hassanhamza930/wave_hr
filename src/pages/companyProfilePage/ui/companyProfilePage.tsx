@@ -31,7 +31,6 @@ function CompanyProfilePage() {
     }, [])
 
     return (
-        // <PageLayout>
             <PublicFacingLayout>
 
                 <div style={{ backgroundImage: `url('${companyDetails.companyCover == "" ? "https://assets-global.website-files.com/5c7fdbdd4e3feeee8dd96dd2/62c4ff55b8637de51557f5f0_growth-flat-color.gif" : companyDetails.companyCover}')` }} className={`  w-full h-72 bg-blue bg-cover shadow-xl bg-center rounded-md flex justify-end items-end p-10`}>
@@ -41,7 +40,7 @@ function CompanyProfilePage() {
 
                 <div
                     style={{ backgroundImage: `url('${companyDetails.companyLogo}')` }}
-                    className="hover:bg-blue bg-contain bg-no-repeat bg-blue bg-center hover:scale-105 -mt-24 ml-12 h-36 w-36 rounded-xl flex justify-center items-center">
+                    className=" bg-contain bg-no-repeat bg-transparent bg-center -mt-24 ml-12 h-36 w-36 rounded-xl flex justify-center items-center">
                 </div>
 
                 <Heading text={companyDetails.companyName} customStyles="mt-4 ml-12"></Heading>
@@ -54,7 +53,7 @@ function CompanyProfilePage() {
                     {companyDetails.numberOfEmployees} Employees
                 </div>
 
-                <div className="ml-12 mt-5 flex flex-row justify-start items-start">
+                <div className="ml-12 mt-5 flex flex-row gap-2 justify-start items-start">
                     {
                         companyDetails.companyTags!=null&&companyDetails.companyTags.map((tag, index) => {
                             return (
@@ -70,6 +69,8 @@ function CompanyProfilePage() {
                 <SubHeading text={companyDetails.companyDescription} customStyles="ml-12 mt-10"/>
 
                 <div className="mt-10 ml-12 text-2xl text-black font-['Inter'] font-bold">Careers</div>
+                
+
 
                 
 
@@ -77,7 +78,6 @@ function CompanyProfilePage() {
                
 
 
-        // </PageLayout>
     );
 }
 

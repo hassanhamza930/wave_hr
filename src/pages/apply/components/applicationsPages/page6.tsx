@@ -10,7 +10,6 @@ import pageIndexAtom from "../../../newJob/atoms/newJobAtoms";
 import JobApplicationAtom, { ApplyStageInitiatedAtom, JobApplication, jobDataAtom, ResponsesAtom, selectedProfilePictureAtom } from "../../atoms/applyPageAtoms";
 import { motion } from "framer-motion";
 import { useParams } from 'react-router';
-import { UserInterface } from '../../../../atoms/app/globalUserAtom';
 import { CompanyData } from '../../ui/apply';
 import sendEmail from '../../../../standards/functions/sendEmail';
 import { ApplicationDataInterface, JobDataInterface } from '../../../../standards/interfaces/interfaces';

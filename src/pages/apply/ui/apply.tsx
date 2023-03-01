@@ -1,10 +1,11 @@
 import { doc, getDoc, getFirestore, Timestamp } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useRecoilState } from "recoil";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
 import { CompanyDataInterface, JobDataInterface } from "../../../standards/interfaces/interfaces";
 import { ButtonOutlinedWhite } from "../../../standards/styles/components/button";
+import { SubHeading } from "../../../standards/styles/components/heading";
 import { ApplyStageInitiatedAtom, jobDataAtom } from "../atoms/applyPageAtoms";
 import ApplicationWindow from "../components/applicationWindow";
 
@@ -22,6 +23,7 @@ export default function Apply() {
     const [loading, setLoading] = useRecoilState(isLoadingAtom);
     const [companyData, setCompanyData] = useState({} as CompanyDataInterface);
     const [jobData, setJobData] = useRecoilState(jobDataAtom);
+    const navigate=useNavigate();
 
     const db = getFirestore();
     const [applyStageInitiated, setApplyStageInitiated] = useRecoilState<boolean>(ApplyStageInitiatedAtom);
@@ -65,13 +67,15 @@ export default function Apply() {
 
                                 <div className="flex flex-col justify-start items-start w-full">
                                     <div className="text-tan/90 mt-5 font-bold text-4xl md:text-6xl">{jobData.jobTitle}</div>
-                                    <div className="text-tan/90 mt-5 text-sm">
+                                    <div className="text-md font-regular text-tan mt-2">{jobData.workModel} , {jobData.jobType}</div>
+                                    <div className="text-md font-regular text-tan mt-1">{jobData.location}</div>
+                                    <div className="text-tan/80 mt-5 text-sm">
                                         Posted on {jobData.time.toDate().toLocaleString().toString()}
                                     </div>
 
                                 </div>
 
-                                <button className="w-[500px] flex flex-col justify-start items-start mt-10 hover:bg-tan bg-tan/80 backdrop-blur-md hover:scale-[1.02] rounded-md shadow-xl p-3 md:p-5">
+                                <button onClick={()=>{navigate("/company/"+jobData.companyId.toString())}} className="w-[500px] flex flex-col justify-start items-start mt-10 hover:bg-tan bg-tan/80 backdrop-blur-md hover:scale-[1.02] rounded-md shadow-xl p-3 md:p-5">
 
                                     <div className="flex flex-row justify-start items-start gap-2 ">
 

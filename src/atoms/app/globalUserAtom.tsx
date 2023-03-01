@@ -1,19 +1,11 @@
 import { atom } from "recoil";
 import { CompanyData } from '../../pages/apply/ui/apply';
-
-export interface UserInterface{
-    name:string|null,
-    photoUrl:string|null,
-    email:string|null,
-    companyOnboarded:boolean|null,
-    companyDetails:CompanyData,
-    interviewEmail:string
-}
+import { UserDataInterface } from "../../standards/interfaces/interfaces";
 
 
  const globalUserAtom = atom({
     key: 'globalUserAtom', // unique ID (with respect to other atoms/selectors)
-    default: {} as UserInterface, // default value (aka initial value)
+    default: {} as UserDataInterface, // default value (aka initial value)
   });
 
 

@@ -44,22 +44,22 @@ export interface ApplicationDataInterface {
 }
 
 
-export interface DayAvailabilityInterface{
-    enabled:boolean,
-    timeStart:string,
-    timeEnd:string,
-}
+// export interface DayAvailabilityInterface{
+//     enabled:boolean,
+//     timeStart:string,
+//     timeEnd:string,
+// }
 
-export interface AvailabilityInterface{
-    mon:DayAvailabilityInterface,
-    tue:DayAvailabilityInterface,
-    wed:DayAvailabilityInterface,
-    thur:DayAvailabilityInterface,
-    fri:DayAvailabilityInterface,
-    sat:DayAvailabilityInterface,
-    sun:DayAvailabilityInterface,
-    timezone:string
-}
+// export interface AvailabilityInterface{
+//     mon:DayAvailabilityInterface,
+//     tue:DayAvailabilityInterface,
+//     wed:DayAvailabilityInterface,
+//     thur:DayAvailabilityInterface,
+//     fri:DayAvailabilityInterface,
+//     sat:DayAvailabilityInterface,
+//     sun:DayAvailabilityInterface,
+//     timezone:string
+// }
 
 export interface UserDataInterface {
     id?:string,
@@ -67,7 +67,7 @@ export interface UserDataInterface {
     photoUrl:string|null,
     email:string|null,
     interviewsSetup:boolean,
-    interviewsAvailability:AvailabilityInterface
+    calendlyLink:string,
 }
 
 

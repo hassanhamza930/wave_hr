@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { getAuth } from "firebase/auth";
 import { doc, getFirestore, setDoc } from "firebase/firestore";
-import { UserInterface } from "../../../atoms/app/globalUserAtom";
+import { UserDataInterface } from "../../../standards/interfaces/interfaces";
 
 export default function useHandleGoogleSignIn() {
 
@@ -19,7 +19,7 @@ export default function useHandleGoogleSignIn() {
             const user = result.user;
             console.log(user.displayName);
 
-            var userDataToDumpOnFirebase:UserInterface={} as UserInterface;
+            var userDataToDumpOnFirebase:UserDataInterface={} as UserDataInterface;
             userDataToDumpOnFirebase.email=user.email;
             userDataToDumpOnFirebase.name=user.displayName;
             userDataToDumpOnFirebase.photoUrl=user.photoURL;

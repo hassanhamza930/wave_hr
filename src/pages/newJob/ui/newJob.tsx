@@ -6,7 +6,6 @@ import { AiFillPlusCircle } from "react-icons/ai";
 import { MdArrowDropDown, MdDelete, MdHdrPlus, MdPlusOne } from "react-icons/md";
 import { useNavigate } from "react-router";
 import { useRecoilState } from "recoil";
-import { UserInterface } from "../../../atoms/app/globalUserAtom";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
 import { ButtonOutlinedWhite, ButtonSolid } from "../../../standards/styles/components/button";
 import { Heading, SubHeading } from "../../../standards/styles/components/heading";

@@ -7,7 +7,6 @@ import { doc, setDoc, getFirestore, getDoc, onSnapshot, Timestamp } from 'fireba
 import { useParams } from 'react-router';
 import { selectedJobAtom } from '../../jobs/jobsAtoms';
 import sendEmail from '../../../standards/functions/sendEmail';
-import { UserInterface } from '../../../atoms/app/globalUserAtom';
 import { selectedApplicantDataAtom, selectedApplicantIdAtom } from '../atoms/applicantsAtoms';
 import { IoMdArrowDropdown, IoMdArrowDropdownCircle } from 'react-icons/io';
 import { Listbox, Menu } from '@headlessui/react';

@@ -7,8 +7,9 @@ import {
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import globalUserAtom, { UserInterface } from '../../../atoms/app/globalUserAtom';
+import globalUserAtom from '../../../atoms/app/globalUserAtom';
 import isLoadingAtom from '../../../atoms/app/isLoadingAtom';
+import { UserDataInterface } from '../../../standards/interfaces/interfaces';
  
 
 export default function useLoggedIn() {
@@ -25,7 +26,7 @@ export default function useLoggedIn() {
 
     if (userDataExists == true) {
       const unsub = onSnapshot(userRef, (data) => {
-        const userData: UserInterface = data.data() as UserInterface;
+        const userData: UserDataInterface = data.data() as UserDataInterface;
         setLoggedInUser(userData);
         setLoggedIn(true);
         setTimeout(()=>{setLoading(false);},1000)
@@ -33,7 +34,7 @@ export default function useLoggedIn() {
     } else {
       localStorage.clear();
       setLoggedIn(false);
-      setLoggedInUser({} as UserInterface);
+      setLoggedInUser({} as UserDataInterface);
       window.location.href = '/';
     }
   };
