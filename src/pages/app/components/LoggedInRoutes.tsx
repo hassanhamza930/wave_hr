@@ -47,6 +47,7 @@ export default function LoggedInRoutes() {
                     <Route path="/apply/:jobId" element={<Apply />} ></Route>
                     <Route path="/addNewCompany" element={<AddNewCompany />} ></Route>
                     <Route path="/company/:companyId" element={<CompanyProfilePage />} ></Route>
+                    <Route path="/interviews" element={<Interviews/>} ></Route>
                 </Routes>
             </>
 

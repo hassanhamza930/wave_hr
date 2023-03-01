@@ -50,9 +50,9 @@ export default function LoggedInHeader() {
                         }} className="hover:scale-[1.02] font-bold text-black text-sm">Company</button>
 
 
-                        {/* <button onClick={() => {
-                            navigate("/pricing");
-                        }} className="hover:scale-[1.02] font-bold text-black text-sm">Calendar</button> */}
+                        <button onClick={() => {
+                            navigate("/interviews");
+                        }} className="hover:scale-[1.02] font-bold text-black text-sm">Interviews</button>
 
                         <Menu >
                             <Menu.Button onClick={() => { }} className="flex flex-row justify-center items-center gap-2">
