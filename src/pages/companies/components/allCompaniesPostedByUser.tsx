@@ -22,7 +22,7 @@ function CompanyCard(companyData: CompanyDataInterface) {
                         {companyData.companyName}
                     </div>
 
-                    <div style={{ backgroundImage: `url('${companyData.companyLogo}')` }} className="h-24 w-24 rounded-md bg-cover bg-center bg-blue"></div>
+                    <div style={{ backgroundImage: `url('${companyData.companyLogo}')` }} className="h-24 w-24 rounded-md bg-cover bg-center bg-transparent"></div>
 
                 </div>
             </button>

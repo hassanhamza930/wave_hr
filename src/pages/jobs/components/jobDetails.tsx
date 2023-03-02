@@ -11,6 +11,7 @@ import { Transition } from "@headlessui/react";
 import ReactQuill from "react-quill";
 import { jobDataAtom } from "../../apply/atoms/applyPageAtoms";
 import { JobDataInterface } from "../../../standards/interfaces/interfaces";
+import { parseLines } from "../../../standards/styles/components/inputs";
 
 export default function JobDetails() {
 
@@ -47,7 +48,7 @@ export default function JobDetails() {
             <div className="flex flex-col justify-start items-start p-10 w-full">
 
                 <div className="relative flex flex-row justify-between items-center w-full">
-                    <div className="text-4xl font-bold text-tan">{selectedJob.jobTitle}</div>
+                    <div className="text-4xl font-bold text-tan">{parseLines(selectedJob.jobTitle)}</div>
                     <Menu>
                         <Menu.Button className="text-tan hover:scale-105">
                             <BsThreeDots size={30} />
@@ -114,11 +115,9 @@ export default function JobDetails() {
 
 
                 <div className="text-xl font-bold text-tan mt-10">Job Description</div>
-                {/* <ReactQuill value={selectedJob.jobDescription} readOnly={true} theme="bubble" className="" /> */}
-                <div dangerouslySetInnerHTML={{ __html: selectedJob.jobDescription }} className="text-md mt-2 text-tan"></div>
+                <textarea rows={selectedJob.jobDescription.split("\n").length} disabled={true} value={selectedJob.jobDescription} className=" w-full text-md mt-2 bg-transparent text-tan"></textarea>
                 <div className="text-xl font-bold text-tan mt-10">Job Qualifications</div>
-                <div dangerouslySetInnerHTML={{ __html: selectedJob.jobQualifications }} className="text-md mt-2 text-tan"></div>
-                {/* <ReactQuill value={selectedJob.jobQualifications} readOnly={true} theme="bubble" className="" /> */}
+                <textarea rows={selectedJob.jobQualifications.split("\n").length} disabled={true} value={selectedJob.jobQualifications} className="w-full text-md mt-2 bg-transparent text-tan"></textarea>
                 <div className="text-xl font-bold text-tan mt-10">Salary Compensation</div>
                 <div className="text-md mt-2 text-tan">{selectedJob.salaryCompensation.toString()}</div>
                 <div className="text-xl font-bold text-tan mt-10 mb-2">Questions</div>

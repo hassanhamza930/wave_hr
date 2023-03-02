@@ -1,7 +1,7 @@
 import dayjs, { Dayjs } from 'dayjs'
 import Timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
-import { doc, getFirestore, setDoc, Timestamp } from "firebase/firestore"
+import { doc, getDoc, getFirestore, setDoc, Timestamp } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { Heading, SubHeading } from "../../../standards/styles/components/heading"
 import PageLayout from "../../../standards/styles/layouts/pageLayout"
@@ -36,6 +36,11 @@ export default function Interviews() {
         // console.log(parsedDate);
         // const localTime = new Date(parsedDate);
         // console.log(localTime);
+        getDoc(doc(db,"users",localStorage.getItem("uid") as string)).then((doc)=>{
+            var userData:UserDataInterface=doc.data() as UserDataInterface;
+            setCalendlyLink(userData.calendlyLink);
+        });
+
     }, [])
 
 
@@ -65,7 +70,7 @@ export default function Interviews() {
 
 
                 <Heading text="Schedule Interviews" customStyles='mt-10' />
-                <SubHeading text="Set your availability and start scheduling interviews with potential candidates." />
+                <SubHeading customStyles='mt-1' text="Set your availability and start scheduling interviews with potential candidates." />
 
                 <SimpleInput customStyles='mt-20' placeholder='Please enter a calendly link for your meetings*' onChange={setCalendlyLink} value={calendlyLink} />
                 <SubHeading customStyles='mt-5 text-sm text-black/70' text="Wave will use this link to email candidates who are approved for interviews, candidates can self schedule interviews on this link." />
