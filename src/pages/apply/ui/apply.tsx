@@ -1,10 +1,12 @@
 import { doc, getDoc, getFirestore, Timestamp } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { BsPerson, BsPin } from "react-icons/bs";
+import { GiOppression } from "react-icons/gi";
 import { useNavigate, useParams } from "react-router";
 import { useRecoilState } from "recoil";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
 import { CompanyDataInterface, JobDataInterface } from "../../../standards/interfaces/interfaces";
-import { ButtonOutlinedWhite } from "../../../standards/styles/components/button";
+import { ButtonOutlinedWhite, ButtonSolid } from "../../../standards/styles/components/button";
 import { SubHeading } from "../../../standards/styles/components/heading";
 import { ApplyStageInitiatedAtom, jobDataAtom } from "../atoms/applyPageAtoms";
 import ApplicationWindow from "../components/applicationWindow";
@@ -23,7 +25,7 @@ export default function Apply() {
     const [loading, setLoading] = useRecoilState(isLoadingAtom);
     const [companyData, setCompanyData] = useState({} as CompanyDataInterface);
     const [jobData, setJobData] = useRecoilState(jobDataAtom);
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
     const db = getFirestore();
     const [applyStageInitiated, setApplyStageInitiated] = useRecoilState<boolean>(ApplyStageInitiatedAtom);
@@ -53,7 +55,7 @@ export default function Apply() {
             <>
                 {applyStageInitiated == true && <ApplicationWindow />}
 
-                <div className="relative h-screen w-full bg-blue flex justify-center items-center">
+                <div className="relative h-screen w-full bgt-tan flex justify-center items-center">
                     <div id="no_scroll" className="pb-20 text-black w-full md:w-[70%] rounded-md h-full md:h-[90%] overflow-y-scroll flex-col justify-start items-start">
 
 
@@ -66,59 +68,66 @@ export default function Apply() {
                             <div className="flex flex-wrap justify-between items-center">
 
                                 <div className="flex flex-col justify-start items-start w-full">
-                                    <div className="text-tan/90 mt-5 font-bold text-4xl md:text-6xl">{jobData.jobTitle}</div>
-                                    <div className="text-md font-regular text-tan mt-2">{jobData.workModel} , {jobData.jobType}</div>
-                                    <div className="text-md font-regular text-tan mt-1">{jobData.location}</div>
-                                    <div className="text-tan/80 mt-5 text-sm">
+                                    <div className="text-black mt-5 font-bold text-4xl md:text-6xl">{jobData.jobTitle}</div>
+                                    <div className="text-md font-regular text-black mt-2">{jobData.workModel} , {jobData.jobType}</div>
+                                    <div className="text-md font-regular text-black mt-1">{jobData.location}</div>
+                                    <div className="text-black/80 mt-5 text-sm">
                                         Posted on {jobData.time.toDate().toLocaleString().toString()}
                                     </div>
 
                                 </div>
 
-                                <button onClick={()=>{navigate("/company/"+jobData.companyId.toString())}} className="w-[500px] flex flex-col justify-start items-start mt-10 hover:bg-tan bg-tan/80 backdrop-blur-md hover:scale-[1.02] rounded-md shadow-xl p-3 md:p-5">
+                                <button onClick={() => { navigate("/company/" + jobData.companyId.toString()) }} className="w-[500px] flex flex-col justify-start items-start mt-5 hover:bg-blue bg-black backdrop-blur-md hover:scale-[1.02] rounded-md shadow-xl px-4 py-2">
 
-                                    <div className="flex flex-row justify-start items-start gap-2 ">
+                                    <div className="flex flex-row justify-center items-center gap-3 ">
 
                                         <div style={{ backgroundImage: `url('${companyData.companyLogo}')` }} className="bg-contain bg-no-repeat bg-center h-16 w-16 rounded-sm bg-transparent"></div>
-                                        <div className="flex w-full flex-col justify-start items-start p-1">
-                                            <div className="text-black font-bold text-start text-md">{companyData.companyName}</div>
-                                            <div className="text-black w-full md:w-96 text-start text-md">{companyData.companyDescription}</div>
+                                        <div className="flex w-full flex-col justify-start items-start">
+                                            <div className="text-tan font-bold text-start text-2xl">{companyData.companyName}</div>
                                         </div>
                                     </div>
 
-                                    <div className="w-full h-[1px] bg-black/50 mt-3"></div>
+                                    <div className="w-full h-[1px] bg-tan/50"></div>
 
-                                    <div className="flex flex-col text-start w-full font-medium mt-5 mb-2 text-black text-sm">
-                                        <div>
+                                    <div className="text-tan mt-2 w-full md:w-96 text-start text-md">
+                                        {companyData.companyDescription}
+                                    </div>
+
+                                    <div className="flex flex-row justify-between w-full font-medium mt-5 mb-2 text-tan text-sm">
+                                        <div className="flex flex-row gap-1 justify-center items-center">
+                                            <BsPerson className="text-tan h-4 w-4"/>
                                             {companyData.numberOfEmployees} Employees
                                         </div>
-                                        {companyData.companyLocation}
+                                        <div className="flex flex-row gap-1 justify-center items-center">
+                                            <BsPin className="text-tan h-4 w-4"/>
+                                            {companyData.companyLocation}
+                                        </div>
                                     </div>
-                                    <div className="text-tan text-sm font-regular mt-2 gap-2 w-full flex justify-start items-start">
+                                    <div className="text-black text-sm font-regular mt-2 mb-4 gap-2 w-full flex justify-start items-start">
                                         {companyData.companyTags.map((tag) => {
-                                            return <div className="px-4 py-2 rounded-full bg-blue text-tan text-sm">
+                                            return <div className="px-4 py-2 rounded-full bg-tan text-blue text-sm">
                                                 {tag}
                                             </div>
                                         })}
                                     </div>
 
-                                    
+
                                 </button>
                             </div>
 
 
-                            <div className="text-tan/90 mt-10 font-bold text-2xl">Job Description</div>
-                            <div dangerouslySetInnerHTML={{ __html: jobData.jobDescription }} className="text-tan/90 mt-2 text-md"></div>
+                            <div className="text-black mt-10 font-bold text-2xl">Job Description</div>
+                            <textarea rows={jobData.jobDescription.split("\n").length} disabled={true} value={jobData.jobDescription} className=" w-full text-md mt-2 bg-transparent text-black"></textarea>
 
-                            <div className="text-tan/90 font-bold text-2xl mt-10">Job Qualifications</div>
-                            <div dangerouslySetInnerHTML={{ __html: jobData.jobQualifications }} className="text-tan/90 mt-2 text-md"></div>
+                            <div className="text-black font-bold text-2xl mt-10">Job Qualifications</div>
+                            <textarea rows={jobData.jobQualifications.split("\n").length} disabled={true} value={jobData.jobQualifications} id="no_scroll" className="w-full text-md mt-2 bg-transparent text-black"></textarea>
 
-                            <div className="text-tan/90 mt-10 flex flex-col justify-start items-start">
+                            <div className="text-black mt-10 flex flex-col justify-start items-start">
                                 <div className="text-2xl font-bold">Salary Compensation</div>
                                 <div className="text-md mt-2">{jobData.salaryCompensation}</div>
                             </div>
 
-                            <ButtonOutlinedWhite customStyles="mt-10" text="Apply" onClick={() => { setApplyStageInitiated(true); }} />
+                            <ButtonSolid customStyles="mt-10" text="Apply" onClick={() => { setApplyStageInitiated(true); }} />
 
                         </div>
 
