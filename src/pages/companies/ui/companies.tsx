@@ -18,7 +18,7 @@ function Companies() {
     return (
         <PageLayout>
 
-            <div className="flex h-full flex-row justify-start items-start gap-5">
+            <div style={{zoom:0.9}} className="flex h-full flex-row justify-start items-start gap-5">
 
                 <div className="w-2/4 pr-20">
                     <Heading text="All Companies" />

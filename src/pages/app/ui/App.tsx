@@ -79,7 +79,7 @@ function App() {
         position="top-center"
         reverseOrder={false}
       />
-      <div style={{ fontFamily: "Inter" }} className=" h-full w-full bg-tan relative">
+      <div style={{ fontFamily: "Inter", }} className=" h-full w-full bg-tan relative">
         {
           loggedIn == true ? <LoggedInRoutes />:<LoggedOutRoutes />
         }

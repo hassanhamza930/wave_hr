@@ -27,7 +27,7 @@ export default function LoggedInHeader() {
     return (
         <>
             {isApplyPage == false &&
-                <div className="fixed shadow-md shadow-black/10 h-[60px] bg-tan z-50 w-full flex flex-row justify-between items-center px-[5%] py-5">
+                <div style={{zoom:0.9}} className="fixed shadow-md shadow-black/10 h-[60px] bg-tan z-50 w-full flex flex-row justify-between items-center px-[5%] py-5">
                     <button onClick={() => { navigate("/") }}>
                         <img src={Logo} className="h-10 w-10"></img>
                     </button>
@@ -50,9 +50,9 @@ export default function LoggedInHeader() {
                         }} className={`hover:scale-[1.02] font-bold ${window.location.href.includes("companies")?"text-purp":"text-black/90"} text-sm`}>Company</button>
 
 
-                        <button onClick={() => {
+                        {/* <button onClick={() => {
                             navigate("/interviews");
-                        }} className={`hover:scale-[1.02] font-bold ${window.location.href.includes("interview")?"text-purp":"text-black/90"} text-sm`}>Interviews</button>
+                        }} className={`hover:scale-[1.02] font-bold ${window.location.href.includes("interview")?"text-purp":"text-black/90"} text-sm`}>Interviews</button> */}
 
                         <Menu >
                             <Menu.Button onClick={() => { }} className="flex flex-row justify-center items-center gap-2">

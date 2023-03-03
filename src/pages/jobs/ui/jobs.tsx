@@ -53,7 +53,7 @@ export default function JobsPage() {
 
         <PageLayout>
 
-            <div className="w-full h-full flex flex-row">
+            <div style={{zoom:0.9}} className="w-full h-full flex flex-row">
                 <div className="h-full w-2/4 flex flex-col justify-start items-start ">
                     <div className="relative">
                         <Menu>

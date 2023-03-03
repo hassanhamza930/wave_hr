@@ -17,9 +17,9 @@ export default function Home() {
 
     return (
         <>
-            <div className="pt-[80px] h-screen w-full bg-tan flex flex-col justify-start item-start p-20">
+            <div className="pt-[80px] h-screen w-full bg-tan flex flex-col justify-center items-center p-10">
 
-                <div className="h-[600px] w-full flex flex-row mt-12">
+                <div style={{zoom:0.9}} className="h-[600px] w-full flex flex-row mt-12">
                     <Hello />
                     <GettingStarted/>
                 </div>

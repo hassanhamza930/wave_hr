@@ -56,7 +56,7 @@ export default function Apply() {
                 {applyStageInitiated == true && <ApplicationWindow />}
 
                 <div className="relative h-screen w-full bgt-tan flex justify-center items-center">
-                    <div id="no_scroll" className="pb-20 text-black w-full md:w-[70%] rounded-md h-full overflow-y-scroll flex-col justify-start items-start">
+                    <div id="no_scroll"  style={{zoom:0.9}} className="pb-20 text-black w-full md:w-[70%] rounded-md h-full overflow-y-scroll flex-col justify-start items-start">
 
 
                         <div style={{ backgroundImage: companyData.companyCover == "" ? "url('https://assets-global.website-files.com/5c7fdbdd4e3feeee8dd96dd2/62c4ff55b8637de51557f5f0_growth-flat-color.gif')" : `url('${companyData.companyCover}')` }} className="rounded-md h-72 mt-5 w-full bg-gradient-to-br from-purple-700 to-blue-800 bg-cover bg-center bg-[]"></div>

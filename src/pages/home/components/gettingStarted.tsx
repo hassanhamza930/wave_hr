@@ -64,7 +64,7 @@ function GettingStarted() {
                             <button onClick={()=>{navigate("/jobs")}} className="text-md font-medium text-black hover:text-purp">Post a job</button>
                     }
                 </div>
-                <div className="h-20 w-1 ml-[6px] -mt-2 -mb-2 bg-purp">
+                {/* <div className="h-20 w-1 ml-[6px] -mt-2 -mb-2 bg-purp">
                 </div>
                 <div className="flex flex-row justify-end items-center gap-4">
                     <div className="h-4 w-4 rounded-full bg-purp"></div>
@@ -73,7 +73,7 @@ function GettingStarted() {
                             <div className="text-md font-medium line-through text-blue">Setup Interview</div> :
                             <button onClick={()=>{navigate("/interviews")}} className="text-md font-medium hover:text-purp text-black">Setup Interview</button>
                     }
-                </div>
+                </div> */}
 
 
             </div>

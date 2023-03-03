@@ -54,7 +54,7 @@ function CompanyDetails() {
 
         <div className="text-tan text-sm font-regular px-10 mt-5 mb-5 gap-2 w-full flex justify-start items-start">
           {selectedCompany.companyTags.map((tag) => {
-            return <div className="px-4 py-2 rounded-full bg-tan text-blue text-sm">
+            return <div className="px-4 py-2 rounded-full bg-tan text-black text-sm">
               {tag}
             </div>
           })}
