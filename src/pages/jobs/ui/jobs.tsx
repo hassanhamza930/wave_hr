@@ -70,7 +70,7 @@ export default function JobsPage() {
                                 leaveFrom="transform opacity-100 scale-100"
                                 leaveTo="transform opacity-0 scale-95">
 
-                                <Menu.Items className="absolute mt-1 justify-center left-0 w-48 rounded-md origin-top-right divide-y divide-gray-100  bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                <Menu.Items className="absolute mt-1 justify-center left-0 w-48 rounded-md origin-top-right divide-y divide-gray-100  bg-white shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none">
 
                                     {allCompanies.map((company,index) => {
                                         return (
@@ -78,7 +78,7 @@ export default function JobsPage() {
                                                 {({ active }) => (
                                                     <button
                                                         onClick={() => { setSelectedCompany(company);setSelectedJob({} as JobDataInterface) }}
-                                                        className={`${active ? 'bg-secondary text-black' : 'text-gray-900'} group flex w-full items-center justify-start  px-4 py-2 text-sm`}>
+                                                        className={`${active ? 'bg-secondary text-black' : 'text-gray-900'} group flex w-full items-center justify-start hover:bg-purp hover:rounded-md hover:text-tan  px-4 py-2 text-sm`}>
                                                         {company.companyName}
                                                     </button>
                                                 )}

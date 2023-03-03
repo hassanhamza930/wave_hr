@@ -47,31 +47,31 @@ function GettingStarted() {
                         <Heading customStyles="mb-10" text="Let's get you started,"></Heading>
                 }
                 <div className="flex flex-row justify-end items-center gap-4">
-                    <div className="h-4 w-4 rounded-full bg-blue"></div>
+                    <div className="h-4 w-4 rounded-full bg-purp"></div>
                     {
                         companySetup == true ?
                             <div className="text-md font-medium line-through text-blue">Setup a company profile</div> :
-                            <button onClick={()=>{navigate("/companies")}} className="text-md font-medium text-black">Setup a company profile</button>
+                            <button onClick={()=>{navigate("/companies")}} className="text-md font-medium hover:text-purp text-black">Setup a company profile</button>
                     }
                 </div>
-                <div className="h-20 w-1 ml-[6px] -mt-2 -mb-2 bg-blue">
+                <div className="h-20 w-1 ml-[6px] -mt-2 -mb-2 bg-purp">
                 </div>
                 <div className="flex flex-row justify-end items-center gap-4">
-                    <div className="h-4 w-4 rounded-full bg-blue"></div>
+                    <div className="h-4 w-4 rounded-full bg-purp"></div>
                     {
-                        companySetup == true ?
+                        jobSetup == true ?
                             <div className="text-md font-medium line-through text-blue">Post a job</div> :
-                            <button onClick={()=>{navigate("/jobs")}} className="text-md font-medium text-black">Post a job</button>
+                            <button onClick={()=>{navigate("/jobs")}} className="text-md font-medium text-black hover:text-purp">Post a job</button>
                     }
                 </div>
-                <div className="h-20 w-1 ml-[6px] -mt-2 -mb-2 bg-blue">
+                <div className="h-20 w-1 ml-[6px] -mt-2 -mb-2 bg-purp">
                 </div>
                 <div className="flex flex-row justify-end items-center gap-4">
-                    <div className="h-4 w-4 rounded-full bg-blue"></div>
+                    <div className="h-4 w-4 rounded-full bg-purp"></div>
                     {
-                        companySetup == true ?
+                        interviewSetup == true ?
                             <div className="text-md font-medium line-through text-blue">Setup Interview</div> :
-                            <button onClick={()=>{navigate("/interviews")}} className="text-md font-medium text-black">Setup Interview</button>
+                            <button onClick={()=>{navigate("/interviews")}} className="text-md font-medium hover:text-purp text-black">Setup Interview</button>
                     }
                 </div>
 

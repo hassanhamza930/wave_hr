@@ -57,13 +57,13 @@ function AddNewCompany() {
                 <CompanyLogo companyLogoValue={companyLogo} setCompanyLogo={setcompanyLogo} />
 
                 <SimpleInput placeholder="Enter company name*" onChange={setcompanyName} value={companyName} customStyles="mt-10" />
-                <TextArea placeholder="Enter company description*" onChange={setcompanyDescription} value={companyDescription} customStyles="mt-10" />
+                <TextArea examples="We make great software" placeholder="Enter company description*" onChange={setcompanyDescription} value={companyDescription} customStyles="mt-10" />
 
 
                 <div className="flex flex-row justify-start items-end w-full mt-10">
-                    <SimpleInput value={companyTagValue} onChange={setcompanyTagValue} placeholder="Add a Company Tag, ex Consulting, Software Services*" customStyles="" />
+                    <SimpleInput examples="Software Services, IT, Sales etc" value={companyTagValue} onChange={setcompanyTagValue} placeholder="Add a Company Tag*" customStyles="" />
                     <button onClick={AddCompanyTag}>
-                        <AiFillPlusSquare className="text-purp  h-10 w-10 ml-5" />
+                        <AiFillPlusCircle className="text-blue hover:text-purp h-10 w-10 ml-5" />
                     </button>
                 </div>
 
@@ -82,9 +82,9 @@ function AddNewCompany() {
                     }
                 </div>
 
-                <SimpleInput value={companyLocation} onChange={setcompanyLocation} placeholder="Location*" customStyles="mt-10" />
+                <SimpleInput examples="Texas, US" value={companyLocation} onChange={setcompanyLocation} placeholder="Location*" customStyles="mt-10" />
 
-                <SimpleInput value={numberOfEmployees} onChange={setnumberOfEmployees} placeholder="Number of Employees*" customStyles="mt-10" />
+                <SimpleInput examples="5" value={numberOfEmployees} onChange={setnumberOfEmployees} placeholder="Number of Employees*" customStyles="mt-10" />
 
                 <ButtonSolid text="Add Company" onClick={() => {
                     AddCompany({

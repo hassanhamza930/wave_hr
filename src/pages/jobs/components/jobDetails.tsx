@@ -115,9 +115,9 @@ export default function JobDetails() {
 
 
                 <div className="text-xl font-bold text-tan mt-10">Job Description</div>
-                <textarea rows={selectedJob.jobDescription.split("\n").length} disabled={true} value={selectedJob.jobDescription} className=" w-full text-md mt-2 bg-transparent text-tan"></textarea>
+                <textarea rows={selectedJob.jobDescription.split("\n").length} disabled={true} id="no_scroll" value={selectedJob.jobDescription} className="resize-none w-full h-full text-md mt-2 bg-transparent text-tan"></textarea>
                 <div className="text-xl font-bold text-tan mt-10">Job Qualifications</div>
-                <textarea rows={selectedJob.jobQualifications.split("\n").length} disabled={true} value={selectedJob.jobQualifications} className="w-full text-md mt-2 bg-transparent text-tan"></textarea>
+                <textarea rows={selectedJob.jobQualifications.split("\n").length} disabled={true} id="no_scroll" value={selectedJob.jobQualifications} className=" resize-none w-full text-md h-full mt-2 bg-transparent text-tan"></textarea>
                 <div className="text-xl font-bold text-tan mt-10">Salary Compensation</div>
                 <div className="text-md mt-2 text-tan">{selectedJob.salaryCompensation.toString()}</div>
                 <div className="text-xl font-bold text-tan mt-10 mb-2">Questions</div>

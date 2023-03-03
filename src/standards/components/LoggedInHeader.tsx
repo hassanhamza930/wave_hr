@@ -43,16 +43,16 @@ export default function LoggedInHeader() {
 
                         <button onClick={() => {
                             navigate("/jobs");
-                        }} className="hover:scale-[1.02] font-bold text-black text-sm">Jobs</button>
+                        }} className={`hover:scale-[1.02] font-bold ${window.location.href.includes("jobs")?"text-purp":"text-black/90"} text-sm`}>Jobs</button>
 
                         <button onClick={() => {
                             navigate("/companies");
-                        }} className="hover:scale-[1.02] font-bold text-black text-sm">Company</button>
+                        }} className={`hover:scale-[1.02] font-bold ${window.location.href.includes("companies")?"text-purp":"text-black/90"} text-sm`}>Company</button>
 
 
                         <button onClick={() => {
                             navigate("/interviews");
-                        }} className="hover:scale-[1.02] font-bold text-black text-sm">Interviews</button>
+                        }} className={`hover:scale-[1.02] font-bold ${window.location.href.includes("interview")?"text-purp":"text-black/90"} text-sm`}>Interviews</button>
 
                         <Menu >
                             <Menu.Button onClick={() => { }} className="flex flex-row justify-center items-center gap-2">

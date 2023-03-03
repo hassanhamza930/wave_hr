@@ -56,10 +56,10 @@ export default function Apply() {
                 {applyStageInitiated == true && <ApplicationWindow />}
 
                 <div className="relative h-screen w-full bgt-tan flex justify-center items-center">
-                    <div id="no_scroll" className="pb-20 text-black w-full md:w-[70%] rounded-md h-full md:h-[90%] overflow-y-scroll flex-col justify-start items-start">
+                    <div id="no_scroll" className="pb-20 text-black w-full md:w-[70%] rounded-md h-full overflow-y-scroll flex-col justify-start items-start">
 
 
-                        <div style={{ backgroundImage: companyData.companyCover == "" ? "url('https://assets-global.website-files.com/5c7fdbdd4e3feeee8dd96dd2/62c4ff55b8637de51557f5f0_growth-flat-color.gif')" : `url('${companyData.companyCover}')` }} className="rounded-md h-72 w-full bg-gradient-to-br from-purple-700 to-blue-800 bg-cover bg-center bg-[]"></div>
+                        <div style={{ backgroundImage: companyData.companyCover == "" ? "url('https://assets-global.website-files.com/5c7fdbdd4e3feeee8dd96dd2/62c4ff55b8637de51557f5f0_growth-flat-color.gif')" : `url('${companyData.companyCover}')` }} className="rounded-md h-72 mt-5 w-full bg-gradient-to-br from-purple-700 to-blue-800 bg-cover bg-center bg-[]"></div>
                         {/* <div style={{ backgroundImage: `url('${companyData.companyLogo}')` }} className="h-36 w-36 bg-blue rounded-md ml-10 -mt-24 bg-cover bg-center bg-[url('https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png')]"></div> */}
 
 
@@ -68,7 +68,7 @@ export default function Apply() {
                             <div className="flex flex-wrap justify-between items-center">
 
                                 <div className="flex flex-col justify-start items-start w-full">
-                                    <div className="text-black mt-5 font-bold text-4xl md:text-6xl">{jobData.jobTitle}</div>
+                                    <div className="text-black mt-2 font-bold text-4xl md:text-6xl">{jobData.jobTitle}</div>
                                     <div className="text-md font-regular text-black mt-2">{jobData.workModel} , {jobData.jobType}</div>
                                     <div className="text-md font-regular text-black mt-1">{jobData.location}</div>
                                     <div className="text-black/80 mt-5 text-sm">
@@ -77,9 +77,9 @@ export default function Apply() {
 
                                 </div>
 
-                                <button onClick={() => { navigate("/company/" + jobData.companyId.toString()) }} className="w-[500px] flex flex-col justify-start items-start mt-5 hover:bg-blue bg-black backdrop-blur-md hover:scale-[1.02] rounded-md shadow-xl px-4 py-2">
+                                <button onClick={() => { navigate("/company/" + jobData.companyId.toString()) }} className="w-[700px] flex flex-col justify-start items-start mt-5 hover:bg-blue bg-black backdrop-blur-md hover:scale-[1.02] rounded-md shadow-2xl px-4 py-2">
 
-                                    <div className="flex flex-row justify-center items-center gap-3 ">
+                                    <div className="flex flex-row justify-center items-center gap-3 w-full">
 
                                         <div style={{ backgroundImage: `url('${companyData.companyLogo}')` }} className="bg-contain bg-no-repeat bg-center h-16 w-16 rounded-sm bg-transparent"></div>
                                         <div className="flex w-full flex-col justify-start items-start">
@@ -87,10 +87,12 @@ export default function Apply() {
                                         </div>
                                     </div>
 
-                                    <div className="w-full h-[1px] bg-tan/50"></div>
+                                    <div className="w-full my-1 h-[1px] bg-tan/50"></div>
 
-                                    <div className="text-tan mt-2 w-full md:w-96 text-start text-md">
-                                        {companyData.companyDescription}
+                                    <div className="text-tan mt-2 h-16 overflow-y-clip w-full text-start text-md">
+                                        {/* {companyData.companyDescription} */}
+                                        <textarea rows={companyData.companyDescription.split("\n").length} disabled={true} id="no_scroll" value={companyData.companyDescription} className="resize-none w-full h-full text-md mt-2 bg-transparent text-tan"></textarea>
+
                                     </div>
 
                                     <div className="flex flex-row justify-between w-full font-medium mt-5 mb-2 text-tan text-sm">
@@ -117,10 +119,10 @@ export default function Apply() {
 
 
                             <div className="text-black mt-10 font-bold text-2xl">Job Description</div>
-                            <textarea rows={jobData.jobDescription.split("\n").length} disabled={true} value={jobData.jobDescription} className=" w-full text-md mt-2 bg-transparent text-black"></textarea>
+                            <textarea rows={jobData.jobDescription.split("\n").length} disabled={true} value={jobData.jobDescription} id="no_scroll" className="resize-none h-full w-full text-md mt-2 bg-transparent text-black"></textarea>
 
                             <div className="text-black font-bold text-2xl mt-10">Job Qualifications</div>
-                            <textarea rows={jobData.jobQualifications.split("\n").length} disabled={true} value={jobData.jobQualifications} id="no_scroll" className="w-full text-md mt-2 bg-transparent text-black"></textarea>
+                            <textarea rows={jobData.jobQualifications.split("\n").length} disabled={true} value={jobData.jobQualifications} id="no_scroll" className="resize-none h-full w-full text-md mt-2 bg-transparent text-black"></textarea>
 
                             <div className="text-black mt-10 flex flex-col justify-start items-start">
                                 <div className="text-2xl font-bold">Salary Compensation</div>

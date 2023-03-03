@@ -104,13 +104,13 @@ export default function NewJob() {
                 <Heading text="Post a new job" />
                 <SubHeading text="Open a new job posting and start receiving applications" customStyles="mt-2" />
 
-                <SimpleInput value={jobTitle} onChange={setjobTitle} placeholder="Job Title*" customStyles="mt-14" />
+                <SimpleInput examples="Software Engineer, Sales Lead etc" value={jobTitle} onChange={setjobTitle} placeholder="Job Title*" customStyles="mt-14" />
 
-                <TextArea customStyles="mt-10" placeholder="Please provide a description of the job*" value={jobDescription} onChange={setJobDescription} />
-                <TextArea customStyles="mt-10" placeholder="Please provide qualifications required for the job*" value={jobQualifications} onChange={setjobQualifications} />
+                <TextArea examples={`At ${selectedCompany.companyName} you would be responsible for ...`} customStyles="mt-10" placeholder="Please provide a description of the job*" value={jobDescription} onChange={setJobDescription} />
+                <TextArea examples={"You would be the ideal candidate if you have the following qualifications..."} customStyles="mt-10" placeholder="Please provide qualifications required for the job*" value={jobQualifications} onChange={setjobQualifications} />
 
-                <SimpleInput value={salaryCompensation} onChange={setSalaryCompensation} placeholder="Salary Compensation*" customStyles="mt-14" />
-                <SimpleInput value={location} onChange={setLocation} placeholder="Location*" customStyles="mt-14" />
+                <SimpleInput examples="$70,000 per annum" value={salaryCompensation} onChange={setSalaryCompensation} placeholder="Salary Compensation*" customStyles="mt-14" />
+                <SimpleInput examples="Texas, US" value={location} onChange={setLocation} placeholder="Location*" customStyles="mt-14" />
 
                 <SubHeading text="Work Model*" customStyles="mt-10  mb-2 text-sm" />
                 <div className="relative">
@@ -119,7 +119,7 @@ export default function NewJob() {
                             {workModel == "" ? "Select a work model" : workModel}
                             <MdArrowDropDown className="text-blue h-4 w-4" />
                         </Menu.Button>
-                        <Menu.Items className={"absolute z-50 mt-1 rounded-md bg-white flex flex-col justify-start items-start"}>
+                        <Menu.Items className={"absolute shadow-xl z-50 mt-1 rounded-md bg-white flex flex-col justify-start items-start"}>
                             {
                                 workModels.map((workModel) => {
                                     return (
@@ -144,7 +144,7 @@ export default function NewJob() {
                             {jobType == "" ? "Select a job type" : jobType}
                             <MdArrowDropDown className="text-blue h-4 w-4" />
                         </Menu.Button>
-                        <Menu.Items className={"absolute z-50 mt-1 rounded-md bg-white flex flex-col justify-start items-start"}>
+                        <Menu.Items className={"absolute shadow-xl z-50 mt-1 rounded-md bg-white flex flex-col justify-start items-start"}>
                             {
                                 jobTypes.map((jobType) => {
                                     return (
@@ -164,9 +164,9 @@ export default function NewJob() {
                 <SubHeading text="Custom Questions" customStyles="mt-14 font-bold mb-5" />
 
                 <div className="flex flex-row justify-start items-end w-full">
-                    <SimpleInput value={customQuestion} onChange={setcustomQuestion} placeholder="Add a custom question" customStyles="" />
+                    <SimpleInput examples="How many years of experience do you have with XYZ..." value={customQuestion} onChange={setcustomQuestion} placeholder="Add a custom question" customStyles="" />
                     <button onClick={AddQuestion}>
-                        <AiFillPlusCircle className="text-purp  h-10 w-10 ml-5" />
+                        <AiFillPlusCircle className="text-blue hover:text-purp  h-10 w-10 ml-5" />
                     </button>
                 </div>
 

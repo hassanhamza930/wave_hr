@@ -1,3 +1,4 @@
+import * as dayjs from 'dayjs'
 import { collection, doc, getDoc, getFirestore, onSnapshot, query, Timestamp, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { BsPerson, BsPin } from "react-icons/bs";
@@ -21,7 +22,6 @@ function CompanyProfilePage() {
     const [loading, setLoading] = useRecoilState(isLoadingAtom);
     const [allJobsPostedByCompany, setAllJobsPostedByCompany] = useState<Array<JobDataInterface>>([] as Array<JobDataInterface>);
     const navigate = useNavigate();
-
 
     function navigateToApplyPage(id: string) {
         var jobLink = window.location.href.includes("localhost") == true ? "http://localhost:3000/" + "apply/" + id : "https://wavehr.vercel.app" + "/apply/" + id;
@@ -101,31 +101,45 @@ function CompanyProfilePage() {
                 }
             </div>
 
-            <SubHeading text={companyDetails.companyDescription} customStyles="ml-12 mt-4" />
+            <textarea rows={companyDetails.companyDescription != null ? companyDetails.companyDescription.split("\n").length : 0} id="no_scroll" value={companyDetails.companyDescription} disabled={true} className="resize-none h-96 text-black text-md bg-transparent w-full font-regular mt-4 px-12 mb-10" />
 
-            <div className="mt-10 ml-12 text-2xl text-black font-['Inter'] font-bold underline">Careers</div>
+            {
+                allJobsPostedByCompany.length != 0 &&
+                <div className="mt-10 ml-12 text-2xl text-black font-['Inter'] font-bold underline">Careers</div>
 
-            <div className="mx-12 mt-4 w-[70%]">
+            }
+
+            <div className="mx-12 mt-4 w-[70%] flex flex-col justify-start items-start gap-3 mb-10">
                 {
-                    allJobsPostedByCompany.map((jobData) => {
+                    allJobsPostedByCompany.map((jobData,index) => {
+                        var currentDate=new Date().getTime();
+                        var postedDate=jobData.time.toDate().getTime();
+                        var difference = currentDate-postedDate;
+                        let daysDiff = Math.floor(difference / (1000 * 3600 * 24));
+                        var finalDifferenceText="Posted "+daysDiff.toString()+" day(s) ago";
+                        if(daysDiff==0){
+                            var hourDiff=Math.floor(difference / (1000 * 3600));
+                            finalDifferenceText="Posted "+hourDiff.toString()+" hour(s) ago";
+                            if(hourDiff==0){
+                                var minuteDiff=Math.floor(difference / (1000 * 60));
+                                finalDifferenceText="Posted "+minuteDiff.toString()+" minute(s) ago";   
+                            }
+                        }
+   
                         return (
-                            <button key={Timestamp.now().toMillis().toString()} onClick={() => { navigateToApplyPage(jobData.id!) }} className="text-black hover:text-tan text-left w-full border-2 rounded-xl hover:bg-blue border-black flex flex-row justify-between items-center p-4">
-
-                                <div className="flex flex-col justify-start items-start gap-1">
+                            <button key={index} onClick={() => { navigateToApplyPage(jobData.id!) }} className="text-black hover:text-tan text-left w-full border-2 rounded-xl hover:bg-blue border-black flex flex-row justify-between items-center p-4">
+                                <div className="flex flex-col justify-start items-start">
                                     <div className="text-2xl font-bold">{jobData.jobTitle}</div>
-                                    <div className="text-sm mt-1 font-regular">Posted on {jobData.time.toDate().toLocaleString().toString()}</div>
+                                    <div className="text-[12px] ml-[1px] font-regular">{finalDifferenceText}</div>
                                 </div>
                                 <div className="flex flex-col justify-center h-full items-end gap-1">
                                     <div className="flex flex-row justify-center items-center gap-1">
-                                        <BsPin className="h-3 w-3"></BsPin>
                                         <div className="text-sm">{jobData.location}</div>
                                     </div>
                                     <div className="flex flex-row justify-center items-center gap-1">
                                         <div className="text-sm">{jobData.jobType}, {jobData.workModel}</div>
                                     </div>
                                 </div>
-
-                                {/* <div className="mt-3 w-full flex flex-row justify-end items-end text-md font-regular">{applicants} Applicant{applicants > 1 ? "s" : ""}</div> */}
                             </button>
                         )
                     })

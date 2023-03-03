@@ -6,10 +6,10 @@ module.exports = {
   theme: {
    extend:{
     colors:{
-      "tan":"#DDD7D5",
+      "tan":"#FFFFFF",
       "black":"#2C2B2B",
       "blue":"#243763",
-      "purp":"#7B2869"
+      "purp":"#B3005E"
      }
    }
   },
