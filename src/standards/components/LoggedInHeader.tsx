@@ -13,21 +13,22 @@ export default function LoggedInHeader() {
     const navigate = useNavigate();
     const [loggedInUser, setLoggedInUser] = useRecoilState(globalUserAtom);
     const [isApplyPage, setIsApplyPage] = useState<boolean>(true);
+    const publicUrls = ["/apply", "/company"];
+    const [showing, setshowing] = useState(true);
 
     useEffect(() => {
-        if (window.location.pathname.toString().includes("apply") == false) {
-            setIsApplyPage(false);
-        }
-        else {
-            setIsApplyPage(true);
-        }
+        publicUrls.forEach((publicUrl) => {
+            if(window.location.href.includes(publicUrl)){
+                setshowing(false);
+            }
+        });
     }, [])
 
 
     return (
         <>
-            {isApplyPage == false &&
-                <div style={{zoom:0.9}} className="fixed shadow-md shadow-black/10 h-[60px] bg-tan z-50 w-full flex flex-row justify-between items-center px-[5%] py-5">
+            { showing&&
+                <div style={{ zoom: 0.9 }} className="fixed shadow-md shadow-black/10 h-[60px] bg-tan z-50 w-full flex flex-row justify-between items-center px-[5%] py-5">
                     <button onClick={() => { navigate("/") }}>
                         <img src={Logo} className="h-10 w-10"></img>
                     </button>
@@ -43,11 +44,11 @@ export default function LoggedInHeader() {
 
                         <button onClick={() => {
                             navigate("/jobs");
-                        }} className={`hover:scale-[1.02] font-bold ${window.location.href.includes("jobs")?"text-purp":"text-black/90"} text-sm`}>Jobs</button>
+                        }} className={`hover:scale-[1.02] font-bold ${window.location.href.includes("jobs") ? "text-purp" : "text-black/90"} text-sm`}>Jobs</button>
 
                         <button onClick={() => {
                             navigate("/companies");
-                        }} className={`hover:scale-[1.02] font-bold ${window.location.href.includes("companies")?"text-purp":"text-black/90"} text-sm`}>Company</button>
+                        }} className={`hover:scale-[1.02] font-bold ${window.location.href.includes("companies") ? "text-purp" : "text-black/90"} text-sm`}>Company</button>
 
 
                         {/* <button onClick={() => {
