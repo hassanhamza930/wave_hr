@@ -48,6 +48,7 @@ function EditJob() {
         setLoading(true);
         console.log(questions);
 
+
         await setDoc(doc(db, "jobs", jobId as string), {
             companyId: selectedCompany.id,
             jobDescription: jobDescription,
@@ -109,8 +110,8 @@ function EditJob() {
         <PageLayout>
             <FormLayout>
 
-                <Heading text="Post a new job" />
-                <SubHeading text="Open a new job posting and start receiving applications" customStyles="mt-2" />
+                <Heading text="Edit job details" />
+                {/* <SubHeading text="Open a new job posting and start receiving applications" customStyles="mt-2" /> */}
 
                 <SimpleInput value={jobTitle} onChange={setjobTitle} placeholder="Job Title" customStyles="mt-14" />
 

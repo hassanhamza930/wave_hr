@@ -18,7 +18,7 @@ function CompanyCard(companyData: CompanyDataInterface) {
             <button onClick={() => { setSelectedCompany(companyData) }} style={{ backgroundImage: `url('${companyData.companyCover}')` }} className="h-32 w-full hover:scale-[1.02] rounded-md bg-cover bg-center">
                 <div className="h-full bg-cover bg-center bg-black/[95%] backdrop-hue-rotate-90 text-tan w-full rounded-md flex flex-1 flex-row justify-between items-center p-5">
 
-                    <div className="text-tan text-4xl h-full w-3/5 overflow-hidden font-bold flex justify-start items-start">
+                    <div className="text-tan text-4xl h-full w-3/5 overflow-hidden text-start font-bold flex justify-start items-start">
                         {companyData.companyName}
                     </div>
 

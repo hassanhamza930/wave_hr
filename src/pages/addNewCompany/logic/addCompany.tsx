@@ -22,12 +22,6 @@ export interface CompanyInformation{
 
 
 
-
-
-
-
-
-
 export function useHandleAddCompany(){
 
     const [loading, setLoading] = useRecoilState(isLoadingAtom);

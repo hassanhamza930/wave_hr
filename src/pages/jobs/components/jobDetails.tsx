@@ -11,7 +11,6 @@ import { Transition } from "@headlessui/react";
 import ReactQuill from "react-quill";
 import { jobDataAtom } from "../../apply/atoms/applyPageAtoms";
 import { JobDataInterface } from "../../../standards/interfaces/interfaces";
-import { parseLines } from "../../../standards/styles/components/inputs";
 
 export default function JobDetails() {
 
@@ -48,7 +47,7 @@ export default function JobDetails() {
             <div className="flex flex-col justify-start items-start p-10 w-full">
 
                 <div className="relative flex flex-row justify-between items-center w-full">
-                    <div className="text-4xl font-bold text-tan">{parseLines(selectedJob.jobTitle)}</div>
+                    <div className="text-4xl font-bold text-tan">{selectedJob.jobTitle}</div>
                     <Menu>
                         <Menu.Button className="text-tan hover:scale-105">
                             <BsThreeDots size={30} />
@@ -115,9 +114,9 @@ export default function JobDetails() {
 
 
                 <div className="text-xl font-bold text-tan mt-10">Job Description</div>
-                <textarea rows={selectedJob.jobDescription.split("\n").length} disabled={true} id="no_scroll" value={selectedJob.jobDescription} className="resize-none w-full h-full text-md mt-2 bg-transparent text-tan"></textarea>
+                <div id="no_scroll" className="resize-none w-full h-full text-md mt-2 bg-transparent text-tan flex flex-col gap-2">{selectedJob.jobDescription.split("\n").map((el)=>{return <div>{el}</div>})}</div>
                 <div className="text-xl font-bold text-tan mt-10">Job Qualifications</div>
-                <textarea rows={selectedJob.jobQualifications.split("\n").length} disabled={true} id="no_scroll" value={selectedJob.jobQualifications} className=" resize-none w-full text-md h-full mt-2 bg-transparent text-tan"></textarea>
+                <div id="no_scroll" className=" resize-none w-full text-md h-full mt-2 bg-transparent text-tan flex flex-col gap-2">{selectedJob.jobQualifications.split("\n").map((el)=>{return <div>{el}</div>})}</div>
                 <div className="text-xl font-bold text-tan mt-10">Salary Compensation</div>
                 <div className="text-md mt-2 text-tan">{selectedJob.salaryCompensation.toString()}</div>
                 <div className="text-xl font-bold text-tan mt-10 mb-2">Questions</div>
