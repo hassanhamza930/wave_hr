@@ -1,4 +1,3 @@
-import { DayjsTimezone } from "dayjs";
 import { Timestamp } from "firebase/firestore"
 
 export interface JobDataInterface {
@@ -30,12 +29,6 @@ export interface CompanyDataInterface {
 }
 
 
-
-export interface QuestionResponse {
-    question: string;
-    answer: string;
-}
-
 export interface ApplicationDataInterface {
     id?: string;
     name: string;
@@ -51,11 +44,35 @@ export interface ApplicationDataInterface {
 }
 
 
+// export interface DayAvailabilityInterface{
+//     enabled:boolean,
+//     timeStart:string,
+//     timeEnd:string,
+// }
+
+// export interface AvailabilityInterface{
+//     mon:DayAvailabilityInterface,
+//     tue:DayAvailabilityInterface,
+//     wed:DayAvailabilityInterface,
+//     thur:DayAvailabilityInterface,
+//     fri:DayAvailabilityInterface,
+//     sat:DayAvailabilityInterface,
+//     sun:DayAvailabilityInterface,
+//     timezone:string
+// }
+
 export interface UserDataInterface {
     id?:string,
     name:string|null,
     photoUrl:string|null,
     email:string|null,
-    timezone:string,
+    interviewsSetup:boolean,
+    calendlyLink:string,
 }
 
+
+
+export interface QuestionResponse {
+    question: string;
+    answer: string;
+}
