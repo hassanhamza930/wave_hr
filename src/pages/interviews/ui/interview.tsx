@@ -38,7 +38,7 @@ export default function Interviews() {
         // console.log(localTime);
         getDoc(doc(db,"users",localStorage.getItem("uid") as string)).then((doc)=>{
             var userData:UserDataInterface=doc.data() as UserDataInterface;
-            setCalendlyLink(userData.calendlyLink);
+            setCalendlyLink(userData.calendlyLink!);
         });
 
     }, [])
