@@ -30,7 +30,7 @@ function ExperienceTheFuture() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
               onClick={() => {
-                navigate("access");
+                navigate("/login");
               }}
               className="hover:scale-[1.02] px-8 py-3 rounded-[10px] bg-primary flex flex-row gap-2 justify-center items-center"
             >
