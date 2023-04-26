@@ -1,34 +1,33 @@
-interface HeadingInterface{
-    text:string,
-    color?:string,
-    customStyles?:string
+interface HeadingInterface {
+  text: string;
+  color?: string;
+  customStyles?: string;
 }
 
-export function Heading({color="text-black",text,customStyles=""}:HeadingInterface) {
-    return ( 
-        <div className={`${color} ${customStyles}  text-4xl font-bold`}>
-            {text}
-        </div>
-     );
+export function Heading({
+  color = 'text-black',
+  text,
+  customStyles = '',
+}: HeadingInterface) {
+  return (
+    <div className={`${color} ${customStyles}  text-4xl font-bold`}>{text}</div>
+  );
 }
 
-
-
-function SubHeading({color="text-black",text,customStyles=""}:HeadingInterface) {
-    return ( 
-        <div className={`${color} ${customStyles} text-md`}>
-            {text}
-        </div>
-     );
+function SubHeading({
+  color = 'text-black',
+  text,
+  customStyles = '',
+}: HeadingInterface) {
+  return <div className={`${color} ${customStyles} text-md`}>{text}</div>;
 }
 
-
-function Text({color="text-blue",text,customStyles=""}:HeadingInterface) {
-    return ( 
-        <div className={`${color} ${customStyles} text-sm`}>
-            {text}
-        </div>
-     );
+function Text({
+  color = 'text-blue',
+  text,
+  customStyles = '',
+}: HeadingInterface) {
+  return <div className={`${color} ${customStyles} text-sm`}>{text}</div>;
 }
 
-export {SubHeading};
+export { SubHeading };
