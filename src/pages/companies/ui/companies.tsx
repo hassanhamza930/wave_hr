@@ -7,36 +7,42 @@ import PageLayout from "../../../standards/styles/layouts/pageLayout";
 import { selectedCompanyAtom } from "../atoms/selectedCompany";
 import AllCompaniesPostedByUser from "../components/allCompaniesPostedByUser";
 import CompanyDetails from "../components/companyDetails";
+import TwoColumnLayoutPage from "../../../standards/styles/layouts/twoColumnLayout";
 
 function Companies() {
     const navigate = useNavigate();
 
 
-    useEffect(()=>{
-    },[])
+    useEffect(() => {
+    }, [])
 
     return (
-        <PageLayout>
+        <TwoColumnLayoutPage
 
-            <div  className="flex h-full flex-row justify-start items-start gap-5">
-
-                <div className="w-2/4 pr-20">
-                    <Heading text="All Companies" />
-                    <SubHeading text="Setup company profiles to start hiring." customStyles="mt-2" />
-                    <AllCompaniesPostedByUser />
-                    <ButtonSolid text="Add Company" onClick={() => { navigate("/addNewCompany") }} customStyles="mt-5 mb-24" />
-
+            component1={
+                <div className="w-full bg-transparent backdrop-blur-xl rounded-xl flex flex-col justify-start items-start gap-10">
+                    {
+                        [1, 2, 3, 4, 5].map((item) => {
+                            return (
+                                <div className="h-96 w-full bg-blue/20 backdrop-blur-xl rounded-xl"></div>
+                            )
+                        })
+                    }
                 </div>
+            }
 
-                <div className="w-2/4 h-full">
-                    <CompanyDetails/>
+            component2={
+                <div className="w-full bg-transparent backdrop-blur-xl rounded-xl flex flex-col justify-start items-start gap-10">
+                    {
+                        [1, 2, 3, 4, 5].map((item) => {
+                            return (
+                                <div className="h-96 w-full bg-blue/50 backdrop-blur-xl rounded-xl"></div>
+                            )
+                        })
+                    }
                 </div>
-
-
-            </div>
-
-
-        </PageLayout>
+            }
+        />
     );
 }
 

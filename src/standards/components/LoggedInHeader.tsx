@@ -17,7 +17,7 @@ export default function LoggedInHeader() {
 
 
     return (
-        <div className="fixed h-[70px] bg-tan z-50 w-full flex flex-row justify-between items-center px-[5%] py-5">
+        <div className="fixed h-[70px] bg-tan z-50 w-full flex flex-row justify-between items-center px-[5%]">
 
             <div className="text-[24px] font-bold">
                 Jobs
@@ -32,7 +32,7 @@ export default function LoggedInHeader() {
 
                 <button onClick={() => {
                     navigate("/companies");
-                }} className={`font-semibold ${window.location.href.includes("companies") ? "text-blue" : "text-black"} text-sm`}>Company</button>
+                }} className={`font-semibold ${window.location.href.includes("companies") ? "text-blue" : "text-black"} text-sm`}>Companies</button>
 
 
 
@@ -63,7 +63,7 @@ export default function LoggedInHeader() {
                                                 Home
                                             </button>
                                         )}
-                                    </Menu.Item>
+                                    </Menu.Item>    
 
                                     <Menu.Item>
                                         {({ active }) => (
