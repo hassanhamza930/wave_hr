@@ -9,7 +9,7 @@ function HumanInTheLoop() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: false }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 1 }}
       variants={{
         visible: { opacity: 1, y: 0, scale: 1 },
         hidden: { opacity: 0, y: 1, scale: 0.95 },

@@ -7,17 +7,14 @@ import { motion } from "framer-motion";
 function OneStopSolution() {
   return (
     <motion.span
-      initial={{
-        y: 10,
-        opacity: 0,
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: false }}
+      transition={{ duration: 0.8 }}
+      variants={{
+        visible: { opacity: 1, y: 0, scale: 1 },
+        hidden: { opacity: 0, y: 1, scale: 0.95 },
       }}
-      animate={{
-        x: 0,
-        y: 0,
-        opacity: 1,
-        rotate: 0,
-      }}
-      transition={{ duration: 1 }}
       className=" items-center justify-center flex flex-col"
     >
       <p
