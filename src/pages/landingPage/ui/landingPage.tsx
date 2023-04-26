@@ -1,14 +1,19 @@
-import GetAccess from "../components/getAccess";
+import SimplifyingModernRecruitment from "../components/SimplifyingModernRecruitment";
 import HumanInTheLoop from "../components/HumanInTheLoop";
-import Pricing from "../components/pricing/pricing";
-
+import Pricing from "../components/PricingPlans/PricingPlan";
+import OneStopSolution from "../components/OneStopSolution/OneStopSolution";
+import ExperienceTheFuture from "../components/ExperienceTheFuture";
+import WaveHRFooter from "../components/WaveHRFooter";
 
 export default function LandingPage() {
-    return (
-        <div className="w-full bg-white flex justify-start items-center flex-col">
-            <GetAccess />
-            <Pricing />
-            <HumanInTheLoop/>
-        </div>
-    )
+  return (
+    <div className="w-full bg-white flex justify-start items-center flex-col">
+      <SimplifyingModernRecruitment />
+      <OneStopSolution />
+      <Pricing />
+      <HumanInTheLoop />
+      <ExperienceTheFuture />
+      <WaveHRFooter />
+    </div>
+  );
 }
