@@ -9,10 +9,10 @@ import { CompanyDataInterface } from '../../../standards/interfaces/interfaces';
 
 const loggedInUser = localStorage.getItem('uid')!;
 // const loggedInUser = 's2vPxnYYAQf2XratArGBFNmlAb82';
-const db = getFirestore();
 
 export const getAllCompanies = async () => {
   try {
+    const db = getFirestore();
     const companiesRef = collection(db, 'companies');
     const q = query(companiesRef, where('companyOwnerId', '==', loggedInUser));
     const querySnapshot = await getDocs(q);
