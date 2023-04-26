@@ -14,9 +14,9 @@ function HumanInTheLoop() {
         visible: { opacity: 1, y: 0, scale: 1 },
         hidden: { opacity: 0, y: 1, scale: 0.95 },
       }}
-      className="h-full w-[75%] mt-72 items-center"
+      className="h-full px-[15%] mt-16 items-center"
     >
-      <div className="flex flex-row mt-[500px] ">
+      <div className="flex flex-row mt-[450px] ">
         <img src={HITL} className="w-[400px] h-[330px] ml-2" />
         <div className="px-10 flex flex-col ml-5 ">
           <div
@@ -37,7 +37,8 @@ function HumanInTheLoop() {
           </div>
         </div>
       </div>
-      <div className="flex flex-row-reverse mt-36 ">
+      
+      <div className="flex flex-row-reverse mt-16 ">
         <img src={PostOnce} className="w-[400px] h-[330px] ml-2" />
         <div className="px-10 flex flex-col mr-5">
           <div
@@ -54,7 +55,8 @@ function HumanInTheLoop() {
           </div>
         </div>
       </div>
-      <div className="flex flex-row mt-36">
+
+      <div className="flex flex-row mt-16">
         <img src={Applications} className="w-[400px] h-[330px] ml-2" />
         <div className="px-10 flex flex-col ml-5">
           <div
@@ -72,6 +74,7 @@ function HumanInTheLoop() {
           </div>
         </div>
       </div>
+
     </motion.div>
   );
 }

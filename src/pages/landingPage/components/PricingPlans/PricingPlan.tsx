@@ -7,15 +7,16 @@ function Pricing() {
   const navigate = useNavigate();
 
   return (
-    <div className="h-screen w-full bg-tan flex flex-col justify-center items-center ">
+    <div className="h-screen w-full bg-tan flex flex-col justify-center items-center mt-24 ">
+
       <div
         style={{ fontFamily: "Space Grotesk" }}
-        className="font-bold text-[35px] tracking-tighter text-primary mt-56"
+        className="font-bold text-[35px] tracking-tighter text-primary mt-96 "
       >
         Pricing plans for teams of all sizes
       </div>
 
-      <div className="h-full w-full flex flex-row justify-center items-start gap-10">
+      <div className="h-min w-full flex flex-col justify-center items-center gap-10 mt-12">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -25,24 +26,23 @@ function Pricing() {
             visible: { opacity: 1, y: 0, scale: 1 },
             hidden: { opacity: 0, y: 1, scale: 0.95 },
           }}
-          className="z-30 h-full w-full flex flex-row justify-center items-start gap-10 px-10 mt-12"
-        >
-          <div className="z-30 h-full w-full flex flex-row justify-center items-start gap-10 px-10 mt-12">
-            <Individual />
-            <Startup />
-            <Pro />
-          </div>
+          className="z-30 h-full w-full flex flex-row justify-center items-start gap-10 px-10 mt-12">
+
+          <Individual />
+          <Startup />
+          <Pro />
+
         </motion.div>
 
         <img
           src={PricingCardsVector}
-          className="w-full h-[1000px] mt-[300px] object-contain absolute z-10"
+          className="w-full h-[700px] mt-[400px] bg-cover absolute z-10"
         />
-        <div className="flex flex-col absolute mt-[900px] z-30 text-tan text-center">
+
+        <div className="flex flex-col relative z-20 text-tan text-center">
           <p
-            style={{ fontFamily: "Space Grotesk" }}
-            className="font-bold text-[33px]"
-          >
+            style={{ fontFamily: "Space Grotesk"   }}
+            className="font-bold text-[33px] mt-24">
             Ready to take your recruitment process to the next level?
           </p>
           <p className="text-[13px]">
