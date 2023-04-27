@@ -9,8 +9,9 @@ function SimplifyingModernRecruitment() {
     <motion.span
       initial="hidden"
       whileInView="visible"
+      animate={{ opacity: 1 }}
       viewport={{ once: false }}
-      transition={{ duration: 2.0 }}
+      transition={{ duration: 2.0, delay: 0.2 }}
       variants={{
         visible: { opacity: 1, y: 0, scale: 1 },
         hidden: { opacity: 0, y: 1, scale: 0.95 },
