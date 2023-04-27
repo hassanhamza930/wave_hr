@@ -10,7 +10,7 @@ function SimplifyingModernRecruitment() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: false }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 2.0 }}
       variants={{
         visible: { opacity: 1, y: 0, scale: 1 },
         hidden: { opacity: 0, y: 1, scale: 0.95 },
@@ -33,7 +33,7 @@ function SimplifyingModernRecruitment() {
         onClick={() => {
           navigate("/login");
         }}
-        className="hover:scale-[1.02] absolute ml-[75px] mt-[250px] text-sm px-8 py-3 rounded-[10px] bg-primary flex flex-row gap-2 justify-center items-center"
+        className="hover:scale-[1.02] absolute ml-[75px] mt-[250px] text-sm px-8 py-3 rounded-[10px] bg-blue flex flex-row gap-2 justify-center items-center"
       >
         <div
           style={{ fontFamily: "Space Grotesk" }}

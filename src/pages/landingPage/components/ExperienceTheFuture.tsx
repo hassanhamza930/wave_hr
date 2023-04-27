@@ -15,12 +15,12 @@ function ExperienceTheFuture() {
           visible: { opacity: 1, y: 0, scale: 1 },
           hidden: { opacity: 0, y: 10, scale: 0.95 },
         }}
-        className="w-full bg-primary bg-opacity-5 flex flex-row  items-center justify-center pt-8 pb-8 rounded-[19px]"
+        className="w-full bg-blue bg-opacity-5 flex flex-row  items-center justify-center pt-8 pb-8 rounded-[19px]"
       >
         <div className="flex flex-col justify-center items-center">
           <div
             style={{ fontFamily: "Space Grotesk" }}
-            className=" text-[22px] text-primary w-full flex flex-row items-center justify-between gap-20"
+            className=" text-[22px] text-blue w-full flex flex-row items-center justify-between gap-20"
           >
             <p className="font-bold">
               Experience the future of recruitment with WaveHR. Sign up today!{" "}
@@ -32,7 +32,7 @@ function ExperienceTheFuture() {
               onClick={() => {
                 navigate("/login");
               }}
-              className="hover:scale-[1.02] px-8 py-3 rounded-[10px] bg-primary flex flex-row gap-2 justify-center items-center"
+              className="hover:scale-[1.02] px-8 py-3 rounded-[10px] bg-blue flex flex-row gap-2 justify-center items-center"
             >
               <div
                 style={{ fontFamily: "Space Grotesk" }}

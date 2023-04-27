@@ -8,7 +8,6 @@ function Pricing() {
 
   return (
     <div className="h-screen w-full bg-tan flex flex-col justify-center items-center mt-24 ">
-
       <div
         style={{ fontFamily: "Space Grotesk" }}
         className="font-bold text-[35px] tracking-tighter text-primary mt-96 "
@@ -26,12 +25,11 @@ function Pricing() {
             visible: { opacity: 1, y: 0, scale: 1 },
             hidden: { opacity: 0, y: 1, scale: 0.95 },
           }}
-          className="z-30 h-full w-full flex flex-row justify-center items-start gap-10 px-10 mt-12">
-
+          className="z-30 h-full w-full flex flex-row justify-center items-start gap-10 px-10 mt-12"
+        >
           <Individual />
           <Startup />
           <Pro />
-
         </motion.div>
 
         <img
@@ -41,8 +39,9 @@ function Pricing() {
 
         <div className="flex flex-col relative z-20 text-tan text-center">
           <p
-            style={{ fontFamily: "Space Grotesk"   }}
-            className="font-bold text-[33px] mt-24">
+            style={{ fontFamily: "Space Grotesk" }}
+            className="font-bold text-[33px] mt-24"
+          >
             Ready to take your recruitment process to the next level?
           </p>
           <p className="text-[13px]">
@@ -58,7 +57,7 @@ function Pricing() {
             >
               <div
                 style={{ fontFamily: "Space Grotesk" }}
-                className="text-primary font-bold text-[12px] uppercase"
+                className="text-blue font-bold text-[12px] uppercase"
               >
                 Sign up now
               </div>

@@ -97,7 +97,7 @@ export function Startup() {
           Careers Page
         </div>
       </div>
-      <button className="hover:scale-[1.02] w-full mt-[120px] text-sm px-8 py-3 rounded-[5px] bg-primary flex flex-row gap-2 justify-center items-center">
+      <button className="hover:scale-[1.02] w-full mt-[120px] text-sm px-8 py-3 rounded-[5px] bg-blue flex flex-row gap-2 justify-center items-center">
         <div className="text-tan font-bold text-[16px]">Join Startup</div>
       </button>
     </div>

@@ -1,6 +1,6 @@
 function WaveHRFooter() {
   return (
-    <div className="bg-primary w-full px-32 flex flex-col items-start justify-start">
+    <div className="bg-blue w-full px-32 flex flex-col items-start justify-start">
       <svg
         width="130"
         height="52"
