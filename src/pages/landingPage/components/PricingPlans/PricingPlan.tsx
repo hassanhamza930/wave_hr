@@ -20,7 +20,7 @@ function Pricing() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: false }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 1.0, delay: 0.2 }}
           variants={{
             visible: { opacity: 1, y: 0, scale: 1 },
             hidden: { opacity: 0, y: 1, scale: 0.95 },

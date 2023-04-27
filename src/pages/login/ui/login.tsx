@@ -76,7 +76,7 @@ export default function Login() {
               </div>
             </motion.div>
           </div>
-          <div className="bg-gradient-to-b from-primary to-[#003DA0] w-2/4 h-screen flex flex-col justify-center items-center">
+          <div className="bg-gradient-to-b from-blue to-[#003DA0] w-2/4 h-screen flex flex-col justify-center items-center">
             <motion.div
               initial="hidden"
               whileInView="visible"

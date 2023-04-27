@@ -21,7 +21,7 @@ function HumanInTheLoop() {
         <div className="px-10 flex flex-col ml-5 ">
           <div
             style={{ fontFamily: "Space Grotesk" }}
-            className="font-bold mb-7 mt-10  text-primary text-[30px]"
+            className="font-bold mb-7 mt-10  text-blue text-[27px]"
           >
             Human in the loop
           </div>
@@ -37,13 +37,13 @@ function HumanInTheLoop() {
           </div>
         </div>
       </div>
-      
+
       <div className="flex flex-row-reverse mt-16 ">
         <img src={PostOnce} className="w-[400px] h-[330px] ml-2" />
         <div className="px-10 flex flex-col mr-5">
           <div
             style={{ fontFamily: "Space Grotesk" }}
-            className="font-bold mb-7 mt-10  text-primary text-[30px]"
+            className="font-bold mb-7 mt-10  text-blue text-[27px]"
           >
             Post once, share everywhere
           </div>
@@ -61,7 +61,7 @@ function HumanInTheLoop() {
         <div className="px-10 flex flex-col ml-5">
           <div
             style={{ fontFamily: "Space Grotesk" }}
-            className="font-bold mb-7 mt-10  text-primary text-[30px]"
+            className="font-bold mb-7 mt-10  text-blue text-[27px]"
           >
             Applications that feels like a conversation
           </div>
@@ -74,7 +74,6 @@ function HumanInTheLoop() {
           </div>
         </div>
       </div>
-
     </motion.div>
   );
 }
