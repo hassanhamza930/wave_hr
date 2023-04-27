@@ -18,14 +18,14 @@ export interface JobDataInterface {
 
 export interface CompanyDataInterface {
     id?: string,
-    companyOwnerId?: string,
-    companyLogo: string,
-    companyCover: string,
+    companyOwnerId?: string, // this will be the person who has created the company
+    companyLogo: string, //this will be the firebase storage url for the company logo  image
+    companyCover: string, //this will be the firebase storage url for the company cover image
     companyName: string,
-    companyDescription: string,
-    companyTags: Array<string>,
-    numberOfEmployees: string,
-    companyLocation: string
+    companyDescription: string, //description of what company does and quick history introduction.
+    companyTags: Array<string>, //this will be an array of strings for example software services, SaaS, hiring software etc.
+    numberOfEmployees: string,  //number of employees in free text format
+    companyLocation: string // this will be location of the company in free text format
 }
 
 
@@ -44,30 +44,13 @@ export interface ApplicationDataInterface {
 }
 
 
-// export interface DayAvailabilityInterface{
-//     enabled:boolean,
-//     timeStart:string,
-//     timeEnd:string,
-// }
-
-// export interface AvailabilityInterface{
-//     mon:DayAvailabilityInterface,
-//     tue:DayAvailabilityInterface,
-//     wed:DayAvailabilityInterface,
-//     thur:DayAvailabilityInterface,
-//     fri:DayAvailabilityInterface,
-//     sat:DayAvailabilityInterface,
-//     sun:DayAvailabilityInterface,
-//     timezone:string
-// }
-
 export interface UserDataInterface {
     id?:string,
     name:string|null,
     photoUrl:string|null,
     email:string|null,
-    interviewsSetup:boolean,
-    calendlyLink:string,
+    interviewsSetup?:boolean, //this will be used to check if the user has setup their interviews settings later down the road
+    calendlyLink?:string, //this will be the link to the users calendly account, the functionality of this is still vague so you can ignore it for now.
 }
 
 
@@ -76,3 +59,6 @@ export interface QuestionResponse {
     question: string;
     answer: string;
 }
+
+
+

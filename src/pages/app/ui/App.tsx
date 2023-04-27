@@ -61,29 +61,24 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useRecoilState(globalUserAtom);
   const { height, width } = useWindowSize();
 
-  const location = useLocation();
 
-  useEffect(()=>{
-    console.log("testignxyaZ");
-    console.log(location.pathname);
-  },[])
 
   return (
     <>
-      {
-        width < 1280 == true && location.pathname.includes("apply")==false && <WaveLooksGoodOnDesktop />
-      }
 
       {loading == true && <Loading />}
+
       <Toaster
         position="top-center"
         reverseOrder={false}
       />
-      <div style={{ fontFamily: "Inter", }} className=" h-full w-full bg-tan relative">
+
+      <div style={{fontFamily: "Inter"}} className="h-full w-full bg-tan relative">
         {
-          loggedIn == true ? <LoggedInRoutes />:<LoggedOutRoutes />
+          loggedIn == true ? <LoggedInRoutes /> : <LoggedOutRoutes />
         }
       </div>
+
     </>
   );
 }
