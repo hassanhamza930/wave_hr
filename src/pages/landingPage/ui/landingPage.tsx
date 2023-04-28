@@ -7,11 +7,11 @@ import WaveHRFooter from "../components/WaveHRFooter";
 
 export default function LandingPage() {
   return (
-    <div className="w-full bg-white flex justify-start items-center flex-col">
+    <div className="w-full bg-white flex justify-start items-center flex-col overflow-x-hidden">
       <SimplifyingModernRecruitment />
       <OneStopSolution />
-      <Pricing />
       <HumanInTheLoop />
+      <Pricing />
       <ExperienceTheFuture />
       <WaveHRFooter />
     </div>

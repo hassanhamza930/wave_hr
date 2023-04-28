@@ -15,15 +15,15 @@ function OneStopSolution() {
         visible: { opacity: 1, y: 0, scale: 1 },
         hidden: { opacity: 0, y: 1, scale: 0.95 },
       }}
-      className=" items-center justify-center flex flex-col"
+      className=" items-center justify-center flex flex-col mt-24"
     >
       <p
         style={{ fontFamily: "Space Grotesk" }}
-        className="font-bold text-[30px] text-primary"
+        className="font-bold text-[35px] text-blue"
       >
         Your One-Stop Solution for Modern Recruitment
       </p>
-      <p className="text-[16px] text-[#696969]">
+      <p className="text-[16px] text-[#696969] mt-5">
         Efficient, Intuitive, and Seamless Recruitment Solution
       </p>
       <motion.span

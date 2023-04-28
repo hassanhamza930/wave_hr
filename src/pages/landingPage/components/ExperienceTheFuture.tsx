@@ -25,22 +25,14 @@ function ExperienceTheFuture() {
             <p className="font-bold">
               Experience the future of recruitment with WaveHR. Sign up today!{" "}
             </p>
-            <motion.button
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-              onClick={() => {
-                navigate("/login");
-              }}
-              className="hover:scale-[1.02] px-8 py-3 rounded-[10px] bg-blue flex flex-row gap-2 justify-center items-center"
-            >
-              <div
-                style={{ fontFamily: "Space Grotesk" }}
-                className="text-tan font-bold text-[12px] uppercase"
-              >
-                Sign up now
-              </div>
-            </motion.button>
+
+            <button
+              onClick={() => { navigate("/login"); }}
+              className="hover:scale-[1.02] hover:shadow-xl transition-all duration-100 ease-in-out text-sm px-8 py-3 rounded-[10px] bg-blue text-white font-medium flex flex-row gap-2 justify-center items-center">
+              Get Access
+            </button>
+
+
           </div>
         </div>
       </motion.div>

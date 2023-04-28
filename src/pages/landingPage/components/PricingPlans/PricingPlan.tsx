@@ -1,5 +1,5 @@
 import { Pro, Individual, Startup } from "./PricingPlanCards";
-import PricingCardsVector from "../../../../images/landingPage/PricingCardsVector.png";
+import PricingCardsVector from "../../../../images/landingPage/pricingbg.svg";
 import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
 
@@ -7,15 +7,15 @@ function Pricing() {
   const navigate = useNavigate();
 
   return (
-    <div className="h-screen w-full bg-tan flex flex-col justify-center items-center mt-24 ">
+    <div style={{backgroundImage:`url('${PricingCardsVector}')`}} className=" w-full bg-tan flex flex-col pb-16 bg-cover bg-center justify-center items-center mt-24">
       <div
         style={{ fontFamily: "Space Grotesk" }}
-        className="font-bold text-[35px] tracking-tighter text-primary mt-96 "
+        className="font-bold text-[35px] tracking-tighter text-primary mt-0 "
       >
         Pricing plans for teams of all sizes
       </div>
 
-      <div className="h-min w-full flex flex-col justify-center items-center gap-10 mt-12">
+      <div className="h-full w-full flex flex-col justify-center items-center gap-10 mt-5">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -25,19 +25,15 @@ function Pricing() {
             visible: { opacity: 1, y: 0, scale: 1 },
             hidden: { opacity: 0, y: 1, scale: 0.95 },
           }}
-          className="z-30 h-full w-full flex flex-row justify-center items-start gap-10 px-10 mt-12"
+          className="z-30 h-full w-full flex flex-row justify-center items-start gap-10 px-10 mt-12 mb-24"
         >
           <Individual />
           <Startup />
           <Pro />
         </motion.div>
 
-        <img
-          src={PricingCardsVector}
-          className="w-full h-[700px] mt-[400px] bg-cover absolute z-10"
-        />
 
-        <div className="flex flex-col relative z-20 text-tan text-center">
+        {/* <div className="flex flex-col relative z-20 text-tan text-center">
           <p
             style={{ fontFamily: "Space Grotesk" }}
             className="font-bold text-[33px] mt-24"
@@ -63,7 +59,7 @@ function Pricing() {
               </div>
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
