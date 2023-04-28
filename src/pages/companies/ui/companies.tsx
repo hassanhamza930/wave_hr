@@ -20,7 +20,6 @@ function Companies() {
         header={
           <div className='flex flex-row justify-start items-start w-full h-full'>
             <StandardLightBlueButton icon={<BiPlus />} text='New Company' />
-
           </div>
         }
         leftBar={<AllCompaniesPostedByUser/>}

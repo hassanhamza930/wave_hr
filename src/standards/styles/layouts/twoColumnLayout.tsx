@@ -18,7 +18,7 @@ const TwoColumnLayoutPage = (props: TwoColumnLayoutPageProps) => {
           {props.header}
         </div>
 
-        <div id='no_scroll' className='h-full w-full overflow-y-scroll p-5 bg-blue/5 rounded-3xl'>
+        <div id='no_scroll' className='h-full w-full overflow-y-scroll bg-blue/5 rounded-3xl'>
           {props.leftBar}
         </div>
 

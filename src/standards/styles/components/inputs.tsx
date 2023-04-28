@@ -1,5 +1,7 @@
 import ReactQuill from "react-quill";
 import { SubHeading } from "./heading";
+import { Gi3DGlasses } from "react-icons/gi";
+import { BiSearch } from "react-icons/bi";
 
 interface SimpleInputProps {
     width?: string,
@@ -24,8 +26,9 @@ function SimpleInput({ placeholder = "", value = "", customStyles = "", onChange
 
 export function SearchBar({ placeholder = "", value = "", customStyles = "", onChange}: SimpleInputProps) {
     return (
-        <div className={` ${customStyles} flex justify-start items-start flex-col`}>
-            <input placeholder={placeholder} value={value} onChange={(newVal) => { onChange(newVal) }} className={` w-96 text-sm border-b-[1px] border-blue text-blue bg-transparent outline-0 p-2 flex justify-center items-center`}>
+        <div className={` ${customStyles} flex flex-row justify-center items-center w-full border-b-[1px] border-blue text-blue bg-transparent px-7 py-5`}>
+            <BiSearch color="black" className=""/>
+            <input placeholder={placeholder} value={value} onChange={(newVal) => { onChange(newVal) }} className={` w-full text-black text-sm bg-transparent outline-none px-2 flex justify-center items-center`}>
             </input>
         </div>
     );

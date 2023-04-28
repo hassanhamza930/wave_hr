@@ -7,6 +7,8 @@ import { Heading, SubHeading } from "../../../standards/styles/components/headin
 import { CompanyInformation } from "../../addNewCompany/logic/addCompany";
 import { selectedCompanyAtom } from "../atoms/selectedCompany";
 import SimpleInput, { SearchBar } from "../../../standards/styles/components/inputs";
+import { StandardMidBlueButton } from "../../../standards/styles/components/button";
+import { BiLinkExternal, BiWindow, BiWindowOpen } from "react-icons/bi";
 
 
 function CompanyCard(companyData: CompanyDataInterface) {
@@ -15,23 +17,21 @@ function CompanyCard(companyData: CompanyDataInterface) {
 
 
     return (
-        <div className="flex w-full h-full flex-row justify-start items-start">
-            <button onClick={() => { setSelectedCompany(companyData) }} style={{ backgroundImage: `url('${companyData.companyCover}')` }} className="h-32 w-full hover:scale-[1.02] rounded-md bg-cover bg-center">
-                <div className="h-full bg-cover bg-center bg-black/[95%] backdrop-hue-rotate-90 text-tan w-full rounded-md flex flex-1 flex-row justify-between items-center p-5">
-
-                    <div className="text-tan text-4xl h-full w-3/5 overflow-hidden text-start font-bold flex justify-start items-start">
-                        {companyData.companyName}
-                    </div>
-
-                    <div style={{ backgroundImage: `url('${companyData.companyLogo}')` }} className="h-24 w-24 rounded-md bg-cover bg-center bg-transparent"></div>
-
+        <div className="hover:bg-blue/5 transition ease-in-out duration-150 flex px-7 py-4 w-full flex-row justify-between items-center border-t-[1px] border-gray">
+            
+            <div className="flex flex-col justify-start items-start h-full w-[60%] ">
+                <div className=" w-full text-md font-regular text-black overflow-hidden">
+                    {companyData.companyName}
                 </div>
-            </button>
+                <div className="text-sm font-regular text-dark-gray">3 Jobs</div>
+            </div>
 
+            <StandardMidBlueButton icon={<BiLinkExternal />} text="View Company" />
 
         </div>
     )
 }
+
 
 
 
@@ -40,34 +40,43 @@ function AllCompaniesPostedByUser() {
     const [allCompaniesPostedByUser, setAllCompaniesPostedByUser] = useState<Array<CompanyDataInterface>>([] as Array<CompanyDataInterface>);
     const db = getFirestore();
 
+    const [searchCompany, setsearchCompany] = useState("");
+
+
+
     async function fetchAllCompaniesPostedByUser() {
 
-        onSnapshot(query(collection(db, "companies"), where("companyOwnerId", "==", localStorage.getItem("uid"))), (docs) => {
+        onSnapshot(collection(db, "companies"), (docs) => {
             var docsData: Array<CompanyDataInterface> = docs.docs.map((doc) => {
                 var tempData: CompanyDataInterface = doc.data() as CompanyDataInterface;
                 tempData.id = doc.id;
                 return tempData as CompanyDataInterface
             });
             setAllCompaniesPostedByUser(docsData as Array<CompanyDataInterface>);
+            console.log("all companies", docsData);
         })
 
     }
 
     useEffect(() => {
+        console.log("fetchin all companies");
         fetchAllCompaniesPostedByUser();
     }, [])
 
     return (
-        <div className="flex flex-col justify-start items-start">
+        <div className="flex h-full flex-col justify-start items-start">
 
-            <SearchBar onChange={(e:any)=>{}} value="" placeholder="Search Company" />
-            {
-                allCompaniesPostedByUser.map((companyData) => {
-                    return (
-                        <CompanyCard {...companyData}></CompanyCard>
-                    )
-                })
-            }
+            <SearchBar onChange={(e: any) => { setsearchCompany(e.target.value) }} value={searchCompany} placeholder="Search Company" />
+
+            <div id="no_scroll" className="h-full flex-1 w-full flex-col justify-start items-start overflow-y-scroll">
+                {
+                    allCompaniesPostedByUser.map((companyData) => {
+                        return (
+                            <CompanyCard {...companyData}></CompanyCard>
+                        )
+                    })
+                }
+            </div>
 
         </div>
     );
