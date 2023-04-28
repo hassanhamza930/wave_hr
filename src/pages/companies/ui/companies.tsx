@@ -3,8 +3,16 @@ import { StandardLightBlueButton } from '../../../standards/styles/components/bu
 import { BiPlus } from 'react-icons/bi';
 import AllCompaniesPostedByUser from '../components/allCompaniesPostedByUser';
 import SelectedCompanyDetails from '../components/selectedCompanyDetails';
+import currentRouteAtom from '../../../atoms/app/currentRouteAtom';
+import { useRecoilState } from 'recoil';
+import { useEffect } from 'react';
 
 function Companies() {
+  const [currentRoute, setcurrentRoute] = useRecoilState(currentRouteAtom);
+
+  useEffect(() => {
+    setcurrentRoute("Companies");
+}, []);
 
   return (
     <>

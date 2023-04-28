@@ -7,20 +7,20 @@ import { AiFillCaretDown } from 'react-icons/ai';
 import { Fragment, useEffect, useState } from 'react'
 import globalUserAtom from "../../atoms/app/globalUserAtom";
 import { useRecoilState } from "recoil";
-
+import currentRouteAtom from "../../atoms/app/currentRouteAtom";
 
 export default function LoggedInHeader() {
 
     const navigate = useNavigate();
     const [loggedInUser, setLoggedInUser] = useRecoilState(globalUserAtom);
-
+    const [currentRoute, setcurrentRoute] = useRecoilState(currentRouteAtom);
 
 
     return (
         <div className="fixed h-[70px] bg-tan z-50 w-full flex flex-row justify-between items-center px-[5%]">
 
-            <div className="text-[24px] font-bold">
-                Jobs
+            <div className="text-md font-regular text-dark-gray flex justify-start items-start">
+                {currentRoute}
             </div>
 
 

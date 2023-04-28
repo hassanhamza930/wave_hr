@@ -10,10 +10,12 @@ import SimpleInput, { SearchBar } from "../../../standards/styles/components/inp
 import { StandardMidBlueButton } from "../../../standards/styles/components/button";
 import { BiLinkExternal, BiWindow, BiWindowOpen } from "react-icons/bi";
 import {motion} from "framer-motion"
+import currentRouteAtom from "../../../atoms/app/currentRouteAtom";
 
 function CompanyCard(companyData: CompanyDataInterface) {
 
     const [selectedCompany, setSelectedCompany] = useRecoilState(selectedCompanyAtom);
+    const [currentRoute, setcurrentRoute] = useRecoilState(currentRouteAtom);
 
 
     return (
@@ -26,7 +28,10 @@ function CompanyCard(companyData: CompanyDataInterface) {
                 <div className="text-sm font-regular text-dark-gray">3 Jobs</div>
             </div>
 
-            <StandardMidBlueButton onClick={()=>{setSelectedCompany(companyData);}} icon={<BiLinkExternal />} text="View Company" />
+            <StandardMidBlueButton onClick={()=>{
+                setSelectedCompany(companyData);
+                setcurrentRoute(`Companies > ${companyData.companyName}`);
+                }} icon={<BiLinkExternal />} text="View Company" />
 
         </div>
     )
