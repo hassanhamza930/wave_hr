@@ -6,6 +6,7 @@ import { CompanyDataInterface } from "../../../standards/interfaces/interfaces";
 import { Heading, SubHeading } from "../../../standards/styles/components/heading";
 import { CompanyInformation } from "../../addNewCompany/logic/addCompany";
 import { selectedCompanyAtom } from "../atoms/selectedCompany";
+import SimpleInput, { SearchBar } from "../../../standards/styles/components/inputs";
 
 
 function CompanyCard(companyData: CompanyDataInterface) {
@@ -57,7 +58,9 @@ function AllCompaniesPostedByUser() {
     }, [])
 
     return (
-        <div className="flex flex-col justify-start items-start mt-5 mb-10 gap-5">
+        <div className="flex flex-col justify-start items-start">
+
+            <SearchBar onChange={(e:any)=>{}} value="" placeholder="Search Company" />
             {
                 allCompaniesPostedByUser.map((companyData) => {
                     return (
@@ -65,7 +68,6 @@ function AllCompaniesPostedByUser() {
                     )
                 })
             }
-            {/* {allCompaniesPostedByUser.length == 0 && <SubHeading text="No companies setup yet." customStyles="mt-20" />} */}
 
         </div>
     );

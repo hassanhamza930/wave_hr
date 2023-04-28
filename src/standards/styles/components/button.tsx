@@ -55,18 +55,11 @@ interface ButtonProps {
   onClick?: () => void;
 }
 
-const StandardButton = ({
-  text,
-  bgColor = '#D9F1FF',
-  textColor = '#000',
-  textSize = 'text-base',
-  icon,
-  onClick,
-}: ButtonProps) => {
+const StandardLightBlueButton = ({text,icon,onClick}: ButtonProps) => {
   return (
     <button
       onClick={onClick}
-      className={`flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-[#D9F1FF] text[${textSize}] text-[${textColor}] font-medium outline-none border-none`}
+      className={`flex items-center justify-center gap-2 py-3 px-5 shadow-sm hover:shadow-md rounded-3xl bg-[#D9F1FF] text-black text-sm font-medium outline-none border-none`}
     >
       {icon && <span>{icon}</span>}
       {text}
@@ -116,7 +109,7 @@ export {
   ButtonOutlinedWhite,
   ButtonOutlinedBlue,
   ButtonSolid,
-  StandardButton,
+  StandardLightBlueButton,
   StandardDarkButton,
   StandardLightButton,
 };

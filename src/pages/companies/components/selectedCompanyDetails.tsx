@@ -9,7 +9,7 @@ import { Dropdown, MenuProps, Space } from "antd";
 import { ButtonOutlinedWhite } from "../../../standards/styles/components/button";
 
 
-function CompanyDetails() {
+function SelectedCompanyDetails() {
 
   const [selectedCompany, setSelectedCompany] = useRecoilState(selectedCompanyAtom);
   const navigate = useNavigate();
@@ -76,4 +76,4 @@ function CompanyDetails() {
   );
 }
 
-export default CompanyDetails;
+export default SelectedCompanyDetails;

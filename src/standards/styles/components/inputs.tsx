@@ -21,6 +21,19 @@ function SimpleInput({ placeholder = "", value = "", customStyles = "", onChange
     );
 }
 
+
+export function SearchBar({ placeholder = "", value = "", customStyles = "", onChange}: SimpleInputProps) {
+    return (
+        <div className={` ${customStyles} flex justify-start items-start flex-col`}>
+            <input placeholder={placeholder} value={value} onChange={(newVal) => { onChange(newVal) }} className={` w-96 text-sm border-b-[1px] border-blue text-blue bg-transparent outline-0 p-2 flex justify-center items-center`}>
+            </input>
+        </div>
+    );
+}
+
+
+
+
 function TextArea({ width = "", placeholder = "", value = "", customStyles = "", onChange,examples="" }: SimpleInputProps) {
     
     
