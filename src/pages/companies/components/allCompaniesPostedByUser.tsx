@@ -9,7 +9,7 @@ import { selectedCompanyAtom } from "../atoms/selectedCompany";
 import SimpleInput, { SearchBar } from "../../../standards/styles/components/inputs";
 import { StandardMidBlueButton } from "../../../standards/styles/components/button";
 import { BiLinkExternal, BiWindow, BiWindowOpen } from "react-icons/bi";
-
+import {motion} from "framer-motion"
 
 function CompanyCard(companyData: CompanyDataInterface) {
 
@@ -20,7 +20,7 @@ function CompanyCard(companyData: CompanyDataInterface) {
         <div className="hover:bg-blue/5 transition ease-in-out duration-150 flex px-7 py-4 w-full flex-row justify-between items-center border-t-[1px] border-gray">
             
             <div className="flex flex-col justify-start items-start h-full w-[60%] ">
-                <div className=" w-full text-md font-regular text-black overflow-hidden">
+                <div className=" w-full text-md font-medium text-black overflow-hidden">
                     {companyData.companyName}
                 </div>
                 <div className="text-sm font-regular text-dark-gray">3 Jobs</div>
@@ -83,15 +83,17 @@ function AllCompaniesPostedByUser() {
 
             <SearchBar onChange={(e: any) => { setsearchCompany(e.target.value) }} value={searchCompany} placeholder="Search Company" />
 
-            <div id="no_scroll" className="h-full flex-1 w-full flex-col justify-start items-start overflow-y-scroll">
+            <motion.div initial={{opacity:0}} animate={{opacity:1}} id="no_scroll" className="h-full flex-1 w-full flex-col justify-start items-start overflow-y-scroll">
                 {
-                    allCompaniesPostedByUser.map((companyData) => {
+                    allCompaniesPostedByUser.map((companyData,index) => {
                         return (
-                            <CompanyCard {...companyData}></CompanyCard>
+                            <motion.div transition={{delay:(index+1)*0.08}} initial={{opacity:0}} animate={{opacity:1}}>
+                                <CompanyCard {...companyData}></CompanyCard>
+                            </motion.div>
                         )
                     })
                 }
-            </div>
+            </motion.div>
 
         </div>
     );
