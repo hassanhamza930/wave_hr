@@ -1,73 +1,81 @@
-import { useEffect, useState } from "react";
-import ReactPlayer from "react-player";
-import hil from "../../../images/landingPage/hil.mp4"
-import { TbArrowLoopRight2 } from "react-icons/tb";
-import { BsFillShareFill } from "react-icons/bs";
-import { BiConversation } from "react-icons/bi";
+import { motion } from "framer-motion";
+import HITL from "../../../images/landingPage/HITL.png";
+import PostOnce from "../../../images/landingPage/PostOnce.png";
+import Applications from "../../../images/landingPage/Applications.png";
 
 function HumanInTheLoop() {
+  return (
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: false }}
+      transition={{ duration: 1 }}
+      variants={{
+        visible: { opacity: 1, y: 0, scale: 1 },
+        hidden: { opacity: 0, y: 1, scale: 0.95 },
+      }}
+      className="h-full px-[20%] mt-24 items-center"
+    >
+      <div className="flex flex-row mt-10 ">
+        <img src={HITL} className="w-[400px] h-[330px] ml-2" />
+        <div className="px-10 flex flex-col ml-5 ">
+          <div
+            style={{ fontFamily: "Space Grotesk" }}
+            className="font-bold mb-7 mt-10  text-blue text-[27px]"
+          >
+            Human in the loop
+          </div>
 
-    const [playing, setplaying] = useState(false);
-
-    useEffect(() => {
-        setplaying(true);
-    }, []);
-
-    return (
-        <div className="relative h-[900px] w-full font-['Inter'] tracking-tight bg-tan flex justify-center items-center ">
-            
-            <div className="absolute z-10 w-full text-tan h-full flex flex-col gap-5 justify-center items-center py-20 bg-tan/90 backdrop-blur-sm ">
-
-                <div className="hover:bg-purp hover:text-tan bg-blue w-3/5 text-tan rounded-md shadow-xl p-10 flex justify-start items-start flex-col">
-                    <div className="text-4xl font-bold flex flex-row justify-center items-center gap-2">
-                        Human in the Loop
-                        <TbArrowLoopRight2 />
-                    </div>
-
-                    <div className="w-full text-md font-medium mt-2 ">
-                        Wave follows a human in the loop approach to hiring,<br />
-                        We believe traditional ATS software hurts diversity and inclusion and skims over people who could be part of your dream team.
-                        <br />Wave provides you the tools to streamline your hiring pipeline while making sure every candidate resume is reviewed by human eyes.
-                    </div>
-
-                </div>
-
-
-                <div className="hover:bg-purp hover:text-tan bg-blue w-3/5 text-tan rounded-md shadow-xl p-10 flex justify-start items-start flex-col">
-                    <div className="text-4xl font-bold flex flex-row justify-center items-center gap-4">
-                        Post Once,Share Everywhere
-                        <BsFillShareFill className="mt-2" size={25} />
-                    </div>
-
-                    <div className="w-full text-md font-medium mt-2 ">
-                        Post your job on our platform and get a shareable link,<br />
-                        Distribute it wherever you like and start receiving applications.
-                        <br />LinkedIn, Indeed, Glassdoor or even Whatsapp.
-                    </div>
-                </div>
-
-
-                <div className="hover:bg-purp hover:text-tan bg-blue w-3/5 text-tan rounded-md shadow-xl p-10 flex justify-start items-start flex-col">
-                    <div className="text-4xl font-bold flex flex-row justify-center items-center gap-4">
-                        Applications that feel like a conversation
-                        <BiConversation className="mt-2" size={30} />
-                    </div>
-
-                    <div className="w-full text-md font-medium mt-2 ">
-                        Wave makes job applications more interactive by turning it into a conversation,<br />
-                        Applicants get detailed overview of what your comapny does with a Careers and a Company page.<br />
-                        Get higher quality applications and get more applicants.
-                    </div>
-                </div>
-
-
-            </div>
-            <div className="absolute z-0 w-full h-full flex justify-center items-center">
-                <ReactPlayer height={"100%"} width={"100%"} url={"./hil.mp4"} controls={false} playing={playing} muted loop />
-            </div>
-
+          <div className="font-regular font-['Inter'] text-[#696969] text-[16px]">
+            Wave follows a human in the loop approach to hiring. We believe
+            traditional ATS software hurts diversity and inclusion and skims
+            over people who could be part of your dream team.
+            <br />
+            <br /> Wave provides you the tools to streamline your hiring
+            pipeline while making sure every candidate resume is reviewed by
+            human eyes.
+          </div>
         </div>
-    );
+      </div>
+
+      <div className="flex flex-row-reverse mt-16 ">
+        <img src={PostOnce} className="w-[400px] h-[330px] ml-2" />
+        <div className="px-10 flex flex-col mr-5">
+          <div
+            style={{ fontFamily: "Space Grotesk" }}
+            className="font-bold mb-7 mt-10  text-blue text-[27px]"
+          >
+            Post once, share everywhere
+          </div>
+
+          <div className="font-regular font-['Inter'] mb-10 text-[#696969] text-[16px] w-[90%]">
+            Post your job on our platform and get a shareable link. Distribute
+            it wherever you like and start receiving applications.LinkedIn,
+            Indeed, Glassdoor or even Whatsapp.
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-row mt-16">
+        <img src={Applications} className="w-[400px] h-[330px] ml-2" />
+        <div className="px-10 flex flex-col ml-5">
+          <div
+            style={{ fontFamily: "Space Grotesk" }}
+            className="font-bold mb-7 mt-10  text-blue text-[27px]"
+          >
+            Applications that feels like a conversation
+          </div>
+
+          <div className="font-regular font-['Inter'] mb-10 text-[16px] text-[#696969]">
+            Wave makes job applications more interactive by turning it into a
+            conversation. Applicants get detailed overview of what your company
+            does with a Careers and a Company page. <br />
+            <br /> Get higher quality applications and more applicants.
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
 }
 
 export default HumanInTheLoop;

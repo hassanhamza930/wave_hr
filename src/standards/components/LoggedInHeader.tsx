@@ -34,13 +34,17 @@ export default function LoggedInHeader() {
                     navigate("/companies");
                 }} className={`font-semibold ${window.location.href.includes("companies") ? "text-blue" : "text-black"} text-sm`}>Companies</button>
 
+                <button onClick={() => {
+                    navigate("/interviews");
+                }} className={`font-semibold ${window.location.href.includes("interviews") ? "text-blue" : "text-black"} text-sm`}>Interviews</button>
+
 
 
                 <div className="relative">
                     <Menu >
-                        <Menu.Button onClick={() => { }} className="flex flex-row justify-center items-center gap-2 border-[2px] p-2 rounded-xl hover:border-blue border-gray">
-                            <div style={{ backgroundImage: `url("${loggedInUser.photoUrl}")` }} className="bg-center bg-blue rounded-xl h-10 w-10 bg-cover" ></div>
-                            <div style={{ backgroundImage: `url("${LogoText}")` }} className="bg-center rounded-xl h-10 w-24 bg-contain bg-no-repeat" ></div>
+                        <Menu.Button onClick={() => { }} className="flex flex-row justify-center items-center gap-2 border-[2px] px-3 py-2 rounded-xl hover:border-blue border-gray">
+                            <div style={{ backgroundImage: `url("${loggedInUser.photoUrl}")` }} className="bg-center bg-blue rounded-md h-8 w-8 bg-cover" ></div>
+                            <div style={{ backgroundImage: `url("${LogoText}")` }} className="bg-center rounded-xl h-10 w-20 bg-contain bg-no-repeat" ></div>
                             <AiFillCaretDown size={10}></AiFillCaretDown>
                         </Menu.Button>
 
@@ -63,7 +67,7 @@ export default function LoggedInHeader() {
                                                 Home
                                             </button>
                                         )}
-                                    </Menu.Item>    
+                                    </Menu.Item>
 
                                     <Menu.Item>
                                         {({ active }) => (
