@@ -3,10 +3,12 @@ import { Fragment } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { useNavigate } from "react-router";
 import { useRecoilState } from "recoil";
-import { Heading } from "../../../standards/styles/components/heading";
+import { Heading, SubHeading } from "../../../standards/styles/components/heading";
 import { selectedCompanyAtom } from "../atoms/selectedCompany";
 import { Dropdown, MenuProps, Space } from "antd";
-import { ButtonOutlinedWhite } from "../../../standards/styles/components/button";
+import { ButtonOutlinedWhite, StandardWhiteButton } from "../../../standards/styles/components/button";
+import { BiEdit, BiLinkExternal } from "react-icons/bi";
+import { MdEditNote } from "react-icons/md";
 
 
 function SelectedCompanyDetails() {
@@ -15,61 +17,49 @@ function SelectedCompanyDetails() {
   const navigate = useNavigate();
 
 
-
-
   return (
     selectedCompany.id == null ?
 
-      <div id="no_scroll" className="relative flex justify-center items-center h-full rounded-md mb-10 w-full overflow-y-scroll">
-        <div className="text-blue text-md">Select a company profile to see details</div>
+      <div id="no_scroll" className="flex justify-center items-center h-full w-full">
+        <div className="text-blue text-md text-center">Select a company profile to see details</div>
       </div> :
 
-      <div id="no_scroll" className="w-full h-[90%] mt-10 bg-black rounded-md overflow-y-scroll">
+      <div id="no_scroll" className="flex-1 flex-col justify-start items-start w-full h-full rounded-md overflow-y-scroll">
 
-        <div style={{ backgroundImage: `url('${selectedCompany.companyCover}')` }} className="h-72 w-full bg-blue bg-cover bg-center bg-[url('https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png')]"></div>
-        <div style={{ backgroundImage: `url('${selectedCompany.companyLogo}')` }} className="border-2 border-black h-36 w-36 shadow-2xl bg-transparent rounded-md ml-10 -mt-24 bg-cover bg-center bg-[url('https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png')]"></div>
+        <div style={{ backgroundImage: `url('${selectedCompany.companyCover}')` }} className="h-72 w-full bg-blue bg-cover bg-center"></div>
 
-        <div className="relative text-tan text-4xl px-10 pt-5 w-full flex flex-row justify-between items-start">
+        <div style={{ backgroundImage: `url('${selectedCompany.companyLogo}')` }} className="h-36 w-36 bg-transparent rounded-md ml-10 -mt-24 bg-cover bg-center"></div>
 
-          <div className="font-bold">
+
+        <div className="text-black flex justify-start items-start px-10 py-5 flex-col">
+          <div className="font-semibold text-4xl">
             {selectedCompany.companyName}
           </div>
 
+          <div className="text-dark-gray text-sm mt-2">
+            {selectedCompany.companyLocation}
+          </div>
 
-          <div className="flex flex-col justify-start items-end gap-2">
-            <ButtonOutlinedWhite text="Edit" onClick={() => {navigate("/editCompany/" + selectedCompany.id)}} />
-            <ButtonOutlinedWhite onClick={() => {navigate("/company/" + selectedCompany.id)}} customStyles="ml-2" text="Company Page" />
+          <div className="text-dark-gray text-sm">
+            {selectedCompany.numberOfEmployees} Employees
           </div>
 
 
+          <div className="flex flex-row justify-start items-start mt-5 gap-3">
+            <StandardWhiteButton text="Company Profile Page" icon={<BiLinkExternal />} />
+            <StandardWhiteButton text="Edit" icon={<MdEditNote />} />
+          </div>
+
+          <div className="font-medium text-2xl mt-10">
+            About
+          </div>
+
+
+
+          <SubHeading customStyles="mt-2" text={selectedCompany.companyDescription}></SubHeading>
+
+
         </div>
-
-        <div className="text-tan text-sm px-10 mt-2">
-          {selectedCompany.companyLocation}
-        </div>
-
-        <div className="text-tan text-sm px-10 mt-0">
-          {selectedCompany.numberOfEmployees} Employees
-        </div>
-
-        <div className="text-tan text-sm font-regular px-10 mt-5 mb-5 gap-2 w-full flex justify-start items-start">
-          {selectedCompany.companyTags.map((tag) => {
-            return <div className="px-4 py-2 rounded-full bg-tan text-black text-sm">
-              {tag}
-            </div>
-          })}
-        </div>
-
-          <div className="text-xl font-bold text-tan ml-10">Company Description</div>
-        <textarea rows={selectedCompany.companyDescription.split("\n").length} id="no_scroll" value={selectedCompany.companyDescription} disabled={true} className="resize-none h-96 text-tan text-md bg-transparent w-full font-regular mt-2 px-10 mb-10">
-        </textarea>
-
-
-
-
-
-
-
 
 
       </div>

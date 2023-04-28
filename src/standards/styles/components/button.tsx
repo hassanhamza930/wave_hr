@@ -61,7 +61,7 @@ const StandardLightBlueButton = ({text,icon,onClick}: ButtonProps) => {
   return (
     <button
       onClick={onClick}
-      className={`transition ease-in-out duration-100 flex items-center justify-center gap-2 py-3 px-5 shadow-sm hover:shadow-md rounded-3xl bg-[#D9F1FF] text-black text-sm font-medium outline-none border-none`}
+      className={`transition ease-in-out duration-100 flex items-center justify-center gap-2 py-3 px-5 shadow-md hover:shadow-xl rounded-3xl bg-[#D9F1FF] text-black text-sm font-medium outline-none border-none`}
     >
       {icon && <span>{icon}</span>}
       {text}
@@ -73,7 +73,7 @@ export const StandardMidBlueButton = ({text,icon,onClick}: ButtonProps) => {
   return (
     <button
       onClick={onClick}
-      className={`transition ease-in-out duration-100 flex items-center justify-center gap-2 py-3 px-5 shadow-sm hover:shadow-md rounded-3xl bg-[#0161FE]/[0.07] text-black text-sm font-medium outline-none border-none`}
+      className={`transition ease-in-out duration-100 flex items-center justify-center gap-2 py-3 px-5 shadow-md hover:shadow-xl rounded-3xl bg-[#0161FE]/[0.07] text-black text-sm font-medium outline-none border-none`}
     >
       {icon && <span>{icon}</span>}
       {text}
@@ -81,6 +81,18 @@ export const StandardMidBlueButton = ({text,icon,onClick}: ButtonProps) => {
   );
 };
 
+
+export const StandardWhiteButton = ({text,icon,onClick}: ButtonProps) => {
+  return (
+    <button
+      onClick={onClick}
+      className={`transition ease-in-out duration-100 flex items-center justify-center gap-2 py-3 px-5 shadow-md hover:shadow-xl rounded-3xl bg-white text-black text-sm font-medium outline-none border-none`}
+    >
+      {icon && <span>{icon}</span>}
+      {text}
+    </button>
+  );
+};
 
 
 const StandardDarkButton = ({

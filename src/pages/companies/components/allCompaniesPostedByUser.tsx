@@ -26,7 +26,7 @@ function CompanyCard(companyData: CompanyDataInterface) {
                 <div className="text-sm font-regular text-dark-gray">3 Jobs</div>
             </div>
 
-            <StandardMidBlueButton icon={<BiLinkExternal />} text="View Company" />
+            <StandardMidBlueButton onClick={()=>{setSelectedCompany(companyData);}} icon={<BiLinkExternal />} text="View Company" />
 
         </div>
     )
@@ -39,19 +39,34 @@ function AllCompaniesPostedByUser() {
 
     const [allCompaniesPostedByUser, setAllCompaniesPostedByUser] = useState<Array<CompanyDataInterface>>([] as Array<CompanyDataInterface>);
     const db = getFirestore();
-
     const [searchCompany, setsearchCompany] = useState("");
 
 
 
     async function fetchAllCompaniesPostedByUser() {
 
+        // onSnapshot(query(collection(db, "companies"),where("companyOwnerId","==",localStorage.getItem("uid"))), (docs) => {
+        //     var docsData: Array<CompanyDataInterface> = docs.docs.map((doc) => {
+        //         var tempData: CompanyDataInterface = doc.data() as CompanyDataInterface;
+        //         tempData.id = doc.id;
+        //         return tempData as CompanyDataInterface
+        //     });
+        //     setAllCompaniesPostedByUser(docsData as Array<CompanyDataInterface>);
+        //     console.log("all companies", docsData);
+        // })
         onSnapshot(collection(db, "companies"), (docs) => {
             var docsData: Array<CompanyDataInterface> = docs.docs.map((doc) => {
                 var tempData: CompanyDataInterface = doc.data() as CompanyDataInterface;
                 tempData.id = doc.id;
-                return tempData as CompanyDataInterface
+                return tempData as CompanyDataInterface;
             });
+
+            docsData=docsData.filter((companyData)=>{
+                if(companyData.companyName.toLowerCase().includes(searchCompany.toLowerCase())){
+                    return companyData;
+                }
+            });
+            
             setAllCompaniesPostedByUser(docsData as Array<CompanyDataInterface>);
             console.log("all companies", docsData);
         })
@@ -61,7 +76,7 @@ function AllCompaniesPostedByUser() {
     useEffect(() => {
         console.log("fetchin all companies");
         fetchAllCompaniesPostedByUser();
-    }, [])
+    }, [searchCompany])
 
     return (
         <div className="flex h-full flex-col justify-start items-start">
