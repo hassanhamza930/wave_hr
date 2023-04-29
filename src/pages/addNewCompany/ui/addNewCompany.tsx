@@ -8,9 +8,12 @@ import CompanyLogo from "../components/companyLogo";
 import { AiFillPlusCircle, AiFillPlusSquare } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 import { MdCancel } from "react-icons/md"
-import { ButtonOutlinedBlue, ButtonSolid } from "../../../standards/styles/components/button";
+import { ButtonOutlinedBlue, ButtonSolid, StandardBlueButton, StandardLightBlueButton, StandardWhiteButton } from "../../../standards/styles/components/button";
 import { CompanyInformation, useHandleAddCompany } from "../logic/addCompany";
 import { CompanyDataInterface } from "../../../standards/interfaces/interfaces";
+import currentRouteAtom from "../../../atoms/app/currentRouteAtom";
+import { useRecoilState } from "recoil";
+import { BiPlus } from "react-icons/bi";
 
 
 function AddNewCompany() {
@@ -25,11 +28,14 @@ function AddNewCompany() {
     const [companyLocation, setcompanyLocation] = useState("" as string);
     const { AddCompany } = useHandleAddCompany();
 
-
+    const [currentRoute, setCurrentRoute] = useRecoilState(currentRouteAtom);
+    useEffect(() => {
+        setCurrentRoute("Companies > New Company");
+    }, []);
 
     const AddCompanyTag = () => {
         if (companyTagValue.trim() == "") {
-            toast.error("Kindly enter a question");
+            toast.error("Please enter a valid tag");
         }
         else {
             setcompanyTags([...companyTags, companyTagValue]);
@@ -44,37 +50,42 @@ function AddNewCompany() {
 
 
     return (
-        <PageLayout>
-            <FormLayout>
+        <FormLayout>
 
-                <Heading text="Add a new company profile" />
-                <SubHeading text="Setup a company profile and start posting jobs." customStyles="mt-2" />
+            <div className="p-10 w-full flex-1 flex-col justify-start items-start ">
 
-                <SubHeading text="Add a Company Banner (Optional)" customStyles="mt-12 text-sm" />
-                <CompanyBanner companyBannerValue={companyCoverImage} setCompanyBanner={setcompanyCoverImage} customStyles="mt-2" />
 
-                <SubHeading text="Add Company Logo*" customStyles="mt-12 text-sm" />
-                <CompanyLogo companyLogoValue={companyLogo} setCompanyLogo={setcompanyLogo} />
+                <div className="flex flex-row justify-start items-start gap-3">
+                    <StandardWhiteButton text="Add Company Logo" icon={<BiPlus />} onClick={() => { }}></StandardWhiteButton>
+                    <StandardWhiteButton text="Add Company Logo" icon={<BiPlus />} onClick={() => { }}></StandardWhiteButton>
+                </div>
 
-                <SimpleInput placeholder="Enter company name*" onChange={setcompanyName} value={companyName} customStyles="mt-10" />
+                {/* <SubHeading text="Add Company Logo*" customStyles="mt-12 text-sm" />
+                <CompanyLogo companyLogoValue={companyLogo} setCompanyLogo={setcompanyLogo} /> */}
+
+
+                <SimpleInput placeholder="Company Name*" onChange={setcompanyName} value={companyName} customStyles="mt-10" />
                 <TextArea examples="We make great software" placeholder="Enter company description*" onChange={setcompanyDescription} value={companyDescription} customStyles="mt-10" />
+
+                <SimpleInput examples="Texas, US" value={companyLocation} onChange={setcompanyLocation} placeholder="Location*" customStyles="mt-10" />
+                <SimpleInput examples="5" value={numberOfEmployees} onChange={setnumberOfEmployees} placeholder="Number of Employees*" customStyles="mt-10" />
 
 
                 <div className="flex flex-row justify-start items-end w-full mt-10">
-                    <SimpleInput examples="Software Services, IT, Sales etc" value={companyTagValue} onChange={setcompanyTagValue} placeholder="Add a Company Tag*" customStyles="" />
-                    <button onClick={AddCompanyTag}>
-                        <AiFillPlusCircle className="text-blue hover:text-purp h-10 w-10 ml-5" />
+                    <SimpleInput examples="Software Services, IT, Sales etc" value={companyTagValue} onChange={setcompanyTagValue} placeholder="Add a Company Tag*" customStyles="w-96" />
+                    <button className="mb-3" onClick={AddCompanyTag}>
+                        <AiFillPlusCircle className="text-blue/90 transition-all duration-75 ease-in-out hover:text-blue h-12 w-12 ml-5" />
                     </button>
                 </div>
 
-                <div className="flex flex-wrap w-2/5 justify-start items-start mb-10 mt-5 gap-2">
+                <div className="flex flex-wrap w-full justify-start items-start mb-10 mt-5 gap-2">
                     {
                         companyTags.map((tag, index) => {
                             return (
-                                <div key={tag + index.toString()} className="flex gap-3 justify-center items-center flex-row px-6 py-2 text-sm text-tan bg-blue rounded-full">
+                                <div key={tag + index.toString()} className="flex gap-3 justify-center border-[1px] border-black items-center flex-row px-6 py-2 text-sm text-black bg-white shadow-md rounded-full">
                                     {tag}
                                     <button onClick={() => { RemoveTag(index) }}>
-                                        <MdCancel className="text-tan h-5 w-5" />
+                                        <MdCancel className="text-black h-5 w-5" />
                                     </button>
                                 </div>
                             )
@@ -82,24 +93,26 @@ function AddNewCompany() {
                     }
                 </div>
 
-                <SimpleInput examples="Texas, US" value={companyLocation} onChange={setcompanyLocation} placeholder="Location*" customStyles="mt-10" />
 
-                <SimpleInput examples="5" value={numberOfEmployees} onChange={setnumberOfEmployees} placeholder="Number of Employees*" customStyles="mt-10" />
 
-                <ButtonSolid text="Add Company" onClick={() => {
-                    AddCompany({
-                        companyCover: companyCoverImage,
-                        companyDescription: companyDescription,
-                        companyLocation: companyLocation,
-                        companyLogo: companyLogo,
-                        companyName: companyName,
-                        companyTags: companyTags,
-                        numberOfEmployees: numberOfEmployees
-                    } as CompanyDataInterface)
-                }} customStyles="mt-20 mb-96" />
+                <div className="flex flex-row justify-end items-end w-full mb-12">
+                    <StandardBlueButton icon={<BiPlus></BiPlus>} text="Add Company" onClick={() => {
+                        AddCompany({
+                            companyCover: companyCoverImage,
+                            companyDescription: companyDescription,
+                            companyLocation: companyLocation,
+                            companyLogo: companyLogo,
+                            companyName: companyName,
+                            companyTags: companyTags,
+                            numberOfEmployees: numberOfEmployees
+                        } as CompanyDataInterface)
+                    }} />
+                </div>
 
-            </FormLayout>
-        </PageLayout>
+
+            </div>
+
+        </FormLayout>
     );
 }
 

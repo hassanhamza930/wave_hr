@@ -6,9 +6,11 @@ import SelectedCompanyDetails from '../components/selectedCompanyDetails';
 import currentRouteAtom from '../../../atoms/app/currentRouteAtom';
 import { useRecoilState } from 'recoil';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router';
 
 function Companies() {
   const [currentRoute, setcurrentRoute] = useRecoilState(currentRouteAtom);
+  const navigate=useNavigate();
 
   useEffect(() => {
     setcurrentRoute("Companies");
@@ -19,7 +21,7 @@ function Companies() {
       <TwoColumnLayoutPage
         header={
           <div className='flex flex-row justify-start items-start w-full h-full'>
-            <StandardLightBlueButton icon={<BiPlus />} text='New Company' />
+            <StandardLightBlueButton onClick={()=>{navigate("/addNewCompany")}} icon={<BiPlus />} text='New Company' />
           </div>
         }
         leftBar={<AllCompaniesPostedByUser/>}

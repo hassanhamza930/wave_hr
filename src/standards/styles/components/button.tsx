@@ -53,15 +53,16 @@ interface ButtonProps {
   textColor?: string;
   textSize?: string;
   icon?: React.ReactNode;
+  customStyles?: string;
   onClick?: () => void;
 }
 
 
-const StandardLightBlueButton = ({text,icon,onClick}: ButtonProps) => {
+const StandardLightBlueButton = ({customStyles,text,icon,onClick}: ButtonProps) => {
   return (
     <button
       onClick={onClick}
-      className={`transition ease-in-out duration-100 flex items-center justify-center gap-2 py-3 px-5 shadow-md hover:shadow-xl rounded-3xl bg-[#D9F1FF] text-black text-sm font-medium outline-none border-none`}
+      className={`${customStyles} transition ease-in-out duration-100 flex items-center justify-center gap-2 py-3 px-5 shadow-md hover:shadow-xl rounded-3xl bg-[#D9F1FF] text-black text-sm font-medium outline-none border-none`}
     >
       {icon && <span>{icon}</span>}
       {text}
@@ -95,9 +96,8 @@ export const StandardWhiteButton = ({text,icon,onClick}: ButtonProps) => {
 };
 
 
-const StandardDarkButton = ({
+const StandardBlueButton = ({
   text,
-  bgColor = '#D9F1FF',
   textColor = '#000',
   textSize = 'text-base',
   icon,
@@ -106,13 +106,14 @@ const StandardDarkButton = ({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center justify-center gap-3 px-6 py-4 rounded-3xl bg-[#0161fe12] text[${textSize}] text-[${textColor}] font-medium outline-none border-none`}
+      className={`hover:shadow-xl shadow-sm transition-all ease-in-out duration-100 flex items-center justify-center gap-3 px-6 py-4 rounded-3xl bg-blue text[${textSize}] text-tan font-medium outline-none border-none`}
     >
       {icon && <span>{icon}</span>}
       {text}
     </button>
   );
 };
+
 
 const StandardLightButton = ({
   text,
@@ -138,6 +139,6 @@ export {
   ButtonOutlinedBlue,
   ButtonSolid,
   StandardLightBlueButton,
-  StandardDarkButton,
+  StandardBlueButton,
   StandardLightButton,
 };
