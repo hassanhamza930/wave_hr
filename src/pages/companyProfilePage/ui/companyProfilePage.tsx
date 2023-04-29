@@ -68,11 +68,11 @@ function CompanyProfilePage() {
                 : companyValues.company.companyCover
             }')`,
           }}
-          className={`w-full h-72 bg-blue bg-cover shadow-md bg-center rounded-3xl flex justify-end items-end p-10`}
+          className={`w-full h-36 md:h-72 bg-blue bg-cover shadow-md bg-center rounded-3xl flex justify-end items-end p-10`}
         />
 
         <div className='flex items-center justify-center'>
-          <div className='w-36 h-36 rounded-md overflow-hidden -mt-24'>
+          <div className='h-24 w-24 md:w-36 md:h-36 rounded-md overflow-hidden -mt-12 md:-mt-24'>
             <img
               src={companyValues.company.companyLogo}
               alt={companyValues.company.companyName}

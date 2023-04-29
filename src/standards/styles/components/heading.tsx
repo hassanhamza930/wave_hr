@@ -12,7 +12,7 @@ function Heading({
   customStyles = '',
 }: HeadingInterface) {
   return (
-    <div className={`${color} ${customStyles}  text-4xl font-bold`}>{text}</div>
+    <div className={`${color} ${customStyles} text-3xl md:text-4xl font-bold`}>{text}</div>
   );
 }
 
