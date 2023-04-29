@@ -25,7 +25,8 @@ export interface CompanyDataInterface {
     companyDescription: string, //description of what company does and quick history introduction.
     companyTags: Array<string>, //this will be an array of strings for example software services, SaaS, hiring software etc.
     numberOfEmployees: string,  //number of employees in free text format
-    companyLocation: string // this will be location of the company in free text format
+    companyLocation: string, // this will be location of the company in free text format
+    companyWebsite?:string
 }
 
 

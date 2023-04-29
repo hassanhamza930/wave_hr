@@ -62,12 +62,16 @@ const LeftBar = ({ companyDetails }: ILeftBar) => {
         ))}
       </div>
 
-      <div className='mt-10 mb-10'>
-        <StandardBlueButton
-          text='Website'
-          icon={<BiLinkExternal className='text-lg' />}
-        />
-      </div>
+      {
+        companyDetails.companyWebsite!="" &&
+        <div className='mt-10 mb-10'>
+          <StandardBlueButton
+            text='Website'
+            onClick={()=>{window.open(companyDetails.companyWebsite!)}}
+            icon={<BiLinkExternal className='text-lg' />}
+          />
+        </div>
+      }
     </div>
   );
 };

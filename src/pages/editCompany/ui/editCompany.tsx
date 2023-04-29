@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 import { MdCancel } from "react-icons/md"
-import { ButtonOutlinedBlue, ButtonSolid } from "../../../standards/styles/components/button";
+import { ButtonOutlinedBlue, ButtonSolid, StandardBlueButton } from "../../../standards/styles/components/button";
 import { CompanyInformation, useHandleAddCompany } from "../../addNewCompany/logic/addCompany";
 import CompanyBanner from "../../addNewCompany/components/companyBanner";
 import CompanyLogo from "../../addNewCompany/components/companyLogo";
@@ -16,6 +16,7 @@ import { useRecoilState } from "recoil";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
 import { useHandleEditCompany } from "../logic/editCompany";
 import { CompanyDataInterface } from "../../../standards/interfaces/interfaces";
+import { BiPlus } from "react-icons/bi";
 
 
 function EditCompany(props: any) {
@@ -28,6 +29,7 @@ function EditCompany(props: any) {
     const [companyTags, setcompanyTags] = useState([] as Array<string>);
     const [numberOfEmployees, setnumberOfEmployees] = useState("" as string);
     const [companyLocation, setcompanyLocation] = useState("" as string);
+    const [companyWebsite, setcompanyWebsite] = useState("" as string);
     const { EditCompany } = useHandleEditCompany();
     const { companyId } = useParams();
     const [loading, setLoading] = useRecoilState(isLoadingAtom);
@@ -70,63 +72,71 @@ function EditCompany(props: any) {
 
 
     return (
-        <PageLayout>
-            <FormLayout>
-
-            <Heading text="Edit company profile" />
-            <SubHeading text="Setup a company profile and start posting jobs." customStyles="mt-2" />
-
-            <SubHeading text="Add a Company Banner (Optional)" customStyles="mt-12 text-sm" />
-            <CompanyBanner companyBannerValue={companyCoverImage} setCompanyBanner={setcompanyCoverImage} customStyles="mt-2" />
-
-            <SubHeading text="Add Company Logo*" customStyles="mt-12 text-sm" />
-            <CompanyLogo companyLogoValue={companyLogo} setCompanyLogo={setcompanyLogo} />
-
-            <SimpleInput placeholder="Enter company name*" onChange={setcompanyName} value={companyName} customStyles="mt-10" />
-            <TextArea placeholder="Enter company description*" onChange={setcompanyDescription} value={companyDescription} customStyles="mt-10" />
+        <FormLayout>
+            <div className="p-10 w-full flex-1 flex-col justify-start items-start ">
 
 
-            <div className="flex flex-row justify-start items-end w-full mt-10">
-                <SimpleInput value={companyTagValue} onChange={setcompanyTagValue} placeholder="Add a Company Tag, ex Consulting, Software Services*" customStyles="" />
-                <button onClick={AddCompanyTag}>
-                    <AiFillPlusCircle className="text-purp  h-10 w-10 ml-5" />
-                </button>
+                <SubHeading text="Add Company Banner" customStyles=" text-sm" />
+                <CompanyBanner companyBannerValue={companyCoverImage} setCompanyBanner={setcompanyCoverImage} customStyles="mt-2" />
+
+
+                <SubHeading text="Add Company Logo*" customStyles="mt-12 text-sm" />
+                <CompanyLogo companyLogoValue={companyLogo} setCompanyLogo={setcompanyLogo} />
+
+
+                <SimpleInput placeholder="Company Name*" onChange={setcompanyName} value={companyName} customStyles="mt-10" />
+                <TextArea examples="We make great software" placeholder="Enter company description*" onChange={setcompanyDescription} value={companyDescription} customStyles="mt-10" />
+
+                <SimpleInput examples="Texas, US" value={companyLocation} onChange={setcompanyLocation} placeholder="Location*" customStyles="mt-10" />
+                <SimpleInput examples="5" value={numberOfEmployees} onChange={setnumberOfEmployees} placeholder="Number of Employees*" customStyles="mt-10" />
+                <SimpleInput examples="https://www.google.com" value={companyWebsite} onChange={setcompanyWebsite} placeholder="Company Website" customStyles="mt-10" />
+
+
+                <div className="flex flex-row justify-start items-end w-full mt-10">
+                    <SimpleInput examples="Software Services, IT, Sales etc" value={companyTagValue} onChange={setcompanyTagValue} placeholder="Add a Company Tag*" customStyles="w-96" />
+                    <button className="mb-3" onClick={AddCompanyTag}>
+                        <AiFillPlusCircle className="text-blue/90 transition-all duration-75 ease-in-out hover:text-blue h-12 w-12 ml-5" />
+                    </button>
+                </div>
+
+                <div className="flex flex-wrap w-full justify-start items-start mb-10 mt-5 gap-2">
+                    {
+                        companyTags.map((tag, index) => {
+                            return (
+                                <div key={tag + index.toString()} className="flex gap-3 justify-center border-[1px] border-black items-center flex-row px-6 py-2 text-sm text-black bg-white shadow-md rounded-full">
+                                    {tag}
+                                    <button onClick={() => { RemoveTag(index) }}>
+                                        <MdCancel className="text-black h-5 w-5" />
+                                    </button>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+
+
+
+                <div className="flex flex-row justify-end items-end w-full mb-12">
+                    <StandardBlueButton icon={<BiPlus></BiPlus>} text="Add Company" onClick={() => {
+                        EditCompany({
+                            id: companyId as string,
+                            companyCover: companyCoverImage,
+                            companyDescription: companyDescription,
+                            companyLocation: companyLocation,
+                            companyLogo: companyLogo,
+                            companyName: companyName,
+                            companyTags: companyTags,
+                            numberOfEmployees: numberOfEmployees,
+                            companyWebsite: companyWebsite,
+                            companyOwnerId: localStorage.getItem("userId") as string
+                        } as CompanyDataInterface)
+                    }} />
+                </div>
+
+
             </div>
-
-            <div className="flex flex-wrap w-2/5 justify-start items-start mb-10 mt-5 gap-2">
-                {
-                    companyTags.map((tag, index) => {
-                        return (
-                            <div key={tag + index.toString()} className="flex gap-3 justify-center items-center flex-row px-6 py-2 text-sm text-tan bg-blue rounded-full">
-                                {tag}
-                                <button onClick={() => { RemoveTag(index) }}>
-                                    <MdCancel className="text-tan h-5 w-5" />
-                                </button>
-                            </div>
-                        )
-                    })
-                }
-            </div>
-
-            <SimpleInput value={companyLocation} onChange={setcompanyLocation} placeholder="Location*" customStyles="mt-10" />
-
-            <SimpleInput value={numberOfEmployees} onChange={setnumberOfEmployees} placeholder="Number of Employees*" customStyles="mt-10" />
-
-            <ButtonSolid text="Update" onClick={() => {
-                EditCompany({
-                    companyCover: companyCoverImage,
-                    companyDescription: companyDescription,
-                    companyLocation: companyLocation,
-                    companyLogo: companyLogo,
-                    companyName: companyName,
-                    companyTags: companyTags,
-                    numberOfEmployees: numberOfEmployees,
-                    id:companyId
-                } as CompanyDataInterface)
-            }} customStyles="mt-20 mb-96" />
 
         </FormLayout>
-        </PageLayout>
     );
 }
 

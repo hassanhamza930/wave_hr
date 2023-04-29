@@ -53,29 +53,36 @@ export function useHandleEditCompany(){
 
 
     async function EditCompany(companyDetails:CompanyDataInterface) {
-        if(companyDetails.companyDescription=="" || companyDetails.companyLogo=="" || companyDetails.companyName=="" || companyDetails.companyLocation=="" || companyDetails.companyTags.length==0 || companyDetails.numberOfEmployees==""){
-            toast.error("Kindly enter all required information");
-        }
-        else{
-            setLoading(true);
-            var finalCompanyData:CompanyDataInterface=companyDetails;
-            
-            console.log("Company Logo Data is"+finalCompanyData.companyLogo);
-            if(finalCompanyData.companyLogo.toString().includes("data")==true){
-                finalCompanyData.companyLogo=await UploadPictureAndGetDownloadLink(finalCompanyData.companyLogo);
+        try{
+            if(companyDetails.companyDescription=="" || companyDetails.companyLogo=="" || companyDetails.companyName=="" || companyDetails.companyLocation=="" || companyDetails.companyTags.length==0 || companyDetails.numberOfEmployees==""){
+                toast.error("Kindly enter all required information");
             }
-            if(finalCompanyData.companyCover.toString().includes("data")==true){
-                finalCompanyData.companyCover=await UploadPictureAndGetDownloadLink(finalCompanyData.companyCover);
-            }
-            else if(finalCompanyData.companyCover==""){
-                finalCompanyData.companyCover="";
-            }
-            
-            finalCompanyData.companyOwnerId=localStorage.getItem('uid') as string;
-            await setDoc(doc(db,"companies",finalCompanyData.id as string),finalCompanyData,{merge:true});
-            setLoading(false);
-            navigate("/companies")
+            else{
+                setLoading(true);
+                var finalCompanyData:CompanyDataInterface=companyDetails;
+                
+                console.log("Company Logo Data is"+finalCompanyData.companyLogo);
+                if(finalCompanyData.companyLogo.toString().includes("data")==true){
+                    finalCompanyData.companyLogo=await UploadPictureAndGetDownloadLink(finalCompanyData.companyLogo);
+                }
+                if(finalCompanyData.companyCover.toString().includes("data")==true){
+                    finalCompanyData.companyCover=await UploadPictureAndGetDownloadLink(finalCompanyData.companyCover);
+                }
+                else if(finalCompanyData.companyCover==""){
+                    finalCompanyData.companyCover="";
+                }
+                
+                finalCompanyData.companyOwnerId=localStorage.getItem('uid') as string;
+                await setDoc(doc(db,"companies",finalCompanyData.id as string),finalCompanyData,{merge:true});
+                setLoading(false);
+                navigate("/companies")
 
+            }
+        }
+        catch(e:any){
+            setLoading(false);
+            toast.error(e);
+            console.log(e);
         }
     }
     return {EditCompany};

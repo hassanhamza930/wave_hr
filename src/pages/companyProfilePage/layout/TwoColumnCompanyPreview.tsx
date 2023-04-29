@@ -12,7 +12,7 @@ const TwoColumnCompanyPreview = (props: ITwoColumnCompanyPreview) => {
       <div className='flex justify-center items-center flex-col h-full w-[42%]'>
         <div
           id='no_scroll'
-          className='h-full w-full overflow-y-scroll bg-blue/5 rounded-3xl p-[5%]'
+          className='h-full w-full overflow-y-scroll bg-blue/5 rounded-3xl p-10'
         >
           {props.leftBar}
         </div>

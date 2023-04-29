@@ -13,14 +13,27 @@ import JobsPage from "../../jobs/ui/jobs";
 import NewJob from '../../newJob/ui/newJob';
 import Test from "../../test/test";
 import { useWindowSize } from "../ui/App";
+import { useEffect, useState } from "react";
 
 
 
 export default function LoggedInRoutes() {
 
+    var publicUrls:Array<string>=["company","apply"];
+    const [isPublic, setisPublic] = useState(false);
+
+    useEffect(()=>{
+        publicUrls.forEach((url)=>{
+            if(window.location.pathname.includes(url)){
+                setisPublic(true);
+            }
+        });
+    },[])
+
     return (
         <>
-            <LoggedInHeader />
+            {isPublic==true ? null : <LoggedInHeader />}
+            {/* <div className="fixed z-50 text-5xl font-bold text-black">{window.location.href}</div> */}
             <Routes>
                 <Route path="/" element={<Home />} ></Route>
                 <Route path="/jobs" element={<JobsPage />} ></Route>

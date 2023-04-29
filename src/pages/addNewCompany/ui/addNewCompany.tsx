@@ -26,6 +26,7 @@ function AddNewCompany() {
     const [companyTags, setcompanyTags] = useState([] as Array<string>);
     const [numberOfEmployees, setnumberOfEmployees] = useState("" as string);
     const [companyLocation, setcompanyLocation] = useState("" as string);
+    const [companyWebsite, setcompanyWebsite] = useState("" as string);
     const { AddCompany } = useHandleAddCompany();
 
     const [currentRoute, setCurrentRoute] = useRecoilState(currentRouteAtom);
@@ -55,13 +56,18 @@ function AddNewCompany() {
             <div className="p-10 w-full flex-1 flex-col justify-start items-start ">
 
 
-                <div className="flex flex-row justify-start items-start gap-3">
+                {/* <div className="flex flex-row justify-start items-start gap-3">
                     <StandardWhiteButton text="Add Company Logo" icon={<BiPlus />} onClick={() => { }}></StandardWhiteButton>
                     <StandardWhiteButton text="Add Company Logo" icon={<BiPlus />} onClick={() => { }}></StandardWhiteButton>
-                </div>
+                </div> */}
 
-                {/* <SubHeading text="Add Company Logo*" customStyles="mt-12 text-sm" />
-                <CompanyLogo companyLogoValue={companyLogo} setCompanyLogo={setcompanyLogo} /> */}
+
+                <SubHeading text="Add Company Banner" customStyles=" text-sm" />
+                <CompanyBanner companyBannerValue={companyCoverImage} setCompanyBanner={setcompanyCoverImage} customStyles="mt-2" />
+
+
+                <SubHeading text="Add Company Logo*" customStyles="mt-12 text-sm" />
+                <CompanyLogo companyLogoValue={companyLogo} setCompanyLogo={setcompanyLogo} />
 
 
                 <SimpleInput placeholder="Company Name*" onChange={setcompanyName} value={companyName} customStyles="mt-10" />
@@ -69,6 +75,7 @@ function AddNewCompany() {
 
                 <SimpleInput examples="Texas, US" value={companyLocation} onChange={setcompanyLocation} placeholder="Location*" customStyles="mt-10" />
                 <SimpleInput examples="5" value={numberOfEmployees} onChange={setnumberOfEmployees} placeholder="Number of Employees*" customStyles="mt-10" />
+                <SimpleInput examples="https://www.google.com" value={companyWebsite} onChange={setcompanyWebsite} placeholder="Company Website" customStyles="mt-10" />
 
 
                 <div className="flex flex-row justify-start items-end w-full mt-10">
@@ -104,7 +111,9 @@ function AddNewCompany() {
                             companyLogo: companyLogo,
                             companyName: companyName,
                             companyTags: companyTags,
-                            numberOfEmployees: numberOfEmployees
+                            numberOfEmployees: numberOfEmployees,
+                            companyWebsite:companyWebsite,
+                            companyOwnerId:localStorage.getItem("userId") as string
                         } as CompanyDataInterface)
                     }} />
                 </div>

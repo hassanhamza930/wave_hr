@@ -31,7 +31,7 @@ function CompanyCard(companyData: CompanyDataInterface) {
             <StandardMidBlueButton onClick={()=>{
                 setSelectedCompany(companyData);
                 setcurrentRoute(`Companies > ${companyData.companyName}`);
-                }} icon={<BiLinkExternal />} text="View Company" />
+                }} text="View Company" />
 
         </div>
     )
@@ -50,16 +50,8 @@ function AllCompaniesPostedByUser() {
 
     async function fetchAllCompaniesPostedByUser() {
 
-        // onSnapshot(query(collection(db, "companies"),where("companyOwnerId","==",localStorage.getItem("uid"))), (docs) => {
-        //     var docsData: Array<CompanyDataInterface> = docs.docs.map((doc) => {
-        //         var tempData: CompanyDataInterface = doc.data() as CompanyDataInterface;
-        //         tempData.id = doc.id;
-        //         return tempData as CompanyDataInterface
-        //     });
-        //     setAllCompaniesPostedByUser(docsData as Array<CompanyDataInterface>);
-        //     console.log("all companies", docsData);
-        // })
-        onSnapshot(collection(db, "companies"), (docs) => {
+       
+        onSnapshot(query(collection(db, "companies"),where("companyOwnerId","==",localStorage.getItem("uid"))), (docs) => {
             var docsData: Array<CompanyDataInterface> = docs.docs.map((doc) => {
                 var tempData: CompanyDataInterface = doc.data() as CompanyDataInterface;
                 tempData.id = doc.id;

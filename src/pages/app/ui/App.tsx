@@ -12,6 +12,7 @@ import { Toaster } from "react-hot-toast";
 import { useState, useEffect } from "react";
 import WaveLooksGoodOnDesktop from "../components/waveLooksGoodOnDesktop";
 import { useLocation } from "react-router";
+import { AnimatePresence } from "framer-motion";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAleTmGUCRY87baXUHowrBhPGdY5YcGZak",
@@ -62,18 +63,23 @@ function App() {
   const { height, width } = useWindowSize();
 
 
+  useEffect(() => {
+  }, [])
+
 
   return (
     <>
 
-      {loading == true && <Loading />}
+      <AnimatePresence>
+        {loading == true && <Loading />}
+      </AnimatePresence>
 
       <Toaster
         position="top-center"
         reverseOrder={false}
       />
 
-      <div style={{fontFamily: "Inter"}} className="h-full w-full bg-tan relative">
+      <div style={{ fontFamily: "Inter" }} className="h-full w-full bg-tan relative">
         {
           loggedIn == true ? <LoggedInRoutes /> : <LoggedOutRoutes />
         }
