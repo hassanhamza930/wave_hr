@@ -8,7 +8,7 @@ interface ITwoColumnCompanyPreview {
 
 const TwoColumnCompanyPreview = (props: ITwoColumnCompanyPreview) => {
   return (
-    <div className='pb-5 bg-tan h-[80vh] flex items-center justify-between mt-20 '>
+    <div className='pb-5 bg-tan h-[80vh] flex items-center justify-between mt-10 '>
       <div className='flex justify-center items-center flex-col h-full w-[42%]'>
         <div
           id='no_scroll'
@@ -21,7 +21,7 @@ const TwoColumnCompanyPreview = (props: ITwoColumnCompanyPreview) => {
         {props.rightHeader}
         <div
           id='no_scroll'
-          className='h-full w-full overflow-y-scroll rounded-3xl'
+          className='h-full w-full overflow-y-scroll'
         >
           {props.rightBar}
         </div>

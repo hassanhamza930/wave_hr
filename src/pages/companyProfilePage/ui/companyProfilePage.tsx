@@ -13,10 +13,13 @@ import JobsList from '../components/JobsList';
 import { companyAtom } from '../atom/companyAtom';
 import SearchHeader from '../components/SearchHeader';
 import Footer from '../components/Footer';
+import { SearchBar } from '../../../standards/styles/components/inputs';
+import { jobSearchAtom } from '../atom/jobSearch';
 
 function CompanyProfilePage() {
   const { companyId } = useParams();
   const [companyValues, setCompanyValues] = useRecoilState(companyAtom);
+  const [jobSearch,setJobSearch] = useRecoilState(jobSearchAtom);
 
   const db = getFirestore();
   const [_, setLoading] = useRecoilState(isLoadingAtom);
@@ -49,19 +52,6 @@ function CompanyProfilePage() {
     }
   }
 
-  // async function fetchAllJobsPostedByCompany() {
-  //   onSnapshot(
-  //     query(collection(db, 'jobs'), where('companyId', '==', companyId)),
-  //     (docs) => {
-  //       var allJobsData: Array<JobDataInterface> = docs.docs.map((doc) => {
-  //         var tempData: JobDataInterface = doc.data() as JobDataInterface;
-  //         tempData.id = doc.id;
-  //         return tempData as JobDataInterface;
-  //       });
-  //       setAllJobsPostedByCompany(allJobsData);
-  //     }
-  //   );
-  // }
 
   useEffect(() => {
     fetchCompanyDetails();
@@ -69,7 +59,6 @@ function CompanyProfilePage() {
   }, []);
 
   return (
-    <div className='flex flex-col'>
       <PublicFacingLayout>
         <div
           style={{
@@ -79,20 +68,20 @@ function CompanyProfilePage() {
                 : companyValues.company.companyCover
             }')`,
           }}
-          className={`w-full h-72 bg-blue bg-cover shadow-xl bg-center rounded-3xl flex justify-end items-end p-10 border border-dark-gray`}
+          className={`w-full h-72 bg-blue bg-cover shadow-md bg-center rounded-3xl flex justify-end items-end p-10`}
         />
 
         <div className='flex items-center justify-center'>
-          <div className='w-36 h-36 rounded-full border border-dark-gray overflow-hidden -mt-24'>
+          <div className='w-36 h-36 rounded-md overflow-hidden -mt-24'>
             <img
               src={companyValues.company.companyLogo}
               alt={companyValues.company.companyName}
-              className='w-full h-full rounded-full object-cover'
+              className='w-full h-full rounded-md object-cover'
             />
           </div>
         </div>
 
-        <div className='flex flex-col justify-center items-center mb-3'>
+        <div className='flex flex-col justify-center items-center mt-3'>
           <Heading text={companyValues.company.companyName} />
           <div className='text-black text-sm mt-2'>
             {companyValues.company.companyLocation}
@@ -103,13 +92,11 @@ function CompanyProfilePage() {
         {isCompanyFetched && (
           <TwoColumnCompanyPreview
             leftBar={<LeftBar companyDetails={companyValues.company} />}
-            rightHeader={<SearchHeader />}
+            rightHeader={<SearchBar placeholder='Search Job' onChange={(e:any)=>{setJobSearch(e.target.value)}} value={jobSearch} />}
             rightBar={<JobsList id={companyValues.company.id!} />}
           />
         )}
       </PublicFacingLayout>
-      <Footer />
-    </div>
   );
 }
 

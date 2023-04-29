@@ -12,28 +12,18 @@ const JobCard = ({ job }: { job: JobDataInterface }) => {
   };
 
   return (
-    <div className='border-t border-t-black/10'>
-      <div className='p-6 flex items-center justify-between'>
-        {/* left */}
-        <div className='max-w-[60%]'>
-          <Text text={job.jobTitle} textSize='text-lg' color='text-black' />
-          <div className='mt-2'>
-            <Text
-              text={`${job.location}, (${job.workModel})`}
-              textSize='text-[#545454]'
-              color='text-black'
-            />
-          </div>
+    <div className="hover:bg-blue/5 transition ease-in-out duration-150 flex px-7 py-4 w-full flex-row justify-between items-center border-t-[1px] border-gray">
+            
+    <div className="flex flex-col justify-start items-start h-full w-[60%] ">
+        <div className=" w-full text-md font-medium text-black overflow-hidden">
+            {job.jobTitle}
         </div>
-
-        {/* right */}
-        <StandardMidBlueButton
-          text='Apply'
-          icon={<BiLinkExternal className='text-lg' />}
-          onClick={handleJobApply}
-        />
-      </div>
+        <div className="text-sm font-regular text-dark-gray">3 Jobs</div>
     </div>
+
+    <StandardMidBlueButton onClick={handleJobApply} icon={<BiLinkExternal />} text="Apply" />
+
+</div>
   );
 };
 
