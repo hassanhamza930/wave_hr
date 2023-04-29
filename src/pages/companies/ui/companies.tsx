@@ -10,21 +10,27 @@ import { useNavigate } from 'react-router';
 
 function Companies() {
   const [currentRoute, setcurrentRoute] = useRecoilState(currentRouteAtom);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setcurrentRoute("Companies");
-}, []);
+    setcurrentRoute('Companies');
+  }, []);
 
   return (
     <>
       <TwoColumnLayoutPage
         header={
           <div className='flex flex-row justify-start items-start w-full h-full'>
-            <StandardLightBlueButton onClick={()=>{navigate("/addNewCompany")}} icon={<BiPlus />} text='New Company' />
+            <StandardLightBlueButton
+              onClick={() => {
+                navigate('/addNewCompany');
+              }}
+              icon={<BiPlus />}
+              text='New Company'
+            />
           </div>
         }
-        leftBar={<AllCompaniesPostedByUser/>}
+        leftBar={<AllCompaniesPostedByUser />}
         rightBar={<SelectedCompanyDetails />}
       />
     </>

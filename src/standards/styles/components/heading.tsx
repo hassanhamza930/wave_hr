@@ -2,9 +2,11 @@ interface HeadingInterface {
   text: string;
   color?: string;
   customStyles?: string;
+  textSize?: string;
+  fontWeight?: string;
 }
 
-export function Heading({
+function Heading({
   color = 'text-black',
   text,
   customStyles = '',
@@ -22,12 +24,16 @@ function SubHeading({
   return <div className={`${color} ${customStyles} text-md`}>{text}</div>;
 }
 
-function Text({
+const Text = ({
   color = 'text-blue',
   text,
   customStyles = '',
-}: HeadingInterface) {
-  return <div className={`${color} ${customStyles} text-sm`}>{text}</div>;
-}
+  textSize = 'text-sm',
+  fontWeight,
+}: HeadingInterface) => (
+  <div className={`${color} ${customStyles} ${textSize} ${fontWeight}`}>
+    {text}
+  </div>
+);
 
-export { SubHeading };
+export { SubHeading, Text, Heading };
