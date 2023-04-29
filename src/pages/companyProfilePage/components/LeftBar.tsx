@@ -24,7 +24,7 @@ const LeftBar = ({ companyDetails }: ILeftBar) => {
 
 
   return (
-    <div className='w-full h-full'>
+    <div className='w-full'>
       <Text
         text={`About ${companyDetails.companyName}`}
         color='text-black'
@@ -62,7 +62,7 @@ const LeftBar = ({ companyDetails }: ILeftBar) => {
         ))}
       </div>
 
-      <div className='mt-10'>
+      <div className='mt-10 mb-10'>
         <StandardBlueButton
           text='Website'
           icon={<BiLinkExternal className='text-lg' />}
