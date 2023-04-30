@@ -64,7 +64,7 @@ const LeftBar = ({ companyDetails }: ILeftBar) => {
 
       {
         companyDetails.companyWebsite!="" &&
-        <div className='mt-10 mb-10'>
+        <div className='mt-10 mb-5'>
           <StandardBlueButton
             text='Website'
             onClick={()=>{window.open(companyDetails.companyWebsite!)}}

@@ -38,10 +38,11 @@ function EditCompany(props: any) {
 
     const AddCompanyTag = () => {
         if (companyTagValue.trim() == "") {
-            toast.error("Kindly enter a question");
+            toast.error("Kindly enter a valid tag");
         }
         else {
             setcompanyTags([...companyTags, companyTagValue]);
+            setcompanyTagValue("");
         }
     }
 
@@ -53,7 +54,7 @@ function EditCompany(props: any) {
 
     async function FetchCompanyDetails() {
         setLoading(true);
-        var companyData: CompanyInformation = (await getDoc(doc(db, "companies", companyId as string))).data() as CompanyInformation;
+        var companyData: CompanyDataInterface = (await getDoc(doc(db, "companies", companyId as string))).data() as CompanyDataInterface;
         setcompanyCoverImage(companyData.companyCover);
         setcompanyDescription(companyData.companyDescription);
         setcompanyLocation(companyData.companyLocation);
@@ -61,6 +62,7 @@ function EditCompany(props: any) {
         setcompanyName(companyData.companyName);
         setcompanyTags(companyData.companyTags);
         setnumberOfEmployees(companyData.numberOfEmployees);
+        setcompanyWebsite(companyData.companyWebsite!);
         setLoading(false);
 
     }
@@ -117,7 +119,7 @@ function EditCompany(props: any) {
 
 
                 <div className="flex flex-row justify-end items-end w-full mb-12">
-                    <StandardBlueButton icon={<BiPlus></BiPlus>} text="Add Company" onClick={() => {
+                    <StandardBlueButton text="Update Company" onClick={() => {
                         EditCompany({
                             id: companyId as string,
                             companyCover: companyCoverImage,

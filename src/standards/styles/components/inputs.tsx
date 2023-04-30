@@ -41,7 +41,7 @@ function TextArea({ placeholder = "", value = "", customStyles = "", onChange, e
     return (
         <div className={` ${customStyles} flex justify-start items-start flex-col`}>
             <SubHeading text={placeholder} customStyles="mb-3 text-sm ml-4"></SubHeading>
-            <textarea placeholder={examples} value={value.replace("<br/>","\n")} onChange={(newVal) => { onChange(newVal.target.value.replace("\n","<br/>")) }} className={` w-full text-sm h-48  text-black bg-blue/10 rounded-3xl px-8 py-6 outline-0 flex justify-center items-center`}>
+            <textarea placeholder={examples} value={value} onChange={(newVal) => { onChange(newVal.target.value) }} className={` w-full text-sm h-48  text-black bg-blue/10 rounded-3xl px-8 py-6 outline-0 flex justify-center items-center`}>
             </textarea>
         </div>
     );

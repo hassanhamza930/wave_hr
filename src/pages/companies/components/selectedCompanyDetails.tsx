@@ -33,12 +33,12 @@ function SelectedCompanyDetails() {
       >
         <div
           style={{ backgroundImage: `url('${selectedCompany.companyCover}')` }}
-          className='h-72 w-full bg-blue bg-cover bg-center'
+          className='h-64 w-full bg-blue bg-cover bg-center'
         />
 
         <div
           style={{ backgroundImage: `url('${selectedCompany.companyLogo}')` }}
-          className='h-36 w-36 bg-transparent rounded-md ml-10 -mt-24 bg-cover bg-center'
+          className='h-36 w-36 border-2 border-white shadow-md bg-transparent rounded-md ml-10 -mt-24 bg-cover bg-center'
         />
 
         <div className='text-black flex justify-start items-start px-10 py-5 flex-col'>
