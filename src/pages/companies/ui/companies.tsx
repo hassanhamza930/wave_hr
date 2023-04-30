@@ -17,7 +17,6 @@ function Companies() {
   }, []);
 
   return (
-    <>
       <TwoColumnLayoutPage
         header={
           <div className='flex flex-row justify-start items-start w-full h-full'>
@@ -33,7 +32,6 @@ function Companies() {
         leftBar={<AllCompaniesPostedByUser />}
         rightBar={<SelectedCompanyDetails />}
       />
-    </>
   );
 }
 
