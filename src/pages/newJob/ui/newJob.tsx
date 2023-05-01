@@ -2,7 +2,9 @@ import { useState } from 'react';
 import {
   addDoc,
   collection,
+  doc,
   getFirestore,
+  setDoc,
   Timestamp,
 } from 'firebase/firestore';
 import toast from 'react-hot-toast';
@@ -24,24 +26,36 @@ import { JobDataInterface } from '../../../standards/interfaces/interfaces';
 import { selectedCompanyAtom } from '../../jobs/atoms/selectedCompanyAtom';
 import ModalLayout from '../../../standards/styles/layouts/ModalLayout';
 import { BiArrowBack } from 'react-icons/bi';
+import { selectedJobAtom } from '../../jobs/jobsAtoms';
 
 interface NewJobProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  data?: JobDataInterface;
 }
 
-export default function NewJob({ isOpen, setIsOpen }: NewJobProps) {
+export default function NewJob({ isOpen, setIsOpen, data }: NewJobProps) {
   const [_, setLoading] = useRecoilState(isLoadingAtom);
   const [selectedCompany] = useRecoilState(selectedCompanyAtom);
-  const [jobTitle, setjobTitle] = useState('' as string);
-  const [jobDescription, setJobDescription] = useState('' as string);
-  const [jobQualifications, setjobQualifications] = useState('' as string);
-  const [salaryCompensation, setSalaryCompensation] = useState('' as string);
-  const [customQuestion, setCustomQuestion] = useState('' as string);
-  const [location, setLocation] = useState('' as string);
-  const [jobType, setjobType] = useState('' as string);
-  const [workModel, setWorkModel] = useState('' as string);
-  const [questions, setQuestions] = useState<string[]>([]);
+  const [jobTitle, setjobTitle] = useState<string>(data ? data.jobTitle : '');
+  const [jobDescription, setJobDescription] = useState(
+    data ? data.jobDescription : ''
+  );
+  const [jobQualifications, setjobQualifications] = useState(
+    data ? data.jobQualifications : ''
+  );
+  const [salaryCompensation, setSalaryCompensation] = useState(
+    data ? data.salaryCompensation : ''
+  );
+  const [customQuestion, setCustomQuestion] = useState('');
+  const [location, setLocation] = useState(data ? data.location : '');
+  const [jobType, setjobType] = useState(data ? data.jobType : '');
+  const [workModel, setWorkModel] = useState(data ? data.workModel : '');
+  const [questions, setQuestions] = useState<string[]>(
+    data ? data.questions : []
+  );
+  const [selectedJob, setSelectedJob] = useRecoilState(selectedJobAtom);
+
   const workModels = ['Remote', 'Onsite', 'Hybrid'];
   const jobTypes = ['Full-time', 'Part-Time'];
 
@@ -79,6 +93,47 @@ export default function NewJob({ isOpen, setIsOpen }: NewJobProps) {
       setIsOpen(false);
     }
   }
+
+  async function updateJob() {
+    if (!jobTitle.trim()) toast.error('Kindly enter Job title');
+    else if (!jobDescription.trim())
+      toast.error('Kindly enter Job description');
+    else if (!jobQualifications.trim())
+      toast.error('Kindly enter Job qualifications');
+    else if (!salaryCompensation)
+      toast.error('Kindly enter salary compensation');
+    else if (!location) toast.error('Kindly enter location');
+    else if (!jobType) toast.error('Kindly enter job type');
+    else if (!workModel) toast.error('Kindly enter work model');
+    else {
+      setLoading(true);
+
+      await setDoc(
+        doc(db, 'jobs', data?.id as string),
+        {
+          companyId: selectedCompany.id,
+          jobDescription: jobDescription,
+          jobQualifications: jobQualifications,
+          jobTitle: jobTitle,
+          jobType: jobType,
+          location: location,
+          questions: questions,
+          salaryCompensation: salaryCompensation,
+          time: Timestamp.now(),
+          workModel: workModel,
+          postedBy: localStorage.getItem('uid') as string,
+        } as JobDataInterface,
+        { merge: true }
+      );
+      setSelectedJob({} as JobDataInterface);
+      setLoading(false);
+      setIsOpen(false);
+    }
+  }
+
+  const handleJobSubmit = () => {
+    data ? updateJob() : handleAddNewJob();
+  };
 
   function addQuestion() {
     if (!customQuestion.trim()) {
@@ -258,8 +313,8 @@ export default function NewJob({ isOpen, setIsOpen }: NewJobProps) {
         ) : null}
 
         <ButtonSolid
-          text='Post Job'
-          onClick={handleAddNewJob}
+          text={data ? 'Update Job' : 'Post Job'}
+          onClick={handleJobSubmit}
           customStyles='mt-10'
         />
       </div>
