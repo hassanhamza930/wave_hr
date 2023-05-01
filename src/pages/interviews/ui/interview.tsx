@@ -35,6 +35,11 @@ import TwoColumnLayoutPage from "../../../standards/styles/layouts/twoColumnLayo
 import { momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import CalenderComponent from "../components/CalenderComponent";
+import TimeSlotSelection from "../components/TimeSlotSelection";
+import SelectDayModal from "../components/SelectDayModal";
+import selectDayModalAtom from "../../../atoms/interview/SelectDayModalAtom";
+import SelectStartTimeModal from "../components/SelectStartTimeModal";
+import SelectEndTimeModal from "../components/SelectEndTimeModal";
 
 export default function Interviews() {
   // const [calendlyLink, setCalendlyLink] = useState("");
@@ -67,6 +72,9 @@ export default function Interviews() {
   //    }
   // }
 
+  const [showSelectDayModal, setShowSelectDayModal] =
+    useRecoilState(selectDayModalAtom);
+
   interface Event {
     id: number;
     start: Date;
@@ -98,20 +106,25 @@ export default function Interviews() {
   const localizer = momentLocalizer(moment);
 
   return (
-    <TwoColumnLayoutPage
-      header={
-        <div className="flex flex-row justify-start items-start w-full h-full">
-          <StandardLightBlueButton
-            //   onClick={() => {
-            //     navigate('/addNewCompany');
-            //   }}
-            icon={<BiPlus />}
-            text="Add Time Slot"
-          />
-        </div>
-      }
-      leftBar={<>Hello</>}
-      rightBar={<CalenderComponent events={events} localizer={localizer} />}
-    />
+    <>
+      <SelectDayModal />
+      <SelectStartTimeModal />
+      <SelectEndTimeModal />
+      <TwoColumnLayoutPage
+        header={
+          <div className="flex flex-row justify-start items-start w-full h-full">
+            <StandardLightBlueButton
+              onClick={() => {
+                setShowSelectDayModal(true);
+              }}
+              icon={<BiPlus />}
+              text="Add Time Slot"
+            />
+          </div>
+        }
+        leftBar={<TimeSlotSelection />}
+        rightBar={<CalenderComponent events={events} localizer={localizer} />}
+      />
+    </>
   );
 }
