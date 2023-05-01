@@ -1,91 +1,117 @@
-import dayjs, { Dayjs } from 'dayjs'
-import Timezone from 'dayjs/plugin/timezone';
-import utc from 'dayjs/plugin/utc';
-import { doc, getDoc, getFirestore, setDoc, Timestamp } from "firebase/firestore"
-import { useEffect, useState } from "react"
-import { Heading, SubHeading } from "../../../standards/styles/components/heading"
-import PageLayout from "../../../standards/styles/layouts/pageLayout"
-import TimePicker from 'react-time-picker';
-import FormLayout from '../../../standards/styles/layouts/FormLayout';
-import SimpleInput from '../../../standards/styles/components/inputs';
-import { useNavigate } from 'react-router';
+import dayjs, { Dayjs } from "dayjs";
+import Timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
+import {
+  doc,
+  getDoc,
+  getFirestore,
+  setDoc,
+  Timestamp,
+} from "firebase/firestore";
+import { useEffect, useState } from "react";
+import {
+  Heading,
+  SubHeading,
+} from "../../../standards/styles/components/heading";
+import PageLayout from "../../../standards/styles/layouts/pageLayout";
+import TimePicker from "react-time-picker";
+import FormLayout from "../../../standards/styles/layouts/FormLayout";
+import SimpleInput from "../../../standards/styles/components/inputs";
+import { useNavigate } from "react-router";
 import Logo from "../../../images/logo.svg";
 import calendlyLogo from "../../../images/calendly.svg";
-import { GiInfinity } from 'react-icons/gi';
-import { BiInfinite } from 'react-icons/bi';
-import { ButtonOutlinedWhite, ButtonSolid } from '../../../standards/styles/components/button';
-import { useRecoilState } from 'recoil';
-import isLoadingAtom from '../../../atoms/app/isLoadingAtom';
-import { UserDataInterface } from '../../../standards/interfaces/interfaces';
-import { toast } from 'react-hot-toast';
-
-
-
+import { GiInfinity } from "react-icons/gi";
+import { BiInfinite, BiPlus } from "react-icons/bi";
+import {
+  ButtonOutlinedWhite,
+  ButtonSolid,
+  StandardLightBlueButton,
+} from "../../../standards/styles/components/button";
+import { useRecoilState } from "recoil";
+import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
+import { UserDataInterface } from "../../../standards/interfaces/interfaces";
+import { toast } from "react-hot-toast";
+import TwoColumnLayoutPage from "../../../standards/styles/layouts/twoColumnLayout";
+import { momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import CalenderComponent from "../components/CalenderComponent";
 
 export default function Interviews() {
+  // const [calendlyLink, setCalendlyLink] = useState("");
+  // const [loading, setloading] = useRecoilState(isLoadingAtom);
+  // const navigate = useNavigate();
+  // const db=getFirestore();
 
+  // useEffect(() => {
+  //     // var foreignTime = Timestamp.now().toDate().toLocaleString('en-EN', { hour: 'numeric', year: "numeric", hour12: false, timeZone: 'Asia/Calcutta', minute: "numeric" });
+  //     // const parsedDate = Date.parse(foreignTime);
+  //     // console.log(parsedDate);
+  //     // const localTime = new Date(parsedDate);
+  //     // console.log(localTime);
+  //     getDoc(doc(db,"users",localStorage.getItem("uid") as string)).then((doc)=>{
+  //         var userData:UserDataInterface=doc.data() as UserDataInterface;
+  //         setCalendlyLink(userData.calendlyLink!);
+  //     });
 
-    const [calendlyLink, setCalendlyLink] = useState("");
-    const [loading, setloading] = useRecoilState(isLoadingAtom);
-    const navigate = useNavigate();
-    const db=getFirestore();
+  // }, [])
 
-    useEffect(() => {
-        // var foreignTime = Timestamp.now().toDate().toLocaleString('en-EN', { hour: 'numeric', year: "numeric", hour12: false, timeZone: 'Asia/Calcutta', minute: "numeric" });
-        // const parsedDate = Date.parse(foreignTime);
-        // console.log(parsedDate);
-        // const localTime = new Date(parsedDate);
-        // console.log(localTime);
-        getDoc(doc(db,"users",localStorage.getItem("uid") as string)).then((doc)=>{
-            var userData:UserDataInterface=doc.data() as UserDataInterface;
-            setCalendlyLink(userData.calendlyLink!);
-        });
+  // async function UpdateCalendlyLink(){
+  //    if(calendlyLink!=""){
+  //     setloading(true);
+  //     await setDoc(doc(db,"users",localStorage.getItem("uid") as string),{interviewsSetup:true,calendlyLink:calendlyLink} as UserDataInterface,{merge:true});
+  //     setloading(false);
+  //     toast.success("Calendly link updated.")
+  //    }
+  //    else{
+  //     toast.error("Kindly provide a calendly link")
+  //    }
+  // }
 
-    }, [])
+  interface Event {
+    id: number;
+    start: Date;
+    end: Date;
+    title: string;
+    description?: string;
+    color?: string;
+  }
 
+  const events: Event[] = [
+    {
+      id: 1,
+      start: new Date("2023-05-02T10:00:00"),
+      end: new Date("2023-05-02T12:00:00"),
+      title: "Meeting with John",
+      description: "Discuss new project",
+      color: "#3174ad",
+    },
+    {
+      id: 2,
+      start: new Date("2023-05-05T14:00:00"),
+      end: new Date("2023-05-05T15:30:00"),
+      title: "Lunch with Mary",
+      description: "Try new restaurant",
+      color: "#d93b3b",
+    },
+  ];
 
-    async function UpdateCalendlyLink(){
-       if(calendlyLink!=""){
-        setloading(true);
-        await setDoc(doc(db,"users",localStorage.getItem("uid") as string),{interviewsSetup:true,calendlyLink:calendlyLink} as UserDataInterface,{merge:true});
-        setloading(false);
-        toast.success("Calendly link updated.")
-       }
-       else{
-        toast.error("Kindly provide a calendly link")
-       }
-    }
+  const localizer = momentLocalizer(moment);
 
-
-    return (
-        <PageLayout>
-            <FormLayout>
-
-                <div className='gap-5 flex flex-row justify-center items-center '>
-                    <img src={Logo} className="h-10 w-10"></img>
-                    <BiInfinite className='h-10 w-10 text-black'/>
-                    <img src={calendlyLogo} className="h-10 w-40 -mb-1"></img>
-
-                </div>
-
-
-                <Heading text="Schedule Interviews" customStyles='mt-10' />
-                <SubHeading customStyles='mt-1' text="Set your availability and start scheduling interviews with potential candidates." />
-
-                <SimpleInput customStyles='mt-20' placeholder='Please enter a calendly link for your meetings*' onChange={setCalendlyLink} value={calendlyLink} />
-                <SubHeading customStyles='mt-5 text-sm text-black/70' text="Wave will use this link to email candidates who are approved for interviews, candidates can self schedule interviews on this link." />
-
-                <div className='text-sm mt-5 text-black/90 flex flex-row justify-center items-center'>
-                    To Setup a new calendly link, <button onClick={() => { window.open('https://www.calendly.com', '_blank') }} className='text-blue/90 pl-1 hover:scale-105 hover:px-1 font-medium'>Click Here</button>
-                </div>
-
-
-                <ButtonSolid customStyles='mt-10' text='Update' onClick={()=>{
-                    UpdateCalendlyLink();
-                }}/>
-
-
-            </FormLayout>
-        </PageLayout>
-    )
+  return (
+    <TwoColumnLayoutPage
+      header={
+        <div className="flex flex-row justify-start items-start w-full h-full">
+          <StandardLightBlueButton
+            //   onClick={() => {
+            //     navigate('/addNewCompany');
+            //   }}
+            icon={<BiPlus />}
+            text="Add Time Slot"
+          />
+        </div>
+      }
+      leftBar={<>Hello</>}
+      rightBar={<CalenderComponent events={events} localizer={localizer} />}
+    />
+  );
 }
