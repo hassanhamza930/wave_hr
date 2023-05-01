@@ -39,7 +39,7 @@ function JobCard(jobData: JobDataInterface) {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [selectedJob.id]);
 
   useEffect(() => {
     fetchApplicants();
@@ -130,15 +130,23 @@ const JobsList = () => {
           >
             {allJobs.length ? (
               allJobs.map((job, index) => {
-                return (
-                  <motion.div
-                    transition={{ delay: (index + 1) * 0.08 }}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                  >
-                    <JobCard {...job} />
-                  </motion.div>
-                );
+                if (
+                  job.jobTitle
+                    .trim()
+                    .toLowerCase()
+                    .includes(searchCompany.trim())
+                )
+                  return (
+                    <motion.div
+                      transition={{ delay: (index + 1) * 0.08 }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                    >
+                      <JobCard {...job} />
+                    </motion.div>
+                  );
+
+                return null;
               })
             ) : (
               <Text

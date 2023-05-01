@@ -1,7 +1,8 @@
 export const copyUrlToClipboard = (jobId: string) => {
-  const url = window.location.href;
+  const baseUrl = window.location.origin;
+  const url = `${baseUrl}/apply/${jobId}`;
   navigator.clipboard
-    .writeText(`${url}/${jobId}`)
+    .writeText(url)
     .then(() => {
       return url;
     })

@@ -98,7 +98,10 @@ export default function NewJob({ isOpen, setIsOpen }: NewJobProps) {
     <ModalLayout isOpen={isOpen}>
       <div className='p-10 w-full flex-1 flex-col justify-start items-start'>
         <div className='flex items-center'></div>
-        <button className='text-3xl text-blue' onClick={() => setIsOpen(false)}>
+        <button
+          className=' absolute left-20 top-24 text-3xl text-blue'
+          onClick={() => setIsOpen(false)}
+        >
           <BiArrowBack />
         </button>
 
