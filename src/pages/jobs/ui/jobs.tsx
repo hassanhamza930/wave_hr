@@ -21,6 +21,7 @@ import { CompanyDataInterface, JobDataInterface } from "../../../standards/inter
 import TwoColumnLayoutPage from "../../../standards/styles/layouts/twoColumnLayout";
 import { BiPlus } from "react-icons/bi";
 import currentRouteAtom from "../../../atoms/app/currentRouteAtom";
+import StandardDropDown, { DropDownOptionInterface } from "../../../standards/styles/components/dropdowns";
 
 
 
@@ -28,9 +29,8 @@ export default function JobsPage() {
 
     const navigate = useNavigate();
     const [selectedJob, setSelectedJob] = useRecoilState(selectedJobAtom);
-    const [moreThanTwoJobs, setMoreThanTwoJobs] = useRecoilState(moreThanTwoJobsAtom);
     const [selectedCompany, setSelectedCompany] = useRecoilState(selectedCompanyAtom);
-    const [allCompanies, setAllCompanies] = useState<Array<CompanyInformation>>([] as Array<CompanyInformation>);
+    const [allCompanies, setAllCompanies] = useState<Array<CompanyDataInterface>>([] as Array<CompanyDataInterface>);
     const [currentRoute, setcurrentRoute] = useRecoilState(currentRouteAtom);
 
 
@@ -58,7 +58,17 @@ export default function JobsPage() {
     return (
         <TwoColumnLayoutPage
             header={
-                <div className='flex flex-row justify-start items-start w-full h-full'>
+                <div className='flex flex-row gap-3 justify-start items-start w-full h-full'>
+                    <StandardDropDown value={selectedCompany.companyName}
+                        options={
+                            allCompanies.map((company) => {
+                                return {
+                                    option: company.companyName,
+                                    onClick: () => {
+                                        setSelectedCompany(company);
+                                    }
+                                } as DropDownOptionInterface
+                            })} placeholder="Select a company" icon={<MdArrowDropDown size={15}></MdArrowDropDown>} />
                     <StandardLightBlueButton
                         onClick={() => {
                             navigate('/addNewCompany');
