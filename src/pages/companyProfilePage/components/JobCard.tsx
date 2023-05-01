@@ -18,7 +18,8 @@ const JobCard = ({ job }: { job: JobDataInterface }) => {
         <div className=" w-full text-md font-medium text-black overflow-hidden">
             {job.jobTitle}
         </div>
-        <div className="text-sm font-regular text-dark-gray">3 Jobs</div>
+        <div className="text-sm font-regular text-dark-gray">{job.jobType}, {job.workModel}</div>
+        <div className="text-sm font-regular text-dark-gray">{job.location}</div>
     </div>
 
     <StandardMidBlueButton onClick={handleJobApply} icon={<BiLinkExternal />} text="Apply" />
