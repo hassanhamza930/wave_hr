@@ -40,6 +40,10 @@ import SelectDayModal from "../components/SelectDayModal";
 import selectDayModalAtom from "../../../atoms/interview/SelectDayModalAtom";
 import SelectStartTimeModal from "../components/SelectStartTimeModal";
 import SelectEndTimeModal from "../components/SelectEndTimeModal";
+import { MdUpdate } from "react-icons/md";
+import { AllSelectedDayAndTimeAtom } from "../../../atoms/interview/AllSelectedDayAndTimeAtom";
+import { FinalSelectedDayAndTimeAtom } from "../../../atoms/interview/FinalSelectedDayAndTimeAtom";
+import updateInterviewTimes from "../logic/updateInterviewTimes";
 
 export default function Interviews() {
   // const [calendlyLink, setCalendlyLink] = useState("");
@@ -74,6 +78,9 @@ export default function Interviews() {
 
   const [showSelectDayModal, setShowSelectDayModal] =
     useRecoilState(selectDayModalAtom);
+
+  const [AllSelectedDayAndTime] = useRecoilState(AllSelectedDayAndTimeAtom);
+  const [FinalSelectedDayAndTime] = useRecoilState(FinalSelectedDayAndTimeAtom);
 
   interface Event {
     id: number;
@@ -112,13 +119,23 @@ export default function Interviews() {
       <SelectEndTimeModal />
       <TwoColumnLayoutPage
         header={
-          <div className="flex flex-row justify-start items-start w-full h-full">
+          <div className="flex flex-row justify-between items-start w-full h-full">
             <StandardLightBlueButton
               onClick={() => {
                 setShowSelectDayModal(true);
               }}
               icon={<BiPlus />}
               text="Add Time Slot"
+            />
+            <StandardLightBlueButton
+              onClick={() => {
+                updateInterviewTimes(
+                  AllSelectedDayAndTime,
+                  FinalSelectedDayAndTime
+                );
+              }}
+              icon={<MdUpdate />}
+              text="Update"
             />
           </div>
         }

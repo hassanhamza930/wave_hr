@@ -52,27 +52,29 @@ function TimeSlotsComponent(props: TimeSlotInterface) {
 
   const handleChecked = (e: any) => {
     if (e.target.checked) {
-      const { checked } = e.target;
-      setParentChecked(checked);
-      setChildChecked(checked ? childChecked : false);
+      setParentChecked(e.target.checked);
+      const childCheckboxes = document.querySelectorAll(
+        'input[type="checkbox"][data-parent-id="' + e.target.id + '"]'
+      );
+      childCheckboxes.forEach((checkbox: any) => {
+        checkbox.checked = false;
+      });
     } else {
-      const { checked } = e.target;
-      setParentChecked(checked);
-      setChildChecked(checked ? childChecked : false);
+      setParentChecked(e.target.checked);
+      const childCheckboxes = document.querySelectorAll(
+        'input[type="checkbox"][data-parent-id="' + e.target.id + '"]'
+      );
+      childCheckboxes.forEach((checkbox: any) => {
+        checkbox.checked = false;
+      });
       clearDaySchedule(theDay);
     }
   };
 
   const handleTimeSlotChecked = (e: any, slots: TimeSlot) => {
     if (e.target.checked) {
-      const { checked } = e.target;
-      setChildChecked(checked);
-      setParentChecked(checked && parentChecked);
       addTimeSlot(theDay, slots?.startTime, slots?.endTime);
     } else {
-      const { checked } = e.target;
-      setChildChecked(checked);
-      setParentChecked(checked && parentChecked);
       deleteTimeSlot(theDay, slots?.startTime, slots?.endTime);
     }
   };
@@ -95,6 +97,7 @@ function TimeSlotsComponent(props: TimeSlotInterface) {
       <label className="pt-5 pl-5 pr-5 pb-1">
         <input
           type="checkbox"
+          id={theDay}
           checked={parentChecked}
           className="w-[14px] h-[14px] mr-3"
           onChange={(e) => handleChecked(e)}
@@ -105,21 +108,37 @@ function TimeSlotsComponent(props: TimeSlotInterface) {
         {props?.slotsArr?.length ? (
           props?.slotsArr?.map((slots: TimeSlot, index: number) => {
             return (
-              <label
-                key={index}
-                className="pl-[45px] flex items-center mb-1 mt-1"
-              >
+              // <label
+              //   key={index}
+              //   className="pl-[45px] flex items-center mb-1 mt-1"
+              // >
+              //   <input
+              //     type="checkbox"
+              //     disabled={!parentChecked}
+              //     checked={childChecked}
+              //     onChange={(e) => handleTimeSlotChecked(e, slots)}
+              //     className="w-[14px] h-[14px] mr-3"
+              //   />
+              //   <span className="text-[13px] font-medium ">
+              //     {slots?.startTime} - {slots?.endTime}
+              //   </span>
+              // </label>
+              <div key={index} className="ml-12">
                 <input
                   type="checkbox"
-                  disabled={!parentChecked}
-                  checked={childChecked}
-                  onChange={(e) => handleTimeSlotChecked(e, slots)}
                   className="w-[14px] h-[14px] mr-3"
+                  id={`${theDay}-${slots?.startTime}-${slots?.endTime}`}
+                  data-parent-id={theDay}
+                  value={`${slots?.startTime}-${slots?.endTime}`}
+                  onChange={(e) => handleTimeSlotChecked(e, slots)}
                 />
-                <span className="text-[13px] font-medium ">
+                <label
+                  className="text-[13px] font-medium "
+                  htmlFor={`${theDay}-${slots?.startTime}-${slots?.endTime}`}
+                >
                   {slots?.startTime} - {slots?.endTime}
-                </span>
-              </label>
+                </label>
+              </div>
             );
           })
         ) : (
