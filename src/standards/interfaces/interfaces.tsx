@@ -63,6 +63,8 @@ export interface TimeSlot {
 }
 
 export interface AllSelectedDayAndTimeInterface {
+  [key: string]: any;
+
   Monday: TimeSlot[];
   Tuesday: TimeSlot[];
   Wednesday: TimeSlot[];
