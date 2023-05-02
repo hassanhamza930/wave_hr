@@ -105,6 +105,7 @@ function TimeSlotsComponent(props: TimeSlotInterface) {
                   className="w-[14px] h-[14px] mr-3"
                   id={`${theDay}-${slots?.startTime}-${slots?.endTime}`}
                   data-parent-id={theDay}
+                  disabled={!parentChecked}
                   value={`${slots?.startTime}-${slots?.endTime}`}
                   onChange={(e) => handleTimeSlotChecked(e, slots)}
                 />

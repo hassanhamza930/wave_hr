@@ -1,18 +1,32 @@
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { AllSelectedDayAndTimeAtom } from "../../../atoms/interview/AllSelectedDayAndTimeAtom";
+import { FinalSelectedDayAndTimeAtom } from "../../../atoms/interview/FinalSelectedDayAndTimeAtom";
 import { SubHeading } from "../../../standards/styles/components/heading";
 import fetchAllSelectedDayAndTime from "../logic/fetchAllSelectedDayAndTime";
 import TimeSlotsComponent from "./TimeSlotsComponent";
 
 function TimeSlotSelection() {
-  const [workSchedule, setWeekSchedule] = useRecoilState(
+  const [weekSchedule, setWeekSchedule] = useRecoilState(
     AllSelectedDayAndTimeAtom
+  );
+  const [finalWeekSchedule, setFinalWeekSchedule] = useRecoilState(
+    FinalSelectedDayAndTimeAtom
   );
 
   useEffect(() => {
-    fetchAllSelectedDayAndTime(workSchedule, setWeekSchedule);
+    fetchAllSelectedDayAndTime(
+      weekSchedule,
+      setWeekSchedule,
+      finalWeekSchedule,
+      setFinalWeekSchedule
+    );
   }, [fetchAllSelectedDayAndTime]);
+
+  useEffect(() => {
+    console.log("hiws", weekSchedule);
+    console.log("hifws", finalWeekSchedule);
+  });
   return (
     <div>
       <SubHeading
@@ -20,16 +34,16 @@ function TimeSlotSelection() {
         customStyles="mt-2 mb-1 p-5 text-[15px] font-bold ml-2"
       ></SubHeading>
 
-      <TimeSlotsComponent day="Monday" slotsArr={workSchedule["Monday"]} />
-      <TimeSlotsComponent day="Tuesday" slotsArr={workSchedule["Tuesday"]} />
+      <TimeSlotsComponent day="Monday" slotsArr={weekSchedule["Monday"]} />
+      <TimeSlotsComponent day="Tuesday" slotsArr={weekSchedule["Tuesday"]} />
       <TimeSlotsComponent
         day="Wednesday"
-        slotsArr={workSchedule["Wednesday"]}
+        slotsArr={weekSchedule["Wednesday"]}
       />
-      <TimeSlotsComponent day="Thursday" slotsArr={workSchedule["Thursday"]} />
-      <TimeSlotsComponent day="Friday" slotsArr={workSchedule["Friday"]} />
-      <TimeSlotsComponent day="Saturday" slotsArr={workSchedule["Saturday"]} />
-      <TimeSlotsComponent day="Sunday" slotsArr={workSchedule["Sunday"]} />
+      <TimeSlotsComponent day="Thursday" slotsArr={weekSchedule["Thursday"]} />
+      <TimeSlotsComponent day="Friday" slotsArr={weekSchedule["Friday"]} />
+      <TimeSlotsComponent day="Saturday" slotsArr={weekSchedule["Saturday"]} />
+      <TimeSlotsComponent day="Sunday" slotsArr={weekSchedule["Sunday"]} />
       <svg
         className="w-full"
         height="1"

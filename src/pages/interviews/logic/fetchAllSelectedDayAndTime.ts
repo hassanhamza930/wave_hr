@@ -4,7 +4,9 @@ import { AllSelectedDayAndTimeInterface } from "../../../standards/interfaces/in
 
 export default async function fetchAllSelectedDayAndTime(
   selectedDaytime: AllSelectedDayAndTimeInterface,
-  setSelectedDaytime: Function
+  setSelectedDaytime: Function,
+  finalDaytime: AllSelectedDayAndTimeInterface,
+  setFinalDaytime: Function
 ) {
   const db = getFirestore();
   const loggedInUser = localStorage.getItem("uid")!;
@@ -15,8 +17,9 @@ export default async function fetchAllSelectedDayAndTime(
     .then((docSnapshot) => {
       if (docSnapshot.exists()) {
         // Use the data() method to extract the user object from the document
-        const userObject = docSnapshot.data().AllTimeSlots;
-        setSelectedDaytime(userObject);
+
+        setSelectedDaytime(docSnapshot.data().AllTimeSlots);
+        setFinalDaytime(docSnapshot.data().SelectedTimeSlots);
       } else {
         console.log("User document does not exist!");
       }
