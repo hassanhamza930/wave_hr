@@ -74,10 +74,6 @@ function TimeSlotsComponent(props: TimeSlotInterface) {
     }
   };
 
-  useEffect(() => {
-    console.log(weekSchedule);
-  }, [weekSchedule]);
-
   return (
     <div className="ml-5 flex flex-col">
       <svg

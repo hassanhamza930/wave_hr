@@ -1,12 +1,18 @@
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { AllSelectedDayAndTimeAtom } from "../../../atoms/interview/AllSelectedDayAndTimeAtom";
 import { SubHeading } from "../../../standards/styles/components/heading";
+import fetchAllSelectedDayAndTime from "../logic/fetchAllSelectedDayAndTime";
 import TimeSlotsComponent from "./TimeSlotsComponent";
 
 function TimeSlotSelection() {
   const [workSchedule, setWeekSchedule] = useRecoilState(
     AllSelectedDayAndTimeAtom
   );
+
+  useEffect(() => {
+    fetchAllSelectedDayAndTime(workSchedule, setWeekSchedule);
+  }, [fetchAllSelectedDayAndTime]);
   return (
     <div>
       <SubHeading
