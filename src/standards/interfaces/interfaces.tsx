@@ -1,4 +1,5 @@
 import { Timestamp } from "firebase/firestore";
+import { DateLocalizer } from "react-big-calendar";
 
 export interface JobDataInterface {
   id?: string;
@@ -69,4 +70,17 @@ export interface AllSelectedDayAndTimeInterface {
   Friday: TimeSlot[];
   Saturday: TimeSlot[];
   Sunday: TimeSlot[];
+}
+export interface Event {
+  id: number;
+  start: Date;
+  end: Date;
+  title: string;
+  description?: string;
+  color?: string;
+}
+
+export interface CalenderComponentInterface {
+  events: Event[];
+  localizer: DateLocalizer;
 }

@@ -7,10 +7,6 @@ import SelectedDayAndTimeAtom from "../../../atoms/interview/SelectedDayAndTimeA
 import SelectStartTimeModalAtom from "../../../atoms/interview/SelectStartTimeModalAtom";
 import { ButtonSolid } from "../../../standards/styles/components/button";
 
-// interface SelectDayInterface {
-//   showSelectDayModal: boolean;
-//   setShowSelectDayModal: React.Dispatch<React.SetStateAction<boolean>>;
-// }
 function SelectDayModal() {
   const daysArr = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const [selectedDay, setSelectedDay] = useState("");

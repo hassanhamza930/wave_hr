@@ -2,16 +2,11 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useRecoilState } from "recoil";
-import selectDayModalAtom from "../../../atoms/interview/SelectDayModalAtom";
 import SelectedDayAndTimeAtom from "../../../atoms/interview/SelectedDayAndTimeAtom";
 import SelectEndTimeModalAtom from "../../../atoms/interview/SelectEndTimeModalAtom";
 import SelectStartTimeModalAtom from "../../../atoms/interview/SelectStartTimeModalAtom";
 import { ButtonSolid } from "../../../standards/styles/components/button";
 
-// interface SelectDayInterface {
-//   showSelectDayModal: boolean;
-//   setShowSelectDayModal: React.Dispatch<React.SetStateAction<boolean>>;
-// }
 function SelectStartTimeModal() {
   const [showSelectStartTimeModal, setShowSelectStartTimeModal] =
     useRecoilState(SelectStartTimeModalAtom);

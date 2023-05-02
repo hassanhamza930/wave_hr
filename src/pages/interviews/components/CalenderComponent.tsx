@@ -1,29 +1,12 @@
 import React from "react";
-import {
-  Calendar,
-  momentLocalizer,
-  Views,
-  DateLocalizer,
-} from "react-big-calendar";
-import moment from "moment";
-
+import { Calendar, Views } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import {
+  CalenderComponentInterface,
+  Event,
+} from "../../../standards/interfaces/interfaces";
 
-interface Event {
-  id: number;
-  start: Date;
-  end: Date;
-  title: string;
-  description?: string;
-  color?: string;
-}
-
-interface MyCalendarProps {
-  events: Event[];
-  localizer: DateLocalizer;
-}
-
-const CalenderComponent: React.FC<MyCalendarProps> = ({
+const CalenderComponent: React.FC<CalenderComponentInterface> = ({
   events,
   localizer,
 }) => {

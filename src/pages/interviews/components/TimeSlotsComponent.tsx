@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { FinalSelectedDayAndTimeAtom } from "../../../atoms/interview/FinalSelectedDayAndTimeAtom";
-import {
-  AllSelectedDayAndTimeInterface,
-  TimeSlot,
-} from "../../../standards/interfaces/interfaces";
+import { TimeSlot } from "../../../standards/interfaces/interfaces";
 
 interface TimeSlotInterface {
   day: string;
@@ -12,13 +9,11 @@ interface TimeSlotInterface {
 }
 function TimeSlotsComponent(props: TimeSlotInterface) {
   const theDay = props?.day;
-  // const [isChecked, setIsChecked] = useState(false);
   const [weekSchedule, setWeekSchedule] = useRecoilState(
     FinalSelectedDayAndTimeAtom
   );
 
   const [parentChecked, setParentChecked] = useState(false);
-  const [childChecked, setChildChecked] = useState(false);
 
   function addTimeSlot(day: string, startTime: string, endTime: string) {
     setWeekSchedule((prevState: any) => ({
@@ -108,21 +103,6 @@ function TimeSlotsComponent(props: TimeSlotInterface) {
         {props?.slotsArr?.length ? (
           props?.slotsArr?.map((slots: TimeSlot, index: number) => {
             return (
-              // <label
-              //   key={index}
-              //   className="pl-[45px] flex items-center mb-1 mt-1"
-              // >
-              //   <input
-              //     type="checkbox"
-              //     disabled={!parentChecked}
-              //     checked={childChecked}
-              //     onChange={(e) => handleTimeSlotChecked(e, slots)}
-              //     className="w-[14px] h-[14px] mr-3"
-              //   />
-              //   <span className="text-[13px] font-medium ">
-              //     {slots?.startTime} - {slots?.endTime}
-              //   </span>
-              // </label>
               <div key={index} className="ml-12">
                 <input
                   type="checkbox"
