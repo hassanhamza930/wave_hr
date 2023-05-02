@@ -17,9 +17,10 @@ export default async function fetchAllSelectedDayAndTime(
     .then((docSnapshot) => {
       if (docSnapshot.exists()) {
         // Use the data() method to extract the user object from the document
-
-        setSelectedDaytime(docSnapshot.data().AllTimeSlots);
-        setFinalDaytime(docSnapshot.data().SelectedTimeSlots);
+        Object?.keys(docSnapshot?.data()?.AllTimeSlots) &&
+          setSelectedDaytime(docSnapshot.data().AllTimeSlots);
+        Object?.keys(docSnapshot?.data()?.SelectedTimeSlots) &&
+          setFinalDaytime(docSnapshot.data().SelectedTimeSlots);
       } else {
         console.log("User document does not exist!");
       }

@@ -23,10 +23,6 @@ function TimeSlotSelection() {
     );
   }, [fetchAllSelectedDayAndTime]);
 
-  useEffect(() => {
-    console.log("hiws", weekSchedule);
-    console.log("hifws", finalWeekSchedule);
-  });
   return (
     <div>
       <SubHeading
@@ -34,16 +30,13 @@ function TimeSlotSelection() {
         customStyles="mt-2 mb-1 p-5 text-[15px] font-bold ml-2"
       ></SubHeading>
 
-      <TimeSlotsComponent day="Monday" slotsArr={weekSchedule["Monday"]} />
-      <TimeSlotsComponent day="Tuesday" slotsArr={weekSchedule["Tuesday"]} />
-      <TimeSlotsComponent
-        day="Wednesday"
-        slotsArr={weekSchedule["Wednesday"]}
-      />
-      <TimeSlotsComponent day="Thursday" slotsArr={weekSchedule["Thursday"]} />
-      <TimeSlotsComponent day="Friday" slotsArr={weekSchedule["Friday"]} />
-      <TimeSlotsComponent day="Saturday" slotsArr={weekSchedule["Saturday"]} />
-      <TimeSlotsComponent day="Sunday" slotsArr={weekSchedule["Sunday"]} />
+      <TimeSlotsComponent day="Monday" slotsArr={weekSchedule?.Monday} />
+      <TimeSlotsComponent day="Tuesday" slotsArr={weekSchedule?.Tuesday} />
+      <TimeSlotsComponent day="Wednesday" slotsArr={weekSchedule?.Wednesday} />
+      <TimeSlotsComponent day="Thursday" slotsArr={weekSchedule?.Thursday} />
+      <TimeSlotsComponent day="Friday" slotsArr={weekSchedule?.Friday} />
+      <TimeSlotsComponent day="Saturday" slotsArr={weekSchedule?.Saturday} />
+      <TimeSlotsComponent day="Sunday" slotsArr={weekSchedule?.Sunday} />
       <svg
         className="w-full"
         height="1"
