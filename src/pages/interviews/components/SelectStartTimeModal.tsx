@@ -24,7 +24,7 @@ function SelectStartTimeModal() {
 
   function closeModal() {
     setShowSelectStartTimeModal(false);
-    setSelectedDayTime({ ...selectedDayTime, startTime: "" });
+    setSelectedDayTime({ ...selectedDayTime, day: "", startTime: "" });
   }
 
   const handleTimeChange = (e: any) => {
@@ -40,11 +40,6 @@ function SelectStartTimeModal() {
       toast.error("Please select start time");
     }
   };
-
-  useEffect(() => {
-    console.log(selectedDayTime);
-  }, [selectedDayTime]);
-
   return (
     <>
       <Transition appear show={showSelectStartTimeModal} as={Fragment}>

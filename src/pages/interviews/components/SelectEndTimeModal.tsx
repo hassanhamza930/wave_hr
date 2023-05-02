@@ -1,11 +1,13 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { AllSelectedDayAndTimeAtom } from "../../../atoms/interview/AllSelectedDayAndTimeAtom";
 import selectDayModalAtom from "../../../atoms/interview/SelectDayModalAtom";
 import SelectedDayAndTimeAtom from "../../../atoms/interview/SelectedDayAndTimeAtom";
 import SelectEndTimeModalAtom from "../../../atoms/interview/SelectEndTimeModalAtom";
 import SelectStartTimeModalAtom from "../../../atoms/interview/SelectStartTimeModalAtom";
+import { AllSelectedDayAndTimeInterface } from "../../../standards/interfaces/interfaces";
 import { ButtonSolid } from "../../../standards/styles/components/button";
 
 // interface SelectDayInterface {
@@ -19,28 +21,54 @@ function SelectEndTimeModal() {
   const [selectedDayTime, setSelectedDayTime] = useRecoilState(
     SelectedDayAndTimeAtom
   );
+  const [workSchedule, setWeekSchedule] = useRecoilState(
+    AllSelectedDayAndTimeAtom
+  );
+
+  function addTimeSlot(day: string, startTime: string, endTime: string) {
+    setWeekSchedule((prevState: any) => ({
+      ...prevState,
+      [day]: [...prevState[day], { startTime, endTime }],
+    }));
+  }
 
   function closeModal() {
     setShowSelectEndTimeModal(false);
-    setSelectedDayTime({ ...selectedDayTime, startTime: "" });
+    setSelectedDayTime({
+      ...selectedDayTime,
+      day: "",
+      startTime: "",
+      endTime: "",
+    });
   }
 
   const handleTimeChange = (e: any) => {
-    setSelectedDayTime({ ...selectedDayTime, endTime: e.target.value });
+    setSelectedDayTime({
+      ...selectedDayTime,
+
+      endTime: e.target.value,
+    });
   };
 
   const handleNext = () => {
     if (selectedDayTime?.endTime) {
-      setShowSelectEndTimeModal(false);
+      if (
+        selectedDayTime?.day &&
+        selectedDayTime?.startTime &&
+        selectedDayTime?.endTime
+      ) {
+        addTimeSlot(
+          selectedDayTime?.day,
+          selectedDayTime?.startTime,
+          selectedDayTime?.endTime
+        );
+        closeModal();
+      }
     } else {
       toast.dismiss();
       toast.error("Please select end time");
     }
   };
-
-  useEffect(() => {
-    console.log(selectedDayTime);
-  }, [selectedDayTime]);
 
   return (
     <>
@@ -88,7 +116,7 @@ function SelectEndTimeModal() {
 
                   <div className="mt-4 flex justify-center items-center">
                     <ButtonSolid
-                      text="Next"
+                      text="Done"
                       onClick={() => {
                         handleNext();
                       }}

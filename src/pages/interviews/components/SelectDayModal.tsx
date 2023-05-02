@@ -24,6 +24,7 @@ function SelectDayModal() {
 
   function closeModal() {
     setShowSelectDayModal(false);
+    setSelectedDayTime({ ...selectedDayTime, day: "" });
     setSelectedDay("");
   }
 
@@ -33,23 +34,21 @@ function SelectDayModal() {
 
   const handleNext = () => {
     if (selectedDay) {
-      daysArr?.map((day) => {
-        if (day === selectedDay) {
-          setSelectedDayTime({ ...selectedDayTime, day: "Monday" });
-        } else if (day === selectedDay) {
-          setSelectedDayTime({ ...selectedDayTime, day: "Tuesday" });
-        } else if (day === selectedDay) {
-          setSelectedDayTime({ ...selectedDayTime, day: "Wednesday" });
-        } else if (day === selectedDay) {
-          setSelectedDayTime({ ...selectedDayTime, day: "Thursday" });
-        } else if (day === selectedDay) {
-          setSelectedDayTime({ ...selectedDayTime, day: "Friday" });
-        } else if (day === selectedDay) {
-          setSelectedDayTime({ ...selectedDayTime, day: "Saturday" });
-        } else if (day === selectedDay) {
-          setSelectedDayTime({ ...selectedDayTime, day: "Sunday" });
-        }
-      });
+      if (selectedDay === "Mon") {
+        setSelectedDayTime({ ...selectedDayTime, day: "Monday" });
+      } else if (selectedDay === "Tue") {
+        setSelectedDayTime({ ...selectedDayTime, day: "Tuesday" });
+      } else if (selectedDay === "Wed") {
+        setSelectedDayTime({ ...selectedDayTime, day: "Wednesday" });
+      } else if (selectedDay === "Thu") {
+        setSelectedDayTime({ ...selectedDayTime, day: "Thursday" });
+      } else if (selectedDay === "Fri") {
+        setSelectedDayTime({ ...selectedDayTime, day: "Friday" });
+      } else if (selectedDay === "Sat") {
+        setSelectedDayTime({ ...selectedDayTime, day: "Saturday" });
+      } else if (selectedDay === "Sun") {
+        setSelectedDayTime({ ...selectedDayTime, day: "Sunday" });
+      }
       setShowSelectDayModal(false);
       setShowSelectStartTimeModal(true);
     } else {

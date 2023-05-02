@@ -1,8 +1,13 @@
 import React from "react";
+import { useRecoilState } from "recoil";
+import { AllSelectedDayAndTimeAtom } from "../../../atoms/interview/AllSelectedDayAndTimeAtom";
 import { SubHeading } from "../../../standards/styles/components/heading";
 import TimeSlotsComponent from "./TimeSlotsComponent";
 
 function TimeSlotSelection() {
+  const [workSchedule, setWeekSchedule] = useRecoilState(
+    AllSelectedDayAndTimeAtom
+  );
   return (
     <div>
       <SubHeading
@@ -10,11 +15,16 @@ function TimeSlotSelection() {
         customStyles="mt-2 mb-1 p-5 text-[15px] font-bold ml-2"
       ></SubHeading>
 
-      <TimeSlotsComponent day="Monday" />
-      <TimeSlotsComponent day="Tuesday" />
-      <TimeSlotsComponent day="Wednesday" />
-      <TimeSlotsComponent day="Thursday" />
-      <TimeSlotsComponent day="Friday" />
+      <TimeSlotsComponent day="Monday" slotsArr={workSchedule["Monday"]} />
+      <TimeSlotsComponent day="Tuesday" slotsArr={workSchedule["Tuesday"]} />
+      <TimeSlotsComponent
+        day="Wednesday"
+        slotsArr={workSchedule["Wednesday"]}
+      />
+      <TimeSlotsComponent day="Thursday" slotsArr={workSchedule["Thursday"]} />
+      <TimeSlotsComponent day="Friday" slotsArr={workSchedule["Friday"]} />
+      <TimeSlotsComponent day="Saturday" slotsArr={workSchedule["Saturday"]} />
+      <TimeSlotsComponent day="Sunday" slotsArr={workSchedule["Sunday"]} />
       <svg
         className="w-full"
         height="1"
