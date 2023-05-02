@@ -35,6 +35,7 @@ export default function useLoggedIn() {
       localStorage.clear();
       setLoggedIn(false);
       setLoggedInUser({} as UserDataInterface);
+      setTimeout(()=>{setLoading(false);},1000)
       window.location.href = '/';
     }
   };
@@ -42,7 +43,6 @@ export default function useLoggedIn() {
 
   useEffect(() => {
     if (localStorage.getItem('uid') != null && loggedInUser.email == null) {
-      setLoading(true);
       setLoggedIn(true);
       console.log('syncing');
       syncUserData();

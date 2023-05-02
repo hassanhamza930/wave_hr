@@ -75,14 +75,13 @@ export default function Page3() {
                 type="button"
                 onClick={() => { saveImageToLocalStorage() }}
                 style={{
-                    backgroundColor: selectedProfilePicture == "" ? "#eae0d5" : "#eae0d5",
                     backgroundImage: `url('${selectedProfilePicture}')`
                 }}
-                className="hover:bg-blue bg-contain bg-no-repeat bg-center hover:scale-105 h-36 w-36 rounded-xl mt-3 flex justify-center items-center">
-                {selectedProfilePicture == "" && <AiFillCamera color="black" className="opacity-50" size={50} />}
+                className="hover:bg-blue/80 hover:text-tan/90 transition-all duration-100 bg-white/90 bg-contain bg-no-repeat bg-center hover:scale-105 h-36 w-36 rounded-xl mt-3 flex justify-center items-center">
+                {selectedProfilePicture == "" && <AiFillCamera size={50} />}
             </button>
 
-            <button type="submit" className="border-tan border-2 hover:bg-tan bg-transparent text-tan hover:text-black px-8 py-2 flex flex-row justify-center items-center gap-2 rounded-md mt-20 w-min">
+            <button type="submit" className="border-tan border-2 hover:bg-tan bg-transparent text-tan hover:text-black px-8 py-2 flex flex-row justify-center items-center gap-2 rounded-full mt-20 w-min">
                 Next
             </button>
 

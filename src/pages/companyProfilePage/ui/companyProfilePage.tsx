@@ -15,11 +15,12 @@ import SearchHeader from '../components/SearchHeader';
 import Footer from '../components/Footer';
 import { SearchBar } from '../../../standards/styles/components/inputs';
 import { jobSearchAtom } from '../atom/jobSearch';
+import { motion } from 'framer-motion';
 
 function CompanyProfilePage() {
   const { companyId } = useParams();
   const [companyValues, setCompanyValues] = useRecoilState(companyAtom);
-  const [jobSearch,setJobSearch] = useRecoilState(jobSearchAtom);
+  const [jobSearch, setJobSearch] = useRecoilState(jobSearchAtom);
 
   const db = getFirestore();
   const [_, setLoading] = useRecoilState(isLoadingAtom);
@@ -55,48 +56,58 @@ function CompanyProfilePage() {
 
   useEffect(() => {
     fetchCompanyDetails();
-    // fetchAllJobsPostedByCompany();
   }, []);
 
+
   return (
-      <PublicFacingLayout>
-        <div
-          style={{
-            backgroundImage: `url('${
-              !companyValues.company.companyCover
-                ? 'https://assets-global.website-files.com/5c7fdbdd4e3feeee8dd96dd2/62c4ff55b8637de51557f5f0_growth-flat-color.gif'
-                : companyValues.company.companyCover
+    <PublicFacingLayout>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.5, delay: 0.2 }}
+        style={{
+          backgroundImage: `url('${!companyValues.company.companyCover
+            ? 'https://assets-global.website-files.com/5c7fdbdd4e3feeee8dd96dd2/62c4ff55b8637de51557f5f0_growth-flat-color.gif'
+            : companyValues.company.companyCover
             }')`,
-          }}
-          className={`w-full h-36 md:h-64 bg-blue bg-cover shadow-md bg-center rounded-3xl flex justify-end items-end p-10`}
-        />
+        }}
+        className={`relative z-10 w-full h-36 md:h-64 bg-blue bg-cover shadow-md bg-center rounded-3xl flex justify-end items-end p-10`}
+      />
 
-        <div className='flex items-center justify-center'>
-          <div className='border-2 border-white shadow-md h-24 w-24 md:w-36 md:h-36 rounded-md overflow-hidden -mt-12 md:-mt-24'>
-            <img
-              src={companyValues.company.companyLogo}
-              alt={companyValues.company.companyName}
-              className='w-full h-full rounded-md object-cover'
-            />
-          </div>
-        </div>
-
-        <div className='flex flex-col justify-center items-center mt-3'>
-          <Heading text={companyValues.company.companyName} />
-          <div className='text-black text-sm mt-2'>
-            {companyValues.company.companyLocation}
-          </div>
-        </div>
-
-        {/* layout */}
-        {isCompanyFetched && (
-          <TwoColumnCompanyPreview
-            leftBar={<LeftBar companyDetails={companyValues.company} />}
-            rightHeader={<SearchBar placeholder='Search Job' onChange={(e:any)=>{setJobSearch(e.target.value)}} value={jobSearch} />}
-            rightBar={<JobsList id={companyValues.company.id!} />}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.5 }}
+        className='relative z-30 flex items-center justify-center'>
+        <div className='border-2 border-white bg-tan shadow-md h-24 w-24 md:w-36 md:h-36 rounded-md overflow-hidden -mt-12 md:-mt-24'>
+          <img
+            src={companyValues.company.companyLogo}
+            alt={companyValues.company.companyName}
+            className='w-full h-full rounded-md object-contain'
           />
-        )}
-      </PublicFacingLayout>
+        </div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.8 }}
+        className='flex flex-col justify-center items-center mt-3'>
+        <Heading text={companyValues.company.companyName} />
+        <div className='text-black text-sm mt-1 md:mt-2'>
+          {companyValues.company.companyLocation}
+        </div>
+      </motion.div>
+
+      {/* layout */}
+      {isCompanyFetched && (
+        <TwoColumnCompanyPreview
+          leftBar={<LeftBar companyDetails={companyValues.company} />}
+          rightHeader={<SearchBar placeholder='Search Job' onChange={(e: any) => { setJobSearch(e.target.value) }} value={jobSearch} />}
+          rightBar={<JobsList id={companyValues.company.id!} />}
+        />
+      )}
+    </PublicFacingLayout>
   );
 }
 
