@@ -143,26 +143,32 @@ const JobsList = () => {
                 return null;
               })
             ) : (
-              <div className='flex justify-center items-center h-full w-full'>
+              <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className='flex justify-center items-center h-full w-full'>
                 <Text
                   text={'No Jobs Found'}
                   color='text-blue'
                   textSize='text-mg'
                   customStyles='m-6'
                 />
-              </div>
+              </motion.div>
             )}
           </motion.div>
         </>
       ) : (
-        <div className='flex justify-center items-center h-full w-full'>
+        <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className='flex justify-center items-center h-full w-full'>
           <Text
             text={'Please Select a Company to See Jobs'}
             color='text-blue'
             textSize='text-mg'
             customStyles='m-6'
           />
-        </div>
+        </motion.div>
       )}
     </div>
   );

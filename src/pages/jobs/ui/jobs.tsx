@@ -58,7 +58,9 @@ export default function JobsPage() {
       <TwoColumnLayoutPage
         header={
           <div className='flex flex-row gap-3 justify-start items-start w-full h-full'>
-            <StandardDropDown
+            {
+              allCompanies.length>0?
+              <StandardDropDown
               value={selectedCompany.companyName}
               options={allCompanies.map((company) => {
                 return {
@@ -72,7 +74,9 @@ export default function JobsPage() {
               })}
               placeholder='Select a company'
               icon={<MdArrowDropDown size={15}></MdArrowDropDown>}
-            />
+            />:
+            <div className='text-blue/80 text-sm flex justify-start items-center h-full w-full'>Create a company to post jobs</div>
+            }
             {selectedCompany.id && (
               <StandardLightBlueButton
                 onClick={() => {
