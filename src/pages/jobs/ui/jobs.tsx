@@ -11,7 +11,7 @@ import {
 import { StandardLightBlueButton } from '../../../standards/styles/components/button';
 import { MdArrowDropDown } from 'react-icons/md';
 import { selectedCompanyAtom } from '../atoms/selectedCompanyAtom';
-import { CompanyDataInterface } from '../../../standards/interfaces/interfaces';
+import { CompanyDataInterface, JobDataInterface } from '../../../standards/interfaces/interfaces';
 import TwoColumnLayoutPage from '../../../standards/styles/layouts/twoColumnLayout';
 import { BiPlus } from 'react-icons/bi';
 import currentRouteAtom from '../../../atoms/app/currentRouteAtom';
@@ -21,16 +21,15 @@ import StandardDropDown, {
 import NewJob from '../../newJob/ui/newJob';
 import JobsList from '../components/JobsList';
 import SelectedJobDetails from '../components/SelectedJobDetails';
+import { selectedJobAtom } from '../jobsAtoms';
 
 export default function JobsPage() {
   const navigate = useNavigate();
-  const [selectedCompany, setSelectedCompany] =
-    useRecoilState(selectedCompanyAtom);
+  const [selectedCompany, setSelectedCompany] = useRecoilState(selectedCompanyAtom);
   const [isOpen, setIsOpen] = useState(false);
-  const [allCompanies, setAllCompanies] = useState<Array<CompanyDataInterface>>(
-    [] as Array<CompanyDataInterface>
-  );
+  const [allCompanies, setAllCompanies] = useState<Array<CompanyDataInterface>>([] as Array<CompanyDataInterface>);
   const [_, setcurrentRoute] = useRecoilState(currentRouteAtom);
+  const [selectedJob, setSelectedJob] = useRecoilState(selectedJobAtom);
 
   const db = getFirestore();
 
@@ -66,6 +65,8 @@ export default function JobsPage() {
                   option: company.companyName,
                   onClick: () => {
                     setSelectedCompany(company);
+                    setSelectedJob({} as JobDataInterface);
+                    
                   },
                 } as DropDownOptionInterface;
               })}

@@ -17,42 +17,43 @@ import { selectedCompanyAtom } from '../atoms/selectedCompanyAtom';
 import { selectedJobAtom } from '../jobsAtoms';
 import { BiLinkExternal } from 'react-icons/bi';
 import { Text } from '../../../standards/styles/components/heading';
+import { useNavigate } from 'react-router';
 
 function JobCard(jobData: JobDataInterface) {
   const [selectedJob, setSelectedJob] = useRecoilState(selectedJobAtom);
   const [applicants, setApplicants] = useState(0);
   const [_, setcurrentRoute] = useRecoilState(currentRouteAtom);
+  const [selectedCompany] = useRecoilState(selectedCompanyAtom);
+  const db = getFirestore();
+  const navigate=useNavigate();
 
-  const fetchApplicants = useCallback(() => {
-    try {
-      const db = getFirestore();
+  const fetchApplicants = () => {
       const applicantsRef = collection(
         db,
         'jobs',
-        `${selectedJob.id}`,
+        `${jobData.id}`,
         'applications'
       );
       onSnapshot(applicantsRef, (snapshot) => {
-        const applicantCount = snapshot.size;
+        var applicantCount = snapshot.docs.length;
         setApplicants(applicantCount);
       });
-    } catch (error) {
-      console.log(error);
-    }
-  }, [selectedJob.id]);
+    
+  };
 
   useEffect(() => {
     fetchApplicants();
-  }, [fetchApplicants]);
+  }, []);
 
   const handleOnClick = () => {
-    setSelectedJob(jobData);
-    setcurrentRoute(`Companies > ${jobData.jobTitle}`);
+    navigate(`/applicants/${selectedJob.id}`);
+    setcurrentRoute(`${selectedCompany.companyName} > ${jobData.jobTitle} > Applicants`);
   };
 
   return (
     <div
-      onClick={handleOnClick}
+    key={jobData.id}
+      onClick={()=>{setSelectedJob(jobData)}}
       className='hover:bg-blue/5 transition ease-in-out duration-150 cursor-pointer flex px-7 py-4 w-full flex-row justify-between items-center border-t-[1px] border-gray'
     >
       <div className='flex flex-col justify-start items-start h-full w-[60%] '>
@@ -73,6 +74,8 @@ function JobCard(jobData: JobDataInterface) {
   );
 }
 
+
+
 const JobsList = () => {
   const [allJobs, setAllJobs] = useState<Array<JobDataInterface>>([]);
   const db = getFirestore();
@@ -92,15 +95,6 @@ const JobsList = () => {
           return tempData as JobDataInterface;
         });
 
-        // docsData = docsData.filter((jobData) => {
-        //   if (
-        //     companyData.companyName
-        //       .toLowerCase()
-        //       .includes(searchCompany.toLowerCase())
-        //   ) {
-        //     return companyData;
-        //   }
-        // });
         setAllJobs(docsData as Array<JobDataInterface>);
       }
     );
@@ -149,24 +143,26 @@ const JobsList = () => {
                 return null;
               })
             ) : (
-              <Text
-                text={'No Jobs Found!'}
-                color='text-black'
-                textSize='text-lg'
-                customStyles='m-6'
-              />
+              <div className='flex justify-center items-center h-full w-full'>
+                <Text
+                  text={'No Jobs Found'}
+                  color='text-blue'
+                  textSize='text-mg'
+                  customStyles='m-6'
+                />
+              </div>
             )}
           </motion.div>
         </>
       ) : (
-        <>
+        <div className='flex justify-center items-center h-full w-full'>
           <Text
             text={'Please Select a Company to See Jobs'}
-            color='text-black'
-            textSize='text-lg'
+            color='text-blue'
+            textSize='text-mg'
             customStyles='m-6'
           />
-        </>
+        </div>
       )}
     </div>
   );
