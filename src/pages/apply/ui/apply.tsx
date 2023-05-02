@@ -6,12 +6,15 @@ import { useNavigate, useParams } from "react-router";
 import { useRecoilState } from "recoil";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
 import { CompanyDataInterface, JobDataInterface } from "../../../standards/interfaces/interfaces";
-import { ButtonOutlinedWhite, ButtonSolid } from "../../../standards/styles/components/button";
-import { Heading, SubHeading } from "../../../standards/styles/components/heading";
+import { ButtonOutlinedWhite, ButtonSolid, StandardBlueButton, StandardWhiteButton } from "../../../standards/styles/components/button";
+import { Heading, SubHeading, Text } from "../../../standards/styles/components/heading";
 import { ApplyStageInitiatedAtom, jobDataAtom } from "../atoms/applyPageAtoms";
 import ApplicationWindow from "../components/applicationWindow";
 import PublicFacingLayout from "../../../standards/styles/layouts/PublicFacingLayout";
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
+import dayjs from "dayjs";
+import { BiBriefcase, BiCurrentLocation, BiLocationPlus, BiPlus } from "react-icons/bi";
+import { MdDone } from "react-icons/md";
 
 export interface CompanyData {
     companyDescription: string,
@@ -58,44 +61,72 @@ export default function Apply() {
 
                 <PublicFacingLayout>
                     <motion.div
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1.5, delay: 0.2 }}
+                        id="no_scroll"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
                         style={{
                             backgroundImage: `url('${!companyData.companyCover
                                 ? 'https://assets-global.website-files.com/5c7fdbdd4e3feeee8dd96dd2/62c4ff55b8637de51557f5f0_growth-flat-color.gif'
                                 : companyData.companyCover
                                 }')`,
                         }}
-                        className={`relative z-10 w-full h-36 md:h-64 bg-blue bg-cover shadow-md bg-center rounded-3xl flex justify-end items-end p-10`}
+                        className={`relative z-10 w-full h-36 md:h-64 bg-blue bg-cover shadow-md bg-center rounded-xl md:rounded-3xl flex justify-end items-end p-10`}
                     />
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 0.5 }}
-                        className='relative z-30 flex items-center justify-center'>
-                        <div className='border-2 border-white bg-tan shadow-md h-24 w-24 md:w-36 md:h-36 rounded-md overflow-hidden -mt-12 md:-mt-24'>
-                            <img
-                                src={companyData.companyLogo}
-                                alt={companyData.companyName}
-                                className='w-full h-full rounded-md object-contain'
-                            />
+                    <div className='text-black flex justify-start items-start py-5 flex-col mt-0 md:mt-5'>
+                        <div className="flex flex-row justify-between items-start md:items-center w-full">
+                            <div className='font-bold text-3xl md:text-4xl'>
+                                {jobData.jobTitle} at {companyData.companyName}
+                            </div>
+                            <div className="md:flex hidden">
+                                <StandardBlueButton text="Apply" onClick={() => { setApplyStageInitiated(true); }} />
+                            </div>
                         </div>
-                    </motion.div>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7, delay: 0.8 }}
-                        className='flex flex-col justify-center items-center mt-3'>
-                        <Heading text={companyData.companyName} />
-                        <div className='text-black text-sm mt-1 md:mt-2'>
-                            {companyData.companyLocation}
+                        <div className='text-dark-gray text-sm mt-2 flex flex-row justify-center items-center gap-1'>
+                            <BiCurrentLocation />
+                            {jobData.location}
                         </div>
-                    </motion.div>
+                        <div className='flex flex-row justify-center items-center gap-1 text-dark-gray text-sm mt-1'>
+                            <BiBriefcase />
+                            <div>{jobData.jobType}, {jobData.workModel}</div>
+                        </div>
 
-                    
+                        <div className='text-dark-gray text-sm mt-1 md:mt-5'>
+                            {dayjs(jobData.time.toDate()).format('DD/MM/YY')}
+                        </div>
+
+
+
+                        <div className='font-semibold text-2xl mt-10'>Job Description</div>
+                        <SubHeading customStyles='mt-2' text={jobData.jobDescription} />
+
+                        <div className='font-semibold text-2xl mt-10'>Job Qualifications</div>
+                        <SubHeading
+                            customStyles='mt-2'
+                            text={`${jobData.jobQualifications}`}
+                        />
+
+                        <div className='font-semibold text-2xl mt-10'>
+                            Salary Compensation
+                        </div>
+                        <SubHeading
+                            customStyles='mt-2 mb-16'
+                            text={jobData.salaryCompensation}
+                        />
+
+                        <div className="md:hidden flex">
+                            <StandardBlueButton text="Apply" onClick={() => { setApplyStageInitiated(true); }} />
+                        </div>
+
+
+
+                    </div>
+
+
+
+
                 </PublicFacingLayout>
             </> : <></>
     )
