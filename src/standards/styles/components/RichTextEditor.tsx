@@ -46,15 +46,16 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   };
 
   return (
-    <div className={` ${customStyles} mt-5 flex justify-start items-start flex-col`}>
+    <div className={` ${customStyles} mt-14 flex justify-start items-start flex-col`}>
       <SubHeading text={placeholder} customStyles="mb-3 text-sm ml-4" />
       <ReactQuill
+        id="no_scroll"
         placeholder={examples}
         value={editorValue}
         onChange={handleEditorChange}
         modules={modules}
         formats={formats}
-        className="w-full text-sm text-gray-800 rounded-3xl  h-48 py-2 px-4 outline-none focus:border-blue-500 focus:shadow-outline-blue resize-none bg-blue/10"
+        className="w-full text-sm text-gray-800 overflow-y-scroll py-2 rounded-3xl px-4 outline-none focus:border-blue-500 focus:shadow-outline-blue resize-none bg-blue/10"
       />
     </div>
   );

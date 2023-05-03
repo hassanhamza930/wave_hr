@@ -1,6 +1,4 @@
-import dayjs, { Dayjs } from 'dayjs'
-import Timezone from 'dayjs/plugin/timezone';
-import utc from 'dayjs/plugin/utc';
+
 import { doc, getDoc, getFirestore, setDoc, Timestamp } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { Heading, SubHeading } from "../../../standards/styles/components/heading"
