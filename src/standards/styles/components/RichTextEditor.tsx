@@ -24,10 +24,11 @@ const formats = [
 ];
 
 interface RichTextEditorProps {
-  placeholder?: string;
-  value?: string;
-  onChange?: (value: string) => void;
+  placeholder: string;
+  value: string;
+  onChange: (value: string) => void;
   customStyles?: string;
+  examples: string
 }
 
 const RichTextEditor: React.FC<RichTextEditorProps> = ({
@@ -35,6 +36,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   value = "",
   onChange = () => {},
   customStyles = "",
+  examples=''
 }) => {
   const [editorValue, setEditorValue] = useState(value);
 
@@ -44,10 +46,10 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   };
 
   return (
-    <div className={` ${customStyles} flex justify-start items-start flex-col`}>
+    <div className={` ${customStyles} mt-5 flex justify-start items-start flex-col`}>
       <SubHeading text={placeholder} customStyles="mb-3 text-sm ml-4" />
       <ReactQuill
-        placeholder={placeholder}
+        placeholder={examples}
         value={editorValue}
         onChange={handleEditorChange}
         modules={modules}

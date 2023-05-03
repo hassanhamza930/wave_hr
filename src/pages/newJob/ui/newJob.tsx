@@ -19,14 +19,13 @@ import {
   Heading,
   SubHeading,
 } from '../../../standards/styles/components/heading';
-import SimpleInput, {
-  TextArea,
-} from '../../../standards/styles/components/inputs';
+import SimpleInput from '../../../standards/styles/components/inputs';
 import { JobDataInterface } from '../../../standards/interfaces/interfaces';
 import { selectedCompanyAtom } from '../../jobs/atoms/selectedCompanyAtom';
 import ModalLayout from '../../../standards/styles/layouts/ModalLayout';
 import { BiArrowBack } from 'react-icons/bi';
 import { selectedJobAtom } from '../../jobs/jobsAtoms';
+import RichTextEditor from '../../../standards/styles/components/RichTextEditor';
 
 interface NewJobProps {
   isOpen: boolean;
@@ -174,22 +173,13 @@ export default function NewJob({ isOpen, setIsOpen, data }: NewJobProps) {
           customStyles='mt-14'
         />
 
-        <TextArea
-          examples={`At ${selectedCompany.companyName} you would be responsible for ...`}
-          customStyles='mt-10'
-          placeholder='Please provide a description of the job*'
-          value={jobDescription}
-          onChange={setJobDescription}
-        />
-        <TextArea
-          examples={
-            'You would be the ideal candidate if you have the following qualifications...'
-          }
-          customStyles='mt-10'
+        <RichTextEditor placeholder='Please provide a description of the job*' value={jobDescription} onChange={setJobDescription} examples={`At ${selectedCompany.companyName} you would be responsible for ...`} />
+        <RichTextEditor customStyles='mt-10'
           placeholder='Please provide qualifications required for the job*'
           value={jobQualifications}
-          onChange={setjobQualifications}
-        />
+          onChange={setjobQualifications} examples={
+            'You would be the ideal candidate if you have the following qualifications...'
+          } />
 
         <SimpleInput
           examples='$70,000 per annum'
