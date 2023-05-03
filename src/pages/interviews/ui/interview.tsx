@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 import TwoColumnLayoutPage from "../../../standards/styles/layouts/twoColumnLayout";
 import { momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-import CalenderComponent from "../components/CalenderComponent";
+import CalenderComponent from "../components/interviewsThisWeek";
 import TimeSlotSelection from "../components/TimeSlotSelection";
 import SelectDayModal from "../components/SelectDayModal";
 import selectDayModalAtom from "../../../atoms/interview/SelectDayModalAtom";
@@ -16,6 +16,7 @@ import { AllSelectedDayAndTimeAtom } from "../../../atoms/interview/AllSelectedD
 import { FinalSelectedDayAndTimeAtom } from "../../../atoms/interview/FinalSelectedDayAndTimeAtom";
 import updateInterviewTimes from "../logic/updateInterviewTimes";
 import { Event } from "../../../standards/interfaces/interfaces";
+import InterviewsThisWeek from "../components/interviewsThisWeek";
 
 export default function Interviews() {
   const [showSelectDayModal, setShowSelectDayModal] =
@@ -39,7 +40,7 @@ export default function Interviews() {
       end: new Date("2023-05-05T15:30:00"),
       title: "Lunch with Mary",
       description: "Try new restaurant",
-      color: "#d93b3b",
+      color: "#E6EFFF",
     },
   ];
 
@@ -60,20 +61,11 @@ export default function Interviews() {
               icon={<BiPlus />}
               text="Add Time Slot"
             />
-            <StandardLightBlueButton
-              onClick={() => {
-                updateInterviewTimes(
-                  AllSelectedDayAndTime,
-                  FinalSelectedDayAndTime
-                );
-              }}
-              icon={<MdUpdate />}
-              text="Update"
-            />
+            
           </div>
         }
         leftBar={<TimeSlotSelection />}
-        rightBar={<CalenderComponent events={events} localizer={localizer} />}
+        rightBar={<InterviewsThisWeek/>}
       />
     </>
   );

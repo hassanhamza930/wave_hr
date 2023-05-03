@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 import SelectedDayAndTimeAtom from "../../../atoms/interview/SelectedDayAndTimeAtom";
 import SelectEndTimeModalAtom from "../../../atoms/interview/SelectEndTimeModalAtom";
 import SelectStartTimeModalAtom from "../../../atoms/interview/SelectStartTimeModalAtom";
-import { ButtonSolid } from "../../../standards/styles/components/button";
+import { ButtonSolid, StandardBlueButton } from "../../../standards/styles/components/button";
 
 function SelectStartTimeModal() {
   const [showSelectStartTimeModal, setShowSelectStartTimeModal] =
@@ -79,15 +79,16 @@ function SelectStartTimeModal() {
                     />
                   </div>
 
-                  <div className="mt-4 flex justify-center items-center">
-                    <ButtonSolid
+                  <div className="flex justify-center items-center">
+                    <StandardBlueButton
                       text="Next"
                       onClick={() => {
                         handleNext();
                       }}
-                      customStyles="w-[125px] h-[50px] rounded-[23px]"
                     />
                   </div>
+
+
                 </Dialog.Panel>
               </Transition.Child>
             </div>

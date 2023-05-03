@@ -5,18 +5,14 @@ import { useRecoilState } from "recoil";
 import selectDayModalAtom from "../../../atoms/interview/SelectDayModalAtom";
 import SelectedDayAndTimeAtom from "../../../atoms/interview/SelectedDayAndTimeAtom";
 import SelectStartTimeModalAtom from "../../../atoms/interview/SelectStartTimeModalAtom";
-import { ButtonSolid } from "../../../standards/styles/components/button";
+import { ButtonSolid, StandardBlueButton } from "../../../standards/styles/components/button";
 
 function SelectDayModal() {
-  const daysArr = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const daysArr = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat","Sun"];
   const [selectedDay, setSelectedDay] = useState("");
-  const [showSelectDayModal, setShowSelectDayModal] =
-    useRecoilState(selectDayModalAtom);
-  const [showSelectStartTimeModal, setShowSelectStartTimeModal] =
-    useRecoilState(SelectStartTimeModalAtom);
-  const [selectedDayTime, setSelectedDayTime] = useRecoilState(
-    SelectedDayAndTimeAtom
-  );
+  const [showSelectDayModal, setShowSelectDayModal] =useRecoilState(selectDayModalAtom);
+  const [showSelectStartTimeModal, setShowSelectStartTimeModal] =useRecoilState(SelectStartTimeModalAtom);
+  const [selectedDayTime, setSelectedDayTime] = useRecoilState(SelectedDayAndTimeAtom);
 
   function closeModal() {
     setShowSelectDayModal(false);
@@ -27,6 +23,7 @@ function SelectDayModal() {
   const handleClick = (day: string) => {
     setSelectedDay(day);
   };
+
 
   const handleNext = () => {
     if (selectedDay) {
@@ -52,6 +49,8 @@ function SelectDayModal() {
       toast.error("Please select a day");
     }
   };
+
+
 
   return (
     <>
@@ -80,7 +79,7 @@ function SelectDayModal() {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
                     className="font-[Inter] text-[16px] font-bold justify-center items-center flex  text-[#454545]"
@@ -93,8 +92,8 @@ function SelectDayModal() {
                         <p
                           className={
                             day === selectedDay
-                              ? "text-[14px] font-[Inter] bg-blue cursor-pointer text-white pt-2 pb-2 pl-3 pr-3 justify-center items-center flex rounded-full flex-row"
-                              : "text-[14px] font-[Inter] cursor-pointer text-[#737373] flex flex-row"
+                              ? "text-[14px] font-[Inter] bg-blue cursor-pointer text-white p-4 justify-center items-center flex rounded-full flex-row"
+                              : "text-[14px] font-[Inter] p-4 cursor-pointer text-[#737373] flex flex-row"
                           }
                           onClick={() => handleClick(day)}
                         >
@@ -104,15 +103,16 @@ function SelectDayModal() {
                     })}
                   </div>
 
-                  <div className="mt-4 flex justify-center items-center">
-                    <ButtonSolid
-                      text="Next"
-                      onClick={() => {
-                        handleNext();
-                      }}
-                      customStyles="w-[125px] h-[50px] rounded-[23px]"
+                  <div className="flex justify-center items-center">
+                    <StandardBlueButton
+                    text="Next"
+                    onClick={() => {
+                      handleNext();
+                    }}
                     />
+                    
                   </div>
+                  
                 </Dialog.Panel>
               </Transition.Child>
             </div>
