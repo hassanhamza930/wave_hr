@@ -43,6 +43,7 @@ export default function AllApplicants() {
                   transition={{ delay: (index + 1) * 0.08 }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
+                  key={index}
                 >
                   <ApplicantCard {...applicant} />
                 </motion.div>
