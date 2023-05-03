@@ -14,6 +14,7 @@ import ManageAvailability from "../components/manageAvailability";
 import userAvailabilityAtom from "../atoms/userAvailabilityAtom";
 import TimeSelectionPopupModalOpenAtom, { selectedDayIndexAtom } from "../atoms/timeSelectionPopupModal";
 import TimeSelectionPopup from "../components/timeSelectionPopup";
+import { UserDataInterface } from "../../../standards/interfaces/interfaces";
 
 export default function Interviews() {
   const [loggedInUser, setloggedInUser] = useRecoilState(globalUserAtom);
@@ -43,7 +44,7 @@ export default function Interviews() {
             className="flex flex-row justify-between items-start w-full h-full">
 
             <StandardDropDown
-              value={loggedInUser.interviewSlotTime}
+              value={loggedInUser.interviewSlotTime!}
               icon={<MdArrowDropDown />}
               placeholder="Select Interview Duration"
               options={
@@ -68,9 +69,10 @@ export default function Interviews() {
                     onClick={() => {
                       try {
                         console.log(userAvailability);
-                        setDoc(doc(db, "users", loggedInUser.id! as string), {
-                          availability: userAvailability,
-                        }, { merge: true });
+                        var newData:UserDataInterface={} as UserDataInterface;
+                        newData.availability=userAvailability;
+                        newData.timezone=Intl.DateTimeFormat().resolvedOptions().timeZone.toString();
+                        setDoc(doc(db, "users", loggedInUser.id! as string), newData, { merge: true });
                       }
                       catch (e) {
                         alert(e);

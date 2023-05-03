@@ -52,10 +52,10 @@ function TimeSelectionPopup() {
                       type="time"
                       id="time"
                       name="time"
-                      value={loggedInUser.availability[selectedDayIndex].startTime}
+                      value={loggedInUser.availability![selectedDayIndex].startTime}
                       onChange={(e)=>{
                         var tempAvailability = _.cloneDeep(loggedInUser.availability);
-                        tempAvailability[selectedDayIndex].startTime = e.target.value;
+                        tempAvailability![selectedDayIndex].startTime = e.target.value;
                         setDoc(doc(db, "users", loggedInUser.id! as string), {
                             availability:tempAvailability
                         },{merge:true});
@@ -66,10 +66,10 @@ function TimeSelectionPopup() {
                       type="time"
                       id="time"
                       name="time"
-                      value={loggedInUser.availability[selectedDayIndex].endTime}
+                      value={loggedInUser.availability![selectedDayIndex].endTime}
                       onChange={(e)=>{
                         var tempAvailability = _.cloneDeep(loggedInUser.availability);
-                        tempAvailability[selectedDayIndex].endTime = e.target.value;
+                        tempAvailability![selectedDayIndex].endTime = e.target.value;
                         setDoc(doc(db, "users", loggedInUser.id! as string), {
                             availability:tempAvailability
                         },{merge:true});

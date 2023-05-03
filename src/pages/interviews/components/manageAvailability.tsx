@@ -97,7 +97,7 @@ function ManageAvailability() {
                 onAvailabilityChange={() => {
                   try {
                     const tempSchedule = _.cloneDeep(loggedInUser.availability);
-                    tempSchedule[index]={...tempSchedule[index],enabled:!tempSchedule[index].enabled};
+                    tempSchedule![index]={...tempSchedule![index],enabled:!tempSchedule![index].enabled};
                     console.log(tempSchedule);
                     setDoc(doc(db, "users", loggedInUser.id! as string), {availability:tempSchedule},{merge:true});
                   }

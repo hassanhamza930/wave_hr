@@ -49,8 +49,10 @@ export interface UserDataInterface {
   name: string | null;
   photoUrl: string | null;
   email: string | null;
-  availability:Array<DailyTimeslotsInterface>, // in sorted order from monday to sunday
-  interviewSlotTime:string // 15min, 30min, etc.
+  availability?:Array<DailyTimeslotsInterface>, // in sorted order from monday to sunday
+  interviewSlotTime?:string, // 15min, 30min, etc.
+  timezone?:string // timezone of the user
+
 }
 
 export interface QuestionResponse {
