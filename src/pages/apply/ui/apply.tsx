@@ -100,13 +100,12 @@ export default function Apply() {
 
 
                         <div className='font-semibold text-2xl mt-10'>Job Description</div>
-                        <SubHeading customStyles='mt-2' text={jobData.jobDescription} />
+                        <div className='text-black mt-2 text-md' dangerouslySetInnerHTML={{__html: jobData.jobDescription}} />
+
 
                         <div className='font-semibold text-2xl mt-10'>Job Qualifications</div>
-                        <SubHeading
-                            customStyles='mt-2'
-                            text={`${jobData.jobQualifications}`}
-                        />
+                        <div className='text-black mt-2 text-md' dangerouslySetInnerHTML={{__html: jobData.jobQualifications}} />
+
 
                         <div className='font-semibold text-2xl mt-10'>
                             Salary Compensation
