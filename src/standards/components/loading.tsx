@@ -11,7 +11,7 @@ export default function Loading() {
         className="fixed z-[120] h-screen w-full bg-tan flex flex-col justify-center items-center gap-10">
             
             <motion.img
-                initial={{ opacity: 0}}
+                initial={{ opacity: 1}}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
                 src={Logo} className="h-36 w-36"></motion.img>

@@ -65,7 +65,7 @@ export default function Page2() {
             <input {...register("email")} placeholder="Email" className="mt-10 w-48 md:w-96 border-b-[1px] border-tan/90 text-tan/90 bg-transparent outline-0 px-2 py-1 flex justify-center items-center">
             </input>
 
-            <button type="submit" className="border-tan border-2 hover:bg-tan bg-transparent text-tan hover:text-black px-8 py-2 flex flex-row justify-center items-center gap-2 rounded-md mt-20 w-min">
+            <button type="submit" className="border-tan border-2 hover:bg-tan bg-transparent text-tan hover:text-black px-8 rounded-full py-2 flex flex-row justify-center items-center gap-2 mt-20 w-min">
                 Next
             </button>
 

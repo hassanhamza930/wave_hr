@@ -106,7 +106,7 @@ const StandardBlueButton = ({
   return (
     <button
       onClick={onClick}
-      className={`hover:shadow-xl shadow-sm transition-all ease-in-out duration-100 flex items-center justify-center gap-3 px-6 py-4 rounded-3xl bg-blue text[${textSize}] text-tan font-medium outline-none border-none`}
+      className={`hover:shadow-xl shadow-sm transition-all ease-in-out duration-100 flex items-center justify-center gap-3 py-3 px-8 rounded-3xl bg-blue text-md text-tan font-medium outline-none border-none`}
     >
       {icon && <span>{icon}</span>}
       {text}

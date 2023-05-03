@@ -54,7 +54,7 @@ const RightBar = ({ id }: { id: string }) => {
             <JobCard key={job.id!} job={job} />
           </motion.div>)
       ) : (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className='p-6'>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}  className='p-6'>
           <Text text='No Jobs Found' color='text-black' textSize='text-sm' />
         </motion.div>
       )}

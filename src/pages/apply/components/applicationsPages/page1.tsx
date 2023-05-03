@@ -79,7 +79,7 @@ export default function Page1() {
             </input>
 
 
-            <button type="submit" className="border-tan border-2 hover:bg-tan bg-transparent text-tan hover:text-black px-8 py-2 flex flex-row justify-center items-center gap-2 rounded-md mt-20 w-min">
+            <button type="submit" className="border-tan border-2 hover:bg-tan bg-transparent rounded-full text-tan hover:text-black px-8 py-2 flex flex-row justify-center items-center gap-2 rounded-md mt-20 w-min">
                 Next
             </button>
 
