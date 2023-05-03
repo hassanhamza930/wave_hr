@@ -3,69 +3,100 @@ import { StandardLightBlueButton } from "../../../standards/styles/components/bu
 import { useRecoilState } from "recoil";
 
 import TwoColumnLayoutPage from "../../../standards/styles/layouts/twoColumnLayout";
-import { momentLocalizer } from "react-big-calendar";
-import moment from "moment";
-import CalenderComponent from "../components/interviewsThisWeek";
-import TimeSlotSelection from "../components/TimeSlotSelection";
-import SelectDayModal from "../components/SelectDayModal";
-import selectDayModalAtom from "../../../atoms/interview/SelectDayModalAtom";
-import SelectStartTimeModal from "../components/SelectStartTimeModal";
-import SelectEndTimeModal from "../components/SelectEndTimeModal";
-import { MdUpdate } from "react-icons/md";
-import { AllSelectedDayAndTimeAtom } from "../../../atoms/interview/AllSelectedDayAndTimeAtom";
-import { FinalSelectedDayAndTimeAtom } from "../../../atoms/interview/FinalSelectedDayAndTimeAtom";
-import updateInterviewTimes from "../logic/updateInterviewTimes";
-import { Event } from "../../../standards/interfaces/interfaces";
+import { MdArrowDropDown, MdUpdate } from "react-icons/md";
 import InterviewsThisWeek from "../components/interviewsThisWeek";
+import StandardDropDown from "../../../standards/styles/components/dropdowns";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import globalUserAtom from "../../../atoms/app/globalUserAtom";
+import { doc, getFirestore, setDoc } from "@firebase/firestore";
+import ManageAvailability from "../components/manageAvailability";
+import userAvailabilityAtom from "../atoms/userAvailabilityAtom";
+import TimeSelectionPopupModalOpenAtom, { selectedDayIndexAtom } from "../atoms/timeSelectionPopupModal";
+import TimeSelectionPopup from "../components/timeSelectionPopup";
 
 export default function Interviews() {
-  const [showSelectDayModal, setShowSelectDayModal] =
-    useRecoilState(selectDayModalAtom);
+  const [loggedInUser, setloggedInUser] = useRecoilState(globalUserAtom);
+  const [userAvailability, setuserAvailability] = useRecoilState(userAvailabilityAtom);
+  const [timeSelectionPopupOpen, settimeSelectionPopupOpen] = useRecoilState(TimeSelectionPopupModalOpenAtom);
+  const [selectedDayIndex, setselectedDayIndex] = useRecoilState(selectedDayIndexAtom);
 
-  const [AllSelectedDayAndTime] = useRecoilState(AllSelectedDayAndTimeAtom);
-  const [FinalSelectedDayAndTime] = useRecoilState(FinalSelectedDayAndTimeAtom);
+  const db = getFirestore();
 
-  const events: Event[] = [
-    {
-      id: 1,
-      start: new Date("2023-05-02T10:00:00"),
-      end: new Date("2023-05-02T12:00:00"),
-      title: "Meeting with John",
-      description: "Discuss new project",
-      color: "#3174ad",
-    },
-    {
-      id: 2,
-      start: new Date("2023-05-05T14:00:00"),
-      end: new Date("2023-05-05T15:30:00"),
-      title: "Lunch with Mary",
-      description: "Try new restaurant",
-      color: "#E6EFFF",
-    },
-  ];
-
-  const localizer = momentLocalizer(moment);
+  function handleInterviewSlotTimeChange(newTime: string) {
+    setDoc(doc(db, "users", loggedInUser.id! as string), {
+      interviewSlotTime: newTime,
+    }, { merge: true });
+  }
 
   return (
     <>
-      <SelectDayModal />
-      <SelectStartTimeModal />
-      <SelectEndTimeModal />
+      {
+        timeSelectionPopupOpen &&
+        <TimeSelectionPopup />
+      }
       <TwoColumnLayoutPage
         header={
-          <div className="flex flex-row justify-between items-start w-full h-full">
-            <StandardLightBlueButton
-              onClick={() => {
-                setShowSelectDayModal(true);
-              }}
-              icon={<BiPlus />}
-              text="Add Time Slot"
-            />
-            
-          </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex flex-row justify-between items-start w-full h-full">
+
+            <StandardDropDown
+              value={loggedInUser.interviewSlotTime}
+              icon={<MdArrowDropDown />}
+              placeholder="Select Interview Duration"
+              options={
+                [
+                  { option: "15 Minutes", onClick: () => { handleInterviewSlotTimeChange("15 Minutes") } },
+                  { option: "30 Minutes", onClick: () => { handleInterviewSlotTimeChange("30 Minutes") } },
+                  { option: "1 Hour", onClick: () => { handleInterviewSlotTimeChange("1 Hour") } },
+                ]
+              }></StandardDropDown>
+
+            <AnimatePresence>
+              {
+                loggedInUser.availability == undefined &&
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <StandardLightBlueButton
+                    text="Create Availability Schedule"
+                    icon={<BiPlus />}
+                    onClick={() => {
+                      try {
+                        console.log(userAvailability);
+                        setDoc(doc(db, "users", loggedInUser.id! as string), {
+                          availability: userAvailability,
+                        }, { merge: true });
+                      }
+                      catch (e) {
+                        alert(e);
+                      }
+                    }}
+                  />
+                </motion.div>
+              }
+            </AnimatePresence>
+
+            <AnimatePresence>
+              {
+                loggedInUser.availability != undefined &&
+                <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="rounded-full bg-blue/10 text-black py-3 px-5 text-sm">
+                  {Intl.DateTimeFormat().resolvedOptions().timeZone.toString()}
+                </motion.div>
+              }
+            </AnimatePresence>
+
+          </motion.div>
         }
-        leftBar={<TimeSlotSelection />}
-        rightBar={<InterviewsThisWeek/>}
+        leftBar={<ManageAvailability />}
+        rightBar={<InterviewsThisWeek />}
       />
     </>
   );

@@ -1,5 +1,6 @@
 import { Timestamp } from "firebase/firestore";
 import { DateLocalizer } from "react-big-calendar";
+import { DailyTimeslotsInterface } from "../../pages/interviews/components/manageAvailability";
 
 export interface JobDataInterface {
   id?: string;
@@ -48,8 +49,8 @@ export interface UserDataInterface {
   name: string | null;
   photoUrl: string | null;
   email: string | null;
-  interviewsSetup?: boolean; //this will be used to check if the user has setup their interviews settings later down the road
-  calendlyLink?: string; //this will be the link to the users calendly account, the functionality of this is still vague so you can ignore it for now.
+  availability:Array<DailyTimeslotsInterface>, // in sorted order from monday to sunday
+  interviewSlotTime:string // 15min, 30min, etc.
 }
 
 export interface QuestionResponse {
@@ -57,32 +58,5 @@ export interface QuestionResponse {
   answer: string;
 }
 
-export interface TimeSlot {
-  startTime: string;
-  endTime: string;
-}
 
-export interface AllSelectedDayAndTimeInterface {
-  [key: string]: any;
 
-  Monday: TimeSlot[];
-  Tuesday: TimeSlot[];
-  Wednesday: TimeSlot[];
-  Thursday: TimeSlot[];
-  Friday: TimeSlot[];
-  Saturday: TimeSlot[];
-  Sunday: TimeSlot[];
-}
-export interface Event {
-  id: number;
-  start: Date;
-  end: Date;
-  title: string;
-  description?: string;
-  color?: string;
-}
-
-export interface CalenderComponentInterface {
-  events: Event[];
-  localizer: DateLocalizer;
-}

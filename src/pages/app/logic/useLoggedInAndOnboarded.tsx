@@ -27,6 +27,7 @@ export default function useLoggedIn() {
     if (userDataExists == true) {
       const unsub = onSnapshot(userRef, (data) => {
         const userData: UserDataInterface = data.data() as UserDataInterface;
+        userData.id=data.id;
         setLoggedInUser(userData);
         setLoggedIn(true);
         setTimeout(()=>{setLoading(false);},1000)

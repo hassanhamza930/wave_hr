@@ -27,9 +27,6 @@ function GettingStarted() {
         if (jobsDocs.length > 0) {
             setJobSetup(true);
         }
-        if (userDoc!.interviewsSetup == true) {
-            setInterviewSetup(true);
-        }
 
     }
 
