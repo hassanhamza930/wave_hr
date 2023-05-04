@@ -25,6 +25,7 @@ import NewJob from '../../newJob/ui/newJob';
 import JobsList from '../components/JobsList';
 import SelectedJobDetails from '../components/SelectedJobDetails';
 import { selectedJobAtom } from '../jobsAtoms';
+import { motion } from 'framer-motion';
 
 export default function JobsPage() {
   const [selectedCompany, setSelectedCompany] =
@@ -63,28 +64,50 @@ export default function JobsPage() {
       <TwoColumnLayoutPage
         header={
           <div className='flex flex-row gap-3 justify-start items-start w-full h-full'>
-            <StandardDropDown
-              value={selectedCompany.companyName}
-              options={allCompanies.map((company) => {
-                return {
-                  option: company.companyName,
-                  onClick: () => {
-                    setSelectedCompany(company);
-                    setSelectedJob({} as JobDataInterface);
-                  },
-                } as DropDownOptionInterface;
-              })}
-              placeholder='Select a company'
-              icon={<MdArrowDropDown size={15}></MdArrowDropDown>}
-            />
+            {
+              allCompanies.length > 0 &&
+              <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              >
+                <StandardDropDown
+                  value={selectedCompany.companyName}
+                  options={allCompanies.map((company) => {
+                    return {
+                      option: company.companyName,
+                      onClick: () => {
+                        setSelectedCompany(company);
+                        setSelectedJob({} as JobDataInterface);
+
+                      },
+                    } as DropDownOptionInterface;
+                  })}
+                  placeholder='Select a company'
+                  icon={<MdArrowDropDown size={15}></MdArrowDropDown>}
+                />
+              </motion.div>
+
+            }
+            {allCompanies.length == 0 &&
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className='text-blue/80 text-sm flex justify-start items-center h-full w-full'>Create a company to post jobs</motion.div>
+            }
             {selectedCompany.id && (
-              <StandardLightBlueButton
+              <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{delay: 0.2,duration:0.4}}
+              >
+                <StandardLightBlueButton
                 onClick={() => {
                   setIsOpen(true);
                 }}
                 icon={<BiPlus />}
                 text='New Job'
               />
+              </motion.div>
             )}
           </div>
         }

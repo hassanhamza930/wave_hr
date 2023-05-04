@@ -1,89 +1,104 @@
-
-import { doc, getDoc, getFirestore, setDoc, Timestamp } from "firebase/firestore"
-import { useEffect, useState } from "react"
-import { Heading, SubHeading } from "../../../standards/styles/components/heading"
-import PageLayout from "../../../standards/styles/layouts/pageLayout"
-import TimePicker from 'react-time-picker';
-import FormLayout from '../../../standards/styles/layouts/FormLayout';
-import SimpleInput from '../../../standards/styles/components/inputs';
-import { useNavigate } from 'react-router';
-import Logo from "../../../images/logo.svg";
-import calendlyLogo from "../../../images/calendly.svg";
-import { GiInfinity } from 'react-icons/gi';
-import { BiInfinite } from 'react-icons/bi';
-import { ButtonOutlinedWhite, ButtonSolid } from '../../../standards/styles/components/button';
-import { useRecoilState } from 'recoil';
-import isLoadingAtom from '../../../atoms/app/isLoadingAtom';
-import { UserDataInterface } from '../../../standards/interfaces/interfaces';
-import { toast } from 'react-hot-toast';
-
-
-
+import TwoColumnLayoutPage from "../../../standards/styles/layouts/twoColumnLayout";
+import { MdArrowDropDown, MdUpdate } from "react-icons/md";
+import InterviewsThisWeek from "../components/interviewsThisWeek";
+import StandardDropDown from "../../../standards/styles/components/dropdowns";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import globalUserAtom from "../../../atoms/app/globalUserAtom";
+import { doc, getFirestore, setDoc } from "@firebase/firestore";
+import ManageAvailability from "../components/manageAvailability";
+import userAvailabilityAtom from "../atoms/userAvailabilityAtom";
+import TimeSelectionPopupModalOpenAtom, { selectedDayIndexAtom } from "../atoms/timeSelectionPopupModal";
+import TimeSelectionPopup from "../components/timeSelectionPopup";
+import { UserDataInterface } from "../../../standards/interfaces/interfaces";
+import { useRecoilState } from "recoil";
+import { StandardLightBlueButton } from "../../../standards/styles/components/button";
+import { BiPlus } from "react-icons/bi";
 
 export default function Interviews() {
+  const [loggedInUser, setloggedInUser] = useRecoilState(globalUserAtom);
+  const [userAvailability, setuserAvailability] = useRecoilState(userAvailabilityAtom);
+  const [timeSelectionPopupOpen, settimeSelectionPopupOpen] = useRecoilState(TimeSelectionPopupModalOpenAtom);
+  const [selectedDayIndex, setselectedDayIndex] = useRecoilState(selectedDayIndexAtom);
 
+  const db = getFirestore();
 
-    const [calendlyLink, setCalendlyLink] = useState("");
-    const [loading, setloading] = useRecoilState(isLoadingAtom);
-    const navigate = useNavigate();
-    const db=getFirestore();
+  function handleInterviewSlotTimeChange(newTime: string) {
+    setDoc(doc(db, "users", loggedInUser.id! as string), {
+      interviewSlotTime: newTime,
+    }, { merge: true });
+  }
 
-    useEffect(() => {
-        // var foreignTime = Timestamp.now().toDate().toLocaleString('en-EN', { hour: 'numeric', year: "numeric", hour12: false, timeZone: 'Asia/Calcutta', minute: "numeric" });
-        // const parsedDate = Date.parse(foreignTime);
-        // console.log(parsedDate);
-        // const localTime = new Date(parsedDate);
-        // console.log(localTime);
-        getDoc(doc(db,"users",localStorage.getItem("uid") as string)).then((doc)=>{
-            var userData:UserDataInterface=doc.data() as UserDataInterface;
-            setCalendlyLink(userData.calendlyLink!);
-        });
+  return (
+    <>
+      {
+        timeSelectionPopupOpen &&
+        <TimeSelectionPopup />
+      }
+      <TwoColumnLayoutPage
+        header={
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex flex-row justify-between items-start w-full h-full">
 
-    }, [])
+            <StandardDropDown
+              value={loggedInUser.interviewSlotTime!}
+              icon={<MdArrowDropDown />}
+              placeholder="Select Interview Duration"
+              options={
+                [
+                  { option: "15 Minutes", onClick: () => { handleInterviewSlotTimeChange("15 Minutes") } },
+                  { option: "30 Minutes", onClick: () => { handleInterviewSlotTimeChange("30 Minutes") } },
+                  { option: "1 Hour", onClick: () => { handleInterviewSlotTimeChange("1 Hour") } },
+                ]
+              }></StandardDropDown>
 
+            <AnimatePresence>
+              {
+                loggedInUser.availability == undefined &&
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <StandardLightBlueButton
+                    text="Create Availability Schedule"
+                    icon={<BiPlus />}
+                    onClick={() => {
+                      try {
+                        console.log(userAvailability);
+                        var newData:UserDataInterface={} as UserDataInterface;
+                        newData.availability=userAvailability;
+                        newData.timezone=Intl.DateTimeFormat().resolvedOptions().timeZone.toString();
+                        setDoc(doc(db, "users", loggedInUser.id! as string), newData, { merge: true });
+                      }
+                      catch (e) {
+                        alert(e);
+                      }
+                    }}
+                  />
+                </motion.div>
+              }
+            </AnimatePresence>
 
-    async function UpdateCalendlyLink(){
-       if(calendlyLink!=""){
-        setloading(true);
-        await setDoc(doc(db,"users",localStorage.getItem("uid") as string),{interviewsSetup:true,calendlyLink:calendlyLink} as UserDataInterface,{merge:true});
-        setloading(false);
-        toast.success("Calendly link updated.")
-       }
-       else{
-        toast.error("Kindly provide a calendly link")
-       }
-    }
+            <AnimatePresence>
+              {
+                loggedInUser.availability != undefined &&
+                <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="rounded-full bg-blue/10 text-black py-3 px-5 text-sm">
+                  {Intl.DateTimeFormat().resolvedOptions().timeZone.toString()}
+                </motion.div>
+              }
+            </AnimatePresence>
 
-
-    return (
-        <PageLayout>
-            <FormLayout>
-
-                <div className='gap-5 flex flex-row justify-center items-center '>
-                    <img src={Logo} className="h-10 w-10"></img>
-                    <BiInfinite className='h-10 w-10 text-black'/>
-                    <img src={calendlyLogo} className="h-10 w-40 -mb-1"></img>
-
-                </div>
-
-
-                <Heading text="Schedule Interviews" customStyles='mt-10' />
-                <SubHeading customStyles='mt-1' text="Set your availability and start scheduling interviews with potential candidates." />
-
-                <SimpleInput customStyles='mt-20' placeholder='Please enter a calendly link for your meetings*' onChange={setCalendlyLink} value={calendlyLink} />
-                <SubHeading customStyles='mt-5 text-sm text-black/70' text="Wave will use this link to email candidates who are approved for interviews, candidates can self schedule interviews on this link." />
-
-                <div className='text-sm mt-5 text-black/90 flex flex-row justify-center items-center'>
-                    To Setup a new calendly link, <button onClick={() => { window.open('https://www.calendly.com', '_blank') }} className='text-blue/90 pl-1 hover:scale-105 hover:px-1 font-medium'>Click Here</button>
-                </div>
-
-
-                <ButtonSolid customStyles='mt-10' text='Update' onClick={()=>{
-                    UpdateCalendlyLink();
-                }}/>
-
-
-            </FormLayout>
-        </PageLayout>
-    )
+          </motion.div>
+        }
+        leftBar={<ManageAvailability />}
+        rightBar={<InterviewsThisWeek />}
+      />
+    </>
+  );
 }

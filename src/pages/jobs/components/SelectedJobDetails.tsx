@@ -82,7 +82,7 @@ function SelectedJobDetails() {
       id='no_scroll'
       className='flex justify-center items-center h-full w-full'
     >
-      <div className='text-black text-md text-center'>
+      <div className='text-blue text-md text-center'>
         Select a Job to see details
       </div>
     </motion.div>
