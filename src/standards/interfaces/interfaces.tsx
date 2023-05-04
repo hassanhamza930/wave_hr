@@ -1,5 +1,4 @@
 import { Timestamp } from "firebase/firestore";
-import { DateLocalizer } from "react-big-calendar";
 import { DailyTimeslotsInterface } from "../../pages/interviews/components/manageAvailability";
 
 export interface JobDataInterface {
