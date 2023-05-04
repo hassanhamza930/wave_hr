@@ -17,11 +17,11 @@ export default function LoggedInHeader() {
 
 
     return (
-        <div className="fixed h-[70px] bg-tan z-50 w-full flex flex-row justify-between items-center px-[5%]">
+        <div className="fixed h-[70px] bg-tan z-50 w-full flex flex-row justify-end items-center px-[5%]">
 
-            <div className="text-md font-regular text-dark-gray flex justify-start items-start">
+            {/* <div className="text-md font-regular text-dark-gray flex justify-start items-start">
                 {currentRoute}
-            </div>
+            </div> */}
 
 
             <div className="flex flex-row gap-16 justify-between items-center">

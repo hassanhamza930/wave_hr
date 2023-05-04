@@ -9,7 +9,6 @@ import { Text } from '../../../standards/styles/components/heading';
 
 export default function AllApplicants() {
   const [applicants, setApplicants] = useState<Array<JobApplication>>([]);
-
   const [searchValue, setSearchValue] = useState<string>('');
   const { jobId } = useParams();
 

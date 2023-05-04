@@ -15,9 +15,7 @@ function ApplicantCard(props: ApplicationDataInterface) {
         setSelectedApplicantId(props.id!);
         setCurrentRoute(`Applicants > ${props.name}`);
       }}
-      className={`text-black py-6 gap-4 cursor-pointer hover:bg-blue/5 flex w-full flex-row justify-start items-center p-3 ${
-        props.id! === selectedApplicantId && 'bg-blue/5'
-      }`}
+      className={`cursor-pointer  hover:bg-blue/5 transition ease-in-out duration-150 flex px-7 py-4 w-full flex-row justify-between items-center border-t-[1px] border-gray`}
     >
       <div
         style={{

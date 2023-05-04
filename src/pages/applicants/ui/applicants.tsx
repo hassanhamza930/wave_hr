@@ -6,17 +6,13 @@ export default function Applicants() {
 
   return (
     <>
-      {/* <PageLayout>
-
-            <div className="h-full w-full flex flex-row justify-between items-center">
-
-                <AllApplicants/>
-                <SelectedApplicantDetails/>
-
-            </div>
-        </PageLayout> */}
       <TwoColumnLayoutPage
-        header={<></>}
+        header={
+        <div className='text-sm flex justify-start items-center h-full w-full text-black'>
+          Seeing applicants for <span className='text-black font-bold ml-1
+          '>Frontend Developer</span>
+        </div>
+        }
         leftBar={<AllApplicants />}
         rightBar={<SelectedApplicantDetails />}
       />
