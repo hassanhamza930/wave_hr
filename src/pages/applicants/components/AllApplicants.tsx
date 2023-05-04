@@ -38,14 +38,7 @@ export default function AllApplicants() {
               applicant.name.trim().toLowerCase().includes(searchValue.trim())
             )
               return (
-                <motion.div
-                  transition={{ delay: (index + 1) * 0.08 }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  key={index}
-                >
-                  <ApplicantCard {...applicant} />
-                </motion.div>
+                <ApplicantCard index={index} {...applicant} />
               );
 
             return null;

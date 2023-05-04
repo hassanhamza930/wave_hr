@@ -46,7 +46,7 @@ function JobCard(jobData: JobDataInterface) {
   }, []);
 
   const handleOnClick = () => {
-    navigate(`/applicants/${selectedJob.id}`);
+    navigate(`/applicants/${jobData.id}`);
     setcurrentRoute(`${selectedCompany.companyName} > ${jobData.jobTitle} > Applicants`);
   };
 

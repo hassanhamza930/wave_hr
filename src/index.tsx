@@ -14,9 +14,7 @@ root.render(
   // <React.StrictMode>
   <RecoilRoot>
     <BrowserRouter>
-      <ErrorBoundary>
         <App />
-      </ErrorBoundary>
     </BrowserRouter>
   </RecoilRoot>
   // </React.StrictMode>
