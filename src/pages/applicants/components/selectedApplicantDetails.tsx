@@ -19,15 +19,12 @@ import Slider from '../../../standards/components/Slider';
 import { TextArea } from '../../../standards/styles/components/inputs';
 
 export default function SelectedApplicantDetails() {
-  const [selectedApplicantData, setSelectedApplicantData] =
-    useRecoilState<JobApplication>(selectedApplicantDataAtom);
+  const [selectedApplicantData, setSelectedApplicantData] = useRecoilState<JobApplication>(selectedApplicantDataAtom);
   const [rating, setRating] = useState(selectedApplicantData.rating ?? 0);
   const [notes, setNotes] = useState(selectedApplicantData.notes ?? '');
   const [isRatingChanged, setIsRatingChanged] = useState(false)
-  const [selectedApplicantId, setSelectedApplicantId] = useRecoilState<string>(
-    selectedApplicantIdAtom
-  );
- 
+  const [selectedApplicantId, setSelectedApplicantId] = useRecoilState<string>(selectedApplicantIdAtom);
+
   const {
     register,
     handleSubmit,
@@ -53,7 +50,7 @@ export default function SelectedApplicantDetails() {
         (doc) => {
           setSelectedApplicantData(doc.data() as JobApplication);
           setSelectedOption(doc.data()!['applicationStatus']);
- 
+
           setValue('notes', doc.data()!['notes']);
         }
       );
@@ -151,11 +148,11 @@ export default function SelectedApplicantDetails() {
   return selectedApplicantId ? (
     <div
       id='no_scroll'
-      className='h-full 2xl:w-[60%] w-full text-black rounded-md flex-col justify-start items-start overflow-y-scroll'
+      className='h-full w-full text-black rounded-md flex-col justify-start items-start overflow-y-scroll'
     >
-      <div className='flex'>
+      <div className='flex flex-row justify-center items-center w-full'>
         {/* left */}
-        <div className='p-10 border-r border-r-gray'>
+        <div className='p-4 w-full border-r border-r-gray'>
           <div className='flex items-center'>
             <div className='h-20 w-20 rounded-full overflow-hidden'>
               <img
@@ -200,7 +197,7 @@ export default function SelectedApplicantDetails() {
                 customStyles='mb-2'
               />
 
-              <div className='px-4 py-2 text-black bg-[rgba(1,97,254,0.07)] text-sm rounded-full'>
+              <div className='w-10 h-10 flex-none flex justify-center items-center text-tan bg-blue/90 text-sm rounded-full'>
                 {rating}
               </div>
             </div>
@@ -209,8 +206,10 @@ export default function SelectedApplicantDetails() {
               max={10}
               step={1}
               value={rating}
-              onChange={(value) => {setRating(value)
-              setIsRatingChanged(true)}}
+              onChange={(value) => {
+                setRating(value)
+                setIsRatingChanged(true)
+              }}
             />
           </div>
           <div className='mt-4'>
@@ -230,16 +229,17 @@ export default function SelectedApplicantDetails() {
             {selectedApplicantData.responses.map((response, index) => (
               <div key={index} className='text-md text-black font-normal mb-10'>
                 <Text
-                  text={`${index + 1}.  ${response.question}`}
+                  text={`${index + 1})   ${response.question}`}
                   color='text-black'
-                  fontWeight='500'
-                  textSize='text-xl'
+                  fontWeight='font-bold'
+                  textSize='text-md'
                 />
                 <Text
                   text={response.answer}
                   color='text-[#2D2D2D]'
                   fontWeight='500'
-                  textSize='text-lg'
+                  customStyles='ml-4 mt-2'
+                  textSize='text-sm'
                 />
               </div>
             ))}
