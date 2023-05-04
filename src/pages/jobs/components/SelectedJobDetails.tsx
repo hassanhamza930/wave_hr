@@ -152,13 +152,10 @@ function SelectedJobDetails() {
             </div>
 
             <div className='font-medium text-2xl mt-10'>Job Description</div>
-            <SubHeading customStyles='mt-2' text={selectedJob.jobDescription} />
+            <div className='text-black mt-2 text-md' dangerouslySetInnerHTML={{__html: selectedJob.jobDescription}} />
 
             <div className='font-medium text-2xl mt-10'>Job Qualifications</div>
-            <SubHeading
-              customStyles='mt-2'
-              text={`${selectedJob.jobQualifications}`}
-            />
+            <div className='text-black mt-2 text-md' dangerouslySetInnerHTML={{__html: selectedJob.jobQualifications}} />
 
             <div className='font-medium text-2xl mt-10'>
               Salary Compensation

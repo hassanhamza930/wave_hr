@@ -6,7 +6,6 @@ import Apply from '../../apply/ui/apply';
 import Companies from '../../companies/ui/companies';
 import CompanyProfilePage from '../../companyProfilePage/ui/companyProfilePage';
 import EditCompany from '../../editCompany/ui/editCompany';
-import EditJob from '../../editJob/ui/editJob';
 import Home from '../../home/ui/home';
 import Interviews from '../../interviews/ui/interview';
 import JobsPage from '../../jobs/ui/jobs';
@@ -31,7 +30,6 @@ export default function LoggedInRoutes() {
       <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path='/jobs' element={<JobsPage />}></Route>
-        <Route path='/editJob/:jobId' element={<EditJob />}></Route>
         <Route path='/editCompany/:companyId' element={<EditCompany />}></Route>
         <Route path='/companies' element={<Companies />}></Route>
         <Route path='/applicants/:jobId' element={<Applicants />}></Route>

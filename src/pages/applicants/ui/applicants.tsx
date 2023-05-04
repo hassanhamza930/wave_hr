@@ -1,22 +1,12 @@
-import { useParams } from "react-router";
-import AllPostedJobs from "../../jobs/components/AllPostedJobs"
-import { useEffect, useState } from 'react';
-import { getDocs, collection, getFirestore, onSnapshot, doc } from 'firebase/firestore';
-import { JobApplication } from '../../apply/atoms/applyPageAtoms';
-import AllApplicants from "../components/AllApplicants";
-import { useRecoilState } from 'recoil';
+import AllApplicants from '../components/AllApplicants';
 import SelectedApplicantDetails from '../components/selectedApplicantDetails';
-import PageLayout from "../../../standards/styles/layouts/pageLayout";
-
-
-
+import TwoColumnLayoutPage from '../../../standards/styles/layouts/twoColumnLayout';
 
 export default function Applicants() {
 
-
-
-    return (
-        <PageLayout>
+  return (
+    <>
+      {/* <PageLayout>
 
             <div className="h-full w-full flex flex-row justify-between items-center">
 
@@ -24,7 +14,12 @@ export default function Applicants() {
                 <SelectedApplicantDetails/>
 
             </div>
-        </PageLayout>
-
-    )
+        </PageLayout> */}
+      <TwoColumnLayoutPage
+        header={<></>}
+        leftBar={<AllApplicants />}
+        rightBar={<SelectedApplicantDetails />}
+      />
+    </>
+  );
 }

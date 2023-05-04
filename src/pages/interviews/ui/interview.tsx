@@ -1,7 +1,3 @@
-import { BiPlus } from "react-icons/bi";
-import { StandardLightBlueButton } from "../../../standards/styles/components/button";
-import { useRecoilState } from "recoil";
-
 import TwoColumnLayoutPage from "../../../standards/styles/layouts/twoColumnLayout";
 import { MdArrowDropDown, MdUpdate } from "react-icons/md";
 import InterviewsThisWeek from "../components/interviewsThisWeek";
@@ -15,6 +11,9 @@ import userAvailabilityAtom from "../atoms/userAvailabilityAtom";
 import TimeSelectionPopupModalOpenAtom, { selectedDayIndexAtom } from "../atoms/timeSelectionPopupModal";
 import TimeSelectionPopup from "../components/timeSelectionPopup";
 import { UserDataInterface } from "../../../standards/interfaces/interfaces";
+import { useRecoilState } from "recoil";
+import { StandardLightBlueButton } from "../../../standards/styles/components/button";
+import { BiPlus } from "react-icons/bi";
 
 export default function Interviews() {
   const [loggedInUser, setloggedInUser] = useRecoilState(globalUserAtom);
