@@ -3,13 +3,12 @@ import { ApplicationDataInterface } from '../../../standards/interfaces/interfac
 import { selectedApplicantIdAtom } from '../atoms/applicantsAtoms';
 import currentRouteAtom from '../../../atoms/app/currentRouteAtom';
 import { motion } from 'framer-motion';
-import { forwardRef } from 'react';
 
 interface ApplicantCardInterface extends ApplicationDataInterface {
   index: number;
 }
 
-const ApplicantCard=forwardRef((props: ApplicantCardInterface,ref)=>{
+const ApplicantCard=(props: ApplicantCardInterface)=>{
   const [selectedApplicantId, setSelectedApplicantId] = useRecoilState(
     selectedApplicantIdAtom
   );
@@ -17,7 +16,6 @@ const ApplicantCard=forwardRef((props: ApplicantCardInterface,ref)=>{
 
   return (
     <motion.div
-    ref={ref as any}
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ delay: (props.index + 1) * 0.08 }}
@@ -38,7 +36,7 @@ const ApplicantCard=forwardRef((props: ApplicantCardInterface,ref)=>{
         </div>
 
         <div className=' w-[30%] flex flex-none justify-end items-center'>
-          <div className='px-4 py-2 text-black text-center bg-[rgba(1,97,254,0.07)] text-sm rounded-full'>
+          <div className={`px-4 py-2 ${props.rating?'text-tan':'text-black'} text-center ${props.rating?'bg-blue/90':'bg-lightblue/10'} text-sm rounded-full`}>
             {props.rating ? props.rating : 'Pending Review'}
           </div>
         </div>
@@ -46,6 +44,6 @@ const ApplicantCard=forwardRef((props: ApplicantCardInterface,ref)=>{
 
     </motion.div>
   );
-})
+}
 
 export default ApplicantCard;

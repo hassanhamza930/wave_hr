@@ -12,12 +12,14 @@ import {
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { Listbox } from '@headlessui/react';
 import { ApplicationDataInterface } from '../../../standards/interfaces/interfaces';
-import { ButtonOutlinedWhite } from '../../../standards/styles/components/button';
+import { ButtonOutlinedWhite, StandardWhiteButton } from '../../../standards/styles/components/button';
 import { SubHeading, Text } from '../../../standards/styles/components/heading';
 import dayjs from 'dayjs';
 import Slider from '../../../standards/components/Slider';
 import { TextArea } from '../../../standards/styles/components/inputs';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import StandardDropDown, { WhiteDropDown } from '../../../standards/styles/components/dropdowns';
+import { MdArrowDropDown, MdChat, MdDelete, MdOutlineRateReview } from 'react-icons/md';
 
 
 export default function SelectedApplicantDetails() {
@@ -27,6 +29,28 @@ export default function SelectedApplicantDetails() {
   const [rating, setrating] = useState(0);
   const db = getFirestore();
   const { jobId } = useParams();
+
+
+
+
+  async function handleRejectApplicant(applicantId: string) {
+    await setDoc(doc(db, 'jobs', jobId as string, 'applications', applicantId), {
+      applicationStatus: 'rejected',
+    } as ApplicationDataInterface, { merge: true });
+    setSelectedApplicantData({} as ApplicationDataInterface);
+    setSelectedApplicantId("" as string);
+  }
+
+
+  async function handleSendInterviewInvite(applicantId: string) {
+    await setDoc(doc(db, 'jobs', jobId as string, 'applications', applicantId), {
+      interviewInviteSent: true,
+      applicationStatus:"Interview Invite Sent"
+    } as ApplicationDataInterface, { merge: true });
+  }
+
+
+
 
 
 
@@ -51,8 +75,6 @@ export default function SelectedApplicantDetails() {
   }, [selectedApplicantData])
 
 
-
-
   //unmount
   useEffect(() => {
     return () => {
@@ -73,8 +95,8 @@ export default function SelectedApplicantDetails() {
     >
       <div className='flex flex-row justify-start items-start w-full'>
         {/* left */}
-        <div id="no_scroll" className='w-2/4 overflow-scroll border-r flex border-r-gray p-5'>
-          <div className='gap-1 flex flex-col h-full w-full justify-start items-start'>
+        <div id="no_scroll" className='w-2/4 border-r flex border-r-gray p-5'>
+          <div className='gap-1 flex flex-col h-full w-full justify-start items-start pb-10'>
 
             <div style={{ backgroundImage: `url('${selectedApplicantData.profilePicture}')` }} className=' h-36 w-36 rounded-md overflow-hidden bg-center bg-cover' />
             <Text
@@ -91,18 +113,41 @@ export default function SelectedApplicantDetails() {
               color='text-dark-gray'
             />
             <Text
-              text={`Applied on ${dayjs(
-                selectedApplicantData?.applicationTime?.toDate()
-              ).format('DD/M/YY')}`}
+              text={`Applied on ${dayjs(selectedApplicantData?.applicationTime?.toDate()).format('DD/M/YY')}`}
               textSize='text-sm'
               fontWeight='font-normal'
               color='text-dark-gray'
             />
 
+            <div className='flex flex-wrap justify-start items-start mt-5 gap-3'>
+              <AnimatePresence>
+                {
+                  selectedApplicantData.interviewInviteSent == true &&
+                  <WhiteDropDown
+                    placeholder='Select Application Status'
+                    value={selectedApplicantData.applicationStatus!}
+                    icon={<MdArrowDropDown />}
+                    options={
+                      [
+                        { option: "Didn't show up for interview", onClick: () => { } },
+                        { option: "Interview Invite Sent", onClick: () => { } },
+                      ]
+                    }
+                  />
+                }
+                {
+                  selectedApplicantData.interviewInviteSent != true &&
+                  <StandardWhiteButton icon={<MdChat />} text='Interview' onClick={() => { handleSendInterviewInvite(selectedApplicantId) }} />
+                }
+              </AnimatePresence>
+              <StandardWhiteButton icon={<MdDelete />} text='Reject' onClick={() => { handleRejectApplicant(selectedApplicantId) }} />
+            </div>
+
+
           </div>
         </div>
         {/* right */}
-        <div className='p-5 w-2/4'>
+        <div className='p-5 w-2/4 '>
           {/* rating */}
           <div className='w-full'>
             <div className='flex items-center justify-between'>
@@ -123,13 +168,13 @@ export default function SelectedApplicantDetails() {
               max={10}
               step={1}
               value={rating}
-              onChange={(newRating)=>{
-                  setrating(Number(newRating.target.value));
-                  setDoc(
-                    doc(db, 'jobs', jobId as string, 'applications', selectedApplicantId),
-                    { rating: Number(newRating.target.value) },
-                    { merge: true }
-                  );
+              onChange={(newRating) => {
+                setrating(Number(newRating.target.value));
+                setDoc(
+                  doc(db, 'jobs', jobId as string, 'applications', selectedApplicantId),
+                  { rating: Number(newRating.target.value) },
+                  { merge: true }
+                );
               }}
               className='w-full h-2 bg-blue/20 rounded-full appearance-none outline-none'
             />
@@ -150,6 +195,7 @@ export default function SelectedApplicantDetails() {
               }}
             />
           </div>
+
         </div>
       </div>
 

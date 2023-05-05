@@ -115,24 +115,7 @@ const StandardBlueButton = ({
 };
 
 
-const StandardLightButton = ({
-  text,
-  bgColor = '#D9F1FF',
-  textColor = '#000',
-  textSize = 'text-base',
-  icon,
-  onClick,
-}: ButtonProps) => {
-  return (
-    <button
-      onClick={onClick}
-      className={`flex items-center justify-center gap-3 px-6 py-4 rounded-3xl bg-[#fff] text[${textSize}] text-[${textColor}] font-medium outline-none border-none`}
-    >
-      {icon && <span className='text-[24px]'>{icon}</span>}
-      {text}
-    </button>
-  );
-};
+
 
 export {
   ButtonOutlinedWhite,
@@ -140,5 +123,4 @@ export {
   ButtonSolid,
   StandardLightBlueButton,
   StandardBlueButton,
-  StandardLightButton,
 };
