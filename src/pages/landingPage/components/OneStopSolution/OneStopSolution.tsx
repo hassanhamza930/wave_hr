@@ -18,7 +18,7 @@ function OneStopSolution() {
       className=" items-center justify-center flex flex-col mt-24"
     >
       <p
-        style={{ fontFamily: "Space Grotesk" }}
+        style={{ fontFamily: "DM Sans" }}
         className="font-bold text-[35px] text-blue"
       >
         Your One-Stop Solution for Modern Recruitment

@@ -22,7 +22,7 @@ export default function Login() {
               }}
             >
               <div
-                style={{ fontFamily: "Space Grotesk" }}
+                style={{ fontFamily: "DM Sans" }}
                 className="text-[40px] font-bold"
               >
                 Log In

@@ -7,7 +7,7 @@ export function Individual() {
         <div className="text-[13px] text-[#3E3E59]">For personal use</div>
 
         <p
-          style={{ fontFamily: "Space Grotesk" }}
+          style={{ fontFamily: "DM Sans" }}
           className="font-bold text-[47px] text-primary"
         >
           $8
@@ -52,7 +52,7 @@ export function Startup() {
         <div className="text-[13px] text-[#3E3E59]">For smaller teams</div>
 
         <p
-          style={{ fontFamily: "Space Grotesk" }}
+          style={{ fontFamily: "DM Sans" }}
           className="font-bold text-[47px] text-primary"
         >
           $15
@@ -112,7 +112,7 @@ export function Pro() {
         <div className="text-[13px] text-[#3E3E59]">For larger teams</div>
 
         <p
-          style={{ fontFamily: "Space Grotesk" }}
+          style={{ fontFamily: "DM Sans" }}
           className="font-bold text-[47px] text-primary"
         >
           $25

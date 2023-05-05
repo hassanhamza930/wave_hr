@@ -20,7 +20,7 @@ function HumanInTheLoop() {
         <img src={HITL} className="w-[400px] h-[330px] ml-2" />
         <div className="px-10 flex flex-col ml-5 ">
           <div
-            style={{ fontFamily: "Space Grotesk" }}
+            style={{ fontFamily: "DM Sans" }}
             className="font-bold mb-7 mt-10  text-blue text-[27px]"
           >
             Human in the loop
@@ -42,7 +42,7 @@ function HumanInTheLoop() {
         <img src={PostOnce} className="w-[400px] h-[330px] ml-2" />
         <div className="px-10 flex flex-col mr-5">
           <div
-            style={{ fontFamily: "Space Grotesk" }}
+            style={{ fontFamily: "DM Sans" }}
             className="font-bold mb-7 mt-10  text-blue text-[27px]"
           >
             Post once, share everywhere
@@ -60,7 +60,7 @@ function HumanInTheLoop() {
         <img src={Applications} className="w-[400px] h-[330px] ml-2" />
         <div className="px-10 flex flex-col ml-5">
           <div
-            style={{ fontFamily: "Space Grotesk" }}
+            style={{ fontFamily: "DM Sans" }}
             className="font-bold mb-7 mt-10  text-blue text-[27px]"
           >
             Applications that feels like a conversation

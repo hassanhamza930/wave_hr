@@ -9,7 +9,7 @@ function Pricing() {
   return (
     <div style={{backgroundImage:`url('${PricingCardsVector}')`}} className=" w-full bg-tan flex flex-col pb-16 bg-cover bg-center justify-center items-center mt-24">
       <div
-        style={{ fontFamily: "Space Grotesk" }}
+        style={{ fontFamily: "DM Sans" }}
         className="font-bold text-[35px] tracking-tighter text-primary mt-0 "
       >
         Pricing plans for teams of all sizes
@@ -35,7 +35,7 @@ function Pricing() {
 
         {/* <div className="flex flex-col relative z-20 text-tan text-center">
           <p
-            style={{ fontFamily: "Space Grotesk" }}
+            style={{ fontFamily: "DM Sans" }}
             className="font-bold text-[33px] mt-24"
           >
             Ready to take your recruitment process to the next level?
@@ -52,7 +52,7 @@ function Pricing() {
               className="hover:scale-[1.02] w-[150px] text-sm px-8 py-3 rounded-[10px] bg-tan flex flex-row gap-2 justify-center items-center"
             >
               <div
-                style={{ fontFamily: "Space Grotesk" }}
+                style={{ fontFamily: "DM Sans" }}
                 className="text-blue font-bold text-[12px] uppercase"
               >
                 Sign up now
