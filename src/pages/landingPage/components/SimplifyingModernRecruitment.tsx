@@ -14,9 +14,9 @@ function SimplifyingModernRecruitment() {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{duration:1,delay:0.4}}
-        style={{ fontFamily: "DM Sans" }} className="text-blue flex flex-col w-full justify-center items-center gap-1 text-7xl font-semibold">
+        style={{ fontFamily: "DM Sans" }} className="text-black/90 flex flex-col w-full justify-center items-center gap-1 text-7xl font-medium">
           <div className="flex flex-row justify-center items-center gap-4">
-            Simplifying <p className="text-darkblue">Modern</p>
+            Simplifying <p className="text-blue">Modern</p>
           </div>
           <div>
             Recruitment
@@ -27,7 +27,7 @@ function SimplifyingModernRecruitment() {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{duration:1,delay:0.6}}
-        className="text-[21px] mt-2 w-full text-center ">
+        className="text-xl mt-2 w-full text-center ">
           The Ultimate tool for Modern Recruiters
         </motion.p>
 

@@ -14,7 +14,7 @@ function HumanInTheLoop() {
         visible: { opacity: 1, y: 0, scale: 1 },
         hidden: { opacity: 0, y: 1, scale: 0.95 },
       }}
-      className="h-full px-[20%] mt-24 items-center"
+      className="h-full px-[15%] mt-24 items-center"
     >
       <div className="flex flex-row mt-10 ">
         <img src={HITL} className="w-[400px] h-[330px] ml-2" />
