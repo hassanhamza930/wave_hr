@@ -4,7 +4,6 @@ import { useRecoilState } from "recoil";
 import CalculateTimeDiff from "../../../standards/functions/calculateTimeDiff";
 import { JobDataInterface } from "../../../standards/interfaces/interfaces";
 import { jobDataAtom } from "../../apply/atoms/applyPageAtoms";
-import { NewJobPosting } from "../../newJob/atoms/newJobAtoms"
 import { selectedJobAtom } from "../jobsAtoms";
 
 

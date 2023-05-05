@@ -2,7 +2,6 @@ import { collection, doc, getDocs, getFirestore, onSnapshot, query, setDoc, Time
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { JobDataInterface } from "../../../standards/interfaces/interfaces";
-import { NewJobPosting } from "../../newJob/atoms/newJobAtoms";
 import { selectedCompanyAtom } from "../atoms/selectedCompanyAtom";
 import { moreThanTwoJobsAtom, selectedJobAtom } from "../jobsAtoms";
 import JobCard from "./JobCard";

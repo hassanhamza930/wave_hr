@@ -6,7 +6,6 @@ import toast from "react-hot-toast";
 import { AiFillCamera } from "react-icons/ai";
 import { useRecoilState } from "recoil";
 import isLoadingAtom from "../../../../atoms/app/isLoadingAtom";
-import pageIndexAtom from "../../../newJob/atoms/newJobAtoms";
 import JobApplicationAtom, { ApplyStageInitiatedAtom, JobApplication, jobDataAtom, ResponsesAtom, selectedProfilePictureAtom } from "../../atoms/applyPageAtoms";
 import { motion } from "framer-motion";
 import { useParams } from 'react-router';
@@ -44,7 +43,6 @@ export default function Page6() {
     const [selectedProfilePicture, setSelectedProfilePicture] = useRecoilState(selectedProfilePictureAtom);
     const { watch, handleSubmit, register } = useForm<JobApplication>();
     const [jobApplication, setJobApplication] = useRecoilState(JobApplicationAtom);
-    const [pageIndex, setPageIndex] = useRecoilState(pageIndexAtom);
     const [responses, setResponses] = useRecoilState(ResponsesAtom);
     const [applyStageInitiated, setApplyStageInitiated] = useRecoilState<boolean>(ApplyStageInitiatedAtom);
     const [loading, setLoading] = useRecoilState(isLoadingAtom);

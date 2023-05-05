@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AiFillCamera } from "react-icons/ai";
 import { useRecoilState } from "recoil";
-import pageIndexAtom from "../../../newJob/atoms/newJobAtoms";
 import JobApplicationAtom, { ApplyPageIndexAtom, JobApplication, selectedProfilePictureAtom } from "../../atoms/applyPageAtoms";
 import { motion } from "framer-motion";
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";

@@ -1,5 +1,4 @@
 import { useRecoilState } from "recoil";
-import pageIndexAtom from "../../newJob/atoms/newJobAtoms";
 import { ApplyPageIndexAtom } from "../atoms/applyPageAtoms";
 import Page1 from "./applicationsPages/page1";
 import Page2 from "./applicationsPages/page2";

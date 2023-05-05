@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AiFillFile } from "react-icons/ai";
 import { useRecoilState } from "recoil";
-import pageIndexAtom from "../../../newJob/atoms/newJobAtoms";
 import JobApplicationAtom, { ApplyPageIndexAtom, JobApplication, selectedResumeAtom } from "../../atoms/applyPageAtoms";
 import { motion } from "framer-motion";
 
