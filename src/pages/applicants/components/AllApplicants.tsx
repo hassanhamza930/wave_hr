@@ -6,6 +6,9 @@ import ApplicantCard from './ApplicantCard';
 import { SearchBar } from '../../../standards/styles/components/inputs';
 import { motion } from 'framer-motion';
 import { Text } from '../../../standards/styles/components/heading';
+import FlipMove from 'react-flip-move';
+
+
 
 export default function AllApplicants() {
   const [applicants, setApplicants] = useState<Array<JobApplication>>([]);
@@ -32,13 +35,14 @@ export default function AllApplicants() {
         id='no_scroll'
         className='h-full flex-1 w-full flex-col justify-start items-start overflow-y-scroll'
       >
+
         {applicants.length ? (
           applicants.map((applicant, index) => {
             if (
               applicant.name.trim().toLowerCase().includes(searchValue.trim())
             )
               return (
-                <ApplicantCard index={index} {...applicant} />
+                <ApplicantCard key={applicant.id!} index={index} {...applicant} />
               );
 
             return null;

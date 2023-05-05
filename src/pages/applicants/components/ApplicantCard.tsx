@@ -3,12 +3,13 @@ import { ApplicationDataInterface } from '../../../standards/interfaces/interfac
 import { selectedApplicantIdAtom } from '../atoms/applicantsAtoms';
 import currentRouteAtom from '../../../atoms/app/currentRouteAtom';
 import { motion } from 'framer-motion';
+import { forwardRef } from 'react';
 
 interface ApplicantCardInterface extends ApplicationDataInterface {
   index: number;
 }
 
-function ApplicantCard(props: ApplicantCardInterface) {
+const ApplicantCard=forwardRef((props: ApplicantCardInterface,ref)=>{
   const [selectedApplicantId, setSelectedApplicantId] = useRecoilState(
     selectedApplicantIdAtom
   );
@@ -16,6 +17,7 @@ function ApplicantCard(props: ApplicantCardInterface) {
 
   return (
     <motion.div
+    ref={ref as any}
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ delay: (props.index + 1) * 0.08 }}
@@ -30,12 +32,12 @@ function ApplicantCard(props: ApplicantCardInterface) {
         <div style={{backgroundImage:`url('${props.profilePicture}')`}} className='h-12 w-12 flex-none bg-blue rounded-full bg-cover'></div>
 
 
-        <div className='w-full ml-2  flex overflow-clip flex-col justify-center items-start pr-2'>
+        <div className='w-full ml-3  flex overflow-clip flex-col justify-center items-start pr-2'>
           <div className='text-md font-bold '>{props.name}</div>
           <div className='text-md'>{props.email}</div>
         </div>
 
-        <div className=' w-[30%] flex flex-none justify-center items-center'>
+        <div className=' w-[30%] flex flex-none justify-end items-center'>
           <div className='px-4 py-2 text-black text-center bg-[rgba(1,97,254,0.07)] text-sm rounded-full'>
             {props.rating ? props.rating : 'Pending Review'}
           </div>
@@ -44,6 +46,6 @@ function ApplicantCard(props: ApplicantCardInterface) {
 
     </motion.div>
   );
-}
+})
 
 export default ApplicantCard;

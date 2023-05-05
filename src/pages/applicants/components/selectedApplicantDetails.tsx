@@ -3,7 +3,7 @@ import { JobApplication } from '../../apply/atoms/applyPageAtoms';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
-import { doc, setDoc, getFirestore, onSnapshot } from 'firebase/firestore';
+import { doc, setDoc, getFirestore, onSnapshot, collection } from 'firebase/firestore';
 import { useParams } from 'react-router';
 import {
   selectedApplicantDataAtom,
@@ -13,187 +13,103 @@ import { IoMdArrowDropdown } from 'react-icons/io';
 import { Listbox } from '@headlessui/react';
 import { ApplicationDataInterface } from '../../../standards/interfaces/interfaces';
 import { ButtonOutlinedWhite } from '../../../standards/styles/components/button';
-import { Text } from '../../../standards/styles/components/heading';
+import { SubHeading, Text } from '../../../standards/styles/components/heading';
 import dayjs from 'dayjs';
 import Slider from '../../../standards/components/Slider';
 import { TextArea } from '../../../standards/styles/components/inputs';
+import { motion } from 'framer-motion';
+
 
 export default function SelectedApplicantDetails() {
-  const [selectedApplicantData, setSelectedApplicantData] = useRecoilState<JobApplication>(selectedApplicantDataAtom);
-  const [rating, setRating] = useState(selectedApplicantData.rating ?? 0);
-  const [notes, setNotes] = useState(selectedApplicantData.notes ?? '');
-  const [isRatingChanged, setIsRatingChanged] = useState(false)
   const [selectedApplicantId, setSelectedApplicantId] = useRecoilState<string>(selectedApplicantIdAtom);
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-    setValue,
-  } = useForm();
+  const [selectedApplicantData, setSelectedApplicantData] = useRecoilState(selectedApplicantDataAtom);
+  const [notes, setnotes] = useState("");
+  const [rating, setrating] = useState(0);
   const db = getFirestore();
   const { jobId } = useParams();
-  const options = [
-    'Interview Invite Sent',
-    'Interview Done',
-    "Didn't show up for interview",
-    'Accepted',
-  ];
 
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+
 
   useEffect(() => {
     if (selectedApplicantId) {
       onSnapshot(
         doc(db, 'jobs', jobId as string, 'applications', selectedApplicantId),
         (doc) => {
-          setSelectedApplicantData(doc.data() as JobApplication);
-          setSelectedOption(doc.data()!['applicationStatus']);
-
-          setValue('notes', doc.data()!['notes']);
+          setSelectedApplicantData(doc.data() as ApplicationDataInterface);
+          setnotes(doc.data()?.notes);
+          setrating(doc.data()?.rating);
         }
       );
     }
+
   }, [selectedApplicantId]);
 
-  async function handleRating() {
-    if (!rating) {
-      toast.error('Kindly enter a value for rank');
-    } else {
-      await setDoc(
-        doc(
-          db,
-          'jobs',
-          jobId as string,
-          'applications',
-          selectedApplicantId as string
-        ),
-        { rating },
-        { merge: true }
-      );
-      toast.success('Rank Updated');
-    }
-  }
 
-
-  async function rejectApplicant() {
-    setSelectedApplicantId('');
-    await setDoc(
-      doc(
-        db,
-        'jobs',
-        jobId as string,
-        'applications',
-        selectedApplicantId as string
-      ),
-      { applicationStatus: 'rejected' } as ApplicationDataInterface,
-      { merge: true }
-    );
-    console.log(selectedApplicantId);
-  }
+  useEffect(() => {
+    setnotes(selectedApplicantData.notes!);
+    setrating(selectedApplicantData.rating!);
+  }, [selectedApplicantData])
 
 
 
-  async function updateNotes(data: any) {
-    await setDoc(
-      doc(
-        db,
-        'jobs',
-        jobId as string,
-        'applications',
-        selectedApplicantId as string
-      ),
-      { notes: data.notes },
-      { merge: true }
-    );
-    toast.success('Notes Updated');
-  }
 
-  async function handleApplicationStatusChange(newValue: string) {
-    setSelectedOption(newValue);
-    setDoc(
-      doc(
-        db,
-        'jobs',
-        jobId as string,
-        'applications',
-        selectedApplicantId as string
-      ),
-      {
-        applicationStatus: newValue,
-      },
-      { merge: true }
-    );
-  }
+  //unmount
+  useEffect(() => {
+    return () => {
+      console.log('Applicants Page Unmounted'); // this will clear out the selected data that is stored in global variables to make sure variables are fresh and empty the next time the user loads the applicants page with another job's data.
+      setSelectedApplicantData({} as ApplicationDataInterface);
+      setSelectedApplicantId("" as string);
+    };
+  }, [])
 
-  async function interviewCandidate() {
-    await setDoc(
-      doc(
-        db,
-        'jobs',
-        jobId as string,
-        'applications',
-        selectedApplicantId as string
-      ),
-      {
-        applicationStatus: 'Interview Invite Sent',
-        interviewInviteSent: true,
-      } as JobApplication,
-      { merge: true }
-    );
-    toast.success('Interview invite sent');
-  }
+
 
   return selectedApplicantId ? (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       id='no_scroll'
-      className='h-full w-full text-black rounded-md flex-col justify-start items-start overflow-y-scroll'
+      className='h-full w-full text-black rounded-md flex-col justify-start items-start overflow-y-scroll p-7'
     >
-      <div className='flex flex-row justify-center items-center w-full'>
+      <div className='flex flex-row justify-start items-start w-full'>
         {/* left */}
-        <div className='p-4 w-full border-r border-r-gray'>
-          <div className='flex items-center'>
-            <div className='h-20 w-20 rounded-full overflow-hidden'>
-              <img
-                src={selectedApplicantData.profilePicture}
-                alt={selectedApplicantData.name}
-                className='w-full h-full object-cover'
-              />
-            </div>
-            <div className='ml-6'>
-              <Text
-                text={selectedApplicantData.name}
-                textSize='text-2xl'
-                fontWeight='font-bold'
-                color='text-black'
-              />
-              <Text
-                text={selectedApplicantData.email}
-                textSize='text-md'
-                fontWeight='font-normal'
-                color='text-[#545454]'
-              />
-              <Text
-                text={`Applied on ${dayjs(
-                  selectedApplicantData?.applicationTime?.toDate()
-                ).format('DD/M/YY')}`}
-                textSize='text-md'
-                fontWeight='font-normal'
-                color='text-[#545454]'
-              />
-            </div>
+        <div id="no_scroll" className='w-2/4 overflow-scroll border-r flex border-r-gray p-5'>
+          <div className='gap-1 flex flex-col h-full w-full justify-start items-start'>
+
+            <div style={{ backgroundImage: `url('${selectedApplicantData.profilePicture}')` }} className=' h-36 w-36 rounded-md overflow-hidden bg-center bg-cover' />
+            <Text
+              customStyles='mt-2'
+              text={selectedApplicantData.name}
+              textSize='text-2xl'
+              fontWeight='font-bold'
+              color='text-black'
+            />
+            <Text
+              text={selectedApplicantData.email}
+              textSize='text-sm'
+              fontWeight='font-normal'
+              color='text-dark-gray'
+            />
+            <Text
+              text={`Applied on ${dayjs(
+                selectedApplicantData?.applicationTime?.toDate()
+              ).format('DD/M/YY')}`}
+              textSize='text-sm'
+              fontWeight='font-normal'
+              color='text-dark-gray'
+            />
+
           </div>
         </div>
         {/* right */}
-        <div className='p-10 w-full'>
+        <div className='p-5 w-2/4'>
           {/* rating */}
-          <div className='relative w-full'>
+          <div className='w-full'>
             <div className='flex items-center justify-between'>
               <Text
-                text='Add Rating'
+                text='Candidate Rating'
                 color='text-black'
-                textSize='text-lg'
+                textSize='text-md'
                 customStyles='mb-2'
               />
 
@@ -201,15 +117,21 @@ export default function SelectedApplicantDetails() {
                 {rating}
               </div>
             </div>
-            <Slider
+            <input
+              type='range'
               min={1}
               max={10}
               step={1}
               value={rating}
-              onChange={(value) => {
-                setRating(value)
-                setIsRatingChanged(true)
+              onChange={(newRating)=>{
+                  setrating(Number(newRating.target.value));
+                  setDoc(
+                    doc(db, 'jobs', jobId as string, 'applications', selectedApplicantId),
+                    { rating: Number(newRating.target.value) },
+                    { merge: true }
+                  );
               }}
+              className='w-full h-2 bg-blue/20 rounded-full appearance-none outline-none'
             />
           </div>
           <div className='mt-4'>
@@ -217,13 +139,21 @@ export default function SelectedApplicantDetails() {
               placeholder=''
               examples='Notes'
               value={notes}
-              onChange={(value: string) => setNotes(value)}
+              onChange={async (value: string) => {
+                console.log(value);
+                setnotes(value);
+                await setDoc(
+                  doc(db, 'jobs', jobId as string, 'applications', selectedApplicantId),
+                  { notes: value },
+                  { merge: true }
+                );
+              }}
             />
           </div>
         </div>
       </div>
 
-      <div className='flex flex-col justify-start items-start border-t border-t-gray p-10'>
+      <div className='flex flex-col justify-start items-start border-t border-t-gray p-5'>
         {selectedApplicantData.responses?.length ? (
           <>
             {selectedApplicantData.responses.map((response, index) => (
@@ -253,10 +183,10 @@ export default function SelectedApplicantDetails() {
         src={selectedApplicantData.resume}
         className='h-[700px] w-full rounded-md p-10 pt-0'
       />
-    </div>
+    </motion.div>
   ) : (
-    <div className='h-full text-black/60 rounded-md text-md flex flex-col justify-center items-center p-10'>
-      Select a candidate to see details {selectedApplicantId}
+    <div className='flex justify-center items-center h-full w-full'>
+      <SubHeading color='text-blue' text={`Select a candidate to see details ${selectedApplicantId}`} />
     </div>
   );
 }

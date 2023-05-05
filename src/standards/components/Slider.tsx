@@ -15,7 +15,7 @@ const Slider: React.FC<Props> = ({
   step,
   value,
   onChange,
-  debounceTime = 1000,
+  debounceTime = 100,
 }) => {
   const [sliderValue, setSliderValue] = useState(value);
 
@@ -45,7 +45,7 @@ const Slider: React.FC<Props> = ({
         step={step}
         value={sliderValue}
         onChange={handleSliderChange}
-        className='w-full h-2 bg-[#32A6F9] rounded-full appearance-none outline-none'
+        className='w-full h-2 bg-blue/20 rounded-full appearance-none outline-none'
       />
 
   );
