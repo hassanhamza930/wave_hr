@@ -21,7 +21,6 @@ import currentRouteAtom from '../../../atoms/app/currentRouteAtom';
 import StandardDropDown, {
   DropDownOptionInterface,
 } from '../../../standards/styles/components/dropdowns';
-import NewJob from '../../newJob/ui/newJob';
 import JobsList from '../components/JobsList';
 import SelectedJobDetails from '../components/SelectedJobDetails';
 import { selectedJobAtom } from '../jobsAtoms';
@@ -30,7 +29,7 @@ import { motion } from 'framer-motion';
 export default function JobsPage() {
   const [selectedCompany, setSelectedCompany] =
     useRecoilState(selectedCompanyAtom);
-  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate()
   const [allCompanies, setAllCompanies] = useState<Array<CompanyDataInterface>>(
     [] as Array<CompanyDataInterface>
   );
@@ -60,7 +59,6 @@ export default function JobsPage() {
 
   return (
     <>
-      <NewJob isOpen={isOpen} setIsOpen={setIsOpen} />
       <TwoColumnLayoutPage
         header={
           <div className='flex flex-row gap-3 justify-start items-start w-full h-full'>
@@ -101,9 +99,7 @@ export default function JobsPage() {
               transition={{delay: 0.2,duration:0.4}}
               >
                 <StandardLightBlueButton
-                onClick={() => {
-                  setIsOpen(true);
-                }}
+                onClick={() => navigate('/jobForm')}
                 icon={<BiPlus />}
                 text='New Job'
               />

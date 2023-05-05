@@ -1,33 +1,35 @@
-import { Heading, SubHeading } from "../../../standards/styles/components/heading";
-import SimpleInput, { TextArea } from "../../../standards/styles/components/inputs";
-import FormLayout from "../../../standards/styles/layouts/FormLayout";
-import PageLayout from "../../../standards/styles/layouts/pageLayout";
 import { useState, useEffect } from "react";
-import CompanyBanner from "../components/companyBanner";
-import CompanyLogo from "../components/companyLogo";
-import { AiFillPlusCircle, AiFillPlusSquare } from "react-icons/ai";
+import { useRecoilState } from "recoil";
+import { BiEditAlt, BiPlus } from "react-icons/bi";
+import { AiFillPlusCircle } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 import { MdCancel } from "react-icons/md"
-import { ButtonOutlinedBlue, ButtonSolid, StandardBlueButton, StandardLightBlueButton, StandardWhiteButton } from "../../../standards/styles/components/button";
-import { CompanyInformation, useHandleAddCompany } from "../logic/addCompany";
+
+import { SubHeading } from "../../../standards/styles/components/heading";
+import SimpleInput, { TextArea } from "../../../standards/styles/components/inputs";
+import FormLayout from "../../../standards/styles/layouts/FormLayout";
+import CompanyBanner from "../components/companyBanner";
+import CompanyLogo from "../components/companyLogo";
+import { StandardBlueButton } from "../../../standards/styles/components/button";
+import { useHandleAddCompany, useHandleEditCompany } from "../logic/addCompany";
 import { CompanyDataInterface } from "../../../standards/interfaces/interfaces";
 import currentRouteAtom from "../../../atoms/app/currentRouteAtom";
-import { useRecoilState } from "recoil";
-import { BiPlus } from "react-icons/bi";
+import { useLocation } from "react-router";
 
 
-function AddNewCompany() {
-
-    const [companyName, setcompanyName] = useState("" as string);
-    const [companyLogo, setcompanyLogo] = useState("" as string);
-    const [companyDescription, setcompanyDescription] = useState("" as string);
-    const [companyCoverImage, setcompanyCoverImage] = useState("" as string);
-    const [companyTagValue, setcompanyTagValue] = useState("" as string);
-    const [companyTags, setcompanyTags] = useState([] as Array<string>);
-    const [numberOfEmployees, setnumberOfEmployees] = useState("" as string);
-    const [companyLocation, setcompanyLocation] = useState("" as string);
-    const [companyWebsite, setcompanyWebsite] = useState("" as string);
+const CompanyForm = () => {
+    const { state } = useLocation() 
+    const [companyName, setcompanyName] = useState("");
+    const [companyLogo, setcompanyLogo] = useState("");
+    const [companyDescription, setcompanyDescription] = useState("");
+    const [companyCoverImage, setcompanyCoverImage] = useState("");
+    const [companyTagValue, setcompanyTagValue] = useState("");
+    const [companyTags, setcompanyTags] = useState<string[]>([]);
+    const [numberOfEmployees, setnumberOfEmployees] = useState("");
+    const [companyLocation, setcompanyLocation] = useState("");
+    const [companyWebsite, setcompanyWebsite] = useState("");
     const { AddCompany } = useHandleAddCompany();
+    const { EditCompany } = useHandleEditCompany()
 
     const [currentRoute, setCurrentRoute] = useRecoilState(currentRouteAtom);
     useEffect(() => {
@@ -47,6 +49,49 @@ function AddNewCompany() {
         setcompanyTags((tags) =>
             tags.filter((tag, index) => index !== indexToRemove)
         );
+    }
+
+
+    useEffect(() => {
+        if(state){
+            setcompanyName(state.companyName);
+            setcompanyLogo(state.companyLogo);
+            setcompanyDescription(state.companyDescription);
+            setcompanyCoverImage(state.companyCover);
+            setcompanyTags(state.companyTags);
+            setnumberOfEmployees(state.numberOfEmployees);
+            setcompanyLocation(state.companyLocation);
+            setcompanyWebsite(state.companyWebsite);
+        }
+    },[])
+
+    const handleSubmit = () => {
+        if(state){
+        EditCompany({
+                            id: state.id as string,
+                            companyCover: companyCoverImage,
+                            companyDescription: companyDescription,
+                            companyLocation: companyLocation,
+                            companyLogo: companyLogo,
+                            companyName: companyName,
+                            companyTags: companyTags,
+                            numberOfEmployees: numberOfEmployees,
+                            companyWebsite: companyWebsite,
+                            companyOwnerId: localStorage.getItem("userId") as string
+                        } as CompanyDataInterface)
+        }else{
+            AddCompany({
+                            companyCover: companyCoverImage,
+                            companyDescription: companyDescription,
+                            companyLocation: companyLocation,
+                            companyLogo: companyLogo,
+                            companyName: companyName,
+                            companyTags: companyTags,
+                            numberOfEmployees: numberOfEmployees,
+                            companyWebsite:companyWebsite,
+                            companyOwnerId:localStorage.getItem("userId") as string
+                        } as CompanyDataInterface)
+        }
     }
 
 
@@ -103,19 +148,7 @@ function AddNewCompany() {
 
 
                 <div className="flex flex-row justify-end items-end w-full mb-12">
-                    <StandardBlueButton icon={<BiPlus></BiPlus>} text="Add Company" onClick={() => {
-                        AddCompany({
-                            companyCover: companyCoverImage,
-                            companyDescription: companyDescription,
-                            companyLocation: companyLocation,
-                            companyLogo: companyLogo,
-                            companyName: companyName,
-                            companyTags: companyTags,
-                            numberOfEmployees: numberOfEmployees,
-                            companyWebsite:companyWebsite,
-                            companyOwnerId:localStorage.getItem("userId") as string
-                        } as CompanyDataInterface)
-                    }} />
+                    <StandardBlueButton icon={state ? <BiEditAlt />: <BiPlus />} text={state? "Edit Company":"Add Company"} onClick={handleSubmit} />
                 </div>
 
 
@@ -125,4 +158,4 @@ function AddNewCompany() {
     );
 }
 
-export default AddNewCompany;
+export default CompanyForm;

@@ -7,13 +7,18 @@ import currentRouteAtom from '../../../atoms/app/currentRouteAtom';
 import { useRecoilState } from 'recoil';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { selectedCompanyAtom } from '../atoms/selectedCompany';
+import { CompanyDataInterface } from '../../../standards/interfaces/interfaces';
 
 function Companies() {
   const [currentRoute, setcurrentRoute] = useRecoilState(currentRouteAtom);
+  const [_, setSelectedCompany] = useRecoilState(selectedCompanyAtom);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     setcurrentRoute('Companies');
+    setSelectedCompany({} as CompanyDataInterface)
   }, []);
 
   return (
@@ -22,7 +27,7 @@ function Companies() {
           <div className='flex flex-row justify-start items-start w-full h-full'>
             <StandardLightBlueButton
               onClick={() => {
-                navigate('/addNewCompany');
+                navigate('/companyForm');
               }}
               icon={<BiPlus />}
               text='New Company'

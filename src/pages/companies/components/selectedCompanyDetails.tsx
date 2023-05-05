@@ -60,7 +60,7 @@ function SelectedCompanyDetails() {
               icon={<BiLinkExternal />}
               onClick={() => window.open(`/company/${selectedCompany.id!}`)}
             />
-            <StandardWhiteButton onClick={()=>{navigate(`/editCompany/${selectedCompany.id}`)}} text='Edit' icon={<MdEditNote />} />
+            <StandardWhiteButton onClick={() => navigate('/companyForm', {state: selectedCompany}) } text='Edit' icon={<MdEditNote />} />
           </div>
 
           <div className='font-medium text-2xl mt-10'>About</div>

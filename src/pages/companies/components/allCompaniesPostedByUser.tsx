@@ -1,21 +1,25 @@
-import { collection, getDocs, getFirestore, onSnapshot, query, where } from "firebase/firestore";
+import { collection, getFirestore, onSnapshot, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { AiOutlineEdit } from "react-icons/ai";
 import { useRecoilState } from "recoil";
 import { CompanyDataInterface } from "../../../standards/interfaces/interfaces";
-import { Heading, SubHeading, Text } from "../../../standards/styles/components/heading";
-import { CompanyInformation } from "../../addNewCompany/logic/addCompany";
+import { Text } from "../../../standards/styles/components/heading";
 import { selectedCompanyAtom } from "../atoms/selectedCompany";
-import SimpleInput, { SearchBar } from "../../../standards/styles/components/inputs";
-import { StandardMidBlueButton } from "../../../standards/styles/components/button";
-import { BiLinkExternal, BiWindow, BiWindowOpen } from "react-icons/bi";
+import { SearchBar } from "../../../standards/styles/components/inputs";
 import { motion } from "framer-motion"
-import currentRouteAtom from "../../../atoms/app/currentRouteAtom";
 
 function CompanyCard(companyData: CompanyDataInterface) {
 
+    const [jobs, setJobs] = useState(0)
+    const db = getFirestore()
+
+    useEffect(() => {
+         onSnapshot(query(collection(db,"jobs"),where("companyId","==",companyData.id!)),(docs)=>{
+            setJobs(docs.docs.length);    
+        })
+    },[])
+
+
     const [selectedCompany, setSelectedCompany] = useRecoilState(selectedCompanyAtom);
-    const [currentRoute, setcurrentRoute] = useRecoilState(currentRouteAtom);
 
 
     return (
@@ -25,7 +29,7 @@ function CompanyCard(companyData: CompanyDataInterface) {
                 <div className=" w-full text-md font-medium text-black overflow-hidden">
                     {companyData.companyName}
                 </div>
-                <div className="text-sm font-regular text-dark-gray">3 Jobs</div>
+                <div className="text-sm font-regular text-dark-gray">{jobs} Jobs</div>
             </div>
 
             {/* <StandardMidBlueButton onClick={()=>{

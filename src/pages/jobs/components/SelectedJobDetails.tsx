@@ -21,7 +21,6 @@ import {
 import { useCallback, useEffect, useState } from 'react';
 import { JobDataInterface } from '../../../standards/interfaces/interfaces';
 import currentRouteAtom from '../../../atoms/app/currentRouteAtom';
-import NewJob from '../../newJob/ui/newJob';
 import { useNavigate } from 'react-router';
 
 
@@ -30,7 +29,8 @@ function SelectedJobDetails() {
   const [selectedJob, setSelectedJob] = useRecoilState(selectedJobAtom);
   const [_, setRoute] = useRecoilState(currentRouteAtom);
   const [applicants, setApplicants] = useState(0);
-  const [isOpen, setIsOpen] = useState(false);
+
+
   const navigate=useNavigate();
 
   const fetchApplicants = useCallback(() => {
@@ -71,7 +71,7 @@ function SelectedJobDetails() {
   };
 
   const handleEditJob = () => {
-    setIsOpen(true);
+  navigate('/jobForm', {state: selectedJob})
     setRoute('Companies');
   };
 
@@ -88,7 +88,6 @@ function SelectedJobDetails() {
     </motion.div>
   ) : (
     <>
-      <NewJob isOpen={isOpen} setIsOpen={setIsOpen} data={selectedJob} />
       <AnimatePresence>
         <motion.div
           initial={{ opacity: 0 }}
