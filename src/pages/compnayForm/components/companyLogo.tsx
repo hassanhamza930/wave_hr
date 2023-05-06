@@ -35,7 +35,7 @@ function CompanyLogo({setCompanyLogo,companyLogoValue}:CompanyLogoInputs) {
             type="button"
             onClick={() => { UpdateCompanyLogo()}}
             style={{backgroundImage:`url('${companyLogoValue!=""&&companyLogoValue}')`}}
-            className="hover:text-tan text-black/80 transition ease-in-out duration-100 hover:bg-blue bg-contain bg-no-repeat bg-white/80 shadow-md bg-center hover:scale-105 mt-2 h-36 w-36 rounded-xl flex justify-center items-center">
+            className="hover:text-tan text-black/80 transition ease-in-out duration-100 hover:bg-blue bg-contain bg-no-repeat bg-blue/10 shadow-md bg-center hover:scale-105 mt-2 h-36 w-36 rounded-xl flex justify-center items-center">
             {companyLogoValue==""?<AiFillCamera className=" h-12 w-12"  />:""}
         </button>
     );

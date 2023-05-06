@@ -90,7 +90,7 @@ function AllCompaniesPostedByUser() {
                         {
                             allCompaniesPostedByUser.map((companyData, index) => {
                                 return (
-                                    <motion.div transition={{ delay: (index + 1) * 0.08 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                                    <motion.div key={companyData.id} transition={{ delay: (index + 1) * 0.08 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                                         <CompanyCard {...companyData}></CompanyCard>
                                     </motion.div>
                                 )

@@ -15,10 +15,11 @@ import { useHandleAddCompany, useHandleEditCompany } from "../logic/addCompany";
 import { CompanyDataInterface } from "../../../standards/interfaces/interfaces";
 import currentRouteAtom from "../../../atoms/app/currentRouteAtom";
 import { useLocation } from "react-router";
+import RichTextEditor from "../../../standards/styles/components/RichTextEditor";
 
 
 const CompanyForm = () => {
-    const { state } = useLocation() 
+    const { state } = useLocation()
     const [companyName, setcompanyName] = useState("");
     const [companyLogo, setcompanyLogo] = useState("");
     const [companyDescription, setcompanyDescription] = useState("");
@@ -32,6 +33,7 @@ const CompanyForm = () => {
     const { EditCompany } = useHandleEditCompany()
 
     const [currentRoute, setCurrentRoute] = useRecoilState(currentRouteAtom);
+
     useEffect(() => {
         setCurrentRoute("Companies > New Company");
     }, []);
@@ -53,7 +55,7 @@ const CompanyForm = () => {
 
 
     useEffect(() => {
-        if(state){
+        if (state) {
             setcompanyName(state.companyName);
             setcompanyLogo(state.companyLogo);
             setcompanyDescription(state.companyDescription);
@@ -63,49 +65,41 @@ const CompanyForm = () => {
             setcompanyLocation(state.companyLocation);
             setcompanyWebsite(state.companyWebsite);
         }
-    },[])
+    }, [])
 
     const handleSubmit = () => {
-        if(state){
-        EditCompany({
-                            id: state.id as string,
-                            companyCover: companyCoverImage,
-                            companyDescription: companyDescription,
-                            companyLocation: companyLocation,
-                            companyLogo: companyLogo,
-                            companyName: companyName,
-                            companyTags: companyTags,
-                            numberOfEmployees: numberOfEmployees,
-                            companyWebsite: companyWebsite,
-                            companyOwnerId: localStorage.getItem("userId") as string
-                        } as CompanyDataInterface)
-        }else{
+        if (state) {
+            EditCompany({
+                id: state.id as string,
+                companyCover: companyCoverImage,
+                companyDescription: companyDescription,
+                companyLocation: companyLocation,
+                companyLogo: companyLogo,
+                companyName: companyName,
+                companyTags: companyTags,
+                numberOfEmployees: numberOfEmployees,
+                companyWebsite: companyWebsite,
+                companyOwnerId: localStorage.getItem("userId") as string
+            } as CompanyDataInterface)
+        } else {
             AddCompany({
-                            companyCover: companyCoverImage,
-                            companyDescription: companyDescription,
-                            companyLocation: companyLocation,
-                            companyLogo: companyLogo,
-                            companyName: companyName,
-                            companyTags: companyTags,
-                            numberOfEmployees: numberOfEmployees,
-                            companyWebsite:companyWebsite,
-                            companyOwnerId:localStorage.getItem("userId") as string
-                        } as CompanyDataInterface)
+                companyCover: companyCoverImage,
+                companyDescription: companyDescription,
+                companyLocation: companyLocation,
+                companyLogo: companyLogo,
+                companyName: companyName,
+                companyTags: companyTags,
+                numberOfEmployees: numberOfEmployees,
+                companyWebsite: companyWebsite,
+                companyOwnerId: localStorage.getItem("userId") as string
+            } as CompanyDataInterface)
         }
     }
 
 
     return (
         <FormLayout>
-
             <div className="p-10 w-full flex-1 flex-col justify-start items-start ">
-
-
-                {/* <div className="flex flex-row justify-start items-start gap-3">
-                    <StandardWhiteButton text="Add Company Logo" icon={<BiPlus />} onClick={() => { }}></StandardWhiteButton>
-                    <StandardWhiteButton text="Add Company Logo" icon={<BiPlus />} onClick={() => { }}></StandardWhiteButton>
-                </div> */}
-
 
                 <SubHeading text="Add Company Banner" customStyles=" text-sm" />
                 <CompanyBanner companyBannerValue={companyCoverImage} setCompanyBanner={setcompanyCoverImage} customStyles="mt-2" />
@@ -116,7 +110,7 @@ const CompanyForm = () => {
 
 
                 <SimpleInput placeholder="Company Name*" onChange={setcompanyName} value={companyName} customStyles="mt-10" />
-                <TextArea examples="We make great software" placeholder="Enter company description*" onChange={setcompanyDescription} value={companyDescription} customStyles="mt-10" />
+                <RichTextEditor examples="We make great software" placeholder="Enter company description*" onChange={setcompanyDescription} value={companyDescription} customStyles="mt-10" />
 
                 <SimpleInput examples="Texas, US" value={companyLocation} onChange={setcompanyLocation} placeholder="Location*" customStyles="mt-10" />
                 <SimpleInput examples="5" value={numberOfEmployees} onChange={setnumberOfEmployees} placeholder="Number of Employees*" customStyles="mt-10" />
@@ -148,7 +142,7 @@ const CompanyForm = () => {
 
 
                 <div className="flex flex-row justify-end items-end w-full mb-12">
-                    <StandardBlueButton icon={state ? <BiEditAlt />: <BiPlus />} text={state? "Edit Company":"Add Company"} onClick={handleSubmit} />
+                    <StandardBlueButton text={state ? "Update Company" : "Add Company"} onClick={handleSubmit} />
                 </div>
 
 

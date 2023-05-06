@@ -4,13 +4,15 @@ import { SubHeading } from '../../../standards/styles/components/heading';
 import { selectedCompanyAtom } from '../atoms/selectedCompany';
 import { StandardWhiteButton } from '../../../standards/styles/components/button';
 import { BiLinkExternal } from 'react-icons/bi';
-import { MdEditNote } from 'react-icons/md';
+import { MdDelete, MdEditNote } from 'react-icons/md';
 import { AnimatePresence } from 'framer-motion';
 import { motion } from 'framer-motion';
+import { collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore';
 
 function SelectedCompanyDetails() {
-  const [selectedCompany] = useRecoilState(selectedCompanyAtom);
+  const [selectedCompany,setSelectedCompany] = useRecoilState(selectedCompanyAtom);
   const navigate = useNavigate();
+  const db = getFirestore();
 
   return !selectedCompany.id ? (
     <motion.div
@@ -61,6 +63,25 @@ function SelectedCompanyDetails() {
               onClick={() => window.open(`/company/${selectedCompany.id!}`)}
             />
             <StandardWhiteButton onClick={() => navigate('/companyForm', {state: selectedCompany}) } text='Edit' icon={<MdEditNote />} />
+            <StandardWhiteButton onClick={async () =>{
+              if(window.confirm('Are you sure you want to delete this company?')){
+                await getDocs(
+                  query(
+                    collection(db, 'jobs'),
+                    where('companyId', '==', selectedCompany.id!),
+                  ),
+                ).then((querySnapshot) => {
+                  querySnapshot.forEach((doc) => {
+                    deleteDoc(doc.ref);
+                  });
+                });
+
+                await deleteDoc(doc(db, 'companies', selectedCompany.id!));
+                setSelectedCompany({} as any);
+              
+              }
+            } } text='Delete' icon={<MdDelete />} />
+
           </div>
 
           <div className='font-medium text-2xl mt-10'>About</div>

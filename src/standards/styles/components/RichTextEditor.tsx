@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { SubHeading } from "./heading";
@@ -33,17 +33,21 @@ interface RichTextEditorProps {
 
 const RichTextEditor: React.FC<RichTextEditorProps> = ({
   placeholder = "",
-  value = "",
+  value,
   onChange = () => {},
   customStyles = "",
   examples=''
 }) => {
-  const [editorValue, setEditorValue] = useState(value);
+  const [editorValue, setEditorValue] = useState("");
 
   const handleEditorChange = (content: string) => {
     setEditorValue(content);
     onChange(content);
   };
+  
+  useEffect(() => {
+    setEditorValue(value);
+  });
 
   return (
     <div className={` ${customStyles} mt-14 flex justify-start items-start flex-col`}>
@@ -51,11 +55,11 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
       <ReactQuill
         id="no_scroll"
         placeholder={examples}
-        value={editorValue}
+        value={value}
         onChange={handleEditorChange}
         modules={modules}
         formats={formats}
-        className="w-full text-sm text-gray-800 overflow-y-scroll py-2 rounded-3xl px-4 outline-none focus:border-blue-500 focus:shadow-outline-blue resize-none bg-blue/10"
+        className="w-full text-sm text-black overflow-y-scroll py-2 rounded-3xl px-4 outline-none focus:border-blue-500 focus:shadow-outline-blue resize-none bg-blue/10"
       />
     </div>
   );

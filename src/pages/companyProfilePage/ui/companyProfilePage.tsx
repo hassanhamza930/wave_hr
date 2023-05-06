@@ -1,7 +1,7 @@
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { useRecoilState } from 'recoil';
 import isLoadingAtom from '../../../atoms/app/isLoadingAtom';
 import { CompanyDataInterface } from '../../../standards/interfaces/interfaces';
@@ -21,7 +21,7 @@ function CompanyProfilePage() {
   const { companyId } = useParams();
   const [companyValues, setCompanyValues] = useRecoilState(companyAtom);
   const [jobSearch, setJobSearch] = useRecoilState(jobSearchAtom);
-
+  const navigate=useNavigate();
   const db = getFirestore();
   const [_, setLoading] = useRecoilState(isLoadingAtom);
   const [isCompanyFetched, setIsCompanyFetched] = useState(false);
