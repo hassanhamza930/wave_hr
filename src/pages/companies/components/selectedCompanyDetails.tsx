@@ -8,9 +8,10 @@ import { MdDelete, MdEditNote } from 'react-icons/md';
 import { AnimatePresence } from 'framer-motion';
 import { motion } from 'framer-motion';
 import { collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore';
+import ReactQuill from 'react-quill';
 
 function SelectedCompanyDetails() {
-  const [selectedCompany,setSelectedCompany] = useRecoilState(selectedCompanyAtom);
+  const [selectedCompany, setSelectedCompany] = useRecoilState(selectedCompanyAtom);
   const navigate = useNavigate();
   const db = getFirestore();
 
@@ -62,9 +63,9 @@ function SelectedCompanyDetails() {
               icon={<BiLinkExternal />}
               onClick={() => window.open(`/company/${selectedCompany.id!}`)}
             />
-            <StandardWhiteButton onClick={() => navigate('/companyForm', {state: selectedCompany}) } text='Edit' icon={<MdEditNote />} />
-            <StandardWhiteButton onClick={async () =>{
-              if(window.confirm('Are you sure you want to delete this company?')){
+            <StandardWhiteButton onClick={() => navigate('/companyForm', { state: selectedCompany })} text='Edit' icon={<MdEditNote />} />
+            <StandardWhiteButton onClick={async () => {
+              if (window.confirm('Are you sure you want to delete this company?')) {
                 await getDocs(
                   query(
                     collection(db, 'jobs'),
@@ -78,18 +79,17 @@ function SelectedCompanyDetails() {
 
                 await deleteDoc(doc(db, 'companies', selectedCompany.id!));
                 setSelectedCompany({} as any);
-              
+
               }
-            } } text='Delete' icon={<MdDelete />} />
+            }} text='Delete' icon={<MdDelete />} />
 
           </div>
 
           <div className='font-medium text-2xl mt-10'>About</div>
 
-          <SubHeading
-            customStyles='mt-2'
-            text={selectedCompany.companyDescription}
-          ></SubHeading>
+          <ReactQuill readOnly={true} theme='bubble' value={selectedCompany.companyDescription} className='mt-2 -ml-3'/>
+
+
         </div>
       </motion.div>
     </AnimatePresence>

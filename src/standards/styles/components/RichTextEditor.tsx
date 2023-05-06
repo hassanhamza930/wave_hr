@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill, ReactQuillProps } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { SubHeading } from "./heading";
+var Font = Quill.import('formats/font');
+// We do not add Aref Ruqaa since it is the default
+Font.whitelist = ['mirza', 'roboto'];
+Font.size=
+Quill.register(Font, true);
+
 
 const modules = {
   toolbar: [
@@ -38,7 +44,9 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   customStyles = "",
   examples=''
 }) => {
+
   const [editorValue, setEditorValue] = useState("");
+
 
   const handleEditorChange = (content: string) => {
     setEditorValue(content);
@@ -59,8 +67,9 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
         onChange={handleEditorChange}
         modules={modules}
         formats={formats}
-        className="w-full text-sm text-black overflow-y-scroll py-2 rounded-3xl px-4 outline-none focus:border-blue-500 focus:shadow-outline-blue resize-none bg-blue/10"
+        className="w-full text-md text-black overflow-y-scroll py-2 rounded-3xl px-4 outline-none focus:border-blue-500 focus:shadow-outline-blue resize-none bg-blue/10"
       />
+      
     </div>
   );
 };

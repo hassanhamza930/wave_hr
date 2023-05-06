@@ -89,7 +89,7 @@ export default function Interviews() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 className="rounded-full bg-blue/10 text-black py-3 px-5 text-sm">
-                  {Intl.DateTimeFormat().resolvedOptions().timeZone.toString()}
+                  Timezone: {Intl.DateTimeFormat().resolvedOptions().timeZone.toString()}
                 </motion.div>
               }
             </AnimatePresence>

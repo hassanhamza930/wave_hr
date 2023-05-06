@@ -15,6 +15,7 @@ import { motion } from "framer-motion";
 import dayjs from "dayjs";
 import { BiBriefcase, BiCurrentLocation, BiLocationPlus, BiPlus } from "react-icons/bi";
 import { MdDone } from "react-icons/md";
+import ReactQuill from "react-quill";
 
 export interface CompanyData {
     companyDescription: string,
@@ -100,14 +101,16 @@ export default function Apply() {
 
 
                         <div className='font-semibold text-2xl mt-10'>Job Description</div>
-                        <div className='text-black mt-2 text-md' dangerouslySetInnerHTML={{__html: jobData.jobDescription}} />
+                        {/* <div className='text-black mt-2 text-md' dangerouslySetInnerHTML={{__html: jobData.jobDescription}} /> */}
+                        <ReactQuill readOnly={true} theme='bubble' value={jobData.jobDescription} className='mt-2 -ml-3'/>
 
 
-                        <div className='font-semibold text-2xl mt-10'>Job Qualifications</div>
-                        <div className='text-black mt-2 text-md' dangerouslySetInnerHTML={{__html: jobData.jobQualifications}} />
+                        <div className='font-semibold text-2xl'>Job Qualifications</div>
+                        {/* <div className='text-black mt-2 text-md' dangerouslySetInnerHTML={{__html: jobData.jobQualifications}} /> */}
+                        <ReactQuill readOnly={true} theme='bubble' value={jobData.jobQualifications} className='mt-2 -ml-3'/>
 
 
-                        <div className='font-semibold text-2xl mt-10'>
+                        <div className='font-semibold text-2xl'>
                             Salary Compensation
                         </div>
                         <SubHeading

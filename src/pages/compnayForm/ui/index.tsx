@@ -109,7 +109,7 @@ const CompanyForm = () => {
                 <CompanyLogo companyLogoValue={companyLogo} setCompanyLogo={setcompanyLogo} />
 
 
-                <SimpleInput placeholder="Company Name*" onChange={setcompanyName} value={companyName} customStyles="mt-10" />
+                <SimpleInput examples="Google" placeholder="Company Name*" onChange={setcompanyName} value={companyName} customStyles="mt-10" />
                 <RichTextEditor examples="We make great software" placeholder="Enter company description*" onChange={setcompanyDescription} value={companyDescription} customStyles="mt-10" />
 
                 <SimpleInput examples="Texas, US" value={companyLocation} onChange={setcompanyLocation} placeholder="Location*" customStyles="mt-10" />

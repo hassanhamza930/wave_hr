@@ -5,6 +5,7 @@ import { BiLinkExternal } from 'react-icons/bi';
 import { CompanyDataInterface } from '../../../standards/interfaces/interfaces';
 import { StandardBlueButton, StandardLightBlueButton } from '../../../standards/styles/components/button';
 import { Text } from '../../../standards/styles/components/heading';
+import ReactQuill from 'react-quill';
 
 interface ILeftBar {
   companyDetails: CompanyDataInterface;
@@ -31,8 +32,8 @@ const LeftBar = ({ companyDetails }: ILeftBar) => {
         textSize='text-xl'
         fontWeight='font-semibold'
       />
-      <div className='mt-2 mb-10'>
-        <Text text={companyDetails.companyDescription} textSize='text-sm' color='black' />
+      <div className='mt-2'>
+        <ReactQuill readOnly={true} theme='bubble' value={companyDetails.companyDescription} className='mt-2 -ml-3'/>
       </div>
       {/* location */}
       <div className='flex items-center'>
