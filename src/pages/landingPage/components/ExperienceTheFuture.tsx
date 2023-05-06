@@ -19,7 +19,7 @@ function ExperienceTheFuture() {
       >
         <div className="flex flex-col justify-center items-center">
           <div
-            style={{ fontFamily: "Space Grotesk" }}
+            style={{ fontFamily: "DM Sans" }}
             className=" text-[22px] text-blue w-full flex flex-row items-center justify-between gap-20"
           >
             <p className="font-bold">

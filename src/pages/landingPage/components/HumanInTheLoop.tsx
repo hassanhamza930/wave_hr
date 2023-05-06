@@ -3,6 +3,37 @@ import HITL from "../../../images/landingPage/HITL.png";
 import PostOnce from "../../../images/landingPage/PostOnce.png";
 import Applications from "../../../images/landingPage/Applications.png";
 
+
+interface FeatureCardProps {
+  title: string;
+  description: string;
+  image: any;
+  reverse: boolean;
+}
+
+function FeatureCard(props: FeatureCardProps) {
+  return (
+    <div className={`hover:scale-[1.02]  transition-all duration-200 hover:shadow-xl flex ${props.reverse == true ? 'flex-row-reverse' : 'flex-row'} mt-10 bg-blue shadow-md rounded-xl text-tan justify-center items-center`}>
+      <img src={props.image} className="w-96 h-96 object-cover rounded-xl" />
+      <div className="px-10 flex flex-col ml-5 ">
+        <div
+          style={{ fontFamily: "DM Sans" }}
+          className="font-bold mb-7 mt-1 text-3xl"
+        >
+          {props.title}
+        </div>
+
+        <div className="font-regular font-['Inter'] text-md">
+          {props.description}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+
+
 function HumanInTheLoop() {
   return (
     <motion.div
@@ -16,64 +47,44 @@ function HumanInTheLoop() {
       }}
       className="h-full px-[20%] mt-24 items-center"
     >
-      <div className="flex flex-row mt-10 ">
-        <img src={HITL} className="w-[400px] h-[330px] ml-2" />
-        <div className="px-10 flex flex-col ml-5 ">
-          <div
-            style={{ fontFamily: "Space Grotesk" }}
-            className="font-bold mb-7 mt-10  text-blue text-[27px]"
-          >
-            Human in the loop
-          </div>
 
-          <div className="font-regular font-['Inter'] text-[#696969] text-[16px]">
-            Wave follows a human in the loop approach to hiring. We believe
-            traditional ATS software hurts diversity and inclusion and skims
-            over people who could be part of your dream team.
-            <br />
-            <br /> Wave provides you the tools to streamline your hiring
-            pipeline while making sure every candidate resume is reviewed by
-            human eyes.
-          </div>
-        </div>
-      </div>
 
-      <div className="flex flex-row-reverse mt-16 ">
-        <img src={PostOnce} className="w-[400px] h-[330px] ml-2" />
-        <div className="px-10 flex flex-col mr-5">
-          <div
-            style={{ fontFamily: "Space Grotesk" }}
-            className="font-bold mb-7 mt-10  text-blue text-[27px]"
-          >
-            Post once, share everywhere
-          </div>
+      <FeatureCard
+        title="Human in the loop"
+        description="
+        Wave follows a human in the loop approach to hiring. We believe
+        traditional ATS software hurts diversity and inclusion and skims
+        over people who could be part of your dream team.
+        Wave provides you the tools to streamline your hiring
+        pipeline while making sure every candidate resume is reviewed by
+        human eyes.
+        "
+        image={HITL}
+        reverse={true}
+      />
 
-          <div className="font-regular font-['Inter'] mb-10 text-[#696969] text-[16px] w-[90%]">
-            Post your job on our platform and get a shareable link. Distribute
-            it wherever you like and start receiving applications.LinkedIn,
-            Indeed, Glassdoor or even Whatsapp.
-          </div>
-        </div>
-      </div>
 
-      <div className="flex flex-row mt-16">
-        <img src={Applications} className="w-[400px] h-[330px] ml-2" />
-        <div className="px-10 flex flex-col ml-5">
-          <div
-            style={{ fontFamily: "Space Grotesk" }}
-            className="font-bold mb-7 mt-10  text-blue text-[27px]"
-          >
-            Applications that feels like a conversation
-          </div>
+      <FeatureCard
+        title="Post once, share everywhere"
+        description="Post your job on our platform and get a shareable link. Distribute
+      it wherever you like and start receiving applications.LinkedIn,
+      Indeed, Glassdoor or even Whatsapp."
+        image={PostOnce}
+        reverse={false}
+      />
 
-          <div className="font-regular font-['Inter'] mb-10 text-[16px] text-[#696969]">
+      <FeatureCard
+        title="Applications that feel like a conversation"
+        description="
             Wave makes job applications more interactive by turning it into a
             conversation. Applicants get detailed overview of what your company
-            does with a Careers and a Company page. <br />
-            <br /> Get higher quality applications and more applicants.
-          </div>
-        </div>
-      </div>
+            does with a Careers and a Company page.
+            Get higher quality applications and more applicants.
+        "
+        image={Applications}
+        reverse={true}
+      />
+
     </motion.div>
   );
 }
