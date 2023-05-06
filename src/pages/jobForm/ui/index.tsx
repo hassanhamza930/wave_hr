@@ -35,8 +35,8 @@ export default function JobForm() {
   const [_, setLoading] = useRecoilState(isLoadingAtom);
   const [selectedCompany] = useRecoilState(selectedCompanyAtom);
   const [jobTitle, setjobTitle] = useState<string>('');
-  const [jobDescription, setJobDescription] = useState('');
-  const [jobQualifications, setjobQualifications] = useState('');
+  const [jobDescription, setJobDescription] = useState(state ? state.jobDescription: '');
+  const [jobQualifications, setjobQualifications] = useState(state ? state.jobQualifications: '');
   const [salaryCompensation, setSalaryCompensation] = useState('');
   const [customQuestion, setCustomQuestion] = useState('');
   const [location, setLocation] = useState('');
