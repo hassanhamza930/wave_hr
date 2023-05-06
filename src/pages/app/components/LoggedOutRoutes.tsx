@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 export default function LoggedOutRoutes() {
 
 
-    var publicUrls:Array<string>=["company","apply"];
+    var publicUrls:Array<string>=["company","apply","login"];
     const [isPublic, setisPublic] = useState(false);
 
     useEffect(()=>{

@@ -10,7 +10,7 @@ export default function Login() {
     <>
       <div className="flex justify-center items-center h-full w-full">
         <div className="h-full w-full flex flex-row">
-          <div className="pl-16 w-2/4 flex flex-col justify-center">
+          <div className="pl-16 w-2/4 flex flex-col justify-center items-center">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -31,7 +31,7 @@ export default function Login() {
                 Please Log In Using Google Account to Continue
               </div>
               <div
-                className="flex flex-row border bg-white pt-3 pb-3 pl-4 items-center cursor-pointer justify-start tablet:w-[50%] w-[28%] mt-8 rounded-[10px]"
+                className="flex flex-row border justify-center bg-white pt-3 pb-3 items-center cursor-pointer w-48 mt-8 rounded-[10px]"
                 onClick={() => {
                   handleGoogleSignIn();
                 }}
