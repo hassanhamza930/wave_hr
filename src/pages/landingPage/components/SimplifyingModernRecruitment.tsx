@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import heroback from "../../../images/landingPage/heroback.svg";
+import { StandardBlueButton } from "../../../standards/styles/components/button";
 
 function SimplifyingModernRecruitment() {
   const navigate = useNavigate();
@@ -8,52 +9,54 @@ function SimplifyingModernRecruitment() {
   return (
     <div className="pt-[75px] tracking-tighter bg-cover bg-no-repeat bg-center bg-tan w-full flex flex-col justify-center items-center">
 
-      <motion.div className="flex flex-col w-full justify-start items-start gap-5 mt-16">
-        
-        <motion.div 
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{duration:1,delay:0.4}}
-        style={{ fontFamily: "DM Sans" }} className="text-black/90 flex flex-col w-full justify-center items-center gap-1 text-7xl font-medium">
-          <div className="flex flex-row justify-center items-center gap-4">
-            Simplifying <p className="text-blue">Modern</p>
-          </div>
-          <div>
-            Recruitment
-          </div>
-        </motion.div>
+      <div className="flex flex-col w-full justify-start items-start gap-5 mt-24">
 
-        <motion.p 
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{duration:1,delay:0.6}}
-        className="text-xl mt-2 w-full text-center ">
+        <div className="flex justify-center items-center w-full h-42 overflow-y-hidden">
+          <motion.div
+            initial={{ opacity: 0, y: 150 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.4 }}
+            style={{ fontFamily: "DM Sans" }} className="text-black/90 overflow-y-hidden flex flex-col w-full justify-center items-center gap-1 text-7xl font-medium">
+            <div className="flex flex-row justify-center items-center gap-4">
+              Simplifying <p className="text-blue">Modern</p>
+            </div>
+            <div>
+              Recruitment
+            </div>
+          </motion.div>
+        </div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.6 }}
+          className="text-xl mt-2 w-full text-center ">
           The Ultimate tool for Modern Recruiters
         </motion.p>
 
-        <motion.div 
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{duration:1,delay:0.8}}
-        className="flex justify-center items-center w-full mt-5">
-          <button
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.8 }}
+          className="flex justify-center items-center w-full mt-5">
+
+          <StandardBlueButton
+            text="Get Access"
             onClick={() => { navigate("/login"); }}
-            className="hover:scale-[1.02] hover:shadow-xl transition-all duration-100 ease-in-out text-md px-8 py-3 rounded-[10px] bg-blue text-white font-medium flex flex-row gap-2 justify-center items-center">
-            Get Access
-          </button>
+          />
         </motion.div>
 
 
-        <motion.div 
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{duration:1,delay:1}}
-        style={{ backgroundImage: `url('${heroback}')` }} className="mt-12 h-[700px] bg-cover bg-center w-full bg-no-repeat object-cover">
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1 }}
+          style={{ backgroundImage: `url('${heroback}')` }} className="mt-12 h-[700px] bg-cover bg-center w-full bg-no-repeat object-cover">
         </motion.div>
 
 
 
-      </motion.div>
+      </div>
 
     </div>
   );

@@ -7,7 +7,7 @@ function Pricing() {
   const navigate = useNavigate();
 
   return (
-    <div style={{backgroundImage:`url('${PricingCardsVector}')`}} className=" w-full bg-tan flex flex-col pb-16 bg-cover bg-center justify-center items-center mt-24">
+    <div style={{backgroundImage:`url('${PricingCardsVector}')`}} className=" w-full bg-tan flex flex-col bg-cover bg-center justify-center items-center mt-24">
       <div
         style={{ fontFamily: "DM Sans" }}
         className="font-bold text-[35px] tracking-tighter text-primary mt-0 "
@@ -20,12 +20,12 @@ function Pricing() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: false }}
-          transition={{ duration: 1.0, delay: 0.2 }}
+          transition={{ duration: 1.0 }}
           variants={{
             visible: { opacity: 1, y: 0, scale: 1 },
-            hidden: { opacity: 0, y: 1, scale: 0.95 },
+            hidden: { opacity: 0, y: 50, scale: 0.97 },
           }}
-          className="z-30 h-full w-full flex flex-row justify-center items-start gap-10 px-10 mt-12 mb-24"
+          className="z-30 h-full w-full flex flex-row justify-center items-start gap-10 px-10 mt-5 mb-24"
         >
           <Individual />
           <Startup />
