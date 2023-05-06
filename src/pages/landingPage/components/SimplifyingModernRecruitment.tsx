@@ -11,7 +11,6 @@ function SimplifyingModernRecruitment() {
 
       <div className="flex flex-col w-full justify-start items-start gap-5 mt-24">
 
-        <div className="flex justify-center items-center w-full h-42 overflow-y-hidden">
           <motion.div
             initial={{ opacity: 0, y: 150 }}
             animate={{ opacity: 1, y: 0 }}
@@ -24,7 +23,6 @@ function SimplifyingModernRecruitment() {
               Recruitment
             </div>
           </motion.div>
-        </div>
 
         <motion.p
           initial={{ opacity: 0, y: 100 }}
