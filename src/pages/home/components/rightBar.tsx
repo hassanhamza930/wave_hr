@@ -13,18 +13,18 @@ import { useNavigate } from "react-router";
 
 export function JobPreviewCard(props: JobDataInterface) {
     return (
-        <div className="w-full h-72 bg-blue/10 hover:bg-lightblue/10 rounded-3xl py-5 pb-20 px-10 hover:shadow-md shadow-sm transition-all duration-300 hover:scale-[1.01]">
+        <div onClick={()=>{window.open(`/apply/${props.id}`)}} className="cursor-pointer w-full h-72 bg-blue/20 hover:bg-blue text-black hover:text-tan rounded-3xl py-5 pb-10 px-10 hover:shadow-md shadow-sm transition-all duration-100 hover:scale-[1.02]">
             <div className="flex h-full flex-col overflow-y-hidden overflow-x-hidden justify-start items-start w-full">
                 <div className="flex flex-row w-full justify-between items-center">
-                    <div className="text-2xl font-semibold text-black w-[70%] overflow-x-hidden">
+                    <div className="text-2xl font-semibold w-[70%] overflow-x-hidden">
                         {props.jobTitle}
                     </div>
                     <div className='flex flex-col justify-start items-start'>
-                        <div className='text-dark-gray text-[12px] mt-2 flex flex-row justify-center items-center gap-1'>
+                        <div className='text-[12px] mt-2 flex flex-row justify-center items-center opacity-80 gap-1'>
                             <BiCurrentLocation />
                             {props.location}
                         </div>
-                        <div className='flex flex-row text-[12px] justify-center items-center gap-1 text-dark-gray mt-1'>
+                        <div className='flex flex-row text-[12px] justify-center items-center gap-1 opacity-80 mt-1'>
                             <BiBriefcase />
                             <div>{props.jobType}, {props.workModel}</div>
                         </div>
@@ -51,7 +51,7 @@ function RightBar() {
             let allJobs: Array<JobDataInterface> = [];
 
             querySnapshot.forEach((doc) => {
-                allJobs.push(doc.data() as JobDataInterface);
+                allJobs.push({...doc.data(),id:doc.id} as JobDataInterface);
             });
 
             setallJobsPostedByUser(allJobs);
