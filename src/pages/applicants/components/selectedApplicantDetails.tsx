@@ -3,7 +3,7 @@ import { JobApplication } from '../../apply/atoms/applyPageAtoms';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
-import { doc, setDoc, getFirestore, onSnapshot, collection } from 'firebase/firestore';
+import { doc, setDoc, getFirestore, onSnapshot, collection, getDoc } from 'firebase/firestore';
 import { useParams } from 'react-router';
 import {
   selectedApplicantDataAtom,
@@ -11,7 +11,7 @@ import {
 } from '../atoms/applicantsAtoms';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { Listbox } from '@headlessui/react';
-import { ApplicationDataInterface, ApplicationStatusEnum } from '../../../standards/interfaces/interfaces';
+import { ApplicationDataInterface, ApplicationStatusEnum, CompanyDataInterface, JobDataInterface, UserDataInterface } from '../../../standards/interfaces/interfaces';
 import { ButtonOutlinedWhite, StandardWhiteButton } from '../../../standards/styles/components/button';
 import { SubHeading, Text } from '../../../standards/styles/components/heading';
 import dayjs from 'dayjs';
@@ -20,6 +20,7 @@ import { TextArea } from '../../../standards/styles/components/inputs';
 import { AnimatePresence, motion } from 'framer-motion';
 import StandardDropDown, { WhiteDropDown } from '../../../standards/styles/components/dropdowns';
 import { MdArrowDropDown, MdChat, MdDelete, MdOutlineRateReview } from 'react-icons/md';
+import axios from "axios";
 
 
 export default function SelectedApplicantDetails() {
@@ -34,19 +35,64 @@ export default function SelectedApplicantDetails() {
 
 
   async function handleRejectApplicant(applicantId: string) {
-    await setDoc(doc(db, 'jobs', jobId as string, 'applications', applicantId), {
-      applicationStatus: ApplicationStatusEnum.Rejected,
-    } as ApplicationDataInterface, { merge: true });
-    setSelectedApplicantData({} as ApplicationDataInterface);
-    setSelectedApplicantId("" as string);
+
+    var jobData:JobDataInterface= (await getDoc(doc(db, 'jobs', jobId as string))).data() as JobDataInterface;
+    await axios.post("https://wavehrback.onrender.com/sendRejectionEmail", {
+      to: selectedApplicantData.email as string,
+      jobId:jobId,
+      companyId: jobData.companyId
+    }).then(async (res) => {
+      
+      try{
+        await setDoc(doc(db, 'jobs', jobId as string, 'applications', applicantId), {
+          applicationStatus: ApplicationStatusEnum.Rejected,
+        } as ApplicationDataInterface, { merge: true });
+        setSelectedApplicantData({} as ApplicationDataInterface);
+        setSelectedApplicantId("" as string);
+        console.log(res);
+        toast.success("Rejection Email Sent");
+      }
+      catch(e){
+        console.log(e);
+      }
+
+
+    }).catch((err) => {
+      console.log(err);
+    });
+
+    
   }
 
 
-  async function handleSendInterviewInvite(applicantId: string) {
-    await setDoc(doc(db, 'jobs', jobId as string, 'applications', applicantId), {
-      interviewInviteSent: true,
-      applicationStatus: ApplicationStatusEnum.InterviewInviteSent
-    } as ApplicationDataInterface, { merge: true });
+  async function handleSendInterviewInvite() {
+
+    var jobData:JobDataInterface= (await getDoc(doc(db, 'jobs', jobId as string))).data() as JobDataInterface;
+    await axios.post("https://wavehrback.onrender.com/sendInterviewInvite", {
+      to: selectedApplicantData.email as string,
+      jobId:jobId,
+      companyId: jobData.companyId
+    }).then(async (res) => {
+      
+      try{
+        await setDoc(doc(db, 'jobs', jobId as string, 'applications', selectedApplicantId), {
+          interviewInviteSent: true,
+          applicationStatus: ApplicationStatusEnum.InterviewInviteSent
+        } as ApplicationDataInterface, { merge: true });
+        console.log(res);
+        toast.success("Interview Invite Sent");
+      }
+      catch(e){
+        console.log(e);
+      }
+
+
+    }).catch((err) => {
+      console.log(err);
+    });
+
+
+    
   }
 
 
@@ -143,7 +189,7 @@ export default function SelectedApplicantDetails() {
                 }
                 {
                   selectedApplicantData.interviewInviteSent != true && selectedApplicantData.rating!=0 &&
-                  <StandardWhiteButton icon={<MdChat />} text='Interview' onClick={() => { handleSendInterviewInvite(selectedApplicantId) }} />
+                  <StandardWhiteButton icon={<MdChat />} text='Interview' onClick={() => { handleSendInterviewInvite() }} />
                 }
               </AnimatePresence>
               <StandardWhiteButton icon={<MdDelete />} text='Reject' onClick={() => { handleRejectApplicant(selectedApplicantId) }} />

@@ -35,7 +35,7 @@ function InterviewsThisWeek() {
   ] as Array<InterviewCardProps>);
 
   return ( 
-    <div className="flex-1 gap-3 flex justify-start items-start w-full flex-col p-7">
+    <div className="flex-1 pt-10 gap-3 flex justify-start items-start w-full flex-col p-7">
       <SubHeading text="Your Interviews this week." textSize="text-sm"/>
         {
           interviews.map((interview, index)=>{

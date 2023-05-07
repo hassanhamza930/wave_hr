@@ -1,5 +1,5 @@
 import {atom} from "recoil";
-import { DailyTimeslotsInterface } from "../components/manageAvailability";
+import { DailyTimeslotsInterface } from "../../../standards/interfaces/interfaces";
 
 const userAvailabilityAtom=atom({
     key:"userAvailabilityAtom",

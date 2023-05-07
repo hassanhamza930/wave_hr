@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { selectedCompanyAtom } from '../atoms/selectedCompany';
 import { CompanyDataInterface } from '../../../standards/interfaces/interfaces';
+import { AnimatePresence, motion } from 'framer-motion';
 
 function Companies() {
   const [currentRoute, setcurrentRoute] = useRecoilState(currentRouteAtom);
@@ -24,7 +25,11 @@ function Companies() {
   return (
       <TwoColumnLayoutPage
         header={
-          <div className='flex flex-row justify-start items-start w-full h-full'>
+          <AnimatePresence>
+            <motion.div 
+          initial={{opacity:0}}
+          animate={{opacity:1}}
+          className='flex flex-row justify-start items-start w-full h-full'>
             <StandardLightBlueButton
               onClick={() => {
                 navigate('/companyForm');
@@ -32,7 +37,8 @@ function Companies() {
               icon={<BiPlus />}
               text='New Company'
             />
-          </div>
+          </motion.div>
+          </AnimatePresence>
         }
         leftBar={<AllCompaniesPostedByUser />}
         rightBar={<SelectedCompanyDetails />}
