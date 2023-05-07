@@ -21,7 +21,7 @@ export default function Home() {
     return (
         <>
            <TwoColumnLayoutPage
-            header={<div className="text-blue text-md p-5">At a glance,</div>}
+            header={<div className="text-blue text-md flex flex-col w-full h-full justify-center items-start p-5">At a glance,</div>}
             leftBar={<LeftBar/>}
             rightBar={<RightBar></RightBar> }
            /> 

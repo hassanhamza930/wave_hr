@@ -67,14 +67,14 @@ function LeftBar() {
 
 
     return (
-        <div className="flex flex-col h-full w-full overflow-y-scroll bg-white overflow-x-hidden p-5">
+        <div id="no_scroll" className="flex flex-col h-full w-full justify-start items-center overflow-y-scroll bg-white overflow-x-hidden p-5">
 
             {
                 loggedInUser.name != undefined &&
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="hover:scale-[1.02] hover:shadow-md duration-300 transition-all text-4xl rounded-3xl font-semibold hover:bg-blue bg-blue/90 text-tan flex justify-center items-center py-10 w-full">
+                    className="hover:scale-[1.02] text-center hover:shadow-md duration-300 transition-all text-4xl rounded-3xl font-semibold hover:bg-blue bg-blue/90 text-tan flex justify-center items-center p-10 w-full">
                     Hello {loggedInUser.name} 👋
                 </motion.div>
             }
