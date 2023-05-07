@@ -1,5 +1,14 @@
 import { Timestamp } from "firebase/firestore";
-import { DailyTimeslotsInterface } from "../../pages/interviews/components/manageAvailability";
+
+export interface DailyTimeslotsInterface {
+  day: string,
+  enabled: boolean,
+  startTime: string,
+  endTime: string,
+  onAvailabilityChange: Function,
+  index?:number
+}
+
 
 export interface JobDataInterface {
   id?: string;

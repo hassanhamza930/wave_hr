@@ -12,15 +12,8 @@ import useLoggedIn from "../../app/logic/useLoggedInAndOnboarded";
 import globalUserAtom from "../../../atoms/app/globalUserAtom";
 import * as _ from 'lodash';
 import TimeSelectionPopupModalOpenAtom, { selectedDayIndexAtom } from "../atoms/timeSelectionPopupModal";
+import { DailyTimeslotsInterface } from "../../../standards/interfaces/interfaces";
 
-export interface DailyTimeslotsInterface {
-  day: string,
-  enabled: boolean,
-  startTime: string,
-  endTime: string,
-  onAvailabilityChange: Function,
-  index?:number
-}
 
 
 
