@@ -36,7 +36,7 @@ function StandardDropDown(props: DropdownProps) {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                 >
-                    <Menu.Items className="z-[90] absolute mt-2 mr-2 justify-center left-0 w-36 origin-top-right text-left divide-y divide-gray-100 rounded-md bg-tan/90 backdrop-blur-2xl shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="z-[90] absolute mt-2 mr-2 justify-center w-max origin-top-right text-left divide-y divide-gray-100 rounded-md bg-tan/90 backdrop-blur-2xl shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <div className="">
 
                             {
