@@ -14,8 +14,8 @@ export default function ApplicationWindow() {
     
 
     return (
-        <div className="h-screen w-full flex justify-center items-center fixed z-[90] bg-tan">
-            <div className=" bg-black/90 flex justify-center items-center h-full w-full">
+        <div style={{fontFamily:"DM Sans"}} className="h-screen w-full flex justify-center items-center fixed z-[90] bg-tan">
+            <div className="bg-darkblue flex justify-center items-center h-full w-full">
                 {pageIndex==0&&<Page1/>}
                 {pageIndex==1&&<Page2/>}
                 {pageIndex==2&&<Page3/>}

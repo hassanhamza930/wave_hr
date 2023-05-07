@@ -37,6 +37,33 @@ function SimpleInput({
   );
 }
 
+export function NumericInput({
+  placeholder = '',
+  value = '',
+  customStyles = '',
+  onChange,
+  examples = '',
+}: SimpleInputProps) {
+  return (
+    <div className={` ${customStyles} flex justify-start items-start flex-col`}>
+      <SubHeading
+        text={placeholder}
+        customStyles='mb-3 text-sm ml-4'
+      ></SubHeading>
+      <input
+        type={"number"}
+        pattern="[0-9]*"
+        placeholder={examples}
+        value={value.replace('<br/>', '\n')}
+        onChange={(newVal) => {
+          onChange(newVal.target.value.replace('\n', '<br/>'));
+        }}
+        className={` w-full text-sm  text-black bg-blue/10 rounded-full px-8 py-6 outline-0 flex justify-center items-center`}
+      ></input>
+    </div>
+  );
+}
+
 export function SearchBar({
   placeholder = '',
   value = '',

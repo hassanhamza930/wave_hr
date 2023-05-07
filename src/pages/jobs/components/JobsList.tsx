@@ -34,7 +34,7 @@ function JobCard(jobData: JobDataInterface) {
         `${jobData.id}`,
         'applications'
       );
-      onSnapshot(applicantsRef, (snapshot) => {
+      onSnapshot(query(applicantsRef,where("applicationStatus","!=","rejected")), (snapshot) => {
         var applicantCount = snapshot.docs.length;
         setApplicants(applicantCount);
       });

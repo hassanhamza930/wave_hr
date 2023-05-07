@@ -1,8 +1,9 @@
 import { useRecoilState } from 'recoil';
-import { ApplicationDataInterface } from '../../../standards/interfaces/interfaces';
+import { ApplicationDataInterface, ApplicationStatusEnum } from '../../../standards/interfaces/interfaces';
 import { selectedApplicantIdAtom } from '../atoms/applicantsAtoms';
 import currentRouteAtom from '../../../atoms/app/currentRouteAtom';
 import { motion } from 'framer-motion';
+import { ReactNode } from 'react';
 
 interface ApplicantCardInterface extends ApplicationDataInterface {
   index: number;
@@ -27,7 +28,7 @@ const ApplicantCard=(props: ApplicantCardInterface)=>{
     >
 
 
-        <div style={{backgroundImage:`url('${props.profilePicture}')`}} className='h-12 w-12 flex-none bg-blue rounded-full bg-cover'></div>
+        <div style={{backgroundImage:`url('${props.profilePicture}')`}} className='h-12 w-12 flex-none bg-blue rounded-full bg-cover bg-center'></div>
 
 
         <div className='w-full ml-3  flex overflow-clip flex-col justify-center items-start pr-2'>
@@ -37,7 +38,7 @@ const ApplicantCard=(props: ApplicantCardInterface)=>{
 
         <div className=' w-[30%] flex flex-none justify-end items-center'>
           <div className={`px-4 py-2 ${props.rating?'text-tan':'text-black'} text-center ${props.rating?'bg-blue/90':'bg-lightblue/10'} text-sm rounded-full`}>
-            {props.rating ? props.rating : 'Pending Review'}
+            {props.rating ? props.rating : ApplicationStatusEnum.pendingReview}
           </div>
         </div>
 

@@ -11,7 +11,7 @@ import {
 } from '../atoms/applicantsAtoms';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { Listbox } from '@headlessui/react';
-import { ApplicationDataInterface } from '../../../standards/interfaces/interfaces';
+import { ApplicationDataInterface, ApplicationStatusEnum } from '../../../standards/interfaces/interfaces';
 import { ButtonOutlinedWhite, StandardWhiteButton } from '../../../standards/styles/components/button';
 import { SubHeading, Text } from '../../../standards/styles/components/heading';
 import dayjs from 'dayjs';
@@ -35,7 +35,7 @@ export default function SelectedApplicantDetails() {
 
   async function handleRejectApplicant(applicantId: string) {
     await setDoc(doc(db, 'jobs', jobId as string, 'applications', applicantId), {
-      applicationStatus: 'rejected',
+      applicationStatus: ApplicationStatusEnum.Rejected,
     } as ApplicationDataInterface, { merge: true });
     setSelectedApplicantData({} as ApplicationDataInterface);
     setSelectedApplicantId("" as string);
@@ -45,7 +45,7 @@ export default function SelectedApplicantDetails() {
   async function handleSendInterviewInvite(applicantId: string) {
     await setDoc(doc(db, 'jobs', jobId as string, 'applications', applicantId), {
       interviewInviteSent: true,
-      applicationStatus:"Interview Invite Sent"
+      applicationStatus: ApplicationStatusEnum.InterviewInviteSent
     } as ApplicationDataInterface, { merge: true });
   }
 
@@ -98,7 +98,7 @@ export default function SelectedApplicantDetails() {
         <div id="no_scroll" className='w-2/4 border-r flex border-r-gray p-5'>
           <div className='gap-1 flex flex-col h-full w-full justify-start items-start pb-10'>
 
-            <div style={{ backgroundImage: `url('${selectedApplicantData.profilePicture}')` }} className=' h-36 w-36 rounded-md overflow-hidden bg-center bg-cover' />
+            <div style={{ backgroundImage: `url('${selectedApplicantData.profilePicture}')` }} className=' h-36 w-36 rounded-md bg-center bg-contain bg-no-repeat bg-blue' />
             <Text
               customStyles='mt-2'
               text={selectedApplicantData.name}
@@ -122,21 +122,27 @@ export default function SelectedApplicantDetails() {
             <div className='flex flex-wrap justify-start items-start mt-5 gap-3'>
               <AnimatePresence>
                 {
-                  selectedApplicantData.interviewInviteSent == true &&
+                  selectedApplicantData.interviewInviteSent==true && selectedApplicantData.rating != 0  &&
                   <WhiteDropDown
                     placeholder='Select Application Status'
                     value={selectedApplicantData.applicationStatus!}
                     icon={<MdArrowDropDown />}
+                    
                     options={
-                      [
-                        { option: "Didn't show up for interview", onClick: () => { } },
-                        { option: "Interview Invite Sent", onClick: () => { } },
-                      ]
+                      Object.keys(ApplicationStatusEnum).map((key) => {
+                        var correspondingOption=ApplicationStatusEnum[key as keyof typeof ApplicationStatusEnum];
+                        return {
+                          option: correspondingOption,
+                          onClick: () => {
+                            setDoc(doc(db, "jobs", jobId as string, "applications", selectedApplicantId), { applicationStatus: correspondingOption } as ApplicationDataInterface, { merge: true });
+                          },
+                        };
+                      })
                     }
                   />
                 }
                 {
-                  selectedApplicantData.interviewInviteSent != true &&
+                  selectedApplicantData.interviewInviteSent != true && selectedApplicantData.rating!=0 &&
                   <StandardWhiteButton icon={<MdChat />} text='Interview' onClick={() => { handleSendInterviewInvite(selectedApplicantId) }} />
                 }
               </AnimatePresence>
@@ -158,9 +164,19 @@ export default function SelectedApplicantDetails() {
                 customStyles='mb-2'
               />
 
-              <div className='w-10 h-10 flex-none flex justify-center items-center text-tan bg-blue/90 text-sm rounded-full'>
-                {rating}
-              </div>
+              {
+                rating != 0 && rating!=undefined ?
+                  <div className='w-10 h-10 flex-none flex justify-center items-center text-tan bg-blue/90 text-sm rounded-full'>
+                    {rating}
+                  </div> :
+                  <div className={`px-4 py-2 ${rating ? 'text-tan' : 'text-black'} text-center ${rating ? 'bg-blue/90' : 'bg-lightblue/10'} text-sm rounded-full`}>
+                    Pending Review  
+                  </div>
+              }
+
+
+
+
             </div>
             <input
               type='range'

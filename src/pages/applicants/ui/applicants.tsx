@@ -2,24 +2,33 @@ import AllApplicants from '../components/AllApplicants';
 import SelectedApplicantDetails from '../components/selectedApplicantDetails';
 import TwoColumnLayoutPage from '../../../standards/styles/layouts/twoColumnLayout';
 import { useEffect, useState } from 'react';
-import { CompanyDataInterface, JobDataInterface } from '../../../standards/interfaces/interfaces';
+import { ApplicationStatusEnum, CompanyDataInterface, JobDataInterface } from '../../../standards/interfaces/interfaces';
 import { useParams } from 'react-router';
 import { DocumentSnapshot, doc, getDoc, getFirestore, onSnapshot } from '@firebase/firestore';
 import { AnimatePresence, motion } from 'framer-motion';
+import StandardDropDown from '../../../standards/styles/components/dropdowns';
+import { MdArrowDropDown } from 'react-icons/md';
+import { useRecoilState } from 'recoil';
+import ApplicantsFilterAtom from '../atoms/applicantsFilterAtom';
+
+
 
 export default function Applicants() {
   const [jobData, setJobData] = useState({} as JobDataInterface);
   const [companyData, setCompanyData] = useState({} as CompanyDataInterface);
+  const FilteringApplicantsStates:Array<string>= Object.entries(ApplicationStatusEnum).map(([key, value]) => (value));
+  FilteringApplicantsStates.splice(0, 0, "All"); 
+  const [currentFilter, setcurrentFilter] = useRecoilState(ApplicantsFilterAtom);
   const { jobId } = useParams();
   const db = getFirestore();
 
   useEffect(() => {
-    onSnapshot(doc(db, 'jobs', jobId as string), (doc1: DocumentSnapshot) => {
-      setJobData(doc1.data() as JobDataInterface);
-      getDoc(doc(db, "companies", doc1.data()!.companyId)).then((doc2) => {
-        setCompanyData(doc2.data() as CompanyDataInterface);
-      })
-    });
+    // onSnapshot(doc(db, 'jobs', jobId as string), (doc1: DocumentSnapshot) => {
+    //   setJobData(doc1.data() as JobDataInterface);
+    //   getDoc(doc(db, "companies", doc1.data()!.companyId)).then((doc2) => {
+    //     setCompanyData(doc2.data() as CompanyDataInterface);
+    //   })
+    // });
   }, []);
 
 
@@ -27,17 +36,21 @@ export default function Applicants() {
     <>
       <TwoColumnLayoutPage
         header={
-          <div className='text-md flex justify-start items-center h-full w-full text-black'>
+          <div className='text-md flex flex-row justify-end items-start h-full w-full text-black'>
             <AnimatePresence>
-              {
-                jobData.jobTitle != undefined && companyData.companyName != undefined &&
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                >
-                  <span><b>{jobData.jobTitle}</b> at <b>{companyData.companyName}</b> </span>
-                </motion.div>
+              <StandardDropDown
+              icon={<MdArrowDropDown/>}
+              placeholder='Select a Filter'
+              value={currentFilter}
+              options={
+               FilteringApplicantsStates.map((option) => {
+                  return {
+                    option: option,
+                    onClick: () => {setcurrentFilter(option as ApplicationStatusEnum)},
+                  };
+                })
               }
+              />
             </AnimatePresence>
           </div>
         }

@@ -29,6 +29,14 @@ export interface CompanyDataInterface {
   companyWebsite?: string;
 }
 
+export enum ApplicationStatusEnum{
+  pendingReview="Pending Review",
+  Accepted="Accepted",
+  Rejected="Rejected",
+  InterviewInviteSent="Interview Invite Sent",
+  DidnTShowUp="Didn't show up for interview"
+}
+
 export interface ApplicationDataInterface {
   id?: string;
   name: string;
@@ -36,9 +44,9 @@ export interface ApplicationDataInterface {
   profilePicture: string;
   resume: string;
   responses: Array<QuestionResponse>;
-  rating?: number;
+  rating: number;
   notes?: string;
-  applicationStatus?: string;
+  applicationStatus?: ApplicationStatusEnum;
   interviewInviteSent: boolean;
   applicationTime: Timestamp;
 }

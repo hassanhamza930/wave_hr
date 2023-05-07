@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 import { MdCancel } from "react-icons/md"
 
 import { SubHeading } from "../../../standards/styles/components/heading";
-import SimpleInput, { TextArea } from "../../../standards/styles/components/inputs";
+import SimpleInput, { NumericInput, TextArea } from "../../../standards/styles/components/inputs";
 import FormLayout from "../../../standards/styles/layouts/FormLayout";
 import CompanyBanner from "../components/companyBanner";
 import CompanyLogo from "../components/companyLogo";
@@ -113,7 +113,7 @@ const CompanyForm = () => {
                 <RichTextEditor examples="We make great software" placeholder="Enter company description*" onChange={setcompanyDescription} value={companyDescription} customStyles="mt-10" />
 
                 <SimpleInput examples="Texas, US" value={companyLocation} onChange={setcompanyLocation} placeholder="Location*" customStyles="mt-10" />
-                <SimpleInput examples="5" value={numberOfEmployees} onChange={setnumberOfEmployees} placeholder="Number of Employees*" customStyles="mt-10" />
+                <NumericInput examples="5" value={numberOfEmployees} onChange={setnumberOfEmployees} placeholder="Number of Employees*" customStyles="mt-10" />
                 <SimpleInput examples="https://www.google.com" value={companyWebsite} onChange={setcompanyWebsite} placeholder="Company Website" customStyles="mt-10" />
 
 

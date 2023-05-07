@@ -11,7 +11,7 @@ import { ApplicationDataInterface } from "../../../../standards/interfaces/inter
 export default function Page1() {
 
     const [selectedProfilePicture, setSelectedProfilePicture] = useRecoilState(selectedProfilePictureAtom);
-    const { watch, handleSubmit, register } = useForm<JobApplication>();
+    const { watch, handleSubmit, register } = useForm<ApplicationDataInterface>();
     const [jobApplication, setJobApplication] = useRecoilState(JobApplicationAtom);
     const [pageIndex, setPageIndex] = useRecoilState(ApplyPageIndexAtom);
 

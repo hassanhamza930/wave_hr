@@ -22,7 +22,7 @@ function StandardDropDown(props: DropdownProps) {
 
         <div className={`relative ${props.customStyles}`}>
             <Menu >
-                <Menu.Button onClick={() => { }} className="transition ease-in-out duration-100 flex items-center justify-center gap-2 py-3 px-5 shadow-md hover:shadow-xl rounded-3xl bg-[#0161FE]/[0.07] text-black text-sm font-medium outline-none border-none">
+                <Menu.Button onClick={() => { }} className="transition ease-in-out duration-100 flex items-center justify-center gap-2 py-3 px-5 shadow-md hover:shadow-xl rounded-3xl bg-[#0161FE]/[0.07] text-black text-sm font-regular outline-none border-none">
                     {props.icon && <span>{props.icon}</span>}
                     {props.value==undefined||props.value==""?props.placeholder:props.value}                
                 </Menu.Button>

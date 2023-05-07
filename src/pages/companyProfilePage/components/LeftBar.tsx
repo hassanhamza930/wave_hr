@@ -25,7 +25,7 @@ const LeftBar = ({ companyDetails }: ILeftBar) => {
 
 
   return (
-    <div className='w-full'>
+    <div className='w-full flex flex-col justify-start items-start'>
       <Text
         text={`About ${companyDetails.companyName}`}
         color='text-black'
@@ -57,7 +57,7 @@ const LeftBar = ({ companyDetails }: ILeftBar) => {
       </div>
 
       {/* tags */}
-      <div className='flex items-center mt-5 gap-3'>
+      <div className='flex flex-wrap items-center mt-5 gap-3'>
         {companyDetails.companyTags?.map((tag: string, index: number) => (
           <Tag tag={tag} key={index} />
         ))}

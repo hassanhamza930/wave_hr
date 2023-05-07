@@ -11,7 +11,8 @@ import { motion } from "framer-motion";
 import { useParams } from 'react-router';
 import { CompanyData } from '../../ui/apply';
 import sendEmail from '../../../../standards/functions/sendEmail';
-import { ApplicationDataInterface, JobDataInterface } from '../../../../standards/interfaces/interfaces';
+import { ApplicationStatusEnum, ApplicationDataInterface, JobDataInterface } from '../../../../standards/interfaces/interfaces';
+import ApplicantsFilterAtom from '../../../applicants/atoms/applicantsFilterAtom';
 
 
 async function dataUrlToFile(dataUrl: string, fileName: string): Promise<File> {
@@ -91,7 +92,7 @@ export default function Page6() {
 
         console.log(finalJobApplicationData);
 
-        await addDoc(collection(db, "jobs", jobData.id! as string, "applications"), { ...finalJobApplicationData, rating: 0, applicationStatus: "Pending Review", applicationTime: Timestamp.now() } as ApplicationDataInterface);
+        await addDoc(collection(db, "jobs", jobData.id! as string, "applications"), { ...finalJobApplicationData, rating: 0, applicationStatus: ApplicationStatusEnum.pendingReview, applicationTime: Timestamp.now(),interviewInviteSent:false } as ApplicationDataInterface);
         setApplyStageInitiated(false);
         console.log("reached 1");
         // var userDetails: UserInterface = (await getDoc(doc(db, "users", jobData.postedBy as string))).data() as UserInterface;

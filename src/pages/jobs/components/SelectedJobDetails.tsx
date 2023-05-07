@@ -17,6 +17,8 @@ import {
   onSnapshot,
   deleteDoc,
   doc,
+  where,
+  query,
 } from 'firebase/firestore';
 import { useCallback, useEffect, useState } from 'react';
 import { JobDataInterface } from '../../../standards/interfaces/interfaces';
@@ -43,7 +45,7 @@ function SelectedJobDetails() {
         `${selectedJob.id}`,
         'applications'
       );
-      onSnapshot(applicantsRef, (snapshot) => {
+      onSnapshot(query(applicantsRef,where("applicationStatus","!=","rejected")), (snapshot) => {
         const applicantCount = snapshot.size;
         setApplicants(applicantCount);
       });
