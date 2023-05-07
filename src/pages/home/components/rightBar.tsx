@@ -13,7 +13,7 @@ import { useNavigate } from "react-router";
 
 export function JobPreviewCard(props: JobDataInterface) {
     return (
-        <div onClick={()=>{window.open(`/apply/${props.id}`)}} className="cursor-pointer w-full h-72 bg-blue/20 hover:bg-blue text-black hover:text-tan rounded-3xl py-5 pb-10 px-10 hover:shadow-md shadow-sm transition-all duration-100 hover:scale-[1.02]">
+        <div onClick={()=>{window.open(`/apply/${props.id}`)}} className="cursor-pointer w-full h-72 bg-blue/10 hover:bg-blue text-black hover:text-tan rounded-3xl py-5 pb-10 px-10 hover:shadow-md shadow-sm transition-all duration-100 hover:scale-[1.02]">
             <div className="flex h-full flex-col overflow-y-hidden overflow-x-hidden justify-start items-start w-full">
                 <div className="flex flex-row w-full justify-between items-center">
                     <div className="text-2xl font-semibold w-[70%] overflow-x-hidden">
