@@ -2,10 +2,14 @@ import { useEffect, useState } from "react";
 import { JobDataInterface } from "../../../standards/interfaces/interfaces";
 import { collection, getDocs, getFirestore, query, where,orderBy } from "firebase/firestore";
 import ReactQuill from "react-quill";
-import { BiBriefcase, BiCurrentLocation } from "react-icons/bi";
+import { BiBriefcase, BiCurrentLocation, BiPlus } from "react-icons/bi";
 import { useRecoilState } from "recoil";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
 import { motion } from "framer-motion";
+import { StandardBlueButton } from "../../../standards/styles/components/button";
+import { useNavigate } from "react-router";
+
+
 
 export function JobPreviewCard(props: JobDataInterface) {
     return (
@@ -40,6 +44,7 @@ function RightBar() {
     const [allJobsPostedByUser, setallJobsPostedByUser] = useState([] as Array<JobDataInterface>);
     const db = getFirestore();
     const [loading, setLoading] = useRecoilState(isLoadingAtom);
+    const navigate=useNavigate();
 
     function fetchAllJobsPostedByUser() {
         getDocs(query( collection(db, "jobs"), where("postedBy", "==", localStorage.getItem('uid') as string,))).then((querySnapshot) => {
@@ -61,7 +66,7 @@ function RightBar() {
     return (
         <div id="no_scroll" className="flex bg-white h-full w-full flex-col justify-start overflow-y-scroll items-start gap-3 p-10">
             {
-                allJobsPostedByUser.map((job,index) => {
+                allJobsPostedByUser?.map((job,index) => {
                     return (
                         <motion.div 
                         initial={{opacity:0}}
@@ -72,6 +77,18 @@ function RightBar() {
                         </motion.div>
                     );
                 })
+            }
+            {
+                allJobsPostedByUser.length==0&&
+                <motion.div 
+                initial={{opacity:0}}
+                animate={{opacity:1}}
+                transition={{duration:1,delay:0.2}}
+                className='flex flex-col justify-center items-center w-full h-full'>
+                    <div className='text-2xl font-semibold text-black'>No Jobs Posted Yet</div>
+                    <div className='text-sm font-regular text-black'>Click on the button below to post your first job</div>
+                    <StandardBlueButton text="Post a new job" customStyles="mt-10" icon={<BiPlus/>} onClick={()=>{navigate("/jobs")}} />
+                </motion.div>
             }
         </div>
     );
