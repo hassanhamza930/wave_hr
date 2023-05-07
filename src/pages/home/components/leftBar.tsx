@@ -42,7 +42,6 @@ function LeftBar() {
     const [numberOfCompanies, setnumberOfCompanies] = useState(0);
     const [numberOfJobs, setnumberOfJobs] = useState(0);
     const [numberOfInterviews, setnumberOfInterviews] = useState(0);
-    const [numberOfApplicants, setnumberOfApplicants] = useState(0);
     const [loading, setloading] = useState(false);
     // const [userCompanyIds, setuserCompanyIds] = useState([] as Array<string>);
     const db = getFirestore();
@@ -56,8 +55,6 @@ function LeftBar() {
             setnumberOfCompanies(querySnapshot.size);
         });
 
-        const applications = await getDocs(collectionGroup(db, 'applications'));
-        setnumberOfApplicants(applications.size);
         setloading(false);
     }
 
@@ -88,7 +85,7 @@ function LeftBar() {
                     <InfoCard isLoading={loading} number={numberOfCompanies} info="Companies" />
                     <InfoCard isLoading={loading} number={numberOfJobs} info="Jobs" />
                     <InfoCard isLoading={loading} number={numberOfInterviews} info="Interviews" />
-                    <InfoCard isLoading={loading} number={numberOfApplicants} info="Applicants" />
+                    <InfoCard isLoading={loading} number={loggedInUser.totalApplicantsForJobsPostedByThisUser!=undefined?loggedInUser.totalApplicantsForJobsPostedByThisUser:0} info="Applicants" />
                 </motion.div>
             }
 

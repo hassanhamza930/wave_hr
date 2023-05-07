@@ -67,8 +67,8 @@ export interface UserDataInterface {
   email: string | null;
   availability?:Array<DailyTimeslotsInterface>, // in sorted order from monday to sunday
   interviewSlotTime?:string, // 15min, 30min, etc.
-  timezone?:string // timezone of the user
-
+  timezone?:string, // timezone of the user
+  totalApplicantsForJobsPostedByThisUser?: number;
 }
 
 export interface QuestionResponse {
