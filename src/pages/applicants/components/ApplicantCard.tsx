@@ -7,6 +7,7 @@ import { ReactNode } from 'react';
 
 interface ApplicantCardInterface extends ApplicationDataInterface {
   index: number;
+  key:string
 }
 
 const ApplicantCard=(props: ApplicantCardInterface)=>{
@@ -17,6 +18,7 @@ const ApplicantCard=(props: ApplicantCardInterface)=>{
 
   return (
     <motion.div
+    key={props.key}
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ delay: (props.index + 1) * 0.08 }}

@@ -4,6 +4,9 @@ import globalUserAtom from "../../../atoms/app/globalUserAtom";
 import GettingStarted from "../components/gettingStarted";
 import Hello from "../components/hello";
 import Schedule from "../components/schedule";
+import TwoColumnLayoutPage from "../../../standards/styles/layouts/twoColumnLayout";
+import LeftBar from "../components/leftBar";
+import RightBar from "../components/rightBar";
 
 
 
@@ -17,15 +20,12 @@ export default function Home() {
 
     return (
         <>
-            <div className="pt-[80px] h-screen w-full bg-tan flex flex-col justify-center items-center p-10">
-
-                <div  className="h-[600px] w-full flex flex-row mt-12">
-                    <Hello />
-                    <GettingStarted/>
-                </div>
-
-            </div>
-        </>
+           <TwoColumnLayoutPage
+            header={<div className="text-blue text-md p-5">At a glance,</div>}
+            leftBar={<LeftBar/>}
+            rightBar={<RightBar></RightBar> }
+           /> 
+      </>
 
     )
 }

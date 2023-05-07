@@ -1,7 +1,7 @@
 import Logo from "../../images/logo.svg";
 import LogoText from "../../images/logoText.svg";
 import { BsArrowRightShort } from "react-icons/bs";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { Menu, Transition } from '@headlessui/react'
 import { AiFillCaretDown } from 'react-icons/ai';
 import { Fragment, useEffect, useState } from 'react'
@@ -14,6 +14,7 @@ export default function LoggedInHeader() {
     const navigate = useNavigate();
     const [loggedInUser, setLoggedInUser] = useRecoilState(globalUserAtom);
     const [currentRoute, setcurrentRoute] = useRecoilState(currentRouteAtom);
+    const location = useLocation();
 
 
     return (
@@ -25,6 +26,12 @@ export default function LoggedInHeader() {
 
 
             <div className="flex flex-row gap-16 justify-between items-center">
+
+
+                <button onClick={() => {
+                    navigate("/");
+                }} className={`font-semibold ${location.pathname == "/" ? "text-blue" : "text-black"} text-sm`}>Home</button>
+
 
                 <button onClick={() => {
                     navigate("/jobs");
