@@ -5,6 +5,7 @@ import CompanyProfilePage from "../../companyProfilePage/ui/companyProfilePage";
 import LandingPage from '../../landingPage/ui/landingPage';
 import Login from "../../login/ui/login";
 import { useEffect, useState } from "react";
+import WaveLooksGoodOnDesktop from "../../../standards/components/waveLooksBestOnDesktop";
 
 
 
@@ -25,6 +26,11 @@ export default function LoggedOutRoutes() {
 
     return (
         <>
+            {
+                isPublic==false&&window.innerWidth<1280&&
+                <WaveLooksGoodOnDesktop/>
+                
+            }
             {isPublic==true ? null : <LoggedOutHeader />}
             <Routes>
                 <Route path="/" element={<LandingPage />} ></Route>

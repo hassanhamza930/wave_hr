@@ -10,7 +10,6 @@ import LoggedOutHeader from "../../../standards/components/LoggedOutHeader";
 import globalUserAtom from "../../../atoms/app/globalUserAtom";
 import { Toaster } from "react-hot-toast";
 import { useState, useEffect } from "react";
-import WaveLooksGoodOnDesktop from "../components/waveLooksGoodOnDesktop";
 import { useLocation } from "react-router";
 import { AnimatePresence } from "framer-motion";
 
