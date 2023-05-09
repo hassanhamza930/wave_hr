@@ -250,7 +250,7 @@ export default function JobForm() {
               return (
                 <div
                   key={`${e}${index}`}
-                  className='h-min flex flex-row justify-center items-center text-blue text-md border-2 rounded-3xl border-blue px-8 py-4 w-[80%]'
+                  className='h-min flex flex-row justify-center items-center text-blue text-md border-2 rounded-3xl border-blue px-8 py-4 w-[90%]'
                 >
                   <div className='w-10 mr-3 h-full  font-bold'>
                     Q.{index + 1}

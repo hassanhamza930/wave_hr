@@ -72,6 +72,7 @@ function RightBar() {
                         initial={{opacity:0}}
                         animate={{opacity:1}}
                         transition={{duration:0.5,delay:(index+1)*0.2}}
+                        className="w-full flex justify-center items-center"
                         key={job.companyId+index}>
                             <JobPreviewCard {...job} />
                         </motion.div>

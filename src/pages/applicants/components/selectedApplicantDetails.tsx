@@ -1,5 +1,4 @@
 import { useRecoilState } from 'recoil';
-import { JobApplication } from '../../apply/atoms/applyPageAtoms';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
@@ -8,6 +7,7 @@ import { useParams } from 'react-router';
 import {
   selectedApplicantDataAtom,
   selectedApplicantIdAtom,
+  sendingInterviewInviteAtom,
 } from '../atoms/applicantsAtoms';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { Listbox } from '@headlessui/react';
@@ -19,8 +19,9 @@ import Slider from '../../../standards/components/Slider';
 import { TextArea } from '../../../standards/styles/components/inputs';
 import { AnimatePresence, motion } from 'framer-motion';
 import StandardDropDown, { WhiteDropDown } from '../../../standards/styles/components/dropdowns';
-import { MdArrowDropDown, MdChat, MdDelete, MdOutlineRateReview } from 'react-icons/md';
+import { MdArrowDropDown, MdChat, MdDelete, MdDownloading, MdOutlineRateReview } from 'react-icons/md';
 import axios from "axios";
+import LoadingSpiner from '../../../standards/styles/components/loadingSpinner';
 
 
 export default function SelectedApplicantDetails() {
@@ -30,6 +31,7 @@ export default function SelectedApplicantDetails() {
   const [rating, setrating] = useState(0);
   const db = getFirestore();
   const { jobId } = useParams();
+  const [sendingInterviewInvite, setsendingInterviewInvite] = useRecoilState(sendingInterviewInviteAtom);
 
 
 
@@ -67,6 +69,7 @@ export default function SelectedApplicantDetails() {
 
   async function handleSendInterviewInvite() {
 
+    setsendingInterviewInvite(true);
     var jobData:JobDataInterface= (await getDoc(doc(db, 'jobs', jobId as string))).data() as JobDataInterface;
     await axios.post("https://wavehrback.onrender.com/sendInterviewInvite", {
       to: selectedApplicantData.email as string,
@@ -81,14 +84,17 @@ export default function SelectedApplicantDetails() {
         } as ApplicationDataInterface, { merge: true });
         console.log(res);
         toast.success("Interview Invite Sent");
+        setsendingInterviewInvite(false);
       }
       catch(e){
         console.log(e);
+        setsendingInterviewInvite(false);
       }
 
 
     }).catch((err) => {
       console.log(err);
+      setsendingInterviewInvite(false);
     });
 
 
@@ -189,7 +195,7 @@ export default function SelectedApplicantDetails() {
                 }
                 {
                   selectedApplicantData.interviewInviteSent != true && selectedApplicantData.rating!=0 &&
-                  <StandardWhiteButton icon={<MdChat />} text='Interview' onClick={() => { handleSendInterviewInvite() }} />
+                  <StandardWhiteButton disabled={sendingInterviewInvite?true:false} icon={sendingInterviewInvite==true?<LoadingSpiner/>:<MdChat/>} text='Interview' onClick={() => { handleSendInterviewInvite() }} />
                 }
               </AnimatePresence>
               <StandardWhiteButton icon={<MdDelete />} text='Reject' onClick={() => { handleRejectApplicant(selectedApplicantId) }} />

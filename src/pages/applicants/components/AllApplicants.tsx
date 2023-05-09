@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { JobApplication } from '../../apply/atoms/applyPageAtoms';
 import { useParams } from 'react-router';
 import getCurrentJobApplications from '../logic/getCurrentJobApplications';
 import ApplicantCard from './ApplicantCard';
@@ -10,11 +9,12 @@ import FlipMove from 'react-flip-move';
 import { ApplicationDataInterface } from '../../../standards/interfaces/interfaces';
 import { useRecoilState } from 'recoil';
 import ApplicantsFilterAtom from '../atoms/applicantsFilterAtom';
+import { sendingInterviewInviteAtom } from '../atoms/applicantsAtoms';
 
 
 
 export default function AllApplicants() {
-  const [applicants, setApplicants] = useState<Array<JobApplication>>([]);
+  const [applicants, setApplicants] = useState<Array<ApplicationDataInterface>>([]);
   const [searchValue, setSearchValue] = useState<string>('');
   const { jobId } = useParams();
   const [currentFilter, setcurrentFilter] = useRecoilState(ApplicantsFilterAtom);

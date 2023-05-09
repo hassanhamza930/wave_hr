@@ -6,6 +6,7 @@ import Page3 from "./applicationsPages/page3";
 import Page4 from "./applicationsPages/page4";
 import Page5 from "./applicationsPages/page5";
 import Page6 from "./applicationsPages/page6";
+import AppliedSuccessfully from "./applicationsPages/appliedSuccessfully";
 
 export default function ApplicationWindow() {
 
@@ -22,6 +23,7 @@ export default function ApplicationWindow() {
                 {pageIndex==3&&<Page4/>}
                 {pageIndex==4&&<Page5/>}
                 {pageIndex==5&&<Page6/>}
+                {pageIndex==6&&<AppliedSuccessfully/>}
             </div>
         </div>
     )

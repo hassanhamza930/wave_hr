@@ -96,7 +96,7 @@ function SelectedJobDetails() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           id='no_scroll'
-          className='flex-1 flex-col justify-start items-start w-full h-full rounded-md overflow-y-scroll py-10'
+          className='flex-1 flex-col justify-start items-start w-full h-full rounded-md overflow-y-scroll py-5'
         >
           <div className='text-black flex justify-start items-start px-10 py-5 flex-col'>
             <div className='font-semibold text-4xl'>{selectedJob.jobTitle}</div>

@@ -54,7 +54,7 @@ function JobCard(jobData: JobDataInterface) {
     <div
     key={jobData.id}
       onClick={()=>{setSelectedJob(jobData)}}
-      className='hover:bg-blue/5 transition ease-in-out duration-150 cursor-pointer flex px-7 py-4 w-full flex-row justify-between items-center border-t-[1px] border-gray'
+      className={`${selectedJob.id==jobData.id?"bg-darkblue/10":"hover:bg-blue/5"} transition ease-in-out duration-150 cursor-pointer flex px-7 py-4 w-full flex-row justify-between items-center border-t-[1px] border-gray`}
     >
       <div className='flex flex-col justify-start items-start h-full w-[60%] '>
         <div className=' w-full text-md font-medium text-black overflow-hidden'>

@@ -11,6 +11,7 @@ function CompanyCard(companyData: CompanyDataInterface) {
 
     const [jobs, setJobs] = useState(0)
     const db = getFirestore()
+    const [selectedCompany, setSelectedCompany] = useRecoilState(selectedCompanyAtom);
 
     useEffect(() => {
          onSnapshot(query(collection(db,"jobs"),where("companyId","==",companyData.id!)),(docs)=>{
@@ -19,11 +20,10 @@ function CompanyCard(companyData: CompanyDataInterface) {
     },[])
 
 
-    const [selectedCompany, setSelectedCompany] = useRecoilState(selectedCompanyAtom);
 
 
     return (
-        <div onClick={() => { setSelectedCompany(companyData) }} className="cursor-pointer  hover:bg-blue/5 transition ease-in-out duration-150 flex px-7 py-4 w-full flex-row justify-between items-center border-t-[1px] border-gray">
+        <button onClick={() => { setSelectedCompany(companyData) }} className={`cursor-pointer text-left  ${selectedCompany.id==companyData.id?"bg-darkblue/10":"hover:bg-blue/5"} transition ease-in-out duration-150 flex px-7 py-4 w-full justify-start items-start border-t-[1px] border-gray`}>
 
             <div className="flex flex-col justify-start items-start h-full w-[60%] ">
                 <div className=" w-full text-md font-medium text-black overflow-hidden">
@@ -32,12 +32,8 @@ function CompanyCard(companyData: CompanyDataInterface) {
                 <div className="text-sm font-regular text-dark-gray">{jobs} Jobs</div>
             </div>
 
-            {/* <StandardMidBlueButton onClick={()=>{
-                setSelectedCompany(companyData);
-                setcurrentRoute(`Companies > ${companyData.companyName}`);
-                }} text="View Company" /> */}
 
-        </div>
+        </button>
     )
 }
 
@@ -49,7 +45,7 @@ function AllCompaniesPostedByUser() {
     const [allCompaniesPostedByUser, setAllCompaniesPostedByUser] = useState<Array<CompanyDataInterface>>([] as Array<CompanyDataInterface>);
     const db = getFirestore();
     const [searchCompany, setsearchCompany] = useState("");
-
+    const [selectedCompany, setselectedCompany] = useRecoilState(selectedCompanyAtom);
 
 
     async function fetchAllCompaniesPostedByUser() {

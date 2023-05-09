@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { AiFillCamera } from "react-icons/ai";
 import { useRecoilState } from "recoil";
 import isLoadingAtom from "../../../../atoms/app/isLoadingAtom";
-import JobApplicationAtom, { ApplyStageInitiatedAtom, JobApplication, jobDataAtom, ResponsesAtom, selectedProfilePictureAtom } from "../../atoms/applyPageAtoms";
+import JobApplicationAtom, { ApplyPageIndexAtom, ApplyStageInitiatedAtom, jobDataAtom, ResponsesAtom, selectedProfilePictureAtom } from "../../atoms/applyPageAtoms";
 import { motion } from "framer-motion";
 import { useParams } from 'react-router';
 import { CompanyData } from '../../ui/apply';
@@ -14,6 +14,7 @@ import sendEmail from '../../../../standards/functions/sendEmail';
 import { ApplicationStatusEnum, ApplicationDataInterface, JobDataInterface, CompanyDataInterface, UserDataInterface } from '../../../../standards/interfaces/interfaces';
 import ApplicantsFilterAtom from '../../../applicants/atoms/applicantsFilterAtom';
 import globalUserAtom from '../../../../atoms/app/globalUserAtom';
+import axios from 'axios';
 
 
 async function dataUrlToFile(dataUrl: string, fileName: string): Promise<File> {
@@ -43,13 +44,13 @@ export const base64toPdfBlob = (data: string) => {
 export default function Page6() {
 
     const [selectedProfilePicture, setSelectedProfilePicture] = useRecoilState(selectedProfilePictureAtom);
-    const { watch, handleSubmit, register } = useForm<JobApplication>();
     const [jobApplication, setJobApplication] = useRecoilState(JobApplicationAtom);
     const [responses, setResponses] = useRecoilState(ResponsesAtom);
     const [applyStageInitiated, setApplyStageInitiated] = useRecoilState<boolean>(ApplyStageInitiatedAtom);
     const [loading, setLoading] = useRecoilState(isLoadingAtom);
     const [jobData, setJobData] = useRecoilState(jobDataAtom);
     const { jobId } = useParams();
+    const [pageIndex, setPageIndex] = useRecoilState(ApplyPageIndexAtom);
 
     const db = getFirestore();
     const storage = getStorage();
@@ -101,29 +102,17 @@ export default function Page6() {
             var totalApplicantsForJobsPostedByThisUser:number=userData.totalApplicantsForJobsPostedByThisUser!=undefined?userData.totalApplicantsForJobsPostedByThisUser:0;
             await setDoc(userRef,{totalApplicantsForJobsPostedByThisUser:totalApplicantsForJobsPostedByThisUser+1} as UserDataInterface,{merge:true});
         });
-        setApplyStageInitiated(false);
-        console.log("reached 1");
-        // var userDetails: UserInterface = (await getDoc(doc(db, "users", jobData.postedBy as string))).data() as UserInterface;
-        // console.log("reached 2");
-        // console.log(finalJobApplicationData.email);
-        // console.log(userDetails.companyDetails.companyName);
 
-        // const requestOptions = {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({ title: 'React Hooks POST Request Example' })
-        // };
+        const resp=await axios.post("https://wavehrback.onrender.com/sendApplyNotification",{
+            to:finalJobApplicationData.email,
+            jobId:jobId,
+            companyId:jobData.companyId
+        });
+        console.log(resp);
 
-        // var subject = `You applied for ${jobData.jobDetails.jobTitle} at ${userDetails.companyDetails.companyName}`;
-        // var emailBody = `You will recieve a confirmation email from the employer upon further selection or rejection.-----${userDetails.companyDetails.companyName}---${Timestamp.now().toDate().toLocaleString()}`;
-       
-        // var email = finalJobApplicationData.email;
-        // // var respons= await fetch(`https://wavefunc.vercel.app/sendEmail?sendTo=${finalJobApplicationData.email}&emailBody=${emailBody}&subject=${subject}`, requestOptions);
-        // sendEmail(email, subject, emailBody);
-
-        toast.success("Job Application Successfully submitted");
+        setPageIndex(6);
         setLoading(false);
-        setTimeout(() => { window.location.reload(); }, 1500);
+        toast.success("Job Application Successfully submitted");
 
     }
 

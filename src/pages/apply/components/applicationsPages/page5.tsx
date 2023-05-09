@@ -3,14 +3,13 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AiFillFile } from "react-icons/ai";
 import { useRecoilState } from "recoil";
-import JobApplicationAtom, { ApplyPageIndexAtom, JobApplication, jobDataAtom, QuestionResponse, ResponsesAtom, selectedResumeAtom } from "../../atoms/applyPageAtoms";
+import JobApplicationAtom, { ApplyPageIndexAtom, jobDataAtom, QuestionResponse, ResponsesAtom, selectedResumeAtom } from "../../atoms/applyPageAtoms";
 import { motion } from "framer-motion";
 import { ButtonOutlinedWhite } from "../../../../standards/styles/components/button";
 
 
 export default function Page5() {
 
-    const { watch, handleSubmit, register } = useForm<JobApplication>();
     const [jobApplication, setJobApplication] = useRecoilState(JobApplicationAtom);
     const [pageIndex, setPageIndex] = useRecoilState(ApplyPageIndexAtom);
     const [jobData, setJobData] = useRecoilState(jobDataAtom);
@@ -74,7 +73,7 @@ export default function Page5() {
                                     visible: { opacity: 1, y: 0 },
                                     hidden: { opacity: 0, y: 50 }
                                 }}
-                                className="text-md font-bold text-tan mt-10">
+                                className="text-xl font-bold text-tan mt-10">
                                 Q{questionIndex + 1}) {questions[questionIndex]}
                             </motion.div>
                         )

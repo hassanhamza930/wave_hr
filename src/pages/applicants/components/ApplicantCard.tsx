@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
 import { ApplicationDataInterface, ApplicationStatusEnum } from '../../../standards/interfaces/interfaces';
-import { selectedApplicantIdAtom } from '../atoms/applicantsAtoms';
+import { selectedApplicantIdAtom, sendingInterviewInviteAtom } from '../atoms/applicantsAtoms';
 import currentRouteAtom from '../../../atoms/app/currentRouteAtom';
 import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
@@ -11,14 +11,14 @@ interface ApplicantCardInterface extends ApplicationDataInterface {
 }
 
 const ApplicantCard=(props: ApplicantCardInterface)=>{
-  const [selectedApplicantId, setSelectedApplicantId] = useRecoilState(
-    selectedApplicantIdAtom
-  );
+  const [selectedApplicantId, setSelectedApplicantId] = useRecoilState(selectedApplicantIdAtom);
   const [_, setCurrentRoute] = useRecoilState(currentRouteAtom);
+  const [sendingInterviewInvite, setsendingInterviewInvite] = useRecoilState(sendingInterviewInviteAtom);
 
   return (
-    <motion.div
+    <motion.button
     key={props.key}
+    disabled={sendingInterviewInvite}
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ delay: (props.index + 1) * 0.08 }}
@@ -26,7 +26,7 @@ const ApplicantCard=(props: ApplicantCardInterface)=>{
         setSelectedApplicantId(props.id!);
         setCurrentRoute(`Applicants > ${props.name}`);
       }}
-      className={`cursor-pointer  hover:bg-blue/5 transition ease-in-out duration-150 flex w-full px-7 py-4 flex-row justify-between items-center border-t-[1px] border-gray`}
+      className={`cursor-pointer  ${selectedApplicantId==props.id?"bg-darkblue/10":"hover:bg-blue/5"} transition ease-in-out duration-150 flex w-full px-7 py-4 flex-row justify-between items-center border-t-[1px] border-gray`}
     >
 
 
@@ -45,7 +45,7 @@ const ApplicantCard=(props: ApplicantCardInterface)=>{
         </div>
 
 
-    </motion.div>
+    </motion.button>
   );
 }
 

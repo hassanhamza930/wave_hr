@@ -72,7 +72,7 @@ export default function Apply() {
                                 : companyData.companyCover
                                 }')`,
                         }}
-                        className={`relative z-10 w-full h-36 md:h-64 bg-blue bg-cover shadow-md bg-center rounded-xl md:rounded-3xl flex justify-end items-end p-10`}
+                        className={`relative mt-5 z-10 w-full h-36 md:h-64 bg-blue bg-cover shadow-md bg-center rounded-xl md:rounded-3xl flex justify-end items-end p-10`}
                     />
 
                     <div className='text-black flex justify-start items-start py-5 flex-col mt-0 md:mt-5'>
@@ -114,11 +114,11 @@ export default function Apply() {
                             Salary Compensation
                         </div>
                         <SubHeading
-                            customStyles='mt-2 mb-16'
+                            customStyles='mt-2 mb-12'
                             text={jobData.salaryCompensation}
                         />
 
-                        <div className="md:hidden flex">
+                        <div className="md:hidden flex mb-24">
                             <StandardBlueButton text="Apply" onClick={() => { setApplyStageInitiated(true); }} />
                         </div>
 

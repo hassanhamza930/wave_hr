@@ -7,20 +7,7 @@ export interface QuestionResponse {
   answer: string;
 }
 
-export interface JobApplication {
-  [key: string]: any;
-  id?: string;
-  name: string;
-  email: string;
-  profilePicture: string;
-  resume: string;
-  responses: Array<QuestionResponse>;
-  rating?: number;
-  notes?: string;
-  applicationStatus?: string;
-  interviewInviteSent: boolean;
-  applicationTime: Timestamp;
-}
+
 
 export const ApplyPageIndexAtom = atom({
   key: "PageIndex", // unique ID (with respect to other atoms/selectors)

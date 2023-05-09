@@ -49,6 +49,7 @@ function ButtonSolid(props: ButtonInputs) {
 
 interface ButtonProps {
   text: string;
+  disabled?:boolean,
   bgColor?: string;
   textColor?: string;
   textSize?: string;
@@ -83,9 +84,10 @@ export const StandardMidBlueButton = ({text,icon,onClick}: ButtonProps) => {
 };
 
 
-export const StandardWhiteButton = ({text,icon,onClick}: ButtonProps) => {
+export const StandardWhiteButton = ({text,icon,onClick,disabled=false}: ButtonProps) => {
   return (
     <button
+      disabled={disabled}
       onClick={onClick}
       className={`transition ease-in-out duration-100 flex items-center justify-center gap-2 py-3 px-5 shadow-md hover:shadow-xl rounded-3xl bg-white text-black text-sm font-medium outline-none border-none`}
     >
