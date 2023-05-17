@@ -71,7 +71,7 @@ function CompanyProfilePage() {
             : companyValues.company.companyCover
             }')`,
         }}
-        className={`relative z-10 w-full h-36 md:h-64 bg-blue bg-cover shadow-md bg-center rounded-3xl flex justify-end items-end p-10`}
+        className={`relative mt-5 z-10 w-full h-36 md:h-64 bg-blue bg-cover shadow-md bg-center rounded-3xl flex justify-end items-end p-10`}
       />
 
       <motion.div

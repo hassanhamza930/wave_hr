@@ -236,9 +236,9 @@ export default function SelectedApplicantDetails() {
               max={10}
               step={1}
               value={rating}
-              onChange={(newRating) => {
+              onChange={async (newRating) => {
                 setrating(Number(newRating.target.value));
-                setDoc(
+                await setDoc(
                   doc(db, 'jobs', jobId as string, 'applications', selectedApplicantId),
                   { rating: Number(newRating.target.value) },
                   { merge: true }

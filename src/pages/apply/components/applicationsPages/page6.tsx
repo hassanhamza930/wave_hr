@@ -110,9 +110,11 @@ export default function Page6() {
         });
         console.log(resp);
 
-        setPageIndex(6);
-        setLoading(false);
         toast.success("Job Application Successfully submitted");
+        setLoading(false);
+        setPageIndex(6);
+
+
 
     }
 

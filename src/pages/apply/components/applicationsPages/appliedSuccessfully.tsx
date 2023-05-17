@@ -5,8 +5,8 @@ function AppliedSuccessfully() {
 
     return (
 
-        <div className={`bg-[url("https://img.freepik.com/free-vector/gradient-dynamic-grainy-background_52683-101978.jpg")] bg-cover bg-center bg-no-repeat relative h-screen w-full flex flex-col justify-start items-start`}>
-            <div className='relative px-5 md:px-[20%] w-full h-full flex flex-col justify-center items-center bg-darkblue/80'>
+        <div className={`bg-darkblue bg-cover bg-center bg-no-repeat relative h-screen w-full flex flex-col justify-start items-start`}>
+            <div className='relative px-5 md:px-[20%] w-full h-full flex flex-col justify-center items-center bg-darkblue'>
                 <motion.div
                     initial="hidden"
                     whileInView="visible"

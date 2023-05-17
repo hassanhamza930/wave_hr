@@ -20,8 +20,8 @@ export default function AllApplicants() {
   const [currentFilter, setcurrentFilter] = useRecoilState(ApplicantsFilterAtom);
 
   useEffect(() => {
-    getCurrentJobApplications(currentFilter,setApplicants, jobId as string, searchValue);
-  }, [searchValue,currentFilter]);
+    getCurrentJobApplications(currentFilter, setApplicants, jobId as string, searchValue);
+  }, [searchValue, currentFilter]);
 
   return (
     <div className='flex w-full h-full flex-col justify-start items-start'>
@@ -46,7 +46,9 @@ export default function AllApplicants() {
               applicant.name.trim().toLowerCase().includes(searchValue.trim())
             )
               return (
-                <ApplicantCard key={applicant.id!} index={index} {...applicant as ApplicationDataInterface} />
+                <div key={applicant.id!} className='w-full'>
+                  <ApplicantCard key={applicant.id!} index={index} {...applicant as ApplicationDataInterface} />
+                </div>
               );
 
             return null;
