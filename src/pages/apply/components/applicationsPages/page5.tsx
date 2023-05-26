@@ -5,7 +5,7 @@ import { AiFillFile } from "react-icons/ai";
 import { useRecoilState } from "recoil";
 import JobApplicationAtom, { ApplyPageIndexAtom, jobDataAtom, QuestionResponse, ResponsesAtom, selectedResumeAtom } from "../../atoms/applyPageAtoms";
 import { motion } from "framer-motion";
-import { ButtonOutlinedWhite } from "../../../../standards/styles/components/button";
+import { ButtonOutlinedWhite } from "../../../../standards/components/button";
 
 
 export default function Page5() {

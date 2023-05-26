@@ -9,20 +9,18 @@ import { useCallback, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { JobDataInterface } from '../../../standards/interfaces/interfaces';
 
-import { SearchBar } from '../../../standards/styles/components/inputs';
-import { StandardMidBlueButton } from '../../../standards/styles/components/button';
+import { SearchBar } from '@components/inputs';
+import { StandardMidBlueButton } from '../../../standards/components/button';
 import { motion } from 'framer-motion';
-import currentRouteAtom from '../../../atoms/app/currentRouteAtom';
 import { selectedCompanyAtom } from '../atoms/selectedCompanyAtom';
 import { selectedJobAtom } from '../jobsAtoms';
 import { BiLinkExternal } from 'react-icons/bi';
-import { Text } from '../../../standards/styles/components/heading';
+import { Text } from '@components/heading';
 import { useNavigate } from 'react-router';
 
 function JobCard(jobData: JobDataInterface) {
   const [selectedJob, setSelectedJob] = useRecoilState(selectedJobAtom);
   const [applicants, setApplicants] = useState(0);
-  const [_, setcurrentRoute] = useRecoilState(currentRouteAtom);
   const [selectedCompany] = useRecoilState(selectedCompanyAtom);
   const db = getFirestore();
   const navigate=useNavigate();
@@ -47,7 +45,6 @@ function JobCard(jobData: JobDataInterface) {
 
   const handleOnClick = () => {
     navigate(`/applicants/${jobData.id}`);
-    setcurrentRoute(`${selectedCompany.companyName} > ${jobData.jobTitle} > Applicants`);
   };
 
   return (

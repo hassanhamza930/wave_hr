@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router";
 import { useRecoilState } from "recoil";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
 import { CompanyDataInterface, JobDataInterface } from "../../../standards/interfaces/interfaces";
-import { ButtonOutlinedWhite, ButtonSolid, StandardBlueButton, StandardWhiteButton } from "../../../standards/styles/components/button";
+import { ButtonOutlinedWhite, ButtonSolid, StandardBlueButton, StandardWhiteButton } from "../../../standards/components/button";
 import { Heading, SubHeading, Text } from "../../../standards/styles/components/heading";
 import { ApplyStageInitiatedAtom, jobDataAtom } from "../atoms/applyPageAtoms";
 import ApplicationWindow from "../components/applicationWindow";

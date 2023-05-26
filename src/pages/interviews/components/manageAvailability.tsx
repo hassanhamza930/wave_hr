@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { SubHeading } from "../../../standards/styles/components/heading";
-import { StandardMidBlueButton } from "../../../standards/styles/components/button";
+import { StandardMidBlueButton } from "../../../standards/components/button";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BiEdit } from "react-icons/bi";
 import { MdEditNote } from "react-icons/md";

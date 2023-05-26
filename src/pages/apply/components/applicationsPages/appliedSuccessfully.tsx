@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { StandardBlueButton } from "../../../../standards/styles/components/button";
+import { StandardBlueButton } from "../../../../standards/components/button";
 
 function AppliedSuccessfully() {
 

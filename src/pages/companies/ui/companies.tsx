@@ -1,9 +1,9 @@
 import TwoColumnLayoutPage from '../../../standards/styles/layouts/twoColumnLayout';
-import { StandardLightBlueButton } from '../../../standards/styles/components/button';
+import { StandardLightBlueButton } from '../../../standards/components/button';
 import { BiPlus } from 'react-icons/bi';
 import AllCompaniesPostedByUser from '../components/allCompaniesPostedByUser';
 import SelectedCompanyDetails from '../components/selectedCompanyDetails';
-import currentRouteAtom from '../../../atoms/app/currentRouteAtom';
+import currentRouteAtom from '../../app/atoms/currentRouteAtom';
 import { useRecoilState } from 'recoil';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';

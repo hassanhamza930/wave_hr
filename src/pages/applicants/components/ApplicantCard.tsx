@@ -1,7 +1,7 @@
 import { useRecoilState } from 'recoil';
 import { ApplicationDataInterface, ApplicationStatusEnum } from '../../../standards/interfaces/interfaces';
 import { selectedApplicantIdAtom, sendingInterviewInviteAtom } from '../atoms/applicantsAtoms';
-import currentRouteAtom from '../../../atoms/app/currentRouteAtom';
+import currentRouteAtom from '../../app/atoms/currentRouteAtom';
 import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
 

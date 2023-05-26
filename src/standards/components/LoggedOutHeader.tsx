@@ -2,7 +2,7 @@ import Logo from "../../images/landingPage/wavehr-logo.png";
 import { BsArrowRightShort } from "react-icons/bs";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
-import { StandardBlueButton } from "../styles/components/button";
+import { StandardBlueButton } from "./button";
 
 export default function LoggedOutHeader() {
   const navigate = useNavigate();

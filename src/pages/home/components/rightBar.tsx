@@ -6,7 +6,7 @@ import { BiBriefcase, BiCurrentLocation, BiPlus } from "react-icons/bi";
 import { useRecoilState } from "recoil";
 import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
 import { motion } from "framer-motion";
-import { StandardBlueButton } from "../../../standards/styles/components/button";
+import { StandardBlueButton } from "../../../standards/components/button";
 import { useNavigate } from "react-router";
 
 

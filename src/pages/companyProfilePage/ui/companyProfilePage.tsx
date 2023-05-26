@@ -13,7 +13,7 @@ import JobsList from '../components/JobsList';
 import { companyAtom } from '../atom/companyAtom';
 import SearchHeader from '../components/SearchHeader';
 import Footer from '../components/Footer';
-import { SearchBar } from '../../../standards/styles/components/inputs';
+import { SearchBar } from '@components/inputs';
 import { jobSearchAtom } from '../atom/jobSearch';
 import { motion } from 'framer-motion';
 

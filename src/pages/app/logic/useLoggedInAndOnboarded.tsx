@@ -3,12 +3,11 @@ import {
   getDoc,
   getFirestore,
   onSnapshot,
-  setDoc,
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import globalUserAtom from '../../../atoms/app/globalUserAtom';
-import isLoadingAtom from '../../../atoms/app/isLoadingAtom';
+import globalUserAtom from '../atoms/globalUserAtom';
+import isLoadingAtom from '../atoms/isLoadingAtom';
 import { UserDataInterface } from '../../../standards/interfaces/interfaces';
  
 

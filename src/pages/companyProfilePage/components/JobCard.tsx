@@ -2,7 +2,7 @@ import { BiLinkExternal } from 'react-icons/bi';
 
 import { JobDataInterface } from '../../../standards/interfaces/interfaces';
 import { Text } from '../../../standards/styles/components/heading';
-import { StandardMidBlueButton } from '../../../standards/styles/components/button';
+import { StandardMidBlueButton } from '../../../standards/components/button';
 import { useNavigate } from 'react-router';
 
 const JobCard = ({ job }: { job: JobDataInterface }) => {

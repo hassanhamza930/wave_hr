@@ -11,7 +11,7 @@ import isLoadingAtom from "../../../atoms/app/isLoadingAtom";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { toast } from "react-hot-toast";
-import { ButtonOutlinedWhite, ButtonSolid } from "../../../standards/styles/components/button";
+import { ButtonOutlinedWhite, ButtonSolid } from "../../../standards/components/button";
 
 
 export default function PostNewJobForm() {

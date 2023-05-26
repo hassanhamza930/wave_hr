@@ -12,21 +12,20 @@ import { AiFillPlusCircle } from 'react-icons/ai';
 import { MdArrowDropDown, MdDelete } from 'react-icons/md';
 import { useRecoilState } from 'recoil';
 import { Menu } from '@headlessui/react';
-
-import isLoadingAtom from '../../../atoms/app/isLoadingAtom';
-import { ButtonSolid, StandardBlueButton } from '../../../standards/styles/components/button';
+import isLoadingAtom from '../../app/atoms/isLoadingAtom';
+import { ButtonSolid, StandardBlueButton } from '../../../standards/components/button';
 import {
   Heading,
   SubHeading,
-} from '../../../standards/styles/components/heading';
-import SimpleInput from '../../../standards/styles/components/inputs';
+} from '@components/heading';
+import SimpleInput from '@components/inputs';
 import { JobDataInterface } from '../../../standards/interfaces/interfaces';
 import { selectedCompanyAtom } from '../../jobs/atoms/selectedCompanyAtom';
 import { selectedJobAtom } from '../../jobs/jobsAtoms';
-import RichTextEditor from '../../../standards/styles/components/RichTextEditor';
+import RichTextEditor from '@components/RichTextEditor';
 import { useLocation, useNavigate } from 'react-router';
-import FormLayout from '../../../standards/styles/layouts/FormLayout';
-import StandardDropDown from '../../../standards/styles/components/dropdowns';
+import FormLayout from '@layouts/FormLayout';
+import StandardDropDown from '@components/dropdowns';
 
 
 export default function JobForm() {

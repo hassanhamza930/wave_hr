@@ -1,5 +1,12 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
+        "paths": {
+          "@components/*": ["standards/components/*"],
+          "@layouts/*":["standards/layouts/*"],
+          "@interfaces/*":["standards/interfaces/interfaces"],
+          "@functions/*":["standards/functions/*"]
+        },
     "target": "es5",
     "lib": [
       "dom",
@@ -22,5 +29,5 @@
   },
   "include": [
     "src"
-  ]
+  ],
 }

@@ -8,54 +8,30 @@ import {
   query,
   where,
 } from 'firebase/firestore';
-import { StandardLightBlueButton } from '../../../standards/styles/components/button';
+import { StandardLightBlueButton } from '../../../standards/components/button';
 import { MdArrowDropDown } from 'react-icons/md';
 import { selectedCompanyAtom } from '../atoms/selectedCompanyAtom';
 import {
   CompanyDataInterface,
   JobDataInterface,
 } from '../../../standards/interfaces/interfaces';
-import TwoColumnLayoutPage from '../../../standards/styles/layouts/twoColumnLayout';
+import TwoColumnLayoutPage from '@layouts/twoColumnLayout';
 import { BiPlus } from 'react-icons/bi';
-import currentRouteAtom from '../../../atoms/app/currentRouteAtom';
-import StandardDropDown, {
-  DropDownOptionInterface,
-} from '../../../standards/styles/components/dropdowns';
+import StandardDropDown, {DropDownOptionInterface} from '@components/dropdowns';
 import JobsList from '../components/JobsList';
 import SelectedJobDetails from '../components/SelectedJobDetails';
 import { selectedJobAtom } from '../jobsAtoms';
 import { motion } from 'framer-motion';
 
 export default function JobsPage() {
-  const [selectedCompany, setSelectedCompany] =
-    useRecoilState(selectedCompanyAtom);
+  const [selectedCompany, setSelectedCompany] =useRecoilState(selectedCompanyAtom);
   const navigate = useNavigate()
-  const [allCompanies, setAllCompanies] = useState<Array<CompanyDataInterface>>(
-    [] as Array<CompanyDataInterface>
-  );
-  const [_, setcurrentRoute] = useRecoilState(currentRouteAtom);
+  const [allCompanies, setAllCompanies] = useState<Array<CompanyDataInterface>>([] as Array<CompanyDataInterface>);
   const [selectedJob, setSelectedJob] = useRecoilState(selectedJobAtom);
 
   const db = getFirestore();
 
-  useEffect(() => {
-    onSnapshot(
-      query(
-        collection(db, 'companies'),
-        where('companyOwnerId', '==', localStorage.getItem('uid') as string)
-      ),
-      (docs) => {
-        var docsData: Array<CompanyDataInterface> = docs.docs.map((doc) => {
-          var tempData: CompanyDataInterface =
-            doc.data() as CompanyDataInterface;
-          tempData.id = doc.id;
-          return tempData as CompanyDataInterface;
-        });
-        setAllCompanies(docsData as Array<CompanyDataInterface>);
-      }
-    );
-    setcurrentRoute('Jobs');
-  }, []);
+
 
   return (
     <>

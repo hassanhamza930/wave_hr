@@ -1,6 +1,5 @@
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import { CompanyDataInterface } from "../../interfaces/interfaces";
 
 export interface DropDownOptionInterface {
     option: string,

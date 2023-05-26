@@ -12,7 +12,7 @@ import TimeSelectionPopupModalOpenAtom, { selectedDayIndexAtom } from "../atoms/
 import TimeSelectionPopup from "../components/timeSelectionPopup";
 import { UserDataInterface } from "../../../standards/interfaces/interfaces";
 import { useRecoilState } from "recoil";
-import { StandardLightBlueButton } from "../../../standards/styles/components/button";
+import { StandardLightBlueButton } from "../../../standards/components/button";
 import { BiPlus } from "react-icons/bi";
 
 export default function Interviews() {

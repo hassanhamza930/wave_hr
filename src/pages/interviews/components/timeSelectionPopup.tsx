@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import TimeSelectionPopupModalOpenAtom, { selectedDayIndexAtom } from "../atoms/timeSelectionPopupModal";
 import globalUserAtom from "../../../atoms/app/globalUserAtom";
 import { doc, getFirestore, setDoc } from "@firebase/firestore";
-import { StandardBlueButton } from "../../../standards/styles/components/button";
+import { StandardBlueButton } from "../../../standards/components/button";
 import * as _ from 'lodash';
 
 function TimeSelectionPopup() {
