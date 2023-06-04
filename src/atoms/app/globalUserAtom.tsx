@@ -1,5 +1,6 @@
 import { atom } from "recoil";
-import { UserDataInterface } from "@interfaces/";
+import { CompanyData } from '../../pages/apply/ui/apply';
+import { UserDataInterface } from "../../standards/interfaces/interfaces";
 
 
  const globalUserAtom = atom({

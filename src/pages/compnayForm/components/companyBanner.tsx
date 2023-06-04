@@ -1,6 +1,6 @@
 import { AiFillCamera } from "react-icons/ai";
 import { BiCamera } from "react-icons/bi";
-import { SubHeading } from "@components/heading";
+import { SubHeading } from "../../../standards/styles/components/heading";
 
 interface CompanyBannerInputs {
     customStyles?: string,

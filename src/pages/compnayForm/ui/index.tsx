@@ -6,14 +6,14 @@ import { toast } from "react-hot-toast";
 import { MdCancel } from "react-icons/md"
 
 import { SubHeading } from "../../../standards/styles/components/heading";
-import SimpleInput, { NumericInput, TextArea } from "@components/inputs";
-import FormLayout from "../../../standards/layouts/FormLayout";
+import SimpleInput, { NumericInput, TextArea } from "../../../standards/styles/components/inputs";
+import FormLayout from "../../../standards/styles/layouts/FormLayout";
 import CompanyBanner from "../components/companyBanner";
 import CompanyLogo from "../components/companyLogo";
-import { StandardBlueButton } from "../../../standards/components/button";
+import { StandardBlueButton } from "../../../standards/styles/components/button";
 import { useHandleAddCompany, useHandleEditCompany } from "../logic/addCompany";
 import { CompanyDataInterface } from "../../../standards/interfaces/interfaces";
-import currentRouteAtom from "../../app/atoms/currentRouteAtom";
+import currentRouteAtom from "../../../atoms/app/currentRouteAtom";
 import { useLocation } from "react-router";
 import RichTextEditor from "../../../standards/styles/components/RichTextEditor";
 

@@ -3,7 +3,7 @@ import { MdOutlinePeopleAlt } from 'react-icons/md';
 import { BiLinkExternal } from 'react-icons/bi';
 
 import { CompanyDataInterface } from '../../../standards/interfaces/interfaces';
-import { StandardBlueButton, StandardLightBlueButton } from '../../../standards/components/button';
+import { StandardBlueButton, StandardLightBlueButton } from '../../../standards/styles/components/button';
 import { Text } from '../../../standards/styles/components/heading';
 import ReactQuill from 'react-quill';
 

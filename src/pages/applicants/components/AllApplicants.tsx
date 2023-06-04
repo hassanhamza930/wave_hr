@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import getCurrentJobApplications from '../logic/getCurrentJobApplications';
 import ApplicantCard from './ApplicantCard';
-import { SearchBar } from '@components/inputs';
+import { SearchBar } from '../../../standards/styles/components/inputs';
 import { motion } from 'framer-motion';
-import { Text } from '@components/heading';
+import { Text } from '../../../standards/styles/components/heading';
+import FlipMove from 'react-flip-move';
 import { ApplicationDataInterface } from '../../../standards/interfaces/interfaces';
 import { useRecoilState } from 'recoil';
 import ApplicantsFilterAtom from '../atoms/applicantsFilterAtom';
+import { sendingInterviewInviteAtom } from '../atoms/applicantsAtoms';
 
 
 

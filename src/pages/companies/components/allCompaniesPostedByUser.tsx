@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import { CompanyDataInterface } from "../../../standards/interfaces/interfaces";
 import { Text } from "../../../standards/styles/components/heading";
 import { selectedCompanyAtom } from "../atoms/selectedCompany";
-import { SearchBar } from "@components/inputs";
+import { SearchBar } from "../../../standards/styles/components/inputs";
 import { motion } from "framer-motion"
 
 function CompanyCard(companyData: CompanyDataInterface) {

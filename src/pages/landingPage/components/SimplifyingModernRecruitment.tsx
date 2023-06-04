@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import heroback from "../../../images/landingPage/heroback.svg";
-import { StandardBlueButton } from "../../../standards/components/button";
+import { StandardBlueButton } from "../../../standards/styles/components/button";
 
 function SimplifyingModernRecruitment() {
   const navigate = useNavigate();

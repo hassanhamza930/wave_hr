@@ -1,7 +1,7 @@
 import { useRecoilState } from 'recoil';
-import { SubHeading } from '@components/heading';
+import { SubHeading } from '../../../standards/styles/components/heading';
 import { selectedJobAtom } from '../jobsAtoms';
-import { StandardWhiteButton } from '../../../standards/components/button';
+import { StandardWhiteButton } from '../../../standards/styles/components/button';
 import { BiBriefcase, BiCurrentLocation, BiLinkExternal } from 'react-icons/bi';
 import { MdContentCopy } from 'react-icons/md';
 import { AnimatePresence } from 'framer-motion';
@@ -22,6 +22,7 @@ import {
 } from 'firebase/firestore';
 import { useCallback, useEffect, useState } from 'react';
 import { JobDataInterface } from '../../../standards/interfaces/interfaces';
+import currentRouteAtom from '../../../atoms/app/currentRouteAtom';
 import { useNavigate } from 'react-router';
 import ReactQuill from 'react-quill';
 
@@ -29,6 +30,7 @@ import ReactQuill from 'react-quill';
 
 function SelectedJobDetails() {
   const [selectedJob, setSelectedJob] = useRecoilState(selectedJobAtom);
+  const [_, setRoute] = useRecoilState(currentRouteAtom);
   const [applicants, setApplicants] = useState(0);
 
 
@@ -64,6 +66,7 @@ function SelectedJobDetails() {
       await deleteDoc(documentRef);
       setSelectedJob({} as JobDataInterface);
       toast.success('Job Delete Successfully');
+      setRoute('Companies');
     } catch (error) {
       console.log(error);
       toast.error('Something went wrong');
@@ -72,6 +75,7 @@ function SelectedJobDetails() {
 
   const handleEditJob = () => {
   navigate('/jobForm', {state: selectedJob})
+    setRoute('Companies');
   };
 
   return !selectedJob.id ? (
@@ -150,9 +154,11 @@ function SelectedJobDetails() {
             </div>
 
             <div className='font-medium text-2xl mt-10'>Job Description</div>
+            {/* <div className='text-black mt-2 text-md' dangerouslySetInnerHTML={{__html: selectedJob.jobDescription}} /> */}
             <ReactQuill readOnly={true} theme='bubble' value={selectedJob.jobDescription} className='mt-2 -ml-3'/>
 
             <div className='font-medium text-2xl mt-5'>Job Qualifications</div>
+            {/* <div className='text-black mt-2 text-md' dangerouslySetInnerHTML={{__html: selectedJob.jobQualifications}} /> */}
             <ReactQuill readOnly={true} theme='bubble' value={selectedJob.jobQualifications} className='mt-2 -ml-3'/>
 
             <div className='font-medium text-2xl'>

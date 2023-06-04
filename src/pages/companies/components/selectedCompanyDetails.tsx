@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router';
 import { useRecoilState } from 'recoil';
 import { SubHeading } from '../../../standards/styles/components/heading';
 import { selectedCompanyAtom } from '../atoms/selectedCompany';
-import { StandardWhiteButton } from '../../../standards/components/button';
+import { StandardWhiteButton } from '../../../standards/styles/components/button';
 import { BiLinkExternal } from 'react-icons/bi';
 import { MdDelete, MdEditNote } from 'react-icons/md';
 import { AnimatePresence } from 'framer-motion';

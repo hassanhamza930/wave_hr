@@ -12,11 +12,11 @@ import {
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { Listbox } from '@headlessui/react';
 import { ApplicationDataInterface, ApplicationStatusEnum, CompanyDataInterface, JobDataInterface, UserDataInterface } from '../../../standards/interfaces/interfaces';
-import { ButtonOutlinedWhite, StandardWhiteButton } from '../../../standards/components/button';
+import { ButtonOutlinedWhite, StandardWhiteButton } from '../../../standards/styles/components/button';
 import { SubHeading, Text } from '../../../standards/styles/components/heading';
 import dayjs from 'dayjs';
 import Slider from '../../../standards/components/Slider';
-import { TextArea } from '@components/inputs';
+import { TextArea } from '../../../standards/styles/components/inputs';
 import { AnimatePresence, motion } from 'framer-motion';
 import StandardDropDown, { WhiteDropDown } from '../../../standards/styles/components/dropdowns';
 import { MdArrowDropDown, MdChat, MdDelete, MdDownloading, MdOutlineRateReview } from 'react-icons/md';
